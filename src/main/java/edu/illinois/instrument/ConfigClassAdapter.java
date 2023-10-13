@@ -1,17 +1,16 @@
 package edu.illinois.instrument;
 
+import edu.illinois.Config;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
 
 /**
  * Author: Shuai Wang
  * Date:  10/13/23
  */
 public class ConfigClassAdapter extends ClassVisitor {
-
     public ConfigClassAdapter(final ClassVisitor classVisitor) {
-        super(Opcodes.ASM9, classVisitor);
+        super(Config.ASMVersion, classVisitor);
     }
 
     @Override

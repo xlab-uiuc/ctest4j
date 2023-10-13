@@ -9,6 +9,9 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Author: Shuai Wang
@@ -16,14 +19,37 @@ import java.io.IOException;
  */
 public class ConfigTestRunner extends BlockJUnit4ClassRunner {
     private String configClassName;
+    private String getConfigMethodSignature;
+    private String setConfigMethodSignature;
 
     public ConfigTestRunner(Class<?> klass) throws InitializationError {
         super(klass);
-        ConfigMetadata configMetadata = klass.getAnnotation(ConfigMetadata.class);
-        this.configClassName = configMetadata.configClassName();
+        getConfigMetadataAnnotation(klass);
         instrumentConfigurationClass();
     }
 
+    /**
+     * Get the ConfigMetadata annotation from the test class.
+     * @param klass
+     */
+    private void getConfigMetadataAnnotation(Class<?> klass) {
+        ConfigMetadata configMetadata = klass.getAnnotation(ConfigMetadata.class);
+        if (configMetadata != null) {
+            this.configClassName = configMetadata.configClassName();
+            this.getConfigMethodSignature = configMetadata.getConfigMethodSignature();
+            this.setConfigMethodSignature = configMetadata.setConfigMethodSignature();
+            // If any of the above three fields is null, throw an exception
+            if (configClassName == null || getConfigMethodSignature == null || setConfigMethodSignature == null) {
+                throw new RuntimeException("ConfigMetadata annotation is not properly set.");
+            }
+        } else {
+            throw new RuntimeException("ConfigMetadata annotation is not set.");
+        }
+    }
+
+    /**
+     * Instrument the configuration class for tracking the usage of configuration parameters.
+     */
     private void instrumentConfigurationClass() {
         try {
             ClassReader reader = new ClassReader(configClassName);
@@ -38,6 +64,19 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Get all the test methods with @Test and @ConfigTest annotations.
+     * @return a list of test methods.
+     */
+    @Override
+    protected List<FrameworkMethod> computeTestMethods() {
+        // Return both methods with @Test and @ConfigTest annotations
+        List<FrameworkMethod> methods = new ArrayList<>();
+        methods.addAll(super.computeTestMethods());
+        methods.addAll(getTestClass().getAnnotatedMethods(ConfigTest.class));
+        return Collections.unmodifiableList(methods);
     }
 
     /**

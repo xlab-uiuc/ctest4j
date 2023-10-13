@@ -1,5 +1,6 @@
 package edu.illinois.instrument;
 
+import edu.illinois.Config;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
@@ -10,7 +11,7 @@ import org.objectweb.asm.Opcodes;
 public class ConfigMethodAdapter extends MethodVisitor {
 
     public ConfigMethodAdapter(final MethodVisitor methodVisitor) {
-        super(Opcodes.ASM9, methodVisitor);
+        super(Config.ASMVersion, methodVisitor);
     }
 
     @Override

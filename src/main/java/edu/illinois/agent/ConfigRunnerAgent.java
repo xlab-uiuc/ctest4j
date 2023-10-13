@@ -3,6 +3,7 @@ package edu.illinois.agent;
 import edu.illinois.Config;
 
 import java.lang.instrument.Instrumentation;
+import java.util.Objects;
 
 /**
  * Author: Shuai Wang
@@ -19,14 +20,14 @@ public class ConfigRunnerAgent {
      * @param instrumentation
      */
     public static void premain(String options, Instrumentation instrumentation) {
-        if (Config.AGENT_MODE == "JUNIT") {
+        if (Objects.equals(Config.AGENT_MODE, "JUNIT")) {
             sInstrumentation = instrumentation;
             instrumentation.addTransformer(new ConfigTransformer());
         }
     }
 
     public static void agentmain(String options, Instrumentation instrumentation) {
-        if (Config.AGENT_MODE == "JUNIT") {
+        if (Objects.equals(Config.AGENT_MODE, "JUNIT")) {
             sInstrumentation = instrumentation;
             instrumentation.addTransformer(new ConfigTransformer());
         }

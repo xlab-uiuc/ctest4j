@@ -1,5 +1,6 @@
 package edu.illinois;
 import edu.illinois.instrument.ConfigClassAdapter;
+import edu.illinois.instrument.ConfigClassLoader;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
@@ -30,8 +31,10 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
             ConfigClassAdapter adapter = new ConfigClassAdapter(writer);
             reader.accept(adapter, 0);
             byte[] byteCode = writer.toByteArray();
-            // This assumes you have a mechanism to use the modified bytecode
-            // Typically, you'd use a custom ClassLoader here to load this modified class
+
+            ConfigClassLoader customLoader = new ConfigClassLoader(configClassName, byteCode, getClass().getClassLoader());
+            Thread.currentThread().setContextClassLoader(customLoader);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

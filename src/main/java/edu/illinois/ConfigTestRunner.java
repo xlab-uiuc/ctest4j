@@ -1,14 +1,10 @@
 package edu.illinois;
-import edu.illinois.instrument.ConfigClassAdapter;
-import edu.illinois.instrument.ConfigClassLoader;
+
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassWriter;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +21,7 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
     public ConfigTestRunner(Class<?> klass) throws InitializationError {
         super(klass);
         getConfigMetadataAnnotation(klass);
-        instrumentConfigurationClass();
+        //getCustomizedClassLoader();
     }
 
     /**
@@ -50,7 +46,7 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
     /**
      * Instrument the configuration class for tracking the usage of configuration parameters.
      */
-    private void instrumentConfigurationClass() {
+/*    private ClassLoader getCustomizedClassLoader() {
         try {
             ClassReader reader = new ClassReader(configClassName);
             ClassWriter writer = new ClassWriter(reader, 0);
@@ -58,12 +54,20 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
             reader.accept(adapter, 0);
             byte[] byteCode = writer.toByteArray();
 
-            ConfigClassLoader customLoader = new ConfigClassLoader(configClassName, byteCode, getClass().getClassLoader());
-            Thread.currentThread().setContextClassLoader(customLoader);
-
+            return new ConfigClassLoader(configClassName, byteCode, getClass().getClassLoader());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }*/
+
+    @Override
+    protected Object createTest() throws Exception {
+        // Set the customized class loader
+        //Thread.currentThread().setContextClassLoader(getCustomizedClassLoader());
+        System.out.println("Class loader is " + Thread.currentThread().getContextClassLoader());
+        // print thread id
+        System.out.println("Thread id: " + Thread.currentThread().getId());
+        return getTestClass().getJavaClass().newInstance();
     }
 
     /**

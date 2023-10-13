@@ -10,7 +10,11 @@ public class Config {
     public static final int JAVA_VERSION = getJavaVersion();
     // TODO: change this to the correct ASM version
     public static final int ASMVersion = Opcodes.ASM5;
+    public static final String AGENT_MODE = System.getProperty("agent.mode", "JUNIT"); // JUNIT or RUNNER
 
+    public static final String TRACKER_CLASS_NAME = "edu/illinois/ConfigTracker";
+    public static final String TRACKER_METHOD_NAME = "markParamAsUsed";
+    public static final String TRACKER_METHOD_SIGNATURE = "(Ljava/lang/String;)V";
     /**
      * Get the ASM version based on the java version
      * @param javaVersion java version

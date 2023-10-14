@@ -6,7 +6,7 @@ import org.objectweb.asm.Opcodes;
  * Author: Shuai Wang
  * Date:  10/13/23
  */
-public class Config {
+public class Names {
     public static final int JAVA_VERSION = getJavaVersion();
     // TODO: change this to the correct ASM version
     public static final int ASMVersion = Opcodes.ASM5;

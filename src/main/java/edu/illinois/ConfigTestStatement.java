@@ -15,6 +15,11 @@ public class ConfigTestStatement extends Statement {
         this.params = params;
     }
 
+    /**
+     * This method is called when the test is executed.
+     * Check whether all the specified parameters are used after the test execution.
+     * @throws Throwable if the test execution throws an @UnUsedConfigParamException
+     */
     @Override
     public void evaluate() throws Throwable {
         ConfigTracker.startTest();

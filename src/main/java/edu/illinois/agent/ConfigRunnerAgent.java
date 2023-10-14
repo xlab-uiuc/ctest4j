@@ -1,7 +1,8 @@
 package edu.illinois.agent;
 
-import edu.illinois.Config;
+import edu.illinois.Names;
 
+import java.lang.instrument.ClassDefinition;
 import java.lang.instrument.Instrumentation;
 import java.util.Objects;
 
@@ -20,17 +21,25 @@ public class ConfigRunnerAgent {
      * @param instrumentation
      */
     public static void premain(String options, Instrumentation instrumentation) {
-        if (Objects.equals(Config.AGENT_MODE, "JUNIT")) {
+        if (Objects.equals(Names.AGENT_MODE, "JUNIT")) {
             sInstrumentation = instrumentation;
             instrumentation.addTransformer(new ConfigTransformer());
         }
     }
 
     public static void agentmain(String options, Instrumentation instrumentation) {
-        System.out.println("ConfigRunnerAgent has been loaded!");
-        if (Objects.equals(Config.AGENT_MODE, "JUNIT")) {
+        if (Objects.equals(Names.AGENT_MODE, "JUNIT")) {
             sInstrumentation = instrumentation;
             instrumentation.addTransformer(new ConfigTransformer());
+        }
+    }
+
+    public static void reloadClass(String className, byte[] newClassBytes) {
+        try {
+            // Use the Instrumentation API to redefine the class
+            sInstrumentation.redefineClasses(new ClassDefinition(Class.forName(className), newClassBytes));
+        } catch (Exception e) {
+            // Handle exceptions
         }
     }
 

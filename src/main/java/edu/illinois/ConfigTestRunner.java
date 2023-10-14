@@ -1,5 +1,6 @@
 package edu.illinois;
 
+import edu.illinois.agent.ConfigRunnerAgent;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
@@ -15,59 +16,38 @@ import java.util.List;
  */
 public class ConfigTestRunner extends BlockJUnit4ClassRunner {
     private String configClassName;
-    private String getConfigMethodSignature;
-    private String setConfigMethodSignature;
+    private List<String> getConfigMethodSignature;
+    private List<String> setConfigMethodSignature;
 
     public ConfigTestRunner(Class<?> klass) throws InitializationError {
         super(klass);
-        getConfigMetadataAnnotation(klass);
-        //getCustomizedClassLoader();
+        //getConfigMetadataAnnotation(klass);
     }
 
     /**
      * Get the ConfigMetadata annotation from the test class.
-     * @param klass
+     * @param klass the test class.
      */
     private void getConfigMetadataAnnotation(Class<?> klass) {
         ConfigMetadata configMetadata = klass.getAnnotation(ConfigMetadata.class);
         if (configMetadata != null) {
             this.configClassName = configMetadata.configClassName();
-            this.getConfigMethodSignature = configMetadata.getConfigMethodSignature();
-            this.setConfigMethodSignature = configMetadata.setConfigMethodSignature();
+            this.getConfigMethodSignature = List.of(configMetadata.getConfigMethodSignature());
+            this.setConfigMethodSignature = List.of(configMetadata.setConfigMethodSignature());
             // If any of the above three fields is null, throw an exception
-            if (configClassName == null || getConfigMethodSignature == null || setConfigMethodSignature == null) {
+            if (configClassName == null || getConfigMethodSignature.isEmpty() || setConfigMethodSignature.isEmpty()) {
                 throw new RuntimeException("ConfigMetadata annotation is not properly set.");
             }
+            // Set to system properties
+            System.setProperty("configClassName", configClassName);
+            System.setProperty("getConfigMethodSignature", getConfigMethodSignature.toString());
+            System.setProperty("setConfigMethodSignature", setConfigMethodSignature.toString());
+            Log.INFO("From @ConfigMetadata Annotation", "Config Class Name: " + System.getProperty("configClassName"));
+            Log.INFO("From @ConfigMetadata Annotation", "Get Config Method Signature: " + System.getProperty("getConfigMethodSignature"));
+            Log.INFO("From @ConfigMetadata Annotation", "Set Config Method Signature: " + System.getProperty("setConfigMethodSignature"));
         } else {
             throw new RuntimeException("ConfigMetadata annotation is not set.");
         }
-    }
-
-    /**
-     * Instrument the configuration class for tracking the usage of configuration parameters.
-     */
-/*    private ClassLoader getCustomizedClassLoader() {
-        try {
-            ClassReader reader = new ClassReader(configClassName);
-            ClassWriter writer = new ClassWriter(reader, 0);
-            ConfigClassAdapter adapter = new ConfigClassAdapter(writer);
-            reader.accept(adapter, 0);
-            byte[] byteCode = writer.toByteArray();
-
-            return new ConfigClassLoader(configClassName, byteCode, getClass().getClassLoader());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
-
-    @Override
-    protected Object createTest() throws Exception {
-        // Set the customized class loader
-        //Thread.currentThread().setContextClassLoader(getCustomizedClassLoader());
-        System.out.println("Class loader is " + Thread.currentThread().getContextClassLoader());
-        // print thread id
-        System.out.println("Thread id: " + Thread.currentThread().getId());
-        return getTestClass().getJavaClass().newInstance();
     }
 
     /**

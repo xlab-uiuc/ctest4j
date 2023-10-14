@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface ConfigMetadata {
     String configClassName();
-    String getConfigMethodSignature() default "get(String,String):String";
-    String setConfigMethodSignature() default "set(String):void";
+    String [] getConfigMethodSignature() default "get(String,String):String";
+    String [] setConfigMethodSignature() default "set(String):void";
 }
 

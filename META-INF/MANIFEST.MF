@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Agent-Class: edu.illinois.agent.ConfigRunnerAgent
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
+Premain-Class: edu.illinois.agent.ConfigRunnerAgent
+Built-By: Shuai Wang <shuaiwang516@gmail.com>

@@ -3,7 +3,11 @@ package edu.illinois.agent;
 import edu.illinois.Config;
 import org.objectweb.asm.*;
 
+import java.io.File;
 import java.lang.instrument.ClassFileTransformer;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.ProtectionDomain;
 
 /**
@@ -70,7 +74,8 @@ public class ConfigTransformer implements ClassFileTransformer {
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined,
                             ProtectionDomain protectionDomain, byte[] classfileBuffer) {
         // TODO: Change the hardcode class to the class name from the annotation
-        if (className.equals("org/apache/hadoop/conf/Configuration")) {
+        System.out.println("Loaded Class From transform(): " + className);
+        if (className.contains("Configuration")) {
             ClassReader classReader = new ClassReader(classfileBuffer);
             ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS);
             ClassVisitor visitor = new ConfigClassAdapter(classWriter);
@@ -78,5 +83,35 @@ public class ConfigTransformer implements ClassFileTransformer {
             return classWriter.toByteArray();
         }
         return null;
+    }
+
+
+    // Internal
+
+    public static void prepare(String path) {
+        File file = new File(path);
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+        }
+    }
+
+    public static void write(final String path,final byte[] bytes) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    prepare(path);
+                    Files.write(Paths.get(path), bytes);
+                } catch (Throwable t){
+                    t.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    public static void main(String args[]) throws MalformedURLException, ClassNotFoundException {
+        // Load the Configuration.java file and transform it with the function above
+        // Save the transformed file to a new file
+
     }
 }

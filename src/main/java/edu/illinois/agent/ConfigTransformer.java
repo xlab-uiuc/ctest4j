@@ -28,7 +28,8 @@ public class ConfigTransformer implements ClassFileTransformer {
         @Override
         public void visitCode() {
             mv.visitCode();
-            mv.visitVarInsn(Opcodes.ALOAD, 0); // Assuming parameter of interest is always the first one
+            // Get the first parameter of the method and pass it to the tracking method
+            mv.visitVarInsn(Opcodes.ALOAD, 1);
             mv.visitMethodInsn(Opcodes.INVOKESTATIC, Config.TRACKER_CLASS_NAME, Config.TRACKER_METHOD_NAME, Config.TRACKER_METHOD_SIGNATURE, false);
         }
     }
@@ -45,7 +46,7 @@ public class ConfigTransformer implements ClassFileTransformer {
         @Override
         public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
             MethodVisitor mv = cv.visitMethod(access, name, descriptor, signature, exceptions);
-            if ("get".equals(name) && "(Ljava/lang/String;)Ljava/lang/String;".equals(descriptor) ||
+            if ("get".equals(name) && "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;".equals(descriptor) ||
                     "set".equals(name) && "(Ljava/lang/String;)V".equals(descriptor)) {
                 mv = new ConfigTransformer.ConfigMethodAdapter(mv);
             }
@@ -74,12 +75,13 @@ public class ConfigTransformer implements ClassFileTransformer {
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined,
                             ProtectionDomain protectionDomain, byte[] classfileBuffer) {
         // TODO: Change the hardcode class to the class name from the annotation
-        System.out.println("Loaded Class From transform(): " + className);
-        if (className.contains("Configuration")) {
+        if (className.equals("org/apache/hadoop/conf/Configuration")) {
+            System.out.println("Loaded Class From transform(): " + className);
             ClassReader classReader = new ClassReader(classfileBuffer);
             ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS);
             ClassVisitor visitor = new ConfigClassAdapter(classWriter);
             classReader.accept(visitor, 0);
+            write("/Users/allenwang/Documents/xlab/CTestRunner/Configuration.class", classWriter.toByteArray());
             return classWriter.toByteArray();
         }
         return null;

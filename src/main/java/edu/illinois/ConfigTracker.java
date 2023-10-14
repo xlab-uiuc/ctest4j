@@ -11,6 +11,7 @@ public class ConfigTracker {
     private static final ThreadLocal<Set<String>> usedParams = ThreadLocal.withInitial(HashSet::new);
 
     public static void startTest() {
+        System.out.println("Starting a new test.");
         usedParams.get().clear();
     }
 

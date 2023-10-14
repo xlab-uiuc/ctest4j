@@ -20,7 +20,6 @@ public class ConfigRunnerAgent {
      * @param instrumentation
      */
     public static void premain(String options, Instrumentation instrumentation) {
-        System.out.println("ConfigRunnerAgent has been loaded!");
         if (Objects.equals(Config.AGENT_MODE, "JUNIT")) {
             sInstrumentation = instrumentation;
             instrumentation.addTransformer(new ConfigTransformer());

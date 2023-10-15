@@ -47,3 +47,9 @@ public class ExampleTest {
 }
 ```
 
+#### Run An Example
+Under the root directory of this project, run the following command:
+```bash
+$ mvn clean install -DskipTests
+$ mvn surefire:test -Dtest=ExampleTest
+```

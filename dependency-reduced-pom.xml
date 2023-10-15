@@ -7,6 +7,17 @@
   <build>
     <plugins>
       <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <argLine>-javaagent:/Users/allenwang/.m2/repository/edu/illinois/CTestRunner/1.0-SNAPSHOT/CTestRunner-1.0-SNAPSHOT.jar</argLine>
+          <systemPropertyVariables>
+            <configurationClassName>edu/illinois/Configuration</configurationClassName>
+            <configurationGetterMethod>get(Ljava/lang/String;)Ljava/lang/String;</configurationGetterMethod>
+            <configurationSetterMethod>set(Ljava/lang/String;Ljava/lang/String;)V</configurationSetterMethod>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.3.0</version>
         <configuration>

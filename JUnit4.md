@@ -10,7 +10,6 @@ For maven project, add the following dependency to your pom.xml:
         <groupId>edu.illinois</groupId>
         <artifactId>CTestRunner</artifactId>
         <version>1.0-SNAPSHOT</version>
-
         <scope>compile</scope>
     </dependency>
 </dependencies>
@@ -22,11 +21,11 @@ Specify Runner Agent and Configuration APIs in Maven Surefire plugin:
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <argLine>-javaagent:/Users/allenwang/.m2/repository/edu/illinois/CTestRunner/1.0-SNAPSHOT/CTestRunner-1.0-SNAPSHOT.jar</argLine>
+          <argLine>-javaagent:~/.m2/repository/edu/illinois/CTestRunner/1.0-SNAPSHOT/CTestRunner-1.0-SNAPSHOT.jar</argLine>
           <systemPropertyVariables>
-            <configurationClassName>org/apache/hadoop/conf/Configuration</configurationClassName>
-            <configurationGetterMethod>get(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;,get(Ljava/lang/String;)Ljava/lang/String;</configurationGetterMethod>
-            <configurationSetterMethod>set(Ljava/lang/String;Ljava/lang/String;)V</configurationSetterMethod>
+            <configurationClassName>${CONFIGURATION_CLASS}</configurationClassName>
+            <configurationGetterMethod>${GETTER_METHOD_NAME_AND_DESCRIPTOR}</configurationGetterMethod>
+            <configurationSetterMethod>${SETTER_METHOD_NAME_AND_DESCRIPTOR}</configurationSetterMethod>
           </systemPropertyVariables>
         </configuration>
       </plugin>
@@ -48,6 +47,7 @@ public class ExampleTest {
 ```
 
 #### Run An Example
+Example dependency can be found at [pom.xml](pom.xml).
 Under the root directory of this project, run the following command:
 ```bash
 $ mvn clean install -DskipTests

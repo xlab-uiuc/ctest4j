@@ -2,6 +2,7 @@ import edu.illinois.ConfigTest;
 import edu.illinois.ConfigTestRunner;
 import edu.illinois.Configuration;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -27,5 +28,10 @@ public class ExampleTest {
         String value3 = conf.get("parameter3");
         System.out.println("In test2: " + " parameter3: " + value3);
         // This test should fail because it never uses parameter4.
+    }
+
+    @Test
+    public void testTrack() {
+        String value4 = conf.get("parameter-tracked");
     }
 }

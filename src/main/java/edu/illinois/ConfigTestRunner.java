@@ -1,6 +1,7 @@
 package edu.illinois;
 
 import edu.illinois.agent.ConfigRunnerAgent;
+import org.junit.Test;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
@@ -46,6 +47,10 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
         ConfigTest configTest = method.getAnnotation(ConfigTest.class);
         if (configTest != null) {
             return new ConfigTestStatement(base, configTest.value());
+        }
+        Test testAnnotation = method.getAnnotation(Test.class);
+        if (testAnnotation != null) {
+            return new ConfigTrackStatement(base, method);
         }
         return base;
     }

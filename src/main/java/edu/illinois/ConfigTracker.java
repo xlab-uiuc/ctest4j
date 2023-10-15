@@ -21,5 +21,9 @@ public class ConfigTracker {
     public static void markParamAsUsed(String param) {
         usedParams.get().add(param);
     }
+
+    public static Set<String> getUsedParams() {
+        return usedParams.get();
+    }
 }
 

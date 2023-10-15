@@ -46,6 +46,17 @@ public class ExampleTest {
 }
 ```
 
+#### Track Configuration Set with Existing Test
+If you do not know which parameter is used in a test method, you can use `@RunWith(ConfigTestRunner.class)` and specify
+your test method with normal `@Test`.
+After you execute the test with the runner, the runner will print out the configuration parameters used in the test method.
+```java
+    @Test
+    public void testTrack() {
+        String value4 = conf.get("parameter-tracked");
+    }
+```
+
 #### Run An Example
 Example dependency can be found at [pom.xml](pom.xml).
 Under the root directory of this project, run the following command:

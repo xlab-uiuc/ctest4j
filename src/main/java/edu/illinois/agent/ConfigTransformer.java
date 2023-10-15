@@ -1,7 +1,7 @@
 package edu.illinois.agent;
 
-import edu.illinois.Log;
 import edu.illinois.Names;
+import edu.illinois.Options;
 import org.objectweb.asm.*;
 
 import java.lang.instrument.ClassFileTransformer;
@@ -147,10 +147,12 @@ public class ConfigTransformer implements ClassFileTransformer {
         }
         if (configGetterMethodMap.containsKey(methodName)) {
             return configGetterMethodMap.get(methodName).contains(description);
-        } else if (configSetterMethodMap.containsKey(methodName)) {
-            return configSetterMethodMap.get(methodName).contains(description);
-        } else {
-            return false;
         }
+        if (Options.instrumentSetter) {
+            if (configSetterMethodMap.containsKey(methodName)) {
+                return configSetterMethodMap.get(methodName).contains(description);
+            }
+        }
+        return false;
     }
 }

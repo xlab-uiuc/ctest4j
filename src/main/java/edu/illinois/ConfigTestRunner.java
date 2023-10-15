@@ -15,39 +15,9 @@ import java.util.List;
  * Date:  10/13/23
  */
 public class ConfigTestRunner extends BlockJUnit4ClassRunner {
-    private String configClassName;
-    private List<String> getConfigMethodSignature;
-    private List<String> setConfigMethodSignature;
 
     public ConfigTestRunner(Class<?> klass) throws InitializationError {
         super(klass);
-        //getConfigMetadataAnnotation(klass);
-    }
-
-    /**
-     * Get the ConfigMetadata annotation from the test class.
-     * @param klass the test class.
-     */
-    private void getConfigMetadataAnnotation(Class<?> klass) {
-        ConfigMetadata configMetadata = klass.getAnnotation(ConfigMetadata.class);
-        if (configMetadata != null) {
-            this.configClassName = configMetadata.configClassName();
-            this.getConfigMethodSignature = List.of(configMetadata.getConfigMethodSignature());
-            this.setConfigMethodSignature = List.of(configMetadata.setConfigMethodSignature());
-            // If any of the above three fields is null, throw an exception
-            if (configClassName == null || getConfigMethodSignature.isEmpty() || setConfigMethodSignature.isEmpty()) {
-                throw new RuntimeException("ConfigMetadata annotation is not properly set.");
-            }
-            // Set to system properties
-            System.setProperty("configClassName", configClassName);
-            System.setProperty("getConfigMethodSignature", getConfigMethodSignature.toString());
-            System.setProperty("setConfigMethodSignature", setConfigMethodSignature.toString());
-            Log.INFO("From @ConfigMetadata Annotation", "Config Class Name: " + System.getProperty("configClassName"));
-            Log.INFO("From @ConfigMetadata Annotation", "Get Config Method Signature: " + System.getProperty("getConfigMethodSignature"));
-            Log.INFO("From @ConfigMetadata Annotation", "Set Config Method Signature: " + System.getProperty("setConfigMethodSignature"));
-        } else {
-            throw new RuntimeException("ConfigMetadata annotation is not set.");
-        }
     }
 
     /**

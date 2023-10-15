@@ -9,11 +9,12 @@ import java.lang.annotation.Target;
  * Author: Shuai Wang
  * Date:  10/13/23
  */
+@Deprecated
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface ConfigMetadata {
     String configClassName();
-    String [] getConfigMethodSignature() default "get(String,String):String";
-    String [] setConfigMethodSignature() default "set(String):void";
+    String [] getConfigMethodSignature();
+    String [] setConfigMethodSignature();
 }
 

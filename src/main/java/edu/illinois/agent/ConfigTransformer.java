@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static edu.illinois.Log.writeToFile;
 
 /**
  * Author: Shuai Wang
@@ -23,10 +22,6 @@ public class ConfigTransformer implements ClassFileTransformer {
     /** The map of getter/setter method names and their descriptors */
     private static Map<String, List<String>> configGetterMethodMap;
     private static Map<String, List<String>> configSetterMethodMap;
-
-    public ConfigTransformer() {
-
-    }
 
     /**
      * Method adapter for the Configuration class
@@ -58,12 +53,7 @@ public class ConfigTransformer implements ClassFileTransformer {
         @Override
         public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
             MethodVisitor mv = cv.visitMethod(access, name, descriptor, signature, exceptions);
-            /*if ("get".equals(name) && "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;".equals(descriptor) ||
-                    "set".equals(name) && "(Ljava/lang/String;)V".equals(descriptor)) {
-                mv = new ConfigMethodAdapter(mv);
-            }*/
             if (isGetterOrSetter(name, descriptor)) {
-                writeToFile("Instrumenting Method: " + name + ", Descriptor: " + descriptor);
                 mv = new ConfigMethodAdapter(mv);
             }
             return mv;
@@ -90,11 +80,10 @@ public class ConfigTransformer implements ClassFileTransformer {
     @Override
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined,
                             ProtectionDomain protectionDomain, byte[] classfileBuffer) {
-        // TODO: Change the hardcode class to the class name from the annotation
+        // TODO: Here we may not need to call this parseGetterSetterDescriptor method every time.
         parseGetterSetterDescriptor();
         if (!configClassName.equals("null")) {
             if (className.equals(configClassName)) {
-                System.out.println("Loaded Class From transform(): " + className);
                 ClassReader classReader = new ClassReader(classfileBuffer);
                 ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS);
                 ClassVisitor visitor = new ConfigClassAdapter(classWriter);
@@ -121,14 +110,6 @@ public class ConfigTransformer implements ClassFileTransformer {
         }
         configGetterMethodMap = genTargetMethodMap(System.getProperty("configurationGetterMethod"));
         configSetterMethodMap = genTargetMethodMap(System.getProperty("configurationSetterMethod"));
-/*
-        if (configClassName.equals("null") || configGetterMethodMap.isEmpty() || configSetterMethodMap.isEmpty()) {
-            throw new RuntimeException("To run with ConfigTest.class, " +
-                    "please set the configuration class name and the getter/setter method " +
-                    "signature in the system properties with the name as " +
-                    "configurationClassName, configurationGetterMethod, configurationSetterMethod>.");
-        }
-*/
     }
 
     /**
@@ -146,7 +127,6 @@ public class ConfigTransformer implements ClassFileTransformer {
             // find the first index of "("
             int firstIndex = methodSignature.indexOf("(");
             if (firstIndex == -1) {
-                System.out.println("Invalid method signature: " + methodSignature);
                 continue;
             }
             String name = methodSignature.substring(0, firstIndex).trim();
@@ -162,7 +142,9 @@ public class ConfigTransformer implements ClassFileTransformer {
     }
 
     private boolean isGetterOrSetter(String methodName, String description) {
-        writeToFile("Checking Method Name: " + methodName + ", Description: " + description);
+        if (configGetterMethodMap == null || configSetterMethodMap == null) {
+            return false;
+        }
         if (configGetterMethodMap.containsKey(methodName)) {
             return configGetterMethodMap.get(methodName).contains(description);
         } else if (configSetterMethodMap.containsKey(methodName)) {
@@ -171,5 +153,4 @@ public class ConfigTransformer implements ClassFileTransformer {
             return false;
         }
     }
-
 }

@@ -7,18 +7,24 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Author: Shuai Wang
  * Date:  10/13/23
  */
 public class ConfigTestRunner extends BlockJUnit4ClassRunner {
+    private final Set<String> classLevelParameters;
 
     public ConfigTestRunner(Class<?> klass) throws InitializationError {
         super(klass);
+        // Retrieve class-level parameters if present
+        ConfigTestClass configTestClassAnnotation = klass.getAnnotation(ConfigTestClass.class);
+        if (configTestClassAnnotation != null) {
+            classLevelParameters = new HashSet<>(Arrays.asList(configTestClassAnnotation.value()));
+        } else {
+            classLevelParameters = new HashSet<>();
+        }
     }
 
     /**
@@ -46,7 +52,11 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
         Statement base = super.methodInvoker(method, test);
         ConfigTest configTest = method.getAnnotation(ConfigTest.class);
         if (configTest != null) {
-            return new ConfigTestStatement(base, configTest.value());
+            Set<String> methodLevelParameters = new HashSet<>();
+            methodLevelParameters.addAll(Arrays.asList(configTest.value()));
+            // add class level parameters to method level parameters
+            methodLevelParameters.addAll(classLevelParameters);
+            return new ConfigTestStatement(base, methodLevelParameters);
         }
         Test testAnnotation = method.getAnnotation(Test.class);
         if (testAnnotation != null) {

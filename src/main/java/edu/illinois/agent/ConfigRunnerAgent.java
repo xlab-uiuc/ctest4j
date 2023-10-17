@@ -21,17 +21,19 @@ public class ConfigRunnerAgent {
      * @param instrumentation
      */
     public static void premain(String options, Instrumentation instrumentation) {
-        if (Objects.equals(Names.AGENT_MODE, "JUNIT")) {
+/*        if (Objects.equals(Names.AGENT_MODE, "JUNIT")) {
             sInstrumentation = instrumentation;
             instrumentation.addTransformer(new ConfigTransformer());
-        }
+        }*/
     }
 
     public static void agentmain(String options, Instrumentation instrumentation) {
+/*
         if (Objects.equals(Names.AGENT_MODE, "JUNIT")) {
             sInstrumentation = instrumentation;
             instrumentation.addTransformer(new ConfigTransformer());
         }
+*/
     }
 
     public static void reloadClass(String className, byte[] newClassBytes) {

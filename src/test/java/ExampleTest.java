@@ -34,4 +34,11 @@ public class ExampleTest {
     public void testTrack() {
         String value4 = conf.get("parameter-tracked");
     }
+
+    @ConfigTest(file = "src/test/resources/test-config.json")
+    public void test3() {
+        String value1 = conf.get("parameter1");
+        String value2 = conf.get("parameter2");
+        System.out.println("In test3: " + " parameter1: " + value1 + " parameter2: " + value2);
+    }
 }

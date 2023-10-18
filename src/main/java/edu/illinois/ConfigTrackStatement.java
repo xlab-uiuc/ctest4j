@@ -22,7 +22,8 @@ public class ConfigTrackStatement extends Statement {
         try {
             base.evaluate();
         } finally {
-            Log.INFO("Test", method.getName(), "uses configuration parameters: " + ConfigTracker.getUsedParams());
+            Log.INFO("Test", method.getDeclaringClass().getCanonicalName() + "#" + method.getName(),
+                    "uses configuration parameters: " + ConfigTracker.getUsedParams());
         }
     }
 }

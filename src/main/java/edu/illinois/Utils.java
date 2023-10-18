@@ -1,5 +1,6 @@
 package edu.illinois;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -37,6 +38,22 @@ public class Utils {
         if (methodDescriptors != null && !methodDescriptors.isEmpty()) {
             // Split with comma
             return new ArrayList<>(List.of(methodDescriptors.split(",")));
+        }
+        return null;
+    }
+
+    /**
+     * Get the file type from the file name
+     * @param file the file name
+     * @return the file type
+     * @throws IOException if the file name is invalid
+     */
+    public static String getFileType(String file)  {
+        if (file != null && !file.isEmpty()) {
+            String[] fileSplit = file.split("\\.");
+            if (fileSplit.length > 1) {
+                return fileSplit[fileSplit.length - 1];
+            }
         }
         return null;
     }

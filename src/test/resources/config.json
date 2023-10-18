@@ -1,0 +1,4 @@
+{
+  "must": ["file-param1"],
+  "maybe": ["file-param2"]
+}

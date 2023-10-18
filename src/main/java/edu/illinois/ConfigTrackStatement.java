@@ -3,8 +3,6 @@ package edu.illinois;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 
-import java.awt.*;
-
 /**
  * Author: Shuai Wang
  * Date:  10/15/23

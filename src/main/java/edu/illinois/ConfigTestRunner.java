@@ -1,12 +1,16 @@
 package edu.illinois;
 
-import edu.illinois.agent.ConfigRunnerAgent;
+import edu.illinois.parser.ConfigurationParser;
+import edu.illinois.parser.JsonConfigurationParser;
+import edu.illinois.parser.NullConfigurationParser;
+import edu.illinois.parser.XmlConfigurationParser;
 import org.junit.Test;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -21,7 +25,11 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
         // Retrieve class-level parameters if present
         ConfigTestClass configTestClassAnnotation = klass.getAnnotation(ConfigTestClass.class);
         if (configTestClassAnnotation != null) {
-            classLevelParameters = new HashSet<>(Arrays.asList(configTestClassAnnotation.value()));
+            try {
+                classLevelParameters = getAllClassParameters(configTestClassAnnotation);
+            } catch (IOException e) {
+                throw new RuntimeException("Unable to parse configuration file from class " + klass.getName() + " Annotation", e);
+            }
         } else {
             classLevelParameters = new HashSet<>();
         }
@@ -52,11 +60,11 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
         Statement base = super.methodInvoker(method, test);
         ConfigTest configTest = method.getAnnotation(ConfigTest.class);
         if (configTest != null) {
-            Set<String> methodLevelParameters = new HashSet<>();
-            methodLevelParameters.addAll(Arrays.asList(configTest.value()));
-            // add class level parameters to method level parameters
-            methodLevelParameters.addAll(classLevelParameters);
-            return new ConfigTestStatement(base, methodLevelParameters);
+            try {
+                return new ConfigTestStatement(base, getAllMethodParameters(configTest));
+            } catch (IOException e) {
+                throw new RuntimeException("Unable to parse configuration file from method " + method.getName() + " Annotation", e);
+            }
         }
         Test testAnnotation = method.getAnnotation(Test.class);
         if (testAnnotation != null) {
@@ -64,5 +72,74 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
         }
         return base;
     }
-}
 
+    /**
+     * Get the parameters from a configuration file.
+     * @param file the path of the configuration file
+     * @return the set of parameters that must be used
+     * @throws IOException if the parsing fails
+     */
+    public Set<String> getParametersFromFile(String file) throws IOException {
+        ConfigurationParser parser = getParser(Utils.getFileType(file));
+        return parser.parse(file);
+    }
+
+    /**
+     * Get the parser for a configuration file based on its file type.
+     * @param configFileType the file type of the configuration file
+     * @return the parser for the configuration file
+     */
+    public ConfigurationParser getParser(String configFileType) {
+        if (configFileType == null) {
+            Log.WARN("Unable to parse configuration file" + configFileType + " from Annotation, use default parser");
+            return new NullConfigurationParser();
+        }
+        switch (configFileType) {
+            case "json":
+                return new JsonConfigurationParser();
+            case "xml":
+                return new XmlConfigurationParser();
+            default:
+                // Default to a parser that returns an empty set
+                return new NullConfigurationParser();
+        }
+    }
+
+    // Internal
+
+    /**
+     * Get all the parameters for a test class that every test method in the class must use.
+     * @param configTestClass the annotation for the test class
+     * @return a set of parameters that every test method in the class must use
+     */
+    private Set<String> getAllClassParameters(ConfigTestClass configTestClass) throws IOException {
+        Set<String> classLevelParameters = new HashSet<>(Arrays.asList(configTestClass.value()));
+        String classConfigFile = configTestClass.file();
+        if (!classConfigFile.isEmpty()) {
+            classLevelParameters.addAll(getParametersFromFile(classConfigFile));
+        }
+        return classLevelParameters;
+    }
+
+    /**
+     * Get all the parameters for a test method.
+     * @param configTest the annotation for the test method
+     * @return a set of parameters that the test method must use
+     * @throws IOException if the parsing fails
+     */
+    private Set<String> getAllMethodParameters(ConfigTest configTest) throws IOException {
+        Set<String> methodLevelParameters = new HashSet<>();
+
+        // Retrieve method-level parameters if present
+        methodLevelParameters.addAll(Arrays.asList(configTest.value()));
+        // Retrieve class-level parameters if present
+        methodLevelParameters.addAll(classLevelParameters);
+
+        // Retrieve file-level parameters if present
+        String file = configTest.file();
+        if (!file.isEmpty()) {
+            methodLevelParameters.addAll(getParametersFromFile(file));
+        }
+        return methodLevelParameters;
+    }
+}

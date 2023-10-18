@@ -1,9 +1,10 @@
-package edu.illinois;
+import edu.illinois.ConfigTracker;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * A fake configuration class that used for testing.
  * Author: Shuai Wang
  * Date:  10/13/23
  */
@@ -23,6 +24,7 @@ public class Configuration {
         }
     }
     public String get(String name) {
+        ConfigTracker.markParamAsUsed(name);
         if (configMap.containsKey(name)) {
             return configMap.get(name);
         }

@@ -46,7 +46,6 @@ one can implement [ConfigurationParser](src/main/java/edu/illinois/parser/Config
 other file format and override `getParser()` method in [ConfigTestRunner#getParser](src/main/java/edu/illinois/ConfigTestRunner.java).
 
 ```java
-import edu.illinois.ConfigTestClass;
 @RunWith(ConfigTestRunner.class)
 @ConfigTestClass(value = {"parameter1"}, file = "config.json")
 public class FromMethodTest {

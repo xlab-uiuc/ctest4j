@@ -36,7 +36,7 @@ Use `@RunWith(ConfigTestRunner.class)` to specify the runner for your test class
 For each configuration test method, use `@ConfigTest` to specify the configuration parameter name.
 ```java
 @RunWith(ConfigTestRunner.class)
-public class ExampleTest {
+public class FromMethodTest {
     @ConfigTest({"parameter1", "parameter2"})
     public void test() {
         // test code
@@ -62,5 +62,5 @@ Example dependency can be found at [pom.xml](pom.xml).
 Under the root directory of this project, run the following command:
 ```bash
 $ mvn clean install -DskipTests
-$ mvn surefire:test -Dtest=ExampleTest
+$ mvn surefire:test -Dtest=FromMethodTest
 ```

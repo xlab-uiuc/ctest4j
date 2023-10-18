@@ -5,11 +5,13 @@ import edu.illinois.parser.JsonConfigurationParser;
 import edu.illinois.parser.NullConfigurationParser;
 import edu.illinois.parser.XmlConfigurationParser;
 import org.junit.Test;
+import org.junit.internal.runners.statements.ExpectException;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
+import javax.swing.plaf.nimbus.State;
 import java.io.IOException;
 import java.util.*;
 
@@ -71,6 +73,31 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
             return new ConfigTrackStatement(base, method);
         }
         return base;
+    }
+
+    /**
+     * @ConfigTest would override the expected exception from @Test annotation.
+     */
+    @Override
+    protected Statement possiblyExpectingExceptions(FrameworkMethod method, Object test, Statement next) {
+        // From @ConfigTest annotation
+        ConfigTest configTest = method.getAnnotation(ConfigTest.class);
+        if (configTest != null) {
+            Class<? extends Throwable> configTestExpectedException = configTest.expected();
+            if (configTestExpectedException != ConfigTest.None.class) {
+                return new ExpectException(next, configTestExpectedException);
+            }
+        }
+        // From @Test annotation
+        Test testAnnotation = method.getAnnotation(Test.class);
+        if (testAnnotation != null) {
+            Class<? extends Throwable> testExpectedException = testAnnotation.expected();
+            if (testExpectedException != Test.None.class) {
+                return new ExpectException(next, testExpectedException);
+            }
+
+        }
+        return next;
     }
 
     /**

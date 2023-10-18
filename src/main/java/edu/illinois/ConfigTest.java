@@ -17,4 +17,21 @@ public @interface ConfigTest {
     String[] value() default {};
     String[] may() default {};
     String file() default "";
+
+    /** Copied From @Test annotation */
+    static class None extends Throwable {
+        private static final long serialVersionUID = 1L;
+
+        private None() {
+        }
+    }
+
+    /**
+     * Optionally specify <code>expected</code>, a Throwable, to cause a test method to succeed if
+     * and only if an exception of the specified class is thrown by the method. If the Throwable's
+     * message or one of its properties should be verified, the
+     * {@link org.junit.rules.ExpectedException ExpectedException} rule can be used instead.
+     */
+    Class<? extends Throwable> expected() default None.class;
+
 }

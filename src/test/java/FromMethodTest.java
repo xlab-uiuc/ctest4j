@@ -23,8 +23,7 @@ public class FromMethodTest {
         System.out.println("In test: " + " parameter1: " + value1 + " parameter2: " + value2);
     }
 
-    @ConfigTest({"parameter3", "parameter4"})
-    @Test(expected = UnUsedConfigParamException.class)
+    @ConfigTest(value = {"parameter3", "parameter4"}, expected = UnUsedConfigParamException.class)
     public void test2() {
         String value3 = conf.get("parameter3");
         String file_value1 = conf.get("file-param1");

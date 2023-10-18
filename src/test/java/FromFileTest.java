@@ -22,8 +22,7 @@ public class FromFileTest {
     /**
      * The test would fail because it never uses "file-param1".
      */
-    @ConfigTest()
-    @Test(expected = UnUsedConfigParamException.class)
+    @ConfigTest(expected = UnUsedConfigParamException.class)
     public void testWouldFail() {
         Configuration conf = new Configuration();
         conf.get("file-param2");

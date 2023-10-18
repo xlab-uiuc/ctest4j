@@ -23,8 +23,7 @@ public class FromClassTest {
     /**
      * The test would fail because it never uses "class-parameter2".
      */
-    @ConfigTest
-    @Test(expected = UnUsedConfigParamException.class)
+    @ConfigTest(expected = UnUsedConfigParamException.class)
     public void testShouldFail() {
         Configuration conf = new Configuration();
         conf.get("class-parameter1");

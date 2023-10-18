@@ -28,8 +28,7 @@ public class FromAllTest {
     /**
      * The test would fail because it never uses "method-parameter2".
      */
-    @ConfigTest({"method-parameter1", "method-parameter2"})
-    @Test(expected = UnUsedConfigParamException.class)
+    @ConfigTest(value = {"method-parameter1", "method-parameter2"}, expected = UnUsedConfigParamException.class)
     public void testFailDueToMethodAnnotation() {
         Configuration conf = new Configuration();
         // From class annotation
@@ -45,8 +44,7 @@ public class FromAllTest {
     /**
      * The test would fail because it never uses "class-parameter2".
      */
-    @ConfigTest({"method-parameter1", "method-parameter2"})
-    @Test(expected = UnUsedConfigParamException.class)
+    @ConfigTest(value = {"method-parameter1", "method-parameter2"}, expected = UnUsedConfigParamException.class)
     public void testFailDueToClassAnnotation() {
         Configuration conf = new Configuration();
         // From class annotation
@@ -63,8 +61,7 @@ public class FromAllTest {
     /**
      * The test would fail because it never uses "file-param1".
      */
-    @ConfigTest({"method-parameter1", "method-parameter2"})
-    @Test(expected = UnUsedConfigParamException.class)
+    @ConfigTest(value = {"method-parameter1", "method-parameter2"}, expected = UnUsedConfigParamException.class)
     public void testFailDueToConfigFile() {
         Configuration conf = new Configuration();
         // From class annotation

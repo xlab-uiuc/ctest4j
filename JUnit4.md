@@ -15,6 +15,7 @@ For maven project, add the following dependency to your pom.xml:
 </dependencies>
 ```
 
+##### Automatic Instrumentation Only：
 Specify Runner Agent and Configuration APIs in Maven Surefire plugin:
 ```xml
       <plugin>
@@ -33,15 +34,27 @@ Specify Runner Agent and Configuration APIs in Maven Surefire plugin:
 
 #### Write Configuration Test
 Use `@RunWith(ConfigTestRunner.class)` to specify the runner for your test class.
-For each configuration test method, use `@ConfigTest` to specify the configuration parameter name.
+`@ConfigTestClass` specifies the configuration parameters that must be used in the all test methods in the test class.
+For each configuration test method, use `@ConfigTest` to specify the configuration parameter that must be used in the test method.
+
+There are two ways of specifying configuration parameters:
+1. Directly write configuration parameter name in `@ConfigTestClass` and `@ConfigTest` annotation as value().
+2. Put configuration parameter name in a file and specify the file path in `@ConfigTestClass` and `@ConfigTest` annotation as file().
+
+Current runner support JSON file format for configuration parameter file, 
+one can implement [ConfigurationParser](src/main/java/edu/illinois/parser/ConfigurationParser.java) to support 
+other file format and override `getParser()` method in [ConfigTestRunner#getParser](src/main/java/edu/illinois/ConfigTestRunner.java).
+
 ```java
+import edu.illinois.ConfigTestClass;
 @RunWith(ConfigTestRunner.class)
+@ConfigTestClass(value = {"parameter1"}, file = "config.json")
 public class FromMethodTest {
-    @ConfigTest({"parameter1", "parameter2"})
+    @ConfigTest({"parameter2"})
     public void test() {
-        // test code
-        // parameter1 and parameter2 must be used in this test method
-        // otherwise UnUsedConfigParamException will be thrown
+        // Assume parameter3 is specified in config.json
+        // Then parameter1, parameter2 and parameter3 must be used in this test method
+        // Otherwise UnUsedConfigParamException will be thrown
     }
 }
 ```
@@ -62,5 +75,5 @@ Example dependency can be found at [pom.xml](pom.xml).
 Under the root directory of this project, run the following command:
 ```bash
 $ mvn clean install -DskipTests
-$ mvn surefire:test -Dtest=FromMethodTest
+$ mvn surefire:test
 ```

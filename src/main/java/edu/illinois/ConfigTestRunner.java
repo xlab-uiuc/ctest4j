@@ -6,14 +6,15 @@ import edu.illinois.parser.NullConfigurationParser;
 import edu.illinois.parser.XmlConfigurationParser;
 import org.junit.Test;
 import org.junit.internal.runners.statements.ExpectException;
+import org.junit.internal.runners.statements.FailOnTimeout;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
-import javax.swing.plaf.nimbus.State;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Author: Shuai Wang
@@ -98,6 +99,21 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
 
         }
         return next;
+    }
+
+    /**
+     * @ConfigTest would override the timeout from @Test annotation.
+     */
+    @Override
+    protected Statement withPotentialTimeout(FrameworkMethod method, Object test, Statement next) {
+        long timeout = 0;
+        ConfigTest configTest = method.getAnnotation(ConfigTest.class);
+        if (configTest != null) {
+            timeout = configTest.timeout();
+        }
+        return FailOnTimeout.builder()
+                .withTimeout(timeout, TimeUnit.MILLISECONDS)
+                .build(next);
     }
 
     /**

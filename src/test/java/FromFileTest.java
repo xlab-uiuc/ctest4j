@@ -2,7 +2,6 @@ import edu.illinois.ConfigTest;
 import edu.illinois.ConfigTestClass;
 import edu.illinois.ConfigTestRunner;
 import edu.illinois.UnUsedConfigParamException;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**

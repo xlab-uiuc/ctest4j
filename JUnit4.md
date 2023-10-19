@@ -63,10 +63,10 @@ If you do not know which parameter is used in a test method, you can use `@RunWi
 your test method with normal `@Test`.
 After you execute the test with the runner, the runner will print out the configuration parameters used in the test method.
 ```java
-    @Test
-    public void testTrack() {
-        String value4 = conf.get("parameter-tracked");
-    }
+@Test
+public void testTrack() {
+    String value4 = conf.get("parameter-tracked");
+}
 ```
 
 #### Run An Example
@@ -75,4 +75,16 @@ Under the root directory of this project, run the following command:
 ```bash
 $ mvn clean install -DskipTests
 $ mvn surefire:test
+```
+
+#### Run several tests with JUnit Suite
+To run several tests with Configuration Test Runner, you can use JUnit Suite with `@RunWith(ConfigTestSuite.class)`.
+```java
+@RunWith(ConfigTestSuite.class)
+@Suite.SuiteClasses({
+        TestNormalOne.class,        
+        TestNormalTwo.class,
+})
+public class AllTests {
+}
 ```

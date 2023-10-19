@@ -7,7 +7,7 @@
     <groupId>edu.illinois</groupId>
     <artifactId>CTestRunner</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+    <packaging>maven-plugin</packaging>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -15,6 +15,8 @@
             <version>4.13.2</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- Dependencies for Parsers -->
         <dependency>
             <groupId>javax.json</groupId>
             <artifactId>javax.json-api</artifactId>
@@ -32,6 +34,7 @@
             <version>9.2</version>
         </dependency>
 
+        <!-- Dependencies for Log4j -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -42,9 +45,30 @@
             <artifactId>log4j-core</artifactId>
             <version>2.17.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>3.6.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-core</artifactId>
+            <version>3.6.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>3.5</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
+
     <build>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -93,6 +117,13 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.6.0</version>
             </plugin>
         </plugins>
     </build>

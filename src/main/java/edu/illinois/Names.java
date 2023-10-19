@@ -16,6 +16,7 @@ public class Names {
     public static final String TRACKER_METHOD_NAME = "markParamAsUsed";
     public static final String TRACKER_METHOD_SIGNATURE = "(Ljava/lang/String;)V";
     public static final String CONFIG_FILE_TYPE_PROPERTY = "config.file.type";
+    public static final String TRACKING_LOG_PREFIX = "[ConfigTestRunner]TEST";
     /**
      * Get the ASM version based on the java version
      * @param javaVersion java version

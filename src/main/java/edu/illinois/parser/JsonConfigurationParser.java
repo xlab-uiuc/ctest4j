@@ -30,14 +30,14 @@ public class JsonConfigurationParser implements ConfigurationParser {
         jsonReader.close();
         fileReader.close();
 
-        Set<String> mustSet = new HashSet<>();
-        // Get the "must" field
-        if (jsonObject.containsKey(MUST_FIELD)) {
-            for (JsonValue must : jsonObject.getJsonArray(MUST_FIELD)) {
-                mustSet.add(((JsonString) must).getString());
+        Set<String> requiredSet = new HashSet<>();
+        // Get the "required" field
+        if (jsonObject.containsKey(REQUIRED)) {
+            for (JsonValue required : jsonObject.getJsonArray(REQUIRED)) {
+                requiredSet.add(((JsonString) required).getString());
             }
         }
-        return mustSet;
+        return requiredSet;
     }
 
     /**

@@ -14,6 +14,6 @@ import java.lang.annotation.Target;
 public @interface ConfigTestClass {
     /** A shared list of configuration parameter name for all methods in the test class. */
     String[] value() default {};
-    String[] may() default {};
+    String[] optional() default {};
     String file() default "";
 }

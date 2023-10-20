@@ -9,7 +9,7 @@ import java.util.Set;
  * Date:  10/17/23
  */
 public interface ConfigurationParser {
-    public static String MUST_FIELD = "must";
+    public static String REQUIRED = "required";
 
     /**
      * Parse the configuration file and return the set of parameters that must be used in each test method.

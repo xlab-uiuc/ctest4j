@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 public @interface ConfigTest {
     /** A list of configuration parameter name as input for a single test method */
     String[] value() default {};
-    String[] may() default {};
+    String[] optional() default {};
     String file() default "";
 
     /** =============================== Copied From @Test annotation =================================== */

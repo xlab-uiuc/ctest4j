@@ -56,13 +56,13 @@ public class ConfigFileGenerator {
      */
     private void writeParamSetToJson(Set<String> paramSet, File jsonFile) {
         JsonObjectBuilder jsonObjectBuilder = Json.createObjectBuilder();
-        JsonArrayBuilder mustArrayBuilder = Json.createArrayBuilder();
+        JsonArrayBuilder requiredArrayBuilder = Json.createArrayBuilder();
 
-        // Add parameters to the "must" array
+        // Add parameters to the "required" array
         for (String param : paramSet) {
-            mustArrayBuilder.add(param);
+            requiredArrayBuilder.add(param);
         }
-        jsonObjectBuilder.add(ConfigurationParser.MUST_FIELD, mustArrayBuilder);
+        jsonObjectBuilder.add(ConfigurationParser.REQUIRED, requiredArrayBuilder);
 
         // Write the JsonObject to a JSON file
         JsonObject jsonObject = jsonObjectBuilder.build();

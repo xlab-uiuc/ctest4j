@@ -24,10 +24,9 @@ public class ConfigTracker {
     /** The name of the current test class */
     private static String currentTestClassName = null;
     /** The map from test class name to the configuration file */
-    private static Map<String, File> testClassToConfigFile = new HashMap<>();
+    private static final Map<String, File> testClassToConfigFile = new HashMap<>();
     /** Whether to inject config parameters from a file */
-    private static boolean injectFromFile = false;
-    private static String configFileDir = null;
+    private static final boolean injectFromFile;
 
     static {
         injectFromFile = constructTestClzToConfigFileMap();
@@ -82,16 +81,22 @@ public class ConfigTracker {
     }
 
     /**
-     * One can override this method to have different strategy to inject config parameters into the configuration class
+     * Inject config parameters into the configuration class
+     * There are two ways to inject config parameters:
+     * 1. From the command line: -DconfigInject="param1=value1,param2=value2";
+     * 2. From a file: the file name is the test class name with the suffix ".json";
+     * 3. From both the command line and a file: the command line injection would override the file injection
+     * One can override this method to have different strategy to inject config parameters
+     * into the configuration class
      * @param configSetterMethod the method to set config parameters
      * @param <T> the type of the config parameter
      */
     public static <T> void injectConfig(BiConsumer<String, T> configSetterMethod) throws IOException {
         if (injectFromFile) {
             injectFromFile(configSetterMethod);
-        } else {
-            injectFromCLI(configSetterMethod);
         }
+        // The CLI injection would override the file injection for the common parameters
+        injectFromCLI(configSetterMethod);
         System.out.println(ConfigTracker.getCurrentTestClassName());
     }
 
@@ -137,7 +142,7 @@ public class ConfigTracker {
      * Construct the map from test class name to the configuration file
      */
     private static boolean constructTestClzToConfigFileMap() {
-        configFileDir = System.getProperty(CONFIG_FILE_DIR_PROPERTY);
+        String configFileDir = System.getProperty(CONFIG_FILE_DIR_PROPERTY);
         if (configFileDir == null) {
             return false;
         }

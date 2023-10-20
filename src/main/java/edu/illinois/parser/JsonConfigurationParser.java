@@ -58,7 +58,7 @@ public class JsonConfigurationParser implements ConfigurationParser {
         Map<String, String> configNameValueMap = new HashMap<>();
         // Iterate over the JSON object and put the key-value pairs into the map
         for (Map.Entry<String, JsonValue> entry : jsonObject.entrySet()) {
-            configNameValueMap.put(entry.getKey(), entry.getValue().toString());
+            configNameValueMap.put(entry.getKey(), ((JsonString)entry.getValue()).getString());
         }
         return configNameValueMap;
     }

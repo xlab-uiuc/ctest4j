@@ -77,19 +77,9 @@ $ mvn clean install -DskipTests
 $ mvn surefire:test
 ```
 
-#### Run several tests with JUnit Suite
-To run several tests with Configuration Test Runner, you can use JUnit Suite with `@RunWith(ConfigTestSuite.class)`.
-```java
-@RunWith(ConfigTestSuite.class)
-@Suite.SuiteClasses({
-        TestNormalOne.class,        
-        TestNormalTwo.class,
-})
-public class AllTests {
-}
-```
 
 #### Configuration Injection
+To test different configuration parameter values, the runner supports injecting configuration parameters into test class.
 The runner supports two ways of injecting configuration parameters into test class:
 1. Use command line arguments to specify configuration parameter values;
 ```bash
@@ -106,4 +96,24 @@ $ mvn surefire:test -Dtest=${configTestName} -Dconfig.file.dir=${configFileDir}
 
 # For example
 $ mvn surefire:test -Dtest=FromFileTest -Dconfig.file.dir=src/test/resources
+```
+
+3. Combine the two ways above. If the same configuration parameter is specified in both command line arguments and json file, the value in command line arguments will be used.
+```bash
+$ mvn surefire:test -Dtest=${configTestName} -Dconfig.inject="parameter1=value1,parameter2=value2..." -Dconfig.file.dir=${configFileDir}
+
+# For example
+$ mvn surefire:test -Dtest=FromFileTest -Dconfig.inject="file-param1=value1,file-param2=value2" -Dconfig.file.dir=src/test/resources
+```
+
+#### Run several tests with JUnit Suite
+To run several tests with Configuration Test Runner, you can use JUnit Suite with `@RunWith(ConfigTestSuite.class)`.
+```java
+@RunWith(ConfigTestSuite.class)
+@Suite.SuiteClasses({
+        TestNormalOne.class,        
+        TestNormalTwo.class,
+})
+public class AllTests {
+}
 ```

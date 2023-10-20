@@ -1,7 +1,9 @@
 package edu.illinois.parser;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -16,7 +18,14 @@ public class NullConfigurationParser implements ConfigurationParser {
      * @return an empty set
      */
     @Override
-    public Set<String> parse(String configFilePath)  {
+    public Set<String> parseConfigNameSet(String configFilePath)  {
         return new HashSet<>();
     }
+
+    @Override
+    public Map<String, String> parseConfigNameValueMap(String configFilePath) throws IOException {
+        return new HashMap<>();
+    }
+
+
 }

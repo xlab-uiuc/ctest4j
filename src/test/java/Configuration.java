@@ -1,5 +1,6 @@
 import edu.illinois.ConfigTracker;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,24 +11,20 @@ import java.util.Map;
  */
 public class Configuration {
     Map<String, String> configMap = new HashMap<>();
-    public Configuration() {
-        String paramMap = System.getProperty("configInjection");
-        // TODO: Support dynamic bytecode instrumentation
-        if (paramMap != null) {
-            String[] params = paramMap.split(",");
-            for (String param : params) {
-                String[] pair = param.split("=");
-                if (pair.length == 2) {
-                    set(pair[0], pair[1]);
-                }
-            }
+    public Configuration()  {
+        try{
+            ConfigTracker.injectConfig(this::set);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     public String get(String name) {
         ConfigTracker.markParamAsUsed(name);
         if (configMap.containsKey(name)) {
+            System.out.println("In get: " + name + " value: " + configMap.get(name));
             return configMap.get(name);
         }
+        System.out.println("In get: " + name + " value: null");
         return "null";
     }
     public void set(String name, String value) {

@@ -1,7 +1,7 @@
 package edu.illinois.parser;
 
-import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -17,6 +17,8 @@ public interface ConfigurationParser {
      * @return the set of parameters that must be used
      * @throws IOException
      */
-    Set<String> parse(String configFilePath) throws IOException;
+    Set<String> parseConfigNameSet(String configFilePath) throws IOException;
+
+    Map<String, String> parseConfigNameValueMap(String configFilePath) throws IOException;
 }
 

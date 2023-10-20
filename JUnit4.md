@@ -88,3 +88,22 @@ To run several tests with Configuration Test Runner, you can use JUnit Suite wit
 public class AllTests {
 }
 ```
+
+#### Configuration Injection
+The runner supports two ways of injecting configuration parameters into test class:
+1. Use command line arguments to specify configuration parameter values;
+```bash
+$ mvn surefire:test -Dtest=${configTestName} -Dconfig.inject="parameter1=value1,parameter2=value2..."
+
+# For example
+$ mvn surefire:test -Dtest=FromFileTest -Dconfig.inject="file-param1=value1,file-param2=value2"
+$ 
+```
+
+2. Use json file to specify configuration parameter values. User can specify the file directory with `config.file.dir` property, and the file name should be in the format of `${configTestClassName}.json`.
+```bash
+$ mvn surefire:test -Dtest=${configTestName} -Dconfig.file.dir=${configFileDir}
+
+# For example
+$ mvn surefire:test -Dtest=FromFileTest -Dconfig.file.dir=src/test/resources
+```

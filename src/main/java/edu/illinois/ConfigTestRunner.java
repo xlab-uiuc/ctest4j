@@ -36,6 +36,7 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
         } else {
             classLevelParameters = new HashSet<>();
         }
+        ConfigTracker.setCurrentTestClassName(klass.getName());
     }
 
     /**
@@ -124,7 +125,7 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
      */
     public Set<String> getParametersFromFile(String file) throws IOException {
         ConfigurationParser parser = getParser(Utils.getFileType(file));
-        return parser.parse(file);
+        return parser.parseConfigNameSet(file);
     }
 
     /**

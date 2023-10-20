@@ -8,7 +8,9 @@ import javax.json.*;
 import java.io.FileReader;
 import java.io.IOException;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class JsonConfigurationParser implements ConfigurationParser {
@@ -20,7 +22,7 @@ public class JsonConfigurationParser implements ConfigurationParser {
      * @throws IOException if the parsing fails
      */
     @Override
-    public Set<String> parse(String jsonFilePath) throws IOException {
+    public Set<String> parseConfigNameSet(String jsonFilePath) throws IOException {
         FileReader fileReader = new FileReader(jsonFilePath);
         JsonReader jsonReader = Json.createReader(fileReader);
         JsonObject jsonObject = jsonReader.readObject();
@@ -36,5 +38,28 @@ public class JsonConfigurationParser implements ConfigurationParser {
             }
         }
         return mustSet;
+    }
+
+    /**
+     * Parse the JSON configuration file and return the map of parameters and their values.
+     * @param configFilePath the path of the JSON configuration file
+     * @return the map of parameters and their values
+     * @throws IOException if the parsing fails
+     */
+    @Override
+    public Map<String, String> parseConfigNameValueMap(String configFilePath) throws IOException {
+        FileReader fileReader = new FileReader(configFilePath);
+        JsonReader jsonReader = Json.createReader(fileReader);
+        JsonObject jsonObject = jsonReader.readObject();
+
+        jsonReader.close();
+        fileReader.close();
+
+        Map<String, String> configNameValueMap = new HashMap<>();
+        // Iterate over the JSON object and put the key-value pairs into the map
+        for (Map.Entry<String, JsonValue> entry : jsonObject.entrySet()) {
+            configNameValueMap.put(entry.getKey(), entry.getValue().toString());
+        }
+        return configNameValueMap;
     }
 }

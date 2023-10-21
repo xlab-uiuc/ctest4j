@@ -62,6 +62,9 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
     @Override
     protected Statement methodInvoker(FrameworkMethod method, Object test) {
         Statement base = super.methodInvoker(method, test);
+        if (Options.mode == Modes.BASE) {
+            return base;
+        }
         ConfigTest configTest = method.getAnnotation(ConfigTest.class);
         if (configTest != null) {
             try {

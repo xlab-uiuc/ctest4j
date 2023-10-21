@@ -92,6 +92,9 @@ public class ConfigTracker {
      * @param <T> the type of the config parameter
      */
     public static <T> void injectConfig(BiConsumer<String, T> configSetterMethod) throws IOException {
+        if (Options.mode != Modes.DEFAULT && Options.mode != Modes.INJECTING) {
+            return;
+        }
         if (injectFromFile) {
             injectFromFile(configSetterMethod);
         }

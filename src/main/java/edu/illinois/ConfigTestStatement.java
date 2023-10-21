@@ -28,9 +28,11 @@ public class ConfigTestStatement extends Statement {
         try {
             base.evaluate();
         } finally {
-            for (String param : params) {
-                if (!ConfigTracker.isParameterUsed(param)) {
-                    throw new UnUsedConfigParamException(param + " was not used during the test.");
+            if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
+                for (String param : params) {
+                    if (!ConfigTracker.isParameterUsed(param)) {
+                        throw new UnUsedConfigParamException(param + " was not used during the test.");
+                    }
                 }
             }
         }

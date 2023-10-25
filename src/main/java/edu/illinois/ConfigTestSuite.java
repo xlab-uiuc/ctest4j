@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
 
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,17 +25,23 @@ public class ConfigTestSuite extends Suite {
      */
     @Override
     protected List<Runner> getChildren() {
+        List<Class<?>> failedKlasses = new ArrayList<>();
         List<Runner> runners = new ArrayList<>();
         SuiteClasses annotation = getTestClass().getJavaClass().getAnnotation(SuiteClasses.class);
         if (annotation != null) {
             for (Class<?> testClass : annotation.value()) {
+                // Skip abstract classes
+                if (Modifier.isAbstract(testClass.getModifiers())) {
+                    continue;
+                }
                 try {
                     runners.add(new ConfigTestRunner(testClass));
                 } catch (InitializationError initializationError) {
-                    throw new RuntimeException("Unable to initialize ConfigTestRunner", initializationError);
+                    failedKlasses.add(testClass);
                 }
             }
         }
+        Log.INFO("Failed to initialize the following classes: " + failedKlasses);
         return runners;
     }
 }

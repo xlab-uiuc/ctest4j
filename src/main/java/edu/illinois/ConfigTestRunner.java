@@ -12,9 +12,12 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+
+import static edu.illinois.Names.USED_CONFIG_FILE_DIR;
 
 /**
  * Author: Shuai Wang
@@ -68,7 +71,7 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
         ConfigTest configTest = method.getAnnotation(ConfigTest.class);
         if (configTest != null) {
             try {
-                return new ConfigTestStatement(base, getAllMethodParameters(configTest));
+                return new ConfigTestStatement(base, getAllMethodParameters(configTest, method));
             } catch (IOException e) {
                 throw new RuntimeException("Unable to parse configuration file from method " + method.getName() + " Annotation", e);
             }
@@ -174,7 +177,7 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
      * @return a set of parameters that the test method must use
      * @throws IOException if the parsing fails
      */
-    private Set<String> getAllMethodParameters(ConfigTest configTest) throws IOException {
+    private Set<String> getAllMethodParameters(ConfigTest configTest, FrameworkMethod method) throws IOException {
         Set<String> methodLevelParameters = new HashSet<>();
 
         // Retrieve method-level parameters if present
@@ -186,6 +189,12 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
         String file = configTest.file();
         if (!file.isEmpty()) {
             methodLevelParameters.addAll(getParametersFromFile(file));
+        } else {
+            // Try to search whether there is a default place that specify the file
+            File defaultFile = new File(USED_CONFIG_FILE_DIR, Utils.getTestMethodFullName(method) + ".json");
+            if (defaultFile.exists()) {
+                methodLevelParameters.addAll(getParametersFromFile(defaultFile.getAbsolutePath()));
+            }
         }
         return methodLevelParameters;
     }

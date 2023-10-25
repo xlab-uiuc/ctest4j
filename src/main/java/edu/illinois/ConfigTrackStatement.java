@@ -6,6 +6,7 @@ import org.junit.runners.model.Statement;
 import static edu.illinois.Names.TEST_CLASS_METHOD_SEPERATOR;
 import static edu.illinois.Names.TRACKING_LOG_PREFIX;
 import static edu.illinois.Options.saveUsedParamToFile;
+import static edu.illinois.Utils.getTestMethodFullName;
 
 /**
  * Author: Shuai Wang
@@ -29,8 +30,7 @@ public class ConfigTrackStatement extends Statement {
             Log.INFO(TRACKING_LOG_PREFIX, method.getDeclaringClass().getCanonicalName() + "#" + method.getName(),
                     "uses configuration parameters: " + ConfigTracker.getUsedParams());
             if (saveUsedParamToFile) {
-                ConfigTracker.writeUsedConfigToFile(method.getDeclaringClass().getName() +
-                        TEST_CLASS_METHOD_SEPERATOR + method.getName());
+                ConfigTracker.writeUsedConfigToFile(getTestMethodFullName(method));
             }
         }
     }

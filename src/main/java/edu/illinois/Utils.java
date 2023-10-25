@@ -1,4 +1,6 @@
 package edu.illinois;
+import org.junit.runners.model.FrameworkMethod;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -59,7 +61,7 @@ public class Utils {
         return null;
     }
 
-    public static void writeParamSetToJson(Set<String> paramSet, File targetJsonFile) throws IOException {
+    public static void writeParamSetToJson(Set<String> paramSet, File targetJsonFile) {
         StringBuilder usedParamsStr = new StringBuilder("{\"required\": [");
         for (String param : paramSet) {
             usedParamsStr.append("\"").append(param).append("\",");
@@ -67,5 +69,14 @@ public class Utils {
         usedParamsStr = new StringBuilder(usedParamsStr.substring(0, usedParamsStr.length() - 1));
         usedParamsStr.append("]}");
         writeBytesToFile(targetJsonFile.getAbsolutePath(), usedParamsStr.toString().getBytes());
+    }
+
+    /**
+     * Get the full name of a test method as the format of "testClassName_testMethodName"
+     * @param method
+     * @return
+     */
+    public static String getTestMethodFullName(FrameworkMethod method) {
+        return method.getMethod().getDeclaringClass().getName() + Names.TEST_CLASS_METHOD_SEPERATOR + method.getName();
     }
 }

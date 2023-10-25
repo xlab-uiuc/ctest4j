@@ -105,11 +105,9 @@ public class ConfigTracker {
     /**
      * For a test with @Test annotation and ConfigTestRunner, the runner would be executed under @ConfigTrackStatement
      * and record the used parameters. This method would write the used parameters to a file.
-     * @throws IOException if the file cannot be written
      */
-    public static void writeUsedConfigToFile(String fileName) throws IOException {
-        String configFileDir = System.getProperty(USED_CONFIG_FILE_DIR_PROPERTY, "config/used");
-        Utils.writeParamSetToJson(ConfigTracker.getUsedParams(), new File(configFileDir, fileName + ".json"));
+    public static void writeUsedConfigToFile(String fileName) {
+        Utils.writeParamSetToJson(ConfigTracker.getUsedParams(), new File(USED_CONFIG_FILE_DIR, fileName + ".json"));
     }
 
     // Internal methods

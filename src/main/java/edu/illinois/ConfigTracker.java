@@ -11,8 +11,7 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.function.BiConsumer;
 
-import static edu.illinois.Names.CONFIG_CLI_INJECT_PROPERTY;
-import static edu.illinois.Names.CONFIG_FILE_DIR_PROPERTY;
+import static edu.illinois.Names.*;
 
 /**
  * Author: Shuai Wang
@@ -103,6 +102,15 @@ public class ConfigTracker {
         System.out.println(ConfigTracker.getCurrentTestClassName());
     }
 
+    /**
+     * For a test with @Test annotation and ConfigTestRunner, the runner would be executed under @ConfigTrackStatement
+     * and record the used parameters. This method would write the used parameters to a file.
+     * @throws IOException if the file cannot be written
+     */
+    public static void writeUsedConfigToFile(String fileName) throws IOException {
+        String configFileDir = System.getProperty(USED_CONFIG_FILE_DIR_PROPERTY, "config/used");
+        Utils.writeParamSetToJson(ConfigTracker.getUsedParams(), new File(configFileDir, fileName + ".json"));
+    }
 
     // Internal methods
 
@@ -145,13 +153,13 @@ public class ConfigTracker {
      * Construct the map from test class name to the configuration file
      */
     private static boolean constructTestClzToConfigFileMap() {
-        String configFileDir = System.getProperty(CONFIG_FILE_DIR_PROPERTY);
+        String configFileDir = System.getProperty(INJECT_CONFIG_FILE_DIR_PROPERTY);
         if (configFileDir == null) {
             return false;
         }
         File configFileDirFile = new File(configFileDir);
         if (!configFileDirFile.exists() || !configFileDirFile.isDirectory()) {
-            throw new RuntimeException(CONFIG_FILE_DIR_PROPERTY + ": " + configFileDir + " does not exist or is not a directory");
+            throw new RuntimeException(INJECT_CONFIG_FILE_DIR_PROPERTY + ": " + configFileDir + " does not exist or is not a directory");
         }
         File[] configFiles = configFileDirFile.listFiles();
         if (configFiles != null) {

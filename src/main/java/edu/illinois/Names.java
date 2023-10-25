@@ -17,8 +17,14 @@ public class Names {
     public static final String TRACKER_METHOD_SIGNATURE = "(Ljava/lang/String;)V";
     public static final String CONFIG_FILE_TYPE_PROPERTY = "config.file.type";
     public static final String TRACKING_LOG_PREFIX = "[ConfigTestRunner]TEST";
-    public static final String CONFIG_FILE_DIR_PROPERTY = "config.file.dir";
-    public static final String CONFIG_CLI_INJECT_PROPERTY = "config.inject";
+    /** The directory of configuration files that stores the value to be injected in the test */
+    public static final String INJECT_CONFIG_FILE_DIR_PROPERTY = "config.inject.dir";
+    /** The command-line argument that specifies the configuration value to be injected */
+    public static final String CONFIG_CLI_INJECT_PROPERTY = "config.inject.cli";
+    /** The directory of files that stores the used configuration parameters by each test */
+    public static final String USED_CONFIG_FILE_DIR_PROPERTY = "config.used.dir";
+    /** The seperator between test class name and test method name */
+    public static final String TEST_CLASS_METHOD_SEPERATOR = "_";
     /**
      * Get the ASM version based on the java version
      * @param javaVersion java version

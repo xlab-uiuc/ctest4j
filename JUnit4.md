@@ -15,7 +15,7 @@ For maven project, add the following dependency to your pom.xml:
 </dependencies>
 ```
 
-##### Automatic Instrumentation Only：
+#### DO NOT USE IT FOR NOW: (Optional) Automatic Instrumentation Only：
 Specify Runner Agent and Configuration APIs in Maven Surefire plugin:
 ```xml
       <plugin>
@@ -31,6 +31,17 @@ Specify Runner Agent and Configuration APIs in Maven Surefire plugin:
         </configuration>
       </plugin>
 ```
+
+#### Manual Instrumentation:
+To track configuration parameters, you need to add the following code to your project:
+```java
+public static <T> void injectConfig(BiConsumer<String, T> configSetterMethod) throws IOException
+public static void markParamAsUsed(String param)
+```
+`injectConfig` method need to be added to the end of your Configuration class constructor to inject configuration value 
+with configuration setter method. `markParamAsUsed` method need to be added to the end of your configuration getter method
+to mark the configuration parameter as used.
+Here is an example of the [instrumented configuration class](src/test/java/Configuration.java).
 
 #### Write Configuration Test
 Use `@RunWith(ConfigTestRunner.class)` to specify the runner for your test class.

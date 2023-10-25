@@ -7,5 +7,5 @@ package edu.illinois;
 public class Options {
     public static Boolean instrumentSetter = Boolean.valueOf(System.getProperty("instrumentSetter", "false"));
 
-    public static Modes mode = Modes.valueOf(System.getProperty("mode", "NORMAL").toUpperCase());
+    public static Modes mode = Modes.valueOf(System.getProperty("mode", "DEFAULT").toUpperCase());
 }

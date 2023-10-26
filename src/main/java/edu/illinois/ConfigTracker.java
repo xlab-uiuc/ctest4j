@@ -90,12 +90,16 @@ public class ConfigTracker {
      * @param configSetterMethod the method to set config parameters
      * @param <T> the type of the config parameter
      */
-    public static <T> void injectConfig(BiConsumer<String, T> configSetterMethod) throws IOException {
+    public static <T> void injectConfig(BiConsumer<String, T> configSetterMethod) {
         if (Options.mode != Modes.DEFAULT && Options.mode != Modes.INJECTING) {
             return;
         }
         if (injectFromFile) {
-            injectFromFile(configSetterMethod);
+            try {
+                injectFromFile(configSetterMethod);
+            } catch (IOException e){
+                Log.ERROR("Unable to inject config from file: " + e.getMessage());
+            }
         }
         // The CLI injection would override the file injection for the common parameters
         injectFromCLI(configSetterMethod);

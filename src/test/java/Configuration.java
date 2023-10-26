@@ -12,11 +12,7 @@ import java.util.Map;
 public class Configuration {
     Map<String, String> configMap = new HashMap<>();
     public Configuration()  {
-        try{
-            ConfigTracker.injectConfig(this::set);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ConfigTracker.injectConfig(this::set);
     }
     public String get(String name) {
         ConfigTracker.markParamAsUsed(name);

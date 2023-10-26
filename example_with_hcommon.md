@@ -69,4 +69,4 @@ This is used to inject the configuration value with the configuration setter met
 ```
 
 ### Write and Run Configuration Tests
-You can follow the [example_ctest.md](example_ctest.md) to write and run configuration tests.
+You can follow the [write_and_run_ctest.md](write_and_run_ctest.md) to write and run configuration tests.

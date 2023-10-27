@@ -62,6 +62,10 @@ public class Utils {
     }
 
     public static void writeParamSetToJson(Set<String> paramSet, File targetJsonFile) {
+        // No need to write if the set is empty
+        if (paramSet.isEmpty()) {
+            return;
+        }
         StringBuilder usedParamsStr = new StringBuilder("{\"required\": [");
         for (String param : paramSet) {
             usedParamsStr.append("\"").append(param).append("\",");

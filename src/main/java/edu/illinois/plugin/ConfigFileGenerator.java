@@ -13,6 +13,7 @@ import static edu.illinois.Names.TRACKING_LOG_PREFIX;
  * Author: Shuai Wang
  * Date:  10/19/23
  */
+@Deprecated
 public class ConfigFileGenerator {
     private final File logFile;
     private final File outputDir;

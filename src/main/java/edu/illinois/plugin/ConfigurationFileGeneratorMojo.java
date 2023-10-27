@@ -11,7 +11,8 @@ import org.apache.maven.plugins.annotations.Parameter;
  * Author: Shuai Wang
  * Date:  10/19/23
  */
-@Mojo(name = "generate-config-file", defaultPhase = LifecyclePhase.INITIALIZE)
+@Deprecated
+@Mojo(name = "generate-config- file", defaultPhase = LifecyclePhase.INITIALIZE)
 public class ConfigurationFileGeneratorMojo extends AbstractMojo {
     @Parameter(property = "logFilePath", required = true)
     private String logFilePath;

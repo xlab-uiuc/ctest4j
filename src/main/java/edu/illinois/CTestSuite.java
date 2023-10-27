@@ -35,7 +35,7 @@ public class CTestSuite extends Suite {
                     continue;
                 }
                 try {
-                    runners.add(new CTestRunner(testClass));
+                    runners.add(new CTestSuiteRunner(testClass));
                 } catch (InitializationError initializationError) {
                     failedKlasses.add(testClass);
                 }

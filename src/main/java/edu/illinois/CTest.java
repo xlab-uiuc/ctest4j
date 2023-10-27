@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface ConfigTest {
+public @interface CTest {
     /** A list of configuration parameter name as input for a single test method */
     String[] value() default {};
     String[] optional() default {};

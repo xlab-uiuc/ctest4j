@@ -1,5 +1,5 @@
-import edu.illinois.ConfigTest;
-import edu.illinois.ConfigTestClass;
+import edu.illinois.CTest;
+import edu.illinois.CTestClass;
 import edu.illinois.ConfigTestRunner;
 import edu.illinois.UnUsedConfigParamException;
 import org.junit.runner.RunWith;
@@ -10,9 +10,9 @@ import org.junit.runner.RunWith;
  * Date:  10/17/23
  */
 @RunWith(ConfigTestRunner.class)
-@ConfigTestClass({"class-parameter1", "class-parameter2"})
+@CTestClass({"class-parameter1", "class-parameter2"})
 public class FromClassTest {
-    @ConfigTest
+    @CTest
     public void test() {
         Configuration conf = new Configuration();
         conf.get("class-parameter1");
@@ -22,7 +22,7 @@ public class FromClassTest {
     /**
      * The test would fail because it never uses "class-parameter2".
      */
-    @ConfigTest(expected = UnUsedConfigParamException.class)
+    @CTest(expected = UnUsedConfigParamException.class)
     public void testShouldFail() {
         Configuration conf = new Configuration();
         conf.get("class-parameter1");

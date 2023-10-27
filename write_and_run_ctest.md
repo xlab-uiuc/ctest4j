@@ -5,12 +5,12 @@ The following example provides a glimpse at the minimum requirements for writing
 
 ```java
 @RunWith(ConfigTestRunner.class)
-@ConfigTestClass(value = {"class-parameter1", "class-parameter2"}, file = "src/test/resources/config.json")
+@CTestClass(value = {"class-parameter1", "class-parameter2"}, file = "src/test/resources/config.json")
 public class FromAllTest {
     /**
      * The test would pass because it uses all the "required" configuration parameters from class annotation, file path, and method annotation.
      */
-    @ConfigTest({"method-parameter1", "method-parameter2"})
+    @CTest({"method-parameter1", "method-parameter2"})
     public void test() {
         Configuration conf = new Configuration();
         // From class annotation
@@ -26,7 +26,7 @@ public class FromAllTest {
     /**
      * The test would fail because it never uses "method-parameter2".
      */
-    @ConfigTest(value = {"method-parameter1", "method-parameter2"}, expected = UnUsedConfigParamException.class)
+    @CTest(value = {"method-parameter1", "method-parameter2"}, expected = UnUsedConfigParamException.class)
     public void testFailDueToMethodAnnotation() {
         Configuration conf = new Configuration();
         // From class annotation
@@ -44,8 +44,8 @@ public class FromAllTest {
 ### Annotations
 | Annotations | Descriptions |
 |---|---|
-| @ConfigTest | Denotes that a method is a configuration test method. It can take 5 arguments: value(), optional(), file(), expected(), and timeout(). `value()` specifies the "required" configuration parameters as a list that the test must use during its execution. `optional()` specifies the "optional" configuration parameters that can be used during the test execution. `file()` takes a file that contains the "required" and/or "optional" configuration parameters, it can be used alone or together with `value()` and `optional()`. `expected()` and `timeout()` are extends from `@Test` annotation, which defines the expected failure/exception during the test execution and the timeout of the test. |
-| @ConfigTestClass | Denotes that a method is a configuration test class. It can take 3 arguments: value(), optional(), and file(). These 3 arguments have the same feature as the ones in `@ConfigTest` annotation but behave at the class level, for example, the `value()` specifies the configuration parameters that must be used by all configuration test methods in the class. |
+| @CTest | Denotes that a method is a configuration test method. It can take 5 arguments: value(), optional(), file(), expected(), and timeout(). `value()` specifies the "required" configuration parameters as a list that the test must use during its execution. `optional()` specifies the "optional" configuration parameters that can be used during the test execution. `file()` takes a file that contains the "required" and/or "optional" configuration parameters, it can be used alone or together with `value()` and `optional()`. `expected()` and `timeout()` are extends from `@Test` annotation, which defines the expected failure/exception during the test execution and the timeout of the test. |
+| @CTestClass | Denotes that a method is a configuration test class. It can take 3 arguments: value(), optional(), and file(). These 3 arguments have the same feature as the ones in `@CTest` annotation but behave at the class level, for example, the `value()` specifies the configuration parameters that must be used by all configuration test methods in the class. |
 | @Test | Denotes that a method is a normal test. If a test method is run with ctest runner and `@Test` annotation, the runner would track the configuration usage during the test execution and output the used configuration parameter to a JSON file named as the test method name. |
 
 ## Run Configuration Test

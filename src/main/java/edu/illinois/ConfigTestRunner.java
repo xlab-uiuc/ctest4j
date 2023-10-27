@@ -29,10 +29,10 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
     public ConfigTestRunner(Class<?> klass) throws InitializationError {
         super(klass);
         // Retrieve class-level parameters if present
-        ConfigTestClass configTestClassAnnotation = klass.getAnnotation(ConfigTestClass.class);
-        if (configTestClassAnnotation != null) {
+        CTestClass cTestClassAnnotation = klass.getAnnotation(CTestClass.class);
+        if (cTestClassAnnotation != null) {
             try {
-                classLevelParameters = getAllClassParameters(configTestClassAnnotation);
+                classLevelParameters = getAllClassParameters(cTestClassAnnotation);
             } catch (IOException e) {
                 throw new RuntimeException("Unable to parse configuration file from class " + klass.getName() + " Annotation", e);
             }
@@ -43,23 +43,23 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
     }
 
     /**
-     * Get all the test methods with @Test and @ConfigTest annotations.
+     * Get all the test methods with @Test and @CTest annotations.
      * @return a list of test methods.
      */
     @Override
     protected List<FrameworkMethod> computeTestMethods() {
-        // Return both methods with @Test and @ConfigTest annotations
+        // Return both methods with @Test and @CTest annotations
         List<FrameworkMethod> methods = new ArrayList<>();
         methods.addAll(super.computeTestMethods());
-        methods.addAll(getTestClass().getAnnotatedMethods(ConfigTest.class));
+        methods.addAll(getTestClass().getAnnotatedMethods(CTest.class));
         return Collections.unmodifiableList(methods);
     }
 
     /**
-     * Invoke the configuration tests with @ConfigTest annotation.
+     * Invoke the configuration tests with @CTest annotation.
      * @param method
      * @param test
-     * @return ConfigTestStatement if the method has @ConfigTest annotation,
+     * @return ConfigTestStatement if the method has @CTest annotation,
      * otherwise return the original statement.
      */
     @Override
@@ -68,10 +68,10 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
         if (Options.mode == Modes.BASE) {
             return base;
         }
-        ConfigTest configTest = method.getAnnotation(ConfigTest.class);
-        if (configTest != null) {
+        CTest cTest = method.getAnnotation(CTest.class);
+        if (cTest != null) {
             try {
-                return new ConfigTestStatement(base, getAllMethodParameters(configTest, method));
+                return new ConfigTestStatement(base, getAllMethodParameters(cTest, method));
             } catch (IOException e) {
                 throw new RuntimeException("Unable to parse configuration file from method " + method.getName() + " Annotation", e);
             }
@@ -84,15 +84,15 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
     }
 
     /**
-     * @ConfigTest would override the expected exception from @Test annotation.
+     * @CTest would override the expected exception from @Test annotation.
      */
     @Override
     protected Statement possiblyExpectingExceptions(FrameworkMethod method, Object test, Statement next) {
-        // From @ConfigTest annotation
-        ConfigTest configTest = method.getAnnotation(ConfigTest.class);
-        if (configTest != null) {
-            Class<? extends Throwable> configTestExpectedException = configTest.expected();
-            if (configTestExpectedException != ConfigTest.None.class) {
+        // From @CTest annotation
+        CTest cTest = method.getAnnotation(CTest.class);
+        if (cTest != null) {
+            Class<? extends Throwable> configTestExpectedException = cTest.expected();
+            if (configTestExpectedException != CTest.None.class) {
                 return new ExpectException(next, configTestExpectedException);
             }
         }
@@ -109,14 +109,14 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
     }
 
     /**
-     * @ConfigTest would override the timeout from @Test annotation.
+     * @CTest would override the timeout from @Test annotation.
      */
     @Override
     protected Statement withPotentialTimeout(FrameworkMethod method, Object test, Statement next) {
         long timeout = 0;
-        ConfigTest configTest = method.getAnnotation(ConfigTest.class);
-        if (configTest != null) {
-            timeout = configTest.timeout();
+        CTest cTest = method.getAnnotation(CTest.class);
+        if (cTest != null) {
+            timeout = cTest.timeout();
         }
         return FailOnTimeout.builder()
                 .withTimeout(timeout, TimeUnit.MILLISECONDS)
@@ -159,12 +159,12 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
 
     /**
      * Get all the parameters for a test class that every test method in the class must use.
-     * @param configTestClass the annotation for the test class
+     * @param cTestClass the annotation for the test class
      * @return a set of parameters that every test method in the class must use
      */
-    private Set<String> getAllClassParameters(ConfigTestClass configTestClass) throws IOException {
-        Set<String> classLevelParameters = new HashSet<>(Arrays.asList(configTestClass.value()));
-        String classConfigFile = configTestClass.file();
+    private Set<String> getAllClassParameters(CTestClass cTestClass) throws IOException {
+        Set<String> classLevelParameters = new HashSet<>(Arrays.asList(cTestClass.value()));
+        String classConfigFile = cTestClass.file();
         if (!classConfigFile.isEmpty()) {
             classLevelParameters.addAll(getParametersFromFile(classConfigFile));
         }
@@ -173,20 +173,20 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
 
     /**
      * Get all the parameters for a test method.
-     * @param configTest the annotation for the test method
+     * @param cTest the annotation for the test method
      * @return a set of parameters that the test method must use
      * @throws IOException if the parsing fails
      */
-    private Set<String> getAllMethodParameters(ConfigTest configTest, FrameworkMethod method) throws IOException {
+    private Set<String> getAllMethodParameters(CTest cTest, FrameworkMethod method) throws IOException {
         Set<String> methodLevelParameters = new HashSet<>();
 
         // Retrieve method-level parameters if present
-        methodLevelParameters.addAll(Arrays.asList(configTest.value()));
+        methodLevelParameters.addAll(Arrays.asList(cTest.value()));
         // Retrieve class-level parameters if present
         methodLevelParameters.addAll(classLevelParameters);
 
         // Retrieve file-level parameters if present
-        String file = configTest.file();
+        String file = cTest.file();
         if (!file.isEmpty()) {
             methodLevelParameters.addAll(getParametersFromFile(file));
         } else {

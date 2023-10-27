@@ -45,12 +45,12 @@ Here is an example of the [instrumented configuration class](src/test/java/Confi
 
 #### Write Configuration Test
 Use `@RunWith(ConfigTestRunner.class)` to specify the runner for your test class.
-`@ConfigTestClass` specifies the configuration parameters that must be used in the all test methods in the test class.
-For each configuration test method, use `@ConfigTest` to specify the configuration parameter that must be used in the test method.
+`@CTestClass` specifies the configuration parameters that must be used in the all test methods in the test class.
+For each configuration test method, use `@CTest` to specify the configuration parameter that must be used in the test method.
 
 There are two ways of specifying configuration parameters:
-1. Directly write configuration parameter name in `@ConfigTestClass` and `@ConfigTest` annotation as value().
-2. Put configuration parameter name in a file and specify the file path in `@ConfigTestClass` and `@ConfigTest` annotation as file().
+1. Directly write configuration parameter name in `@CTestClass` and `@CTest` annotation as value().
+2. Put configuration parameter name in a file and specify the file path in `@CTestClass` and `@CTest` annotation as file().
 
 Current runner support JSON file format for configuration parameter file, 
 one can implement [ConfigurationParser](src/main/java/edu/illinois/parser/ConfigurationParser.java) to support 
@@ -58,9 +58,9 @@ other file format and override `getParser()` method in [ConfigTestRunner#getPars
 
 ```java
 @RunWith(ConfigTestRunner.class)
-@ConfigTestClass(value = {"parameter1"}, file = "config.json")
+@CTestClass(value = {"parameter1"}, file = "config.json")
 public class FromMethodTest {
-    @ConfigTest({"parameter2"})
+    @CTest({"parameter2"})
     public void test() {
         // Assume parameter3 is specified in config.json
         // Then parameter1, parameter2 and parameter3 must be used in this test method

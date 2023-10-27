@@ -1,4 +1,4 @@
-import edu.illinois.ConfigTestRunner;
+import edu.illinois.CTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
  * Author: Shuai Wang
  * Date:  10/19/23
  */
-@RunWith(ConfigTestRunner.class)
+@RunWith(CTestRunner.class)
 public class TestConfigCaller {
     Configuration conf = null;
     @Before

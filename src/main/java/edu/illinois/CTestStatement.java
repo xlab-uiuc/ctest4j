@@ -8,11 +8,11 @@ import java.util.Set;
  * Author: Shuai Wang
  * Date:  10/13/23
  */
-public class ConfigTestStatement extends Statement {
+public class CTestStatement extends Statement {
     private final Statement base;
     private final Set<String> params;
 
-    public ConfigTestStatement(Statement base, Set<String> params) {
+    public CTestStatement(Statement base, Set<String> params) {
         this.base = base;
         this.params = params;
     }

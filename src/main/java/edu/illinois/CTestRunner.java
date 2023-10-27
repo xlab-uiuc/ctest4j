@@ -23,10 +23,10 @@ import static edu.illinois.Names.USED_CONFIG_FILE_DIR;
  * Author: Shuai Wang
  * Date:  10/13/23
  */
-public class ConfigTestRunner extends BlockJUnit4ClassRunner {
+public class CTestRunner extends BlockJUnit4ClassRunner {
     private final Set<String> classLevelParameters;
 
-    public ConfigTestRunner(Class<?> klass) throws InitializationError {
+    public CTestRunner(Class<?> klass) throws InitializationError {
         super(klass);
         // Retrieve class-level parameters if present
         CTestClass cTestClassAnnotation = klass.getAnnotation(CTestClass.class);
@@ -71,7 +71,7 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
         CTest cTest = method.getAnnotation(CTest.class);
         if (cTest != null) {
             try {
-                return new ConfigTestStatement(base, getAllMethodParameters(cTest, method));
+                return new CTestStatement(base, getAllMethodParameters(cTest, method));
             } catch (IOException e) {
                 throw new RuntimeException("Unable to parse configuration file from method " + method.getName() + " Annotation", e);
             }
@@ -81,6 +81,10 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
             return new ConfigTrackStatement(base, method);
         }
         return base;
+    }
+
+    protected Statement vanillaMethodInvoker(FrameworkMethod method, Object test) {
+        return super.methodInvoker(method, test);
     }
 
     /**
@@ -190,12 +194,23 @@ public class ConfigTestRunner extends BlockJUnit4ClassRunner {
         if (!file.isEmpty()) {
             methodLevelParameters.addAll(getParametersFromFile(file));
         } else {
-            // Try to search whether there is a default place that specify the file
-            File defaultFile = new File(USED_CONFIG_FILE_DIR, Utils.getTestMethodFullName(method) + ".json");
-            if (defaultFile.exists()) {
-                methodLevelParameters.addAll(getParametersFromFile(defaultFile.getAbsolutePath()));
-            }
+            methodLevelParameters.addAll(getRequiredParametersFromDefaultFile(method));
         }
         return methodLevelParameters;
+    }
+
+    /**
+     * Search whether there is a default place that specify the file
+     * @param method the test method
+     * @return the set of parameters that must be used
+     * @throws IOException if the parsing fails
+     */
+    protected Set<String> getRequiredParametersFromDefaultFile(FrameworkMethod method) throws IOException {
+        Set<String> params = new HashSet<>();
+        File defaultFile = new File(USED_CONFIG_FILE_DIR, Utils.getTestMethodFullName(method) + ".json");
+        if (defaultFile.exists()) {
+            params.addAll(getParametersFromFile(defaultFile.getAbsolutePath()));
+        }
+        return params;
     }
 }

@@ -1,6 +1,6 @@
 import edu.illinois.CTest;
 import edu.illinois.CTestClass;
-import edu.illinois.ConfigTestRunner;
+import edu.illinois.CTestRunner;
 import edu.illinois.UnUsedConfigParamException;
 import org.junit.runner.RunWith;
 
@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
  * Author: Shuai Wang
  * Date:  10/17/23
  */
-@RunWith(ConfigTestRunner.class)
+@RunWith(CTestRunner.class)
 @CTestClass(file = "src/test/resources/config.json")
 public class FromFileTest {
     @CTest()

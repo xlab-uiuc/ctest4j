@@ -1,5 +1,5 @@
 import edu.illinois.CTest;
-import edu.illinois.ConfigTestRunner;
+import edu.illinois.CTestRunner;
 import edu.illinois.UnUsedConfigParamException;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
  * Author: Shuai Wang
  * Date:  10/15/23
  */
-@RunWith(ConfigTestRunner.class)
+@RunWith(CTestRunner.class)
 public class FromMethodTest {
     private Configuration conf;
     @Before

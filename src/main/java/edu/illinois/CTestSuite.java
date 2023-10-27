@@ -13,9 +13,9 @@ import java.util.List;
  * Author: Shuai Wang
  * Date:  10/18/23
  */
-public class ConfigTestSuite extends Suite {
+public class CTestSuite extends Suite {
 
-    public ConfigTestSuite(Class<?> klass, RunnerBuilder builder) throws InitializationError {
+    public CTestSuite(Class<?> klass, RunnerBuilder builder) throws InitializationError {
         super(klass, builder);
     }
 
@@ -35,7 +35,7 @@ public class ConfigTestSuite extends Suite {
                     continue;
                 }
                 try {
-                    runners.add(new ConfigTestRunner(testClass));
+                    runners.add(new CTestRunner(testClass));
                 } catch (InitializationError initializationError) {
                     failedKlasses.add(testClass);
                 }

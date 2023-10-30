@@ -73,14 +73,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
+<!--                <configuration>
                     <argLine>-javaagent:/Users/allenwang/.m2/repository/edu/illinois/CTestRunner/1.0-SNAPSHOT/CTestRunner-1.0-SNAPSHOT.jar</argLine>
                     <systemPropertyVariables>
                         <configurationClassName>edu/illinois/Configuration</configurationClassName>
                         <configurationGetterMethod>get(Ljava/lang/String;)Ljava/lang/String;</configurationGetterMethod>
                         <configurationSetterMethod>set(Ljava/lang/String;Ljava/lang/String;)V</configurationSetterMethod>
                     </systemPropertyVariables>
-                </configuration>
+                </configuration>-->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

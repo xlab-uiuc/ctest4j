@@ -1,0 +1,1 @@
+{"required": ["hadoop.security.credential.provider.path","hadoop.zk.auth","hadoop.security.credential.clear-text-fallback"]}

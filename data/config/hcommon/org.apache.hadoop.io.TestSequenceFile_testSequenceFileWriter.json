@@ -1,0 +1,1 @@
+{"required": ["fs.defaultFS","io.seqfile.compression.type","fs.permissions.umask-mode","fs.local.block.size","fs.file.impl.disable.cache","io.file.buffer.size","io.serializations"]}

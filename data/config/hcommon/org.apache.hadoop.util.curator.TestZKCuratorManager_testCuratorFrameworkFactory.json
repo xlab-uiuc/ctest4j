@@ -1,0 +1,1 @@
+{"required": ["hadoop.zk.ssl.keystore.password","hadoop.zk.ssl.truststore.location","hadoop.zk.timeout-ms","hadoop.zk.num-retries","hadoop.zk.ssl.truststore.password","hadoop.zk.retry-interval-ms","hadoop.zk.ssl.keystore.location","hadoop.zk.address"]}

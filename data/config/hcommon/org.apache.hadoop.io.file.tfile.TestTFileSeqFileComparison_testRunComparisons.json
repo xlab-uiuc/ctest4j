@@ -1,0 +1,1 @@
+{"required": ["fs.defaultFS","io.seqfile.compress.blocksize","file.stream-buffer-size","io.compression.codec.lzo.class","fs.local.block.size","fs.option.openfile.buffer.size","test.reload.lzo.codec","fs.file.impl.disable.cache","io.file.buffer.size","tfile.fs.input.buffer.size","fs.permissions.umask-mode","tfile.fs.output.buffer.size","io.serializations"]}

@@ -1,0 +1,1 @@
+{"required": ["foo.weighted-cost.queue","foo.weighted-cost.handler","foo.weighted-cost.response","foo.weighted-cost.lockfree","foo.weighted-cost.lockexclusive","foo.weighted-cost.lockwait","foo.weighted-cost.lockshared","foo.weighted-cost.enqueue","foo.weighted-cost.processing"]}

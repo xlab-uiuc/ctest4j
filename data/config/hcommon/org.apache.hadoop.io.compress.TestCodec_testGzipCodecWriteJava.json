@@ -1,0 +1,1 @@
+{"required": ["zlib.compress.strategy","zlib.compress.level","io.compression.codecs","io.file.buffer.size"]}

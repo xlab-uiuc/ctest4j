@@ -1,0 +1,1 @@
+{"required": ["hadoop.proxyservers","hadoop.security.impersonation.provider.class"]}

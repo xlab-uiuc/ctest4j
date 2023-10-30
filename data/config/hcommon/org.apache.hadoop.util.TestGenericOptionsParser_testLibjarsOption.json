@@ -1,0 +1,1 @@
+{"required": ["fs.defaultFS","tmpjars","fs.client.resolve.remote.symlinks","fs.permissions.umask-mode","file.stream-buffer-size","fs.local.block.size","fs.file.impl.disable.cache","io.file.buffer.size","fs.AbstractFileSystem.file.impl"]}

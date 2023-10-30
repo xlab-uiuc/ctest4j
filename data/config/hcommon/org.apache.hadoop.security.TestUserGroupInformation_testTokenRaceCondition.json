@@ -1,0 +1,1 @@
+{"required": ["hadoop.security.groups.cache.secs","hadoop.tokens","hadoop.token.files","hadoop.security.groups.negative-cache.secs","hadoop.security.groups.cache.background.reload.threads","hadoop.security.group.mapping","hadoop.security.groups.cache.background.reload","hadoop.user.group.static.mapping.overrides","hadoop.security.groups.cache.warn.after.ms"]}

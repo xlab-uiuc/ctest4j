@@ -1,0 +1,1 @@
+{"required": ["hadoop.http.authentication.token.validity","hadoop.http.authentication.foo","hadoop.http.authentication.kerberos.keytab","bind.address","hadoop.http.authentication.simple.anonymous.allowed","hadoop.http.authentication.type","hadoop.http.authentication.signature.secret.file","hadoop.http.authentication.kerberos.principal"]}

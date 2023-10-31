@@ -55,6 +55,51 @@ To track the usage of configuration parameters, add the `ConfigTracker.markParam
      return result;
    }
 ```
+To track the configuration parameters that are set by the test, add the `ConfigTracker.markParamAsSet(paramName)` to the setter methods.
+```java
+  public void set(String name, String value, String source) {
++   ConfigTracker.markParmaAsSet(name);
+    Preconditions.checkArgument(
+        name != null,
+        "Property name must not be null");
+    Preconditions.checkArgument(
+        value != null,
+        "The value of property %s must not be null", name);
+    name = name.trim();
+    DeprecationContext deprecations = deprecationContext.get();
+    if (deprecations.getDeprecatedKeyMap().isEmpty()) {
+      getProps();
+    }
+    getOverlay().setProperty(name, value);
+    getProps().setProperty(name, value);
+    String newSource = (source == null ? "programmatically" : source);
+
+    if (!isDeprecated(name)) {
+      putIntoUpdatingResource(name, new String[] {newSource});
+      String[] altNames = getAlternativeNames(name);
+      if(altNames != null) {
+        for(String n: altNames) {
+          if(!n.equals(name)) {
++           ConfigTracker.markParmaAsSet(n);
+            getOverlay().setProperty(n, value);
+            getProps().setProperty(n, value);
+            putIntoUpdatingResource(n, new String[] {newSource});
+          }
+        }
+      }
+    }
+    else {
+      String[] names = handleDeprecation(deprecationContext.get(), name);
+      String altSource = "because " + name + " is deprecated";
+      for(String n : names) {
++       ConfigTracker.markParmaAsSet(n);
+        getOverlay().setProperty(n, value);
+        getProps().setProperty(n, value);
+        putIntoUpdatingResource(n, new String[] {altSource});
+      }
+    }
+  }
+```
 
 ### Add ctest-runner configuration injector to the Configuration constructor
 Add the `ConfigTracker.injectConfig(setterMethod)` to the end of the Configuration constructor.

@@ -138,8 +138,8 @@ public class ConfigTracker {
      * For a test with @Test annotation and ConfigTestRunner, the runner would be executed under @ConfigTrackStatement
      * and record the used parameters. This method would write the used parameters to a file.
      */
-    public static void writeUsedConfigToFile(String fileName) {
-        Utils.writeParamSetToJson(ConfigTracker.getUsedParams(), new File(USED_CONFIG_FILE_DIR, fileName + ".json"));
+    public static void writeConfigToFile(String fileName) {
+        Utils.writeParamSetToJson(ConfigTracker.getUsedParams(), ConfigTracker.getSetParams(), new File(USED_CONFIG_FILE_DIR, fileName + ".json"));
     }
 
     // Internal methods

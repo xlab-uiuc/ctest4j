@@ -61,18 +61,28 @@ public class Utils {
         return null;
     }
 
-    public static void writeParamSetToJson(Set<String> paramSet, File targetJsonFile) {
+    public static void writeParamSetToJson(Set<String> usedParam, Set<String> setParam, File targetJsonFile) {
         // No need to write if the set is empty
-        if (paramSet.isEmpty()) {
+        if (usedParam.isEmpty() && setParam.isEmpty()) {
             return;
         }
-        StringBuilder usedParamsStr = new StringBuilder("{\"required\": [");
-        for (String param : paramSet) {
-            usedParamsStr.append("\"").append(param).append("\",");
+        StringBuilder paramStr = new StringBuilder("{\"required\": [");
+        for (String param : usedParam) {
+            paramStr.append("\"").append(param).append("\",");
         }
-        usedParamsStr = new StringBuilder(usedParamsStr.substring(0, usedParamsStr.length() - 1));
-        usedParamsStr.append("]}");
-        writeBytesToFile(targetJsonFile.getAbsolutePath(), usedParamsStr.toString().getBytes());
+        if (!usedParam.isEmpty()) {
+            paramStr = new StringBuilder(paramStr.substring(0, paramStr.length() - 1));
+        }
+        paramStr.append("], \"set\": [");
+
+        for (String param : setParam) {
+            paramStr.append("\"").append(param).append("\",");
+        }
+        if (!setParam.isEmpty()) {
+            paramStr = new StringBuilder(paramStr.substring(0, paramStr.length() - 1));
+        }
+        paramStr.append("]}");
+        writeBytesToFile(targetJsonFile.getAbsolutePath(), paramStr.toString().getBytes());
     }
 
     /**

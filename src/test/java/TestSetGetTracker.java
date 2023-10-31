@@ -1,7 +1,10 @@
+import edu.illinois.CTest;
+import edu.illinois.CTestRunner;
 import edu.illinois.ConfigTracker;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +13,7 @@ import java.util.Set;
  * Author: Shuai Wang
  * Date:  10/31/23
  */
+@RunWith(CTestRunner.class)
 public class TestSetGetTracker {
     Configuration conf = null;
     @Before

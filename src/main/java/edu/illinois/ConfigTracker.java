@@ -20,6 +20,8 @@ import static edu.illinois.Names.*;
 public class ConfigTracker {
     /** The set of parameters that have been used in the current test method */
     private static final ThreadLocal<Set<String>> usedParams = ThreadLocal.withInitial(HashSet::new);
+    /** The set of parameters that have been set in the current test method */
+    private static final ThreadLocal<Set<String>> setParmas = ThreadLocal.withInitial(HashSet::new);
     /** The name of the current test class */
     private static String currentTestClassName = null;
     /** The map from test class name to the configuration file */
@@ -36,6 +38,7 @@ public class ConfigTracker {
      */
     public static void startTest() {
         usedParams.get().clear();
+        setParmas.get().clear();
     }
 
     /**
@@ -56,11 +59,36 @@ public class ConfigTracker {
     }
 
     /**
+     * Check whether a parameter has been set in the current test method
+     * @param param the parameter to check
+     * @return true if the parameter has been set, false otherwise
+     */
+    public static boolean isParameterSet(String param) {
+        return setParmas.get().contains(param);
+    }
+
+    /**
+     * Mark a parameter as set in the current test method
+     * @param param the parameter that has been set
+     */
+    public static void markParmaAsSet(String param) {
+        setParmas.get().add(param);
+    }
+
+    /**
      * Get the set of parameters that have been used in the current test method
      * @return the set of parameters that have been used in the current test method
      */
     public static Set<String> getUsedParams() {
         return usedParams.get();
+    }
+
+    /**
+     * Get the set of parameters that have been set in the current test method
+     * @return the set of parameters that have been set in the current test method
+     */
+    public static Set<String> getSetParams() {
+        return setParmas.get();
     }
 
     /**

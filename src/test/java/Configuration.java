@@ -24,6 +24,7 @@ public class Configuration {
         return "null";
     }
     public void set(String name, String value) {
+        ConfigTracker.markParmaAsSet(name);
         configMap.put(name, value);
     }
 }

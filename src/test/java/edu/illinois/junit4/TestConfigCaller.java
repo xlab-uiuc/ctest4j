@@ -1,4 +1,7 @@
+package edu.illinois.junit4;
+
 import edu.illinois.CTestRunner;
+import edu.illinois.Configuration;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

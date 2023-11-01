@@ -1,3 +1,6 @@
+package edu.illinois.junit4;
+
+import edu.illinois.Configuration;
 import org.junit.Test;
 
 /**

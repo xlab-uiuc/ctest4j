@@ -1,6 +1,8 @@
-import edu.illinois.CTest;
+package edu.illinois.junit4;
+
 import edu.illinois.CTestRunner;
 import edu.illinois.ConfigTracker;
+import edu.illinois.Configuration;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,7 +1,6 @@
-import edu.illinois.CTest;
-import edu.illinois.CTestClass;
-import edu.illinois.CTestRunner;
-import edu.illinois.UnUsedConfigParamException;
+package edu.illinois.junit4;
+
+import edu.illinois.*;
 import org.junit.runner.RunWith;
 
 /**

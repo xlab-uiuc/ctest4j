@@ -1,5 +1,7 @@
-package edu.illinois;
+package edu.illinois.junit4;
 
+import edu.illinois.ConfigTracker;
+import edu.illinois.Log;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 

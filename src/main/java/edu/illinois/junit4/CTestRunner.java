@@ -1,5 +1,6 @@
-package edu.illinois;
+package edu.illinois.junit4;
 
+import edu.illinois.*;
 import edu.illinois.parser.ConfigurationParser;
 import edu.illinois.parser.JsonConfigurationParser;
 import edu.illinois.parser.NullConfigurationParser;

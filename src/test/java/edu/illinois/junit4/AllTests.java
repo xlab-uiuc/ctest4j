@@ -1,6 +1,5 @@
 package edu.illinois.junit4;
 
-import edu.illinois.CTestSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

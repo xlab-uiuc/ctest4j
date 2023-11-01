@@ -1,5 +1,9 @@
-package edu.illinois;
+package edu.illinois.junit4;
 
+import edu.illinois.ConfigTracker;
+import edu.illinois.Modes;
+import edu.illinois.Options;
+import edu.illinois.UnUsedConfigParamException;
 import org.junit.runners.model.Statement;
 
 import java.util.Set;

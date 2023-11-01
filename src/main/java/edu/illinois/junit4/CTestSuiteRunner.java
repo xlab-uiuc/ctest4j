@@ -1,4 +1,4 @@
-package edu.illinois;
+package edu.illinois.junit4;
 
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;

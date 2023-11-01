@@ -8,7 +8,7 @@ For maven project, add the following dependency to your pom.xml:
 <dependencies>
     <dependency>
         <groupId>edu.illinois</groupId>
-        <artifactId>CTestRunner</artifactId>
+        <artifactId>junit4-ctest-runner</artifactId>
         <version>1.0-SNAPSHOT</version>
         <scope>compile</scope>
     </dependency>
@@ -41,7 +41,7 @@ public static void markParamAsUsed(String param)
 `injectConfig` method need to be added to the end of your Configuration class constructor to inject configuration value 
 with configuration setter method. `markParamAsUsed` method need to be added to the end of your configuration getter method
 to mark the configuration parameter as used.
-Here is an example of the [instrumented configuration class](src/test/java/Configuration.java).
+Here is an example of the [instrumented configuration class](junit4-runner/src/test/java/Configuration.java).
 
 #### Write Configuration Test
 Use `@RunWith(ConfigTestRunner.class)` to specify the runner for your test class.
@@ -53,8 +53,8 @@ There are two ways of specifying configuration parameters:
 2. Put configuration parameter name in a file and specify the file path in `@CTestClass` and `@CTest` annotation as file().
 
 Current runner support JSON file format for configuration parameter file, 
-one can implement [ConfigurationParser](src/main/java/edu/illinois/parser/ConfigurationParser.java) to support 
-other file format and override `getParser()` method in [ConfigTestRunner#getParser](src/main/java/edu/illinois/ConfigTestRunner.java).
+one can implement [ConfigurationParser](junit4-runner/src/main/java/edu/illinois/parser/ConfigurationParser.java) to support 
+other file format and override `getParser()` method in [ConfigTestRunner#getParser](junit4-runner/src/main/java/edu/illinois/ConfigTestRunner.java).
 
 ```java
 @RunWith(ConfigTestRunner.class)

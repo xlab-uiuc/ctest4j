@@ -13,14 +13,14 @@ $ git clone git@github.com:apache/hadoop.git
 ```
 
 ## Add the runner dependency to HCommon
-Add the dependency to the `pom.xml` file of HCommon module.
+Since HCommon uses JUnit4, add the junit4 runner dependency to the `pom.xml` file of HCommon module.
 
 ```xml
 <dependencies>
     ...
     <dependency>
         <groupId>edu.illinois</groupId>
-        <artifactId>CTestRunner</artifactId>
+        <artifactId>junit4-ctest-runner</artifactId>
         <version>1.0-SNAPSHOT</version>
         <scope>compile</scope>
     </dependency>

@@ -19,4 +19,13 @@ public @interface CTest {
     String[] value() default {};
     String[] optional() default {};
     String file() default "";
+
+    static class None extends Throwable {
+        private static final long serialVersionUID = 1L;
+
+        private None() {
+        }
+    }
+
+    Class<? extends Throwable> expected() default None.class;
 }

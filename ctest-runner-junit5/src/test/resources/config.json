@@ -1,0 +1,4 @@
+{
+  "required": ["file-param1"],
+  "optional": ["file-param2"]
+}

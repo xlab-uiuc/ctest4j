@@ -1,5 +1,7 @@
-package edu.illinois;
+package edu.illinois.junit5;
 
+import edu.illinois.CTest;
+import edu.illinois.Configuration;
 import org.junit.jupiter.api.Test;
 
 /**

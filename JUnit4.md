@@ -8,7 +8,7 @@ For maven project, add the following dependency to your pom.xml:
 <dependencies>
     <dependency>
         <groupId>edu.illinois</groupId>
-        <artifactId>junit4-ctest-runner</artifactId>
+        <artifactId>ctest-runner-junit4</artifactId>
         <version>1.0-SNAPSHOT</version>
         <scope>compile</scope>
     </dependency>

@@ -1,6 +1,7 @@
 package edu.illinois.junit4;
 
 import edu.illinois.CTest;
+import edu.illinois.CTestRunner;
 import edu.illinois.Configuration;
 import edu.illinois.UnUsedConfigParamException;
 import org.junit.Before;

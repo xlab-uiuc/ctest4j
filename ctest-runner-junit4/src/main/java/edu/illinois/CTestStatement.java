@@ -1,4 +1,4 @@
-package edu.illinois.junit4;
+package edu.illinois;
 
 import edu.illinois.ConfigTracker;
 import edu.illinois.Modes;

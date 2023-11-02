@@ -20,7 +20,7 @@ Since HCommon uses JUnit4, add the junit4 runner dependency to the `pom.xml` fil
     ...
     <dependency>
         <groupId>edu.illinois</groupId>
-        <artifactId>junit4-ctest-runner</artifactId>
+        <artifactId>ctest-runner-junit4</artifactId>
         <version>1.0-SNAPSHOT</version>
         <scope>compile</scope>
     </dependency>

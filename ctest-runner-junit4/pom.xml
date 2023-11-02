@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>edu.illinois</groupId>
-        <artifactId>CTestRunner</artifactId>
+        <artifactId>ctest-runner</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>junit4-ctest-runner</artifactId>
+    <artifactId>ctest-runner-junit4</artifactId>
 
     <dependencies>
         <dependency>
@@ -17,6 +17,11 @@
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>edu.illinois</groupId>
+            <artifactId>ctest-runner-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

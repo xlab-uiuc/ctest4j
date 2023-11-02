@@ -1,7 +1,5 @@
-package edu.illinois.junit4;
+package edu.illinois;
 
-import edu.illinois.Log;
-import edu.illinois.junit4.CTestSuiteRunner;
 import org.junit.runner.Runner;
 import org.junit.runners.Suite;
 import org.junit.runners.model.InitializationError;

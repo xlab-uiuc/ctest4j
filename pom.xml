@@ -11,6 +11,7 @@
     <modules>
         <module>ctest-runner-junit4</module>
         <module>ctest-runner-common</module>
+        <module>ctest-runner-junit5</module>
     </modules>
     <dependencies>
         <dependency>
@@ -52,7 +53,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
 <!--                <configuration>
-                    <argLine>-javaagent:/Users/allenwang/.m2/repository/edu/illinois/CTestRunner/1.0-SNAPSHOT/CTestRunner-1.0-SNAPSHOT.jar</argLine>
+                    <argLine>-javaagent:/Users/allenwang/.m2/repository/edu/illinois/edu.illinois.CTestRunner/1.0-SNAPSHOT/edu.illinois.CTestRunner-1.0-SNAPSHOT.jar</argLine>
                     <systemPropertyVariables>
                         <configurationClassName>edu/illinois/Configuration</configurationClassName>
                         <configurationGetterMethod>get(Ljava/lang/String;)Ljava/lang/String;</configurationGetterMethod>

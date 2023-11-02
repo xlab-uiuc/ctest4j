@@ -1,9 +1,5 @@
 package edu.illinois;
 
-import edu.illinois.ConfigTracker;
-import edu.illinois.Modes;
-import edu.illinois.Options;
-import edu.illinois.UnUsedConfigParamException;
 import org.junit.runners.model.Statement;
 
 import java.util.Set;
@@ -12,11 +8,11 @@ import java.util.Set;
  * Author: Shuai Wang
  * Date:  10/13/23
  */
-public class CTestStatement extends Statement {
+public class CTestJUnit4Statement extends Statement {
     private final Statement base;
     private final Set<String> params;
 
-    public CTestStatement(Statement base, Set<String> params) {
+    public CTestJUnit4Statement(Statement base, Set<String> params) {
         this.base = base;
         this.params = params;
     }

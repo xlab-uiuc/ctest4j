@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
  * Author: Shuai Wang
  * Date:  10/17/23
  */
-@RunWith(CTestRunner.class)
+@RunWith(CTestJUnit4Runner.class)
 @CTestClass(value = {"class-parameter1", "class-parameter2"}, file = "src/test/resources/config.json")
 public class FromAllTest {
     @CTest({"method-parameter1", "method-parameter2"})

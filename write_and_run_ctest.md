@@ -4,7 +4,7 @@
 The following example provides a glimpse at the minimum requirements for writing a configuration test in JUnit4 with CTest Runner.
 
 ```java
-@RunWith(ConfigTestRunner.class)
+@RunWith(CTestJUnit4Runner.class)
 @CTestClass(value = {"class-parameter1", "class-parameter2"}, file = "src/test/resources/config.json")
 public class FromAllTest {
     /**
@@ -71,7 +71,7 @@ $ mvn surefire:test -Dmode=default -Dconfig.inject.dir=src/test/resources/inject
 CTest Suite Runner is a runner that allows user to run a suite of configuration tests.
 An example of using CTest Suite Runner is:
 ```java
-@RunWith(CTestSuite.class)
+@RunWith(CTestJUnit4Suite.class)
 @Suite.SuiteClasses({
         TestNormalOne.class,
         TestNormalTwo.class,

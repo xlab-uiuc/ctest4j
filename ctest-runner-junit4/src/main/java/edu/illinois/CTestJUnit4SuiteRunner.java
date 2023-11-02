@@ -12,9 +12,9 @@ import static edu.illinois.Options.ctestSuiteTracking;
  * Author: Shuai Wang
  * Date:  10/27/23
  */
-public class CTestSuiteRunner extends CTestRunner {
+public class CTestJUnit4SuiteRunner extends CTestJUnit4Runner {
 
-    public CTestSuiteRunner(Class<?> klass) throws InitializationError {
+    public CTestJUnit4SuiteRunner(Class<?> klass) throws InitializationError {
         super(klass);
     }
 
@@ -25,7 +25,7 @@ public class CTestSuiteRunner extends CTestRunner {
             return super.methodInvoker(method, test);
         } else {
             try {
-                return new CTestStatement(base, getRequiredParametersFromDefaultFile(method));
+                return new CTestJUnit4Statement(base, getRequiredParametersFromDefaultFile(method.getMethod().getDeclaringClass().getName(), method.getName()));
             } catch (IOException e) {
                 throw new RuntimeException("Failed to run CTest " + method.getName() + " from CTestSuite ");
             }

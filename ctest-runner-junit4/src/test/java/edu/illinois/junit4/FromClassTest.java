@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
  * Author: Shuai Wang
  * Date:  10/17/23
  */
-@RunWith(CTestRunner.class)
+@RunWith(CTestJUnit4Runner.class)
 @CTestClass({"class-parameter1", "class-parameter2"})
 public class FromClassTest {
     @CTest

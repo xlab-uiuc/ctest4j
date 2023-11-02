@@ -52,6 +52,7 @@
   <modules>
     <module>ctest-runner-junit4</module>
     <module>ctest-runner-common</module>
+    <module>ctest-runner-junit5</module>
   </modules>
   <dependencies>
     <dependency>

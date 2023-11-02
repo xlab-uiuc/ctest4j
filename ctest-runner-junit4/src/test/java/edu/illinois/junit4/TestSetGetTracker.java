@@ -1,6 +1,6 @@
 package edu.illinois.junit4;
 
-import edu.illinois.CTestRunner;
+import edu.illinois.CTestJUnit4Runner;
 import edu.illinois.ConfigTracker;
 import edu.illinois.Configuration;
 import org.junit.Assert;
@@ -15,7 +15,7 @@ import java.util.Set;
  * Author: Shuai Wang
  * Date:  10/31/23
  */
-@RunWith(CTestRunner.class)
+@RunWith(CTestJUnit4Runner.class)
 public class TestSetGetTracker {
     Configuration conf = null;
     @Before

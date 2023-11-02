@@ -93,4 +93,8 @@ public class Utils {
     public static String getTestMethodFullName(FrameworkMethod method) {
         return method.getMethod().getDeclaringClass().getName() + Names.TEST_CLASS_METHOD_SEPERATOR + method.getName();
     }
+
+    public static String getTestMethodFullName(String className, String methodName) {
+        return className + Names.TEST_CLASS_METHOD_SEPERATOR + methodName;
+    }
 }

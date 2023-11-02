@@ -1,7 +1,5 @@
 package edu.illinois;
 
-import edu.illinois.ConfigTracker;
-import edu.illinois.Log;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 
@@ -13,11 +11,11 @@ import static edu.illinois.Utils.getTestMethodFullName;
  * Author: Shuai Wang
  * Date:  10/15/23
  */
-public class ConfigTrackStatement extends Statement {
+public class ConfigTrackJUnit4Statement extends Statement {
     private final Statement base;
     private final FrameworkMethod method;
 
-    public ConfigTrackStatement(Statement base, FrameworkMethod method) {
+    public ConfigTrackJUnit4Statement(Statement base, FrameworkMethod method) {
         this.base = base;
         this.method = method;
     }

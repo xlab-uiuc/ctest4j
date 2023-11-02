@@ -37,10 +37,12 @@ To track configuration parameters, you need to add the following code to your pr
 ```java
 public static <T> void injectConfig(BiConsumer<String, T> configSetterMethod) throws IOException
 public static void markParamAsUsed(String param)
+public static void markParamAsSet(String param)
 ```
 `injectConfig` method need to be added to the end of your Configuration class constructor to inject configuration value 
 with configuration setter method. `markParamAsUsed` method need to be added to the end of your configuration getter method
 to mark the configuration parameter as used.
+`markParamAsSet` method need to be added to the end of your configuration setter method to mark the configuration parameter as set.
 Here is an example of the [instrumented configuration class](junit4-runner/src/test/java/Configuration.java).
 
 #### Write Configuration Test

@@ -121,4 +121,38 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
                 .withTimeout(timeout, TimeUnit.MILLISECONDS)
                 .build(next);
     }
+
+    /**
+     * Start tracking the class-level parameters before running the @BeforeClass methods.
+     * @param statement
+     * @return
+     */
+    @Override
+    protected Statement withBeforeClasses(Statement statement) {
+        final Statement originalStatement = super.withBeforeClasses(statement);
+        return new Statement() {
+            @Override
+            public void evaluate() throws Throwable {
+                ConfigTracker.startTrackClassParam();
+                originalStatement.evaluate();
+            }
+        };
+    }
+
+    /**
+     * End tracking the class-level parameters after running the @AfterClass methods.
+     * @param statement
+     * @return
+     */
+    @Override
+    protected Statement withAfterClasses(Statement statement) {
+        final Statement originalStatement = super.withAfterClasses(statement);
+        return new Statement() {
+            @Override
+            public void evaluate() throws Throwable {
+                ConfigTracker.endTrackClassParam();
+                originalStatement.evaluate();
+            }
+        };
+    }
 }

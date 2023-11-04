@@ -18,10 +18,15 @@ import static edu.illinois.Names.*;
  * Date:  10/13/23
  */
 public class ConfigTracker {
+    private static boolean trackClassParam = false;
+    /** The set of parameters that have been used in the current test class */
+    private static final Set<String> classUsedParmas = new HashSet<>();
+    /** The set of parameters that have been set in the current test class */
+    private static final Set<String> classSetParmas = new HashSet<>();
     /** The set of parameters that have been used in the current test method */
-    private static final ThreadLocal<Set<String>> usedParams = ThreadLocal.withInitial(HashSet::new);
+    private static final ThreadLocal<Set<String>> methodUsedParams = ThreadLocal.withInitial(HashSet::new);
     /** The set of parameters that have been set in the current test method */
-    private static final ThreadLocal<Set<String>> setParmas = ThreadLocal.withInitial(HashSet::new);
+    private static final ThreadLocal<Set<String>> methodSetParmas = ThreadLocal.withInitial(HashSet::new);
     /** The name of the current test class */
     private static String currentTestClassName = null;
     /** The map from test class name to the configuration file */
@@ -33,54 +38,79 @@ public class ConfigTracker {
         injectFromFile = constructTestClzToConfigFileMap();
     }
 
+
+    /**
+     * Start tracking class-level parameters
+     */
+    public static void startTrackClassParam() {
+        trackClassParam = true;
+        classUsedParmas.clear();
+        classSetParmas.clear();
+    }
+
+    /**
+     * Stop tracking class-level parameters
+     */
+    public static void endTrackClassParam() {
+        trackClassParam = false;
+    }
+
     /**
      * Start a new test method, clear the set of used parameters
      */
     public static void startTest() {
-        usedParams.get().clear();
-        setParmas.get().clear();
+        methodUsedParams.get().clear();
+        methodSetParmas.get().clear();
     }
 
     /**
-     * Check whether a parameter has been used in the current test method
+     * Check whether a parameter has been used in the current test method or class
      * @param param the parameter to check
      * @return true if the parameter has been used, false otherwise
      */
     public static boolean isParameterUsed(String param) {
-        return usedParams.get().contains(param);
+        return methodUsedParams.get().contains(param) || classUsedParmas.contains(param);
     }
 
     /**
-     * Mark a parameter as used in the current test method
+     * Mark a parameter as used in the current test method or class
      * @param param the parameter to mark
      */
     public static void markParamAsUsed(String param) {
-        usedParams.get().add(param);
+        if (trackClassParam) {
+            classUsedParmas.add(param);
+        } else {
+            methodUsedParams.get().add(param);
+        }
     }
 
     /**
-     * Check whether a parameter has been set in the current test method
+     * Check whether a parameter has been set in the current test method or class
      * @param param the parameter to check
      * @return true if the parameter has been set, false otherwise
      */
     public static boolean isParameterSet(String param) {
-        return setParmas.get().contains(param);
+        return methodSetParmas.get().contains(param) || classSetParmas.contains(param);
     }
 
     /**
-     * Mark a parameter as set in the current test method
+     * Mark a parameter as set in the current test method or class
      * @param param the parameter that has been set
      */
     public static void markParmaAsSet(String param) {
-        setParmas.get().add(param);
+        if (trackClassParam) {
+            classSetParmas.add(param);
+        } else {
+            methodSetParmas.get().add(param);
+        }
     }
 
     /**
      * Get the set of parameters that have been used in the current test method
      * @return the set of parameters that have been used in the current test method
      */
-    public static Set<String> getUsedParams() {
-        return usedParams.get();
+    public static Set<String> getMethodUsedParams() {
+        return methodUsedParams.get();
     }
 
     /**
@@ -88,7 +118,47 @@ public class ConfigTracker {
      * @return the set of parameters that have been set in the current test method
      */
     public static Set<String> getSetParams() {
-        return setParmas.get();
+        return methodSetParmas.get();
+    }
+
+
+    /**
+     * Get the set of parameters that have been used in the current test class
+     * @return the set of parameters that have been used in the current test class
+     */
+    public static Set<String> getClassUsedParmas() {
+        return classUsedParmas;
+    }
+
+    /**
+     * Get the set of parameters that have been set in the current test class
+     * @return the set of parameters that have been set in the current test class
+     */
+    public static Set<String> getClassSetParmas() {
+        return classSetParmas;
+    }
+
+
+    /**
+     * Get the set of all parameters that have been used in the current test class and method
+     * @return the set of all parameters that have been used in the current test class and method
+     */
+    public static Set<String> getAllUsedParams() {
+        Set<String> allUsedParams = new HashSet<>();
+        allUsedParams.addAll(methodUsedParams.get());
+        allUsedParams.addAll(classUsedParmas);
+        return allUsedParams;
+    }
+
+    /**
+     * Get the set of all parameters that have been set in the current test class and method
+     * @return the set of all parameters that have been set in the current test class and method
+     */
+    public static Set<String> getAllSetParams() {
+        Set<String> allSetParams = new HashSet<>();
+        allSetParams.addAll(methodSetParmas.get());
+        allSetParams.addAll(classSetParmas);
+        return allSetParams;
     }
 
     /**
@@ -139,7 +209,7 @@ public class ConfigTracker {
      * and record the used parameters. This method would write the used parameters to a file.
      */
     public static void writeConfigToFile(String fileName) {
-        Utils.writeParamSetToJson(ConfigTracker.getUsedParams(), ConfigTracker.getSetParams(), new File(USED_CONFIG_FILE_DIR, fileName + ".json"));
+        Utils.writeParamSetToJson(ConfigTracker.getAllUsedParams(), ConfigTracker.getAllSetParams(), new File(USED_CONFIG_FILE_DIR, fileName + ".json"));
     }
 
     // Internal methods

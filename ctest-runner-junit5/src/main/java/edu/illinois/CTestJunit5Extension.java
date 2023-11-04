@@ -99,7 +99,8 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
         Test test = extensionContext.getRequiredTestMethod().getAnnotation(Test.class);
         if (test != null) {
             Log.INFO(TRACKING_LOG_PREFIX, className + "#" + methodName,
-                    "uses configuration parameters: " + ConfigTracker.getUsedParams());
+                    "uses configuration parameters: " + ConfigTracker.getAllUsedParams() + " and set parameters: " +
+                            ConfigTracker.getAllSetParams());
             if (saveUsedParamToFile) {
                 ConfigTracker.writeConfigToFile(getTestMethodFullName(className, methodName));
             }

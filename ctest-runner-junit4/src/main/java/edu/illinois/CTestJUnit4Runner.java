@@ -150,7 +150,6 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
             @Override
             public void evaluate() throws Throwable {
                 ConfigTracker.startTestMethod();
-                System.out.println("In CTestJUnit4Runner.withBefores() for method" + method.getName());
                 originalStatement.evaluate();
             }
         };
@@ -164,7 +163,6 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
             public void evaluate() throws Throwable {
                 try {
                     originalStatement.evaluate();
-                    System.out.println("In CTestJUnit4Runner.withAfters()");
                     CTest cTest = method.getAnnotation(CTest.class);
                     if (cTest != null) {
                         checkCTestParameterUsage(getAllMethodParameters(getTestClass().getJavaClass().getName(),

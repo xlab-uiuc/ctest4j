@@ -24,13 +24,10 @@ public class CTestJUnit4Statement extends Statement {
      */
     @Override
     public void evaluate() throws Throwable {
-        //ConfigTracker.startTestMethod();
         try {
             base.evaluate();
         } finally {
-            System.out.println("In CTestJUnit4Statement.evaluate()");
             if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
-                System.out.println(ConfigTracker.getAllUsedParams());
                 for (String param : params) {
                     if (!ConfigTracker.isParameterUsed(param)) {
                         throw new UnUsedConfigParamException(param + " was not used during the test.");

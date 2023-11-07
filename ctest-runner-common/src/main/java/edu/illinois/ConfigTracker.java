@@ -55,9 +55,6 @@ public class ConfigTracker {
         trackClassParam = false;
         methodUsedParams.clear();
         methodSetParmas.clear();
-        System.out.println("In ConfigTracker.startTestMethod()");
-        System.out.println(methodUsedParams);
-        System.out.println(methodSetParmas);
     }
 
     /**
@@ -198,7 +195,6 @@ public class ConfigTracker {
         }
         // The CLI injection would override the file injection for the common parameters
         injectFromCLI(configSetterMethod);
-        System.out.println(ConfigTracker.getCurrentTestClassName());
     }
 
     /**

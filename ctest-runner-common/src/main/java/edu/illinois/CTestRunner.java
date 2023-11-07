@@ -7,10 +7,12 @@ import edu.illinois.parser.XmlConfigurationParser;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
+import static edu.illinois.Names.TRACKING_LOG_PREFIX;
 import static edu.illinois.Names.USED_CONFIG_FILE_DIR;
+import static edu.illinois.Options.saveUsedParamToFile;
+import static edu.illinois.Utils.getTestMethodFullName;
 
 /**
  * Author: Shuai Wang
@@ -94,5 +96,21 @@ public interface CTestRunner {
             params.addAll(getParametersFromFile(defaultFile.getAbsolutePath()));
         }
         return params;
+    }
+
+    default void checkCTestParameterUsage(Set<String> params) throws UnUsedConfigParamException {
+        if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
+            for (String param : params) {
+                if (!ConfigTracker.isParameterUsed(param)) {
+                    throw new UnUsedConfigParamException(param + " was not used during the test.");
+                }
+            }
+        }
+    }
+
+    default void writeConfigToFile(String fileName) {
+        if (saveUsedParamToFile) {
+            ConfigTracker.writeConfigToFile(fileName);
+        }
     }
 }

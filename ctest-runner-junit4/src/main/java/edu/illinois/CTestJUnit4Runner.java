@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import static edu.illinois.Names.TRACKING_LOG_PREFIX;
+import static edu.illinois.Utils.getTestMethodFullName;
 
 /**
  * Author: Shuai Wang
@@ -50,11 +52,10 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
     }
 
     /**
-     * Invoke the configuration tests with @CTest annotation.
+     * Invoke a vanilla method.
      * @param method
      * @param test
-     * @return ConfigTestStatement if the method has @CTest annotation,
-     * otherwise return the original statement.
+     * @return
      */
     @Override
     protected Statement methodInvoker(FrameworkMethod method, Object test) {
@@ -133,26 +134,53 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
-                ConfigTracker.startTrackClassParam();
+                ConfigTracker.startTestClass();
                 originalStatement.evaluate();
             }
         };
     }
 
     /**
-     * End tracking the class-level parameters after running the @AfterClass methods.
-     * @param statement
-     * @return
+     * Start tracking the method-level parameters before running the @Before methods.
      */
     @Override
-    protected Statement withAfterClasses(Statement statement) {
-        final Statement originalStatement = super.withAfterClasses(statement);
+    protected Statement withBefores(FrameworkMethod method, Object target, Statement statement) {
+        final Statement originalStatement = super.withBefores(method, target, statement);
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
-                ConfigTracker.endTrackClassParam();
+                ConfigTracker.startTestMethod();
+                System.out.println("In CTestJUnit4Runner.withBefores() for method" + method.getName());
                 originalStatement.evaluate();
             }
         };
     }
+
+/*    @Override
+    protected Statement withAfters(FrameworkMethod method, Object target, Statement statement) {
+        final Statement originalStatement = super.withAfters(method, target, statement);
+        return new Statement() {
+            @Override
+            public void evaluate() throws Throwable {
+                try {
+                    originalStatement.evaluate();
+                    System.out.println("In CTestJUnit4Runner.withAfters()");
+                    CTest cTest = method.getAnnotation(CTest.class);
+                    if (cTest != null) {
+                        checkCTestParameterUsage(getAllMethodParameters(getTestClass().getJavaClass().getName(),
+                                method.getName(), cTest.file(), new HashSet<>(Arrays.asList(cTest.value())), classLevelParameters));
+                        return;
+                    }
+                    if (method.getAnnotation(Test.class) != null) {
+                        Log.INFO(TRACKING_LOG_PREFIX, method.getDeclaringClass().getCanonicalName() + "#" + method.getName(),
+                                "uses configuration parameters: " + ConfigTracker.getAllUsedParams() + " and set parameters: " +
+                                        ConfigTracker.getAllSetParams());
+                        writeConfigToFile(getTestMethodFullName(method));
+                    }
+                } catch (Exception e) {
+                  e.printStackTrace();
+                }
+            }
+        };
+    }*/
 }

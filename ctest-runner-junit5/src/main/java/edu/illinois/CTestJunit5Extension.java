@@ -58,7 +58,7 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
         if (Options.mode == Modes.BASE) {
             return;
         }
-        ConfigTracker.startTest();
+        ConfigTracker.startTestMethod();
         methodName = extensionContext.getRequiredTestMethod().getName();
     }
 

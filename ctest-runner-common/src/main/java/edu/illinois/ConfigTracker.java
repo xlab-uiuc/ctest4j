@@ -24,9 +24,9 @@ public class ConfigTracker {
     /** The set of parameters that have been set in the current test class */
     private static final Set<String> classSetParmas = new HashSet<>();
     /** The set of parameters that have been used in the current test method */
-    private static final ThreadLocal<Set<String>> methodUsedParams = ThreadLocal.withInitial(HashSet::new);
+    private static final Set<String> methodUsedParams = new HashSet<>();
     /** The set of parameters that have been set in the current test method */
-    private static final ThreadLocal<Set<String>> methodSetParmas = ThreadLocal.withInitial(HashSet::new);
+    private static final Set<String> methodSetParmas = new HashSet<>();
     /** The name of the current test class */
     private static String currentTestClassName = null;
     /** The map from test class name to the configuration file */
@@ -38,29 +38,26 @@ public class ConfigTracker {
         injectFromFile = constructTestClzToConfigFileMap();
     }
 
-
     /**
      * Start tracking class-level parameters
      */
-    public static void startTrackClassParam() {
+    public static void startTestClass() {
         trackClassParam = true;
         classUsedParmas.clear();
         classSetParmas.clear();
     }
 
     /**
-     * Stop tracking class-level parameters
-     */
-    public static void endTrackClassParam() {
-        trackClassParam = false;
-    }
-
-    /**
      * Start a new test method, clear the set of used parameters
      */
-    public static void startTest() {
-        methodUsedParams.get().clear();
-        methodSetParmas.get().clear();
+    public static void startTestMethod() {
+        // Stop tracking class-level parameters once a test method is started
+        trackClassParam = false;
+        methodUsedParams.clear();
+        methodSetParmas.clear();
+        System.out.println("In ConfigTracker.startTestMethod()");
+        System.out.println(methodUsedParams);
+        System.out.println(methodSetParmas);
     }
 
     /**
@@ -69,7 +66,7 @@ public class ConfigTracker {
      * @return true if the parameter has been used, false otherwise
      */
     public static boolean isParameterUsed(String param) {
-        return methodUsedParams.get().contains(param) || classUsedParmas.contains(param);
+        return methodUsedParams.contains(param) || classUsedParmas.contains(param);
     }
 
     /**
@@ -80,7 +77,7 @@ public class ConfigTracker {
         if (trackClassParam) {
             classUsedParmas.add(param);
         } else {
-            methodUsedParams.get().add(param);
+            methodUsedParams.add(param);
         }
     }
 
@@ -90,7 +87,7 @@ public class ConfigTracker {
      * @return true if the parameter has been set, false otherwise
      */
     public static boolean isParameterSet(String param) {
-        return methodSetParmas.get().contains(param) || classSetParmas.contains(param);
+        return methodSetParmas.contains(param) || classSetParmas.contains(param);
     }
 
     /**
@@ -101,7 +98,7 @@ public class ConfigTracker {
         if (trackClassParam) {
             classSetParmas.add(param);
         } else {
-            methodSetParmas.get().add(param);
+            methodSetParmas.add(param);
         }
     }
 
@@ -110,7 +107,7 @@ public class ConfigTracker {
      * @return the set of parameters that have been used in the current test method
      */
     public static Set<String> getMethodUsedParams() {
-        return methodUsedParams.get();
+        return methodUsedParams;
     }
 
     /**
@@ -118,7 +115,7 @@ public class ConfigTracker {
      * @return the set of parameters that have been set in the current test method
      */
     public static Set<String> getSetParams() {
-        return methodSetParmas.get();
+        return methodSetParmas;
     }
 
 
@@ -145,7 +142,7 @@ public class ConfigTracker {
      */
     public static Set<String> getAllUsedParams() {
         Set<String> allUsedParams = new HashSet<>();
-        allUsedParams.addAll(methodUsedParams.get());
+        allUsedParams.addAll(methodUsedParams);
         allUsedParams.addAll(classUsedParmas);
         return allUsedParams;
     }
@@ -156,7 +153,7 @@ public class ConfigTracker {
      */
     public static Set<String> getAllSetParams() {
         Set<String> allSetParams = new HashSet<>();
-        allSetParams.addAll(methodSetParmas.get());
+        allSetParams.addAll(methodSetParmas);
         allSetParams.addAll(classSetParmas);
         return allSetParams;
     }

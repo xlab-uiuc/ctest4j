@@ -32,7 +32,7 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
      * @throws Exception
      */
     @Override
-    public void beforeAll(ExtensionContext extensionContext) throws Exception {
+    public void beforeAll(ExtensionContext extensionContext) {
         // Retrieve class-level parameters
         className = extensionContext.getRequiredTestClass().getName();
         CTestClass cTestClass = extensionContext.getRequiredTestClass().getAnnotation(CTestClass.class);
@@ -46,6 +46,7 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
             classLevelParameters = new HashSet<>();
         }
         ConfigTracker.setCurrentTestClassName(className);
+        ConfigTracker.startTestClass();
     }
 
     /**
@@ -54,7 +55,7 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
      * @throws Exception
      */
     @Override
-    public void beforeEach(ExtensionContext extensionContext) throws Exception {
+    public void beforeEach(ExtensionContext extensionContext) {
         if (Options.mode == Modes.BASE) {
             return;
         }
@@ -68,7 +69,7 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
      * @throws Exception
      */
     @Override
-    public void afterEach(ExtensionContext extensionContext) throws Exception {
+    public void afterEach(ExtensionContext extensionContext) {
         if (Options.mode == Modes.BASE) {
             return;
         }

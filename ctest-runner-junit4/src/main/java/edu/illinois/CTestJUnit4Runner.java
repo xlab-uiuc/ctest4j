@@ -20,7 +20,7 @@ import static edu.illinois.Utils.getTestMethodFullName;
  * Date:  10/13/23
  */
 public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRunner {
-    private final Set<String> classLevelParameters;
+    protected final Set<String> classLevelParameters;
 
     public CTestJUnit4Runner(Class<?> klass) throws InitializationError {
         super(klass);
@@ -98,16 +98,7 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
                 return new ExpectException(next, configTestExpectedException);
             }
         }
-        // From @Test annotation
-        Test testAnnotation = method.getAnnotation(Test.class);
-        if (testAnnotation != null) {
-            Class<? extends Throwable> testExpectedException = testAnnotation.expected();
-            if (testExpectedException != Test.None.class) {
-                return new ExpectException(next, testExpectedException);
-            }
-
-        }
-        return next;
+        return super.possiblyExpectingExceptions(method, test, next);
     }
 
     /**
@@ -117,8 +108,14 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
     protected Statement withPotentialTimeout(FrameworkMethod method, Object test, Statement next) {
         long timeout = 0;
         CTest cTest = method.getAnnotation(CTest.class);
+        Test testAnnotation = method.getAnnotation(Test.class);
         if (cTest != null) {
             timeout = cTest.timeout();
+        } else if (testAnnotation != null) {
+            timeout = testAnnotation.timeout();
+        }
+        if (timeout <= 0) {
+            return next;
         }
         return FailOnTimeout.builder()
                 .withTimeout(timeout, TimeUnit.MILLISECONDS)

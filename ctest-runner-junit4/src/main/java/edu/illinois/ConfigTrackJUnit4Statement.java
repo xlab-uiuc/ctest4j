@@ -11,6 +11,7 @@ import static edu.illinois.Utils.getTestMethodFullName;
  * Author: Shuai Wang
  * Date:  10/15/23
  */
+@Deprecated
 public class ConfigTrackJUnit4Statement extends Statement {
     private final Statement base;
     private final FrameworkMethod method;

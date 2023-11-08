@@ -12,6 +12,7 @@ import static edu.illinois.Options.ctestSuiteTracking;
  * Author: Shuai Wang
  * Date:  10/27/23
  */
+@Deprecated
 public class CTestJUnit4SuiteRunner extends CTestJUnit4Runner {
 
     public CTestJUnit4SuiteRunner(Class<?> klass) throws InitializationError {

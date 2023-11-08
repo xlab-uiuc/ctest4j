@@ -264,5 +264,13 @@ public class ConfigTracker {
         }
         return true;
     }
+
+    /**
+     * Update the config usage for the current test method
+     */
+    public static void updateConfigUsage(ConfigUsage configUsage, String methodName) {
+        configUsage.addMethodLevelParams(methodName, methodUsedParams);
+        configUsage.addClassLevelParams(classUsedParmas);
+    }
 }
 

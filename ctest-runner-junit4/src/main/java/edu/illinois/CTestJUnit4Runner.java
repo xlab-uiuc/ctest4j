@@ -8,10 +8,12 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import static edu.illinois.Names.USED_CONFIG_FILE_DIR;
 import static edu.illinois.Options.saveUsedParamToFile;
 import static edu.illinois.Utils.getTestMethodFullName;
 
@@ -21,6 +23,8 @@ import static edu.illinois.Utils.getTestMethodFullName;
  */
 public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRunner {
     protected final Set<String> classLevelParameters;
+    protected final ConfigUsage configUsage = new ConfigUsage();
+    protected final String testClassName = getTestClass().getJavaClass().getName();
 
     public CTestJUnit4Runner(Class<?> klass) throws InitializationError {
         super(klass);
@@ -166,6 +170,7 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
                 try {
                     originalStatement.evaluate();
                 } finally {
+                    ConfigTracker.updateConfigUsage(configUsage, method.getName());
                     if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
                         CTest cTest = method.getAnnotation(CTest.class);
                         if (cTest != null) {
@@ -188,6 +193,26 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
                             }
                         }
                     }
+                }
+            }
+        };
+    }
+
+    /**
+     * Write the ConfigUsage object to a JSON file after running the @AfterClass methods.
+     * @param statement
+     * @return
+     */
+    @Override
+    protected Statement withAfterClasses(Statement statement) {
+        Statement originalStatement = super.withAfterClasses(statement);
+        return new Statement() {
+            @Override
+            public void evaluate() throws Throwable {
+                try {
+                    originalStatement.evaluate();
+                } finally {
+                    ConfigUsage.writeToJson(configUsage, new File(USED_CONFIG_FILE_DIR, testClassName + ".json"));
                 }
             }
         };

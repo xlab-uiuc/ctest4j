@@ -22,7 +22,6 @@ public class ConfigTrackJUnit4Statement extends Statement {
 
     @Override
     public void evaluate() throws Throwable {
-        //ConfigTracker.startTestMethod();
         try {
             base.evaluate();
         } finally {

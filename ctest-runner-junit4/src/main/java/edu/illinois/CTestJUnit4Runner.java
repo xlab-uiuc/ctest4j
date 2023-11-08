@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static edu.illinois.Names.TRACKING_LOG_PREFIX;
+import static edu.illinois.Options.saveUsedParamToFile;
 import static edu.illinois.Utils.getTestMethodFullName;
 
 /**
@@ -52,11 +52,12 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
     }
 
     /**
-     * Invoke a vanilla method.
+     * Invoke the test method
      * @param method
      * @param test
      * @return
      */
+/*
     @Override
     protected Statement methodInvoker(FrameworkMethod method, Object test) {
         Statement base = super.methodInvoker(method, test);
@@ -78,6 +79,7 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
         }
         return base;
     }
+*/
 
     protected Statement vanillaMethodInvoker(FrameworkMethod method, Object test) {
         return super.methodInvoker(method, test);
@@ -155,7 +157,10 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
         };
     }
 
-/*    @Override
+    /**
+     * Check if the test method uses all the parameters specified in the @CTest and @CTestClass annotation.
+     */
+    @Override
     protected Statement withAfters(FrameworkMethod method, Object target, Statement statement) {
         final Statement originalStatement = super.withAfters(method, target, statement);
         return new Statement() {
@@ -163,22 +168,31 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
             public void evaluate() throws Throwable {
                 try {
                     originalStatement.evaluate();
-                    CTest cTest = method.getAnnotation(CTest.class);
-                    if (cTest != null) {
-                        checkCTestParameterUsage(getAllMethodParameters(getTestClass().getJavaClass().getName(),
-                                method.getName(), cTest.file(), new HashSet<>(Arrays.asList(cTest.value())), classLevelParameters));
-                        return;
+                } finally {
+                    if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
+                        CTest cTest = method.getAnnotation(CTest.class);
+                        if (cTest != null) {
+                            for (String param : getAllMethodParameters(getTestClass().getJavaClass().getName(),
+                                    method.getName(), cTest.file(), new HashSet<>(Arrays.asList(cTest.value())), classLevelParameters)) {
+                                if (!ConfigTracker.isParameterUsed(param)) {
+                                    if (cTest.expected() != CTest.None.class) {
+                                        if (cTest.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
+                                            return;
+                                        }
+                                    }
+                                    throw new UnUsedConfigParamException(param + " was not used during the test.");
+                                }
+                            }
+                        }
+                        Test testAnnotation = method.getAnnotation(Test.class);
+                        if (testAnnotation != null) {
+                            if (saveUsedParamToFile) {
+                                ConfigTracker.writeConfigToFile(getTestMethodFullName(method));
+                            }
+                        }
                     }
-                    if (method.getAnnotation(Test.class) != null) {
-                        Log.INFO(TRACKING_LOG_PREFIX, method.getDeclaringClass().getCanonicalName() + "#" + method.getName(),
-                                "uses configuration parameters: " + ConfigTracker.getAllUsedParams() + " and set parameters: " +
-                                        ConfigTracker.getAllSetParams());
-                        writeConfigToFile(getTestMethodFullName(method));
-                    }
-                } catch (Exception e) {
-                  e.printStackTrace();
                 }
             }
         };
-    }*/
+    }
 }

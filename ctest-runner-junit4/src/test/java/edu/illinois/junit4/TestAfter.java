@@ -3,37 +3,38 @@ package edu.illinois.junit4;
 import edu.illinois.CTest;
 import edu.illinois.CTestJUnit4Runner;
 import edu.illinois.Configuration;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.io.IOException;
 
 /**
  * Author: Shuai Wang
- * Date:  11/4/23
+ * Date:  11/7/23
  */
 @RunWith(CTestJUnit4Runner.class)
-public class TestBeforeClassAndBefore {
+public class TestAfter {
     Configuration conf = null;
-    @BeforeClass
-    public static void setUp() {
-        Configuration conf = new Configuration();
-        conf.get("beforeClass");
-    }
-
     @Before
-    public void setUp2() {
-        System.out.println("In setUp");
+    public void before() {
         conf = new Configuration();
-        conf.get("before");
     }
 
-    @CTest(value = {"beforeClass", "before", "param1"})
+    @CTest({"param1", "after"})
     public void test() {
         conf.get("param1");
     }
 
-    @CTest(value = {"beforeClass", "before", "param2"})
+    @CTest({"param2", "after"})
     public void test2() {
         conf.get("param2");
+    }
+
+    @After
+    public void after() {
+        conf.get("after");
     }
 }

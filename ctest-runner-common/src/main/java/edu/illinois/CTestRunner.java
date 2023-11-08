@@ -9,10 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import static edu.illinois.Names.TRACKING_LOG_PREFIX;
 import static edu.illinois.Names.USED_CONFIG_FILE_DIR;
 import static edu.illinois.Options.saveUsedParamToFile;
-import static edu.illinois.Utils.getTestMethodFullName;
 
 /**
  * Author: Shuai Wang

@@ -1,5 +1,6 @@
 config/
 target/
+app/
 .idea/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

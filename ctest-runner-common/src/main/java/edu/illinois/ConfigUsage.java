@@ -12,6 +12,7 @@ import java.util.*;
  * Author: Shuai Wang
  * Date:  11/8/23
  */
+// TODO: make two field optional
 public class ConfigUsage {
     /** Class-level configuration parameters that are used by all test methods in the class */
     private Set<String> classLevelParams = new HashSet<>();

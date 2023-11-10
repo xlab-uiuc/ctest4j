@@ -55,36 +55,7 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
         return Collections.unmodifiableList(methods);
     }
 
-    /**
-     * Invoke the test method
-     * @param method
-     * @param test
-     * @return
-     */
-/*
-    @Override
-    protected Statement methodInvoker(FrameworkMethod method, Object test) {
-        Statement base = super.methodInvoker(method, test);
-        if (Options.mode == Modes.BASE) {
-            return base;
-        }
-        CTest cTest = method.getAnnotation(CTest.class);
-        if (cTest != null) {
-            try {
-                return new CTestJUnit4Statement(base, getAllMethodParameters(getTestClass().getJavaClass().getName(),
-                        method.getName(), cTest.file(), new HashSet<>(Arrays.asList(cTest.value())), classLevelParameters));
-            } catch (IOException e) {
-                throw new RuntimeException("Unable to parse configuration file from method " + method.getName() + " Annotation", e);
-            }
-        }
-        Test testAnnotation = method.getAnnotation(Test.class);
-        if (testAnnotation != null) {
-            return new ConfigTrackJUnit4Statement(base, method);
-        }
-        return base;
-    }
-*/
-
+    
     protected Statement vanillaMethodInvoker(FrameworkMethod method, Object test) {
         return super.methodInvoker(method, test);
     }

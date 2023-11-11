@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+
 /**
  * Author: Shuai Wang
  * Date:  11/10/23
@@ -29,7 +30,6 @@ public class FromAllTest {
     @Test
     public void testTestAnnotation() {
         conf.get("testTestAnnotation");
-
     }
 
     @CTest
@@ -44,6 +44,7 @@ public class FromAllTest {
 
     @CTest(expected = UnUsedConfigParamException.class)
     public void testCTestAnnotationFail() {
+        Configuration conf = new Configuration();
         conf.get("testCTestAnnotationFail");
     }
 }

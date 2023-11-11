@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 import static edu.illinois.Names.USED_CONFIG_FILE_DIR;
 import static edu.illinois.Options.saveUsedParamToFile;
+import static edu.illinois.Utils.getTestMethodFullName;
 
 /**
  * Design B: Only CTestClass Annotation and treat all the test methods as @CTest
@@ -161,46 +162,39 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
                     originalStatement.evaluate();
                 } finally {
                     ConfigTracker.updateConfigUsage(configUsage, method.getName());
-                    checkConfigUsage(method);
+                    if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
+                        CTest cTest = method.getAnnotation(CTest.class);
+                        if (cTest != null) {
+                            for (String param : getUnionMethodParameters(getTestClass().getJavaClass().getName(),
+                                    method.getName(), cTest.configMappingFile())) {
+                                if (!ConfigTracker.isParameterUsed(param)) {
+                                    if (cTest.expected() != CTest.None.class) {
+                                        if (cTest.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
+                                            return;
+                                        }
+                                    }
+                                    throw new UnUsedConfigParamException(param + " was not used during the test.");
+                                }
+                            }
+                        }
+                        Test testAnnotation = method.getAnnotation(Test.class);
+                        if (testAnnotation != null) {
+                            for (String param : getUnionMethodParameters(getTestClass().getJavaClass().getName(),
+                                    method.getName(), "")) {
+                                if (!ConfigTracker.isParameterUsed(param)) {
+                                    if (testAnnotation.expected() != Test.None.class) {
+                                        if (testAnnotation.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
+                                            return;
+                                        }
+                                    }
+                                    throw new UnUsedConfigParamException(param + " was not used during the test.");
+                                }
+                            }
+                        }
+                    }
                 }
             }
         };
-    }
-
-
-    @Override
-    public void checkConfigUsage(Object methodObj) throws UnUsedConfigParamException, IOException {
-        FrameworkMethod method = (FrameworkMethod) methodObj;
-        if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
-            CTest cTest = method.getAnnotation(CTest.class);
-            if (cTest != null) {
-                for (String param : getUnionMethodParameters(getTestClass().getJavaClass().getName(),
-                        method.getName(), cTest.configMappingFile())) {
-                    if (!ConfigTracker.isParameterUsed(param)) {
-                        if (cTest.expected() != CTest.None.class) {
-                            if (cTest.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
-                                return;
-                            }
-                        }
-                        throw new UnUsedConfigParamException(param + " was not used during the test.");
-                    }
-                }
-            }
-            Test testAnnotation = method.getAnnotation(Test.class);
-            if (testAnnotation != null) {
-                for (String param : getUnionMethodParameters(getTestClass().getJavaClass().getName(),
-                        method.getName(), "")) {
-                    if (!ConfigTracker.isParameterUsed(param)) {
-                        if (testAnnotation.expected() != Test.None.class) {
-                            if (testAnnotation.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
-                                return;
-                            }
-                        }
-                        throw new UnUsedConfigParamException(param + " was not used during the test.");
-                    }
-                }
-            }
-        }
     }
 
     /**

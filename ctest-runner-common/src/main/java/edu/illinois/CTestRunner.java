@@ -30,7 +30,6 @@ public interface CTestRunner {
      * @param method
      * @throws Exception if the check fails
      */
-    void checkConfigUsage(Object method) throws Exception;
 
     /**
      * Get the parameters from a configuration file.

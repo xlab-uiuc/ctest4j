@@ -1,4 +1,4 @@
-package edu.illinois.junit4;
+package edu.illinois.junit4.designA;
 
 import edu.illinois.*;
 import org.junit.runner.RunWith;
@@ -9,21 +9,20 @@ import org.junit.runner.RunWith;
  * Date:  10/17/23
  */
 @RunWith(CTestJUnit4Runner.class)
-@CTestClass({"class-parameter1", "class-parameter2"})
-public class FromClassTest {
-    @CTest
+@CTestClass(configMappingFile = "src/test/resources/config.json")
+public class FromFileTest {
+    @CTest()
     public void test() {
         Configuration conf = new Configuration();
-        conf.get("class-parameter1");
-        conf.get("class-parameter2");
+        conf.get("file-param1");
     }
 
     /**
-     * The test would fail because it never uses "class-parameter2".
+     * The test would fail because it never uses "file-param1".
      */
     @CTest(expected = UnUsedConfigParamException.class)
-    public void testShouldFail() {
+    public void testWouldFail() {
         Configuration conf = new Configuration();
-        conf.get("class-parameter1");
+        conf.get("file-param2");
     }
 }

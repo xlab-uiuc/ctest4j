@@ -1,0 +1,10 @@
+{
+  "classLevelParams":["beforeClass","before"],
+  "methodLevelParams":
+  {
+    "testTestAnnotation":["testTestAnnotation"],
+    "testCTestAnnotation":["testCTestAnnotation"],
+    "testTestAnnotationFail": ["testTestAnnotationFail", "never-used"],
+    "testCTestAnnotationFail": ["testCTestAnnotationFail", "never-used"]
+  }
+}

@@ -19,6 +19,20 @@ import static edu.illinois.Options.saveUsedParamToFile;
 public interface CTestRunner {
 
     /**
+     * Initialize the runner.
+     * @param kclass the test class
+     * @throws Exception if the initialization fails
+     */
+    void initializeRunner(Class<?> kclass) throws Exception;
+
+    /**
+     * Check configuration parameter usage after each test method is executed.
+     * @param method
+     * @throws Exception if the check fails
+     */
+    void checkConfigUsage(Object method) throws Exception;
+
+    /**
      * Get the parameters from a configuration file.
      * @param file the path of the configuration file
      * @return the set of parameters that must be used

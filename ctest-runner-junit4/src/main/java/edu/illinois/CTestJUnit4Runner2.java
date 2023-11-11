@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 import static edu.illinois.Names.USED_CONFIG_FILE_DIR;
 import static edu.illinois.Options.saveUsedParamToFile;
-import static edu.illinois.Utils.getTestMethodFullName;
 
 /**
  * Design B: Only CTestClass Annotation and treat all the test methods as @CTest
@@ -24,30 +23,46 @@ import static edu.illinois.Utils.getTestMethodFullName;
  * Date:  11/10/23
  */
 // TODO: Write test cases for this class
-public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestRunner  {
-    protected final String classLevelConfigMappingFile;
-    protected final Set<String> classLevelParameters;
+public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestRunner {
+    protected String classLevelConfigMappingFile;
+    protected Set<String> classLevelParameters;
     protected Map<String, Set<String>> methodLevelParameters;
     protected final ConfigUsage configUsage = new ConfigUsage();
     protected final String testClassName = getTestClass().getJavaClass().getName();
 
-    public CTestJUnit4Runner2(Class<?> klass) throws InitializationError {
+    public CTestJUnit4Runner2(Class<?> klass) throws InitializationError, IOException {
         super(klass);
+        initializeRunner(klass);
+    }
+
+    /**
+     * Initialize the runner.
+     * @CTestClass annotation is required and the class-level configuration file is required.
+     */
+    @Override
+    public void initializeRunner(Class<?> klass) throws InitializationError, IOException {
         // Retrieve class-level parameters if present
         CTestClass cTestClass = klass.getAnnotation(CTestClass.class);
         if (cTestClass == null) {
-            throw new RuntimeException("CTestClass annotation is not present in class " + klass.getName());
+            throw new InitializationError("CTestClass annotation is not present in class " + klass.getName());
         }
-        try {
-            classLevelConfigMappingFile = cTestClass.file();
+
+        // Get classLevel and methodLevel parameters from the mapping file
+        // If the file is not specified, use the default file =>
+        // System.getProperty("config.used.dir", "config/used") + "/" + testClassName + ".json"
+        // If the default file is not present, throw an exception
+        classLevelConfigMappingFile = cTestClass.configMappingFile();
+        if (classLevelConfigMappingFile.isEmpty()) {
+            classLevelConfigMappingFile = new File(USED_CONFIG_FILE_DIR, testClassName + ".json").getAbsolutePath();
             if (classLevelConfigMappingFile.isEmpty()) {
-                throw new IOException("Class-level configuration file is not specified.");
+                throw new InitializationError("Class-level configuration file is not specified.");
             }
-            classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), classLevelConfigMappingFile);
-            methodLevelParameters = getAllMethodLevelParametersFromMappingFile(classLevelConfigMappingFile);
-        } catch (IOException e) {
-            throw new RuntimeException("Unable to parse configuration file from class " + klass.getName() + " Annotation", e);
         }
+        // Retrieve class-level parameters if present
+        classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), classLevelConfigMappingFile);
+        // Retrieve method-level parameters if present
+        methodLevelParameters = getAllMethodLevelParametersFromMappingFile(classLevelConfigMappingFile);
+        // Set the current test class name
         ConfigTracker.setCurrentTestClassName(klass.getName());
     }
 
@@ -62,11 +77,6 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
         methods.addAll(super.computeTestMethods());
         methods.addAll(getTestClass().getAnnotatedMethods(CTest.class));
         return Collections.unmodifiableList(methods);
-    }
-
-
-    protected Statement vanillaMethodInvoker(FrameworkMethod method, Object test) {
-        return super.methodInvoker(method, test);
     }
 
     /**
@@ -151,42 +161,46 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
                     originalStatement.evaluate();
                 } finally {
                     ConfigTracker.updateConfigUsage(configUsage, method.getName());
-                    if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
-                        CTest cTest = method.getAnnotation(CTest.class);
-                        if (cTest != null) {
-                            for (String param : getUnionMethodParameters(getTestClass().getJavaClass().getName(),
-                                    method.getName(), cTest.file())) {
-                                if (!ConfigTracker.isParameterUsed(param)) {
-                                    if (cTest.expected() != CTest.None.class) {
-                                        if (cTest.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
-                                            return;
-                                        }
-                                    }
-                                    throw new UnUsedConfigParamException(param + " was not used during the test.");
-                                }
-                            }
-                        }
-                        Test testAnnotation = method.getAnnotation(Test.class);
-                        if (testAnnotation != null) {
-                            for (String param : getUnionMethodParameters(getTestClass().getJavaClass().getName(),
-                                    method.getName(), "")) {
-                                if (!ConfigTracker.isParameterUsed(param)) {
-                                    if (testAnnotation.expected() != Test.None.class) {
-                                        if (testAnnotation.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
-                                            return;
-                                        }
-                                    }
-                                    throw new UnUsedConfigParamException(param + " was not used during the test.");
-                                }
-                            }
-                            if (saveUsedParamToFile) {
-                                ConfigTracker.writeConfigToFile(getTestMethodFullName(method));
-                            }
-                        }
-                    }
+                    checkConfigUsage(method);
                 }
             }
         };
+    }
+
+
+    @Override
+    public void checkConfigUsage(Object methodObj) throws UnUsedConfigParamException, IOException {
+        FrameworkMethod method = (FrameworkMethod) methodObj;
+        if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
+            CTest cTest = method.getAnnotation(CTest.class);
+            if (cTest != null) {
+                for (String param : getUnionMethodParameters(getTestClass().getJavaClass().getName(),
+                        method.getName(), cTest.configMappingFile())) {
+                    if (!ConfigTracker.isParameterUsed(param)) {
+                        if (cTest.expected() != CTest.None.class) {
+                            if (cTest.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
+                                return;
+                            }
+                        }
+                        throw new UnUsedConfigParamException(param + " was not used during the test.");
+                    }
+                }
+            }
+            Test testAnnotation = method.getAnnotation(Test.class);
+            if (testAnnotation != null) {
+                for (String param : getUnionMethodParameters(getTestClass().getJavaClass().getName(),
+                        method.getName(), "")) {
+                    if (!ConfigTracker.isParameterUsed(param)) {
+                        if (testAnnotation.expected() != Test.None.class) {
+                            if (testAnnotation.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
+                                return;
+                            }
+                        }
+                        throw new UnUsedConfigParamException(param + " was not used during the test.");
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -203,7 +217,9 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
                 try {
                     originalStatement.evaluate();
                 } finally {
-                    ConfigUsage.writeToJson(configUsage, new File(USED_CONFIG_FILE_DIR, testClassName + ".json"));
+                    if (saveUsedParamToFile) {
+                        ConfigUsage.writeToJson(configUsage, new File(USED_CONFIG_FILE_DIR, testClassName + ".json"));
+                    }
                 }
             }
         };
@@ -230,4 +246,5 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
         }
         return allMethodLevelParameters;
     }
+
 }

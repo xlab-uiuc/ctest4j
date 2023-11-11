@@ -107,4 +107,14 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
             }
         }
     }
+
+    @Override
+    public void initializeRunner(Class<?> kclass) throws Exception {
+
+    }
+
+    @Override
+    public void checkConfigUsage(Object method) throws Exception {
+
+    }
 }

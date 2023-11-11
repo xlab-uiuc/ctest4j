@@ -33,7 +33,7 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
         CTestClass cTestClass = klass.getAnnotation(CTestClass.class);
         if (cTestClass != null) {
             try {
-                classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), cTestClass.file());
+                classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), cTestClass.configMappingFile());
             } catch (IOException e) {
                 throw new RuntimeException("Unable to parse configuration file from class " + klass.getName() + " Annotation", e);
             }
@@ -147,7 +147,7 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
                         CTest cTest = method.getAnnotation(CTest.class);
                         if (cTest != null) {
                             for (String param : getUnionMethodParameters(getTestClass().getJavaClass().getName(),
-                                    method.getName(), cTest.file(), new HashSet<>(Arrays.asList(cTest.value())), classLevelParameters)) {
+                                    method.getName(), cTest.configMappingFile(), new HashSet<>(Arrays.asList(cTest.value())), classLevelParameters)) {
                                 if (!ConfigTracker.isParameterUsed(param)) {
                                     if (cTest.expected() != CTest.None.class) {
                                         if (cTest.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
@@ -188,5 +188,15 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
                 }
             }
         };
+    }
+
+    @Override
+    public void initializeRunner(Class<?> kclass) throws Exception {
+
+    }
+
+    @Override
+    public void checkConfigUsage(Object method) throws Exception {
+
     }
 }

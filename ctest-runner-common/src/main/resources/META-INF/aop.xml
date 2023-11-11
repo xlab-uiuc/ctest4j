@@ -1,0 +1,5 @@
+<aspectj>
+    <aspects>
+        <aspect name="edu.illinois.agent.AspectJLoader"/>
+    </aspects>
+</aspectj>

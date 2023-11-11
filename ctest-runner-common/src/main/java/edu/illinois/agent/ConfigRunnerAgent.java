@@ -6,6 +6,7 @@ import java.lang.instrument.ClassDefinition;
 import java.lang.instrument.Instrumentation;
 import java.util.Objects;
 
+import org.aspectj.weaver.loadtime.ClassPreProcessorAgentAdapter;
 /**
  * Author: Shuai Wang
  * Date:  10/13/23
@@ -21,10 +22,8 @@ public class ConfigRunnerAgent {
      * @param instrumentation
      */
     public static void premain(String options, Instrumentation instrumentation) {
-/*        if (Objects.equals(Names.AGENT_MODE, "JUNIT")) {
-            sInstrumentation = instrumentation;
-            instrumentation.addTransformer(new ConfigTransformer());
-        }*/
+        ClassPreProcessorAgentAdapter transformer = new ClassPreProcessorAgentAdapter();
+        instrumentation.addTransformer(transformer);
     }
 
     public static void agentmain(String options, Instrumentation instrumentation) {

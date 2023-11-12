@@ -44,7 +44,7 @@ def get_class_and_method_name(target_dir) -> Dict:
     for entry in entries:
         tmp = entry.split("_", 1)
         if len(tmp) != 2:
-            raise ValueError("Cannot resolve class and method name")
+            raise ValueError("Cannot resolve class and method name.")
         class_name = tmp[0]
         method_name = tmp[1]
         if class_name in results:
@@ -74,7 +74,7 @@ def add_dependency(project, test_module):
             f.seek(0)
             f.write(contents)
 
-# Require file to be opened as r+ mode
+# Require file to be opened as r+ mode, require file to be written back by caller
 def add_import_and_runwith(f=None, test_class=True):
     if f is None:
         print_log("file does not exist")
@@ -82,6 +82,7 @@ def add_import_and_runwith(f=None, test_class=True):
     if f.mode != "r+":
         print_log("file opened in wrong mode")
         return None
+    f.seek(0)
     contents = f.readlines()
     # check existing @RunWith present or not, @Test present or not to select targets and add relavent information
     abstract_class = False
@@ -127,10 +128,11 @@ def add_import_and_runwith(f=None, test_class=True):
                         contents[index] = ABSTRACT_IMPORT + contents[index]
                     import_added = True
                 break
-        contents = "".join(contents)
-        f.seek(0)
-        f.write(contents)
+        # contents = "".join(contents)
+        # f.seek(0)
+        # f.write(contents)
         print_log("test import and @RunWith added for " + f.name)
+    return contents
 
 def add_runwith_for_all(target_dir: str):
     print_log("add import information and @RunWith in " + target_dir)
@@ -145,7 +147,10 @@ def add_runwith_for_all(target_dir: str):
         for file_name in files:
             if ".java" in file_name:
                 with open(dir_path + "/" + file_name, "r+") as f:
-                    add_import_and_runwith(f, True)
+                    contents = add_import_and_runwith(f, True)
+                    contents = "".join(contents)
+                    f.seek(0)
+                    f.write(contents)
 
 def run_tests_to_track(config_used_dir: str="src/test/resources/used_config"):
     print_log("compile source code")
@@ -187,17 +192,20 @@ def annotate_test_method(class_method_pair: Dict, target_dir: str, config_used_d
     for dir_path, dir_name, files in os.walk(target_dir):
         for file_name in files:
             if file_name[:-5] in class_name_striped:
-                print(file_name)
+                # print(file_name)
                 with open(dir_path + "/" + file_name, "r+") as f:
                     contents = f.readlines()
+                    # handle super class import imformation
+                    abstract_class = False
+                    for content in contents:
+                        if re.search(" abstract class \w+ {", content) is not None:
+                            abstract_class = True
+                    if abstract_class:
+                        contents = add_import_and_runwith(f, False)
+                        if contents is None:
+                            raise ValueError("Function add_import_and_runwith() failed: Abstract class already has @CTest")
                     test_methods = class_method_pair[class_name_striped[file_name[:-5]]]
                     for index, content in enumerate(contents):
-                        if "extends" in content:
-                            print("detected")
-                            super_class_name = re.search(" \w+ {", content)
-                            if super_class_name is not None:
-                                super_class_name = super_class_name.group()[1:-2]
-                                super_class.append(super_class_name)
                         test_method_name = re.search(" test\w+\(", content)
                         if test_method_name is None:
                             continue
@@ -212,34 +220,6 @@ def annotate_test_method(class_method_pair: Dict, target_dir: str, config_used_d
                     contents = "".join(contents)
                     f.seek(0)
                     f.write(contents)
-    # handle super class test annotation
-    print(super_class)
-    if len(super_class) != 0:
-        for dir_path, dir_name, files in os.walk(target_dir):
-            for file_name in files:
-                target_file = False
-                if file_name[:-5] in super_class:
-                    with open(dir_path + "/" + file_name, "r+") as f:
-                        add_import_and_runwith(f, False)
-                        f.seek(0)
-                        contents = f.readlines()
-                        for index, content in enumerate(contents):
-                            if "@Test" in content:
-                                method_name = re.search(" \w+(", contents[index + 1])
-                                if method_name is None:
-                                    continue
-                                method_name = method_name.group()[1:-1]
-                                # could use remaining class_method_pair
-                                config_file_name = get_config_file_by_method_name(config_used_dir, method_name)
-                                if config_file_name is None:
-                                    continue
-                                if "@Test(" in content:
-                                    contents[index] = contents[index].replace("@Test(", "@CTest(file=\"" + config_file_name + "\", ")
-                                elif "@Test" in content:
-                                    contents[index] = contents[index].replace("@Test", "@CTest(file=\"" + config_file_name + "\")")
-                        contents = "".join(contents)
-                        f.seek(0)
-                        f.write(contents)
     return class_method_pair
 
 # Core section
@@ -250,7 +230,7 @@ def auto_annotate_script(project: str, test_module:str, test_file_dir: str, used
     print_log("======================================================================")
     if project == "hadoop-common":
         add_dependency(project, test_module)
-        change_working_dir(os.getcwd() + "/app/hadoop/hadoop-common-project/hadoop-common")
+        change_working_dir(os.getcwd() + "/../app/hadoop/hadoop-common-project/hadoop-common")
         # add import and runwith to all test classes
         add_runwith_for_all(test_file_dir)
         # run all tests to track parameter usage, save those in "src/test/resources/used_config"
@@ -263,7 +243,7 @@ def auto_annotate_script(project: str, test_module:str, test_file_dir: str, used
         print(remaining)
 
 def test():
-    change_working_dir(os.getcwd() + "/app/hadoop/hadoop-common-project/hadoop-common")
+    change_working_dir(os.getcwd() + "/../app/hadoop/hadoop-common-project/hadoop-common")
     # add_dependency("hadoop-common", "junit4")
     # add_runwith_for_all("src/test/java/org/apache/hadoop/crypto")
     class_method_pair = get_class_method_pair("src/test/resources/used_config")
@@ -279,5 +259,5 @@ if __name__ == "__main__":
     if sys.argv[2] not in TEST_MODULES_SUPPORTED:
         print_log("test module not supported")
         exit
-    # auto_annotate_script(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
-    test()
+    auto_annotate_script(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+    # test()

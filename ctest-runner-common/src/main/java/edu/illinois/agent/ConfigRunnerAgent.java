@@ -1,19 +1,14 @@
 package edu.illinois.agent;
 
-import edu.illinois.Names;
-
-import java.lang.instrument.ClassDefinition;
-import java.lang.instrument.Instrumentation;
-import java.util.Objects;
-
+import org.aspectj.weaver.loadtime.Agent;
 import org.aspectj.weaver.loadtime.ClassPreProcessorAgentAdapter;
+import java.lang.instrument.Instrumentation;
+
 /**
  * Author: Shuai Wang
  * Date:  10/13/23
  */
 public class ConfigRunnerAgent {
-    /** Name of the Agent */
-    private static Instrumentation sInstrumentation;
 
     /**
      * This method is called before the application's main method is called.
@@ -22,29 +17,10 @@ public class ConfigRunnerAgent {
      * @param instrumentation
      */
     public static void premain(String options, Instrumentation instrumentation) {
-        ClassPreProcessorAgentAdapter transformer = new ClassPreProcessorAgentAdapter();
-        instrumentation.addTransformer(transformer);
+        Agent.premain(options, instrumentation);
+        ClassPreProcessorAgentAdapter adapter = new ClassPreProcessorAgentAdapter();
+        instrumentation.addTransformer(adapter, true);
     }
 
-    public static void agentmain(String options, Instrumentation instrumentation) {
-/*
-        if (Objects.equals(Names.AGENT_MODE, "JUNIT")) {
-            sInstrumentation = instrumentation;
-            instrumentation.addTransformer(new ConfigTransformer());
-        }
-*/
-    }
-
-    public static void reloadClass(String className, byte[] newClassBytes) {
-        try {
-            // Use the Instrumentation API to redefine the class
-            sInstrumentation.redefineClasses(new ClassDefinition(Class.forName(className), newClassBytes));
-        } catch (Exception e) {
-            // Handle exceptions
-        }
-    }
-
-    public static Instrumentation getInstrumentation() {
-        return sInstrumentation;
-    }
 }
+

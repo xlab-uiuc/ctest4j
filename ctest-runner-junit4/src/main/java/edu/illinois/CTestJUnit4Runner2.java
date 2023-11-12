@@ -1,5 +1,6 @@
 package edu.illinois;
 
+
 import org.junit.Test;
 import org.junit.internal.runners.statements.ExpectException;
 import org.junit.internal.runners.statements.FailOnTimeout;
@@ -18,28 +19,51 @@ import static edu.illinois.Options.saveUsedParamToFile;
 import static edu.illinois.Utils.getTestMethodFullName;
 
 /**
- * Design A: Both CTestClass and CTest Annotation
+ * Design B: Only CTestClass Annotation and treat all the test methods as @CTest
  * Author: Shuai Wang
- * Date:  10/13/23
+ * Date:  11/10/23
  */
-public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRunner {
-    protected final Set<String> classLevelParameters;
+// TODO: Write test cases for this class
+public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestRunner {
+    protected String classLevelConfigMappingFile;
+    protected Set<String> classLevelParameters;
+    protected Map<String, Set<String>> methodLevelParameters;
     protected final ConfigUsage configUsage = new ConfigUsage();
     protected final String testClassName = getTestClass().getJavaClass().getName();
 
-    public CTestJUnit4Runner(Class<?> klass) throws InitializationError {
+    public CTestJUnit4Runner2(Class<?> klass) throws InitializationError, IOException {
         super(klass);
+        initializeRunner(klass);
+    }
+
+    /**
+     * Initialize the runner.
+     * @CTestClass annotation is required and the class-level configuration file is required.
+     */
+    @Override
+    public void initializeRunner(Class<?> klass) throws InitializationError, IOException {
         // Retrieve class-level parameters if present
         CTestClass cTestClass = klass.getAnnotation(CTestClass.class);
-        if (cTestClass != null) {
-            try {
-                classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), cTestClass.configMappingFile());
-            } catch (IOException e) {
-                throw new RuntimeException("Unable to parse configuration file from class " + klass.getName() + " Annotation", e);
-            }
-        } else {
-            classLevelParameters = new HashSet<>();
+        if (cTestClass == null) {
+            throw new InitializationError("CTestClass annotation is not present in class " + klass.getName());
         }
+
+        // Get classLevel and methodLevel parameters from the mapping file
+        // If the file is not specified, use the default file =>
+        // System.getProperty("config.used.dir", "config/used") + "/" + testClassName + ".json"
+        // If the default file is not present, throw an exception
+        classLevelConfigMappingFile = cTestClass.configMappingFile();
+        if (classLevelConfigMappingFile.isEmpty()) {
+            classLevelConfigMappingFile = new File(USED_CONFIG_FILE_DIR, testClassName + ".json").getAbsolutePath();
+            if (classLevelConfigMappingFile.isEmpty()) {
+                throw new InitializationError("Class-level configuration file is not specified.");
+            }
+        }
+        // Retrieve class-level parameters if present
+        classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), classLevelConfigMappingFile);
+        // Retrieve method-level parameters if present
+        methodLevelParameters = getAllMethodLevelParametersFromMappingFile(classLevelConfigMappingFile);
+        // Set the current test class name
         ConfigTracker.setCurrentTestClassName(klass.getName());
     }
 
@@ -54,11 +78,6 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
         methods.addAll(super.computeTestMethods());
         methods.addAll(getTestClass().getAnnotatedMethods(CTest.class));
         return Collections.unmodifiableList(methods);
-    }
-
-    
-    protected Statement vanillaMethodInvoker(FrameworkMethod method, Object test) {
-        return super.methodInvoker(method, test);
     }
 
     /**
@@ -131,7 +150,7 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
     }
 
     /**
-     * Check if the test method uses all the parameters specified in the @CTest and @CTestClass annotation.
+     * Check if the test method uses all the parameters for all the test methods in the class.
      */
     @Override
     protected Statement withAfters(FrameworkMethod method, Object target, Statement statement) {
@@ -147,7 +166,7 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
                         CTest cTest = method.getAnnotation(CTest.class);
                         if (cTest != null) {
                             for (String param : getUnionMethodParameters(getTestClass().getJavaClass().getName(),
-                                    method.getName(), cTest.configMappingFile(), new HashSet<>(Arrays.asList(cTest.value())), classLevelParameters)) {
+                                    method.getName(), cTest.configMappingFile())) {
                                 if (!ConfigTracker.isParameterUsed(param)) {
                                     if (cTest.expected() != CTest.None.class) {
                                         if (cTest.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
@@ -160,8 +179,16 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
                         }
                         Test testAnnotation = method.getAnnotation(Test.class);
                         if (testAnnotation != null) {
-                            if (saveUsedParamToFile) {
-                                ConfigTracker.writeConfigToFile(getTestMethodFullName(method));
+                            for (String param : getUnionMethodParameters(getTestClass().getJavaClass().getName(),
+                                    method.getName(), "")) {
+                                if (!ConfigTracker.isParameterUsed(param)) {
+                                    if (testAnnotation.expected() != Test.None.class) {
+                                        if (testAnnotation.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
+                                            return;
+                                        }
+                                    }
+                                    throw new UnUsedConfigParamException(param + " was not used during the test.");
+                                }
                             }
                         }
                     }
@@ -184,14 +211,34 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
                 try {
                     originalStatement.evaluate();
                 } finally {
-                    ConfigUsage.writeToJson(configUsage, new File(USED_CONFIG_FILE_DIR, testClassName + ".json"));
+                    if (saveUsedParamToFile) {
+                        ConfigUsage.writeToJson(configUsage, new File(USED_CONFIG_FILE_DIR, testClassName + ".json"));
+                    }
                 }
             }
         };
     }
 
     @Override
-    public void initializeRunner(Class<?> kclass) throws Exception {
-
+    public Set<String> getUnionClassParameters(Set<String> classLevelParameters, String classConfigFile) throws IOException {
+        classLevelParameters.addAll(getClasssParametersFromMappingFile(classConfigFile));
+        return classLevelParameters;
     }
+
+    public Set<String> getUnionMethodParameters(String className, String methodName, String methodLevelConfigMappingFile) throws IOException {
+        Set<String> allMethodLevelParameters = new HashSet<>();
+        // Retrieve method-level parameters if present
+        allMethodLevelParameters.addAll(this.methodLevelParameters.get(methodName));
+        // Retrieve class-level parameters if present
+        allMethodLevelParameters.addAll(this.classLevelParameters);
+
+        // Retrieve file-level parameters if present
+        if (!methodLevelConfigMappingFile.isEmpty()) {
+            allMethodLevelParameters.addAll(getParametersFromMappingFile(methodLevelConfigMappingFile));
+        } else {
+            allMethodLevelParameters.addAll(getRequiredParametersFromDefaultFile(className, methodName));
+        }
+        return allMethodLevelParameters;
+    }
+
 }

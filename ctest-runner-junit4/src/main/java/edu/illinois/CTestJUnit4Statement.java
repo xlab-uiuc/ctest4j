@@ -8,6 +8,7 @@ import java.util.Set;
  * Author: Shuai Wang
  * Date:  10/13/23
  */
+@Deprecated
 public class CTestJUnit4Statement extends Statement {
     private final Statement base;
     private final Set<String> params;

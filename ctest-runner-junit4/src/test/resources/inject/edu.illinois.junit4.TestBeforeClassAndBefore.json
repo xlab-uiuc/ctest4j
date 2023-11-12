@@ -1,0 +1,6 @@
+{
+  "beforeClass": "beforeClass-fromFile",
+  "before": "before-fromFile",
+  "param1": "param1-fromFile",
+  "param2": "param2-fromFile"
+}

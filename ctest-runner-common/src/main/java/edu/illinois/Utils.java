@@ -1,7 +1,9 @@
 package edu.illinois;
 import org.junit.runners.model.FrameworkMethod;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,8 +17,32 @@ import java.util.Set;
  */
 public class Utils {
 
+    public static String readStringFromFile(String path) throws IOException {
+        return new String(Files.readAllBytes(Paths.get(path)));
+    }
+
     /**
-     * Write instrumented class bytes to a file in a new thread
+     * Write a string to a file
+     * @param path
+     * @param content
+     */
+    public static void writeStringToFile(final String path, final String content) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
+            writer.write(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteFile(String path) {
+        File file = new File(path);
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
+    /**
+     * Write bytes to a file in a new thread
      * @param path the path of the file
      * @param bytes the bytes to write
      */
@@ -82,7 +108,7 @@ public class Utils {
             paramStr = new StringBuilder(paramStr.substring(0, paramStr.length() - 1));
         }
         paramStr.append("]}");
-        writeBytesToFile(targetJsonFile.getAbsolutePath(), paramStr.toString().getBytes());
+        writeStringToFile(targetJsonFile.getAbsolutePath(), paramStr.toString());
     }
 
     /**
@@ -97,4 +123,8 @@ public class Utils {
     public static String getTestMethodFullName(String className, String methodName) {
         return className + Names.TEST_CLASS_METHOD_SEPERATOR + methodName;
     }
+
+    /** ========== Json file related methods ========== */
+
+
 }

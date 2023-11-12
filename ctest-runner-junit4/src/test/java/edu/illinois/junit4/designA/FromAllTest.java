@@ -1,4 +1,4 @@
-package edu.illinois.junit4;
+package edu.illinois.junit4.designA;
 
 import edu.illinois.*;
 import org.junit.runner.RunWith;
@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
  * Date:  10/17/23
  */
 @RunWith(CTestJUnit4Runner.class)
-@CTestClass(value = {"class-parameter1", "class-parameter2"}, file = "src/test/resources/config.json")
+@CTestClass(value = {"class-parameter1", "class-parameter2"}, configMappingFile = "src/test/resources/config.json")
 public class FromAllTest {
     @CTest({"method-parameter1", "method-parameter2"})
     public void test() {

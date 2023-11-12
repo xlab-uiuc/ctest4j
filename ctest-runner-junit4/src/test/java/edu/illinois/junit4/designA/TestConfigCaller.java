@@ -1,4 +1,4 @@
-package edu.illinois.junit4;
+package edu.illinois.junit4.designA;
 
 import edu.illinois.CTestJUnit4Runner;
 import edu.illinois.Configuration;

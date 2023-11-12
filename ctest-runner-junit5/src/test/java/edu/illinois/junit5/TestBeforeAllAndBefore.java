@@ -1,29 +1,27 @@
-package edu.illinois.junit4;
+package edu.illinois.junit5;
 
 import edu.illinois.CTest;
-import edu.illinois.CTestJUnit4Runner;
+import edu.illinois.CTestJunit5Extension;
 import edu.illinois.Configuration;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 /**
  * Author: Shuai Wang
- * Date:  11/4/23
+ * Date:  11/7/23
  */
-@RunWith(CTestJUnit4Runner.class)
-public class TestBeforeClassAndBefore {
+@ExtendWith(CTestJunit5Extension.class)
+public class TestBeforeAllAndBefore {
     Configuration conf = null;
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         Configuration conf = new Configuration();
         conf.get("beforeClass");
     }
 
-    @Before
+    @BeforeEach
     public void setUp2() {
-        System.out.println("In setUp");
         conf = new Configuration();
         conf.get("before");
     }
@@ -31,5 +29,10 @@ public class TestBeforeClassAndBefore {
     @CTest(value = {"beforeClass", "before", "param1"})
     public void test() {
         conf.get("param1");
+    }
+
+    @CTest(value = {"beforeClass", "before", "param2"})
+    public void test2() {
+        conf.get("param2");
     }
 }

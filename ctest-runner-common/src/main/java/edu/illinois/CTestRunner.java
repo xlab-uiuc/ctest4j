@@ -111,7 +111,8 @@ public interface CTestRunner {
      * @throws IOException if the parsing fails
      */
     default Set<String> getUnionMethodParameters(String className, String methodName, String methodLevelConfigMappingFile,
-                                                 Set<String> methodLevelParameters, Set<String> classLevelParameters) throws IOException {
+                                                 String methodLevelRegex, Set<String> methodLevelParameters,
+                                                 Set<String> classLevelParameters) throws IOException {
         Set<String> allMethodLevelParameters = new HashSet<>();
         // Retrieve method-level parameters if present
         allMethodLevelParameters.addAll(methodLevelParameters);
@@ -123,6 +124,10 @@ public interface CTestRunner {
             allMethodLevelParameters.addAll(getParametersFromMappingFile(methodLevelConfigMappingFile));
         } else {
             allMethodLevelParameters.addAll(getRequiredParametersFromDefaultFile(className, methodName));
+        }
+        // Retrieve regex-level parameters if present
+        if (!methodLevelRegex.isEmpty()) {
+            allMethodLevelParameters.addAll(getParametersFromRegex(methodLevelRegex));
         }
         return allMethodLevelParameters;
     }

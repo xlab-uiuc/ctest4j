@@ -147,7 +147,8 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
                         CTest cTest = method.getAnnotation(CTest.class);
                         if (cTest != null) {
                             for (String param : getUnionMethodParameters(getTestClass().getJavaClass().getName(),
-                                    method.getName(), cTest.configMappingFile(), new HashSet<>(Arrays.asList(cTest.value())), classLevelParameters)) {
+                                    method.getName(), cTest.configMappingFile(), cTest.regex(),
+                                    new HashSet<>(Arrays.asList(cTest.value())), classLevelParameters)) {
                                 if (!ConfigTracker.isParameterUsed(param)) {
                                     if (cTest.expected() != CTest.None.class) {
                                         if (cTest.expected().isAssignableFrom(UnUsedConfigParamException.class)) {

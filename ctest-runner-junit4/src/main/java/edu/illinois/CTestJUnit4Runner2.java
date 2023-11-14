@@ -166,7 +166,7 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
                         CTest cTest = method.getAnnotation(CTest.class);
                         if (cTest != null) {
                             for (String param : getUnionMethodParameters(getTestClass().getJavaClass().getName(),
-                                    method.getName(), cTest.configMappingFile())) {
+                                    method.getName(), cTest.configMappingFile(), "")) {
                                 if (!ConfigTracker.isParameterUsed(param)) {
                                     if (cTest.expected() != CTest.None.class) {
                                         if (cTest.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
@@ -180,7 +180,7 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
                         Test testAnnotation = method.getAnnotation(Test.class);
                         if (testAnnotation != null) {
                             for (String param : getUnionMethodParameters(getTestClass().getJavaClass().getName(),
-                                    method.getName(), "")) {
+                                    method.getName(), "", "")) {
                                 if (!ConfigTracker.isParameterUsed(param)) {
                                     if (testAnnotation.expected() != Test.None.class) {
                                         if (testAnnotation.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
@@ -225,7 +225,7 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
         return classLevelParameters;
     }
 
-    public Set<String> getUnionMethodParameters(String className, String methodName, String methodLevelConfigMappingFile) throws IOException {
+    public Set<String> getUnionMethodParameters(String className, String methodName, String methodLevelConfigMappingFile, String methodRegex) throws IOException {
         Set<String> allMethodLevelParameters = new HashSet<>();
         // Retrieve method-level parameters if present
         allMethodLevelParameters.addAll(this.methodLevelParameters.get(methodName));

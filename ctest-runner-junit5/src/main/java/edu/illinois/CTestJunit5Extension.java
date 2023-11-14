@@ -79,7 +79,8 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
             try {
                 if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
                     Set<String> params = getUnionMethodParameters(className, methodName,
-                            cTest.configMappingFile(), new HashSet<>(Arrays.asList(cTest.value())), classLevelParameters);
+                            cTest.configMappingFile(), cTest.regex(),
+                            new HashSet<>(Arrays.asList(cTest.value())), classLevelParameters);
                     for (String param : params) {
                         if (!ConfigTracker.isParameterUsed(param)) {
                             Class<? extends Throwable> expected = cTest.expected();

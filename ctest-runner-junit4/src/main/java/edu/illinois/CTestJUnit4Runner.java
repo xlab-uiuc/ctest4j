@@ -33,7 +33,7 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
         CTestClass cTestClass = klass.getAnnotation(CTestClass.class);
         if (cTestClass != null) {
             try {
-                classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), cTestClass.configMappingFile());
+                classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), cTestClass.configMappingFile(), cTestClass.regex());
             } catch (IOException e) {
                 throw new RuntimeException("Unable to parse configuration file from class " + klass.getName() + " Annotation", e);
             }

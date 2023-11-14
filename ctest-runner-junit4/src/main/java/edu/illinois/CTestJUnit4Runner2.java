@@ -60,7 +60,7 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
             }
         }
         // Retrieve class-level parameters if present
-        classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), classLevelConfigMappingFile);
+        classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), classLevelConfigMappingFile, "");
         // Retrieve method-level parameters if present
         methodLevelParameters = getAllMethodLevelParametersFromMappingFile(classLevelConfigMappingFile);
         // Set the current test class name
@@ -220,7 +220,7 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
     }
 
     @Override
-    public Set<String> getUnionClassParameters(Set<String> classLevelParameters, String classConfigFile) throws IOException {
+    public Set<String> getUnionClassParameters(Set<String> classLevelParameters, String classConfigFile, String classRegex) throws IOException {
         classLevelParameters.addAll(getClasssParametersFromMappingFile(classConfigFile));
         return classLevelParameters;
     }

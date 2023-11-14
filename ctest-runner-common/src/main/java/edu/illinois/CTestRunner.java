@@ -25,11 +25,13 @@ public interface CTestRunner {
      */
     void initializeRunner(Class<?> kclass) throws Exception;
 
-    /**
-     * Check configuration parameter usage after each test method is executed.
-     * @param method
-     * @throws Exception if the check fails
-     */
+    default Set<String> getParametersFromRegex(String regex) {
+        Set<String> params = new HashSet<>();
+        if (!regex.isEmpty()) {
+            params.addAll(new ConfigRegex(regex).getParameters());
+        }
+        return params;
+    }
 
     /**
      * Get the parameters from a configuration file.
@@ -93,9 +95,12 @@ public interface CTestRunner {
      * Get all the parameters for a test class that every test method in the class must use.
      * @return a set of parameters that every test method in the class must use
      */
-    default Set<String> getUnionClassParameters(Set<String> classLevelParameters, String classConfigFile) throws IOException {
+    default Set<String> getUnionClassParameters(Set<String> classLevelParameters, String classConfigFile, String classRegex) throws IOException {
         if (!classConfigFile.isEmpty()) {
             classLevelParameters.addAll(getParametersFromMappingFile(classConfigFile));
+        }
+        if (!classRegex.isEmpty()) {
+            classLevelParameters.addAll(getParametersFromRegex(classRegex));
         }
         return classLevelParameters;
     }

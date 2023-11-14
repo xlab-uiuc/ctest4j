@@ -16,4 +16,5 @@ public @interface CTestClass {
     String[] value() default {};
     String[] optional() default {};
     String file() default "";
+    String regex() default "";
 }

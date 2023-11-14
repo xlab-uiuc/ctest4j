@@ -19,6 +19,7 @@ public @interface CTest {
     String[] value() default {};
     String[] optional() default {};
     String configMappingFile() default "";
+    String regex() default "";
 
     static class None extends Throwable {
         private static final long serialVersionUID = 1L;

@@ -1,6 +1,6 @@
 <aspectj>
     <aspects>
         <aspect name="edu.illinois.agent.AspectJWeaver"/>
-        <weaver options="-verbose -showWeaveInfo">
+        <weaver options="-verbose -showWeaveInfo"/>
     </aspects>
 </aspectj>

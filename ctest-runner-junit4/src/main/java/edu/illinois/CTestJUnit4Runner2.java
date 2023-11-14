@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static edu.illinois.Names.USED_CONFIG_FILE_DIR;
+import static edu.illinois.Names.CONFIG_MAPPING_DIR;
 import static edu.illinois.Options.saveUsedParamToFile;
 import static edu.illinois.Utils.getTestMethodFullName;
 
@@ -50,11 +50,11 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
 
         // Get classLevel and methodLevel parameters from the mapping file
         // If the file is not specified, use the default file =>
-        // System.getProperty("config.used.dir", "config/used") + "/" + testClassName + ".json"
+        // System.getProperty("ctest.mapping.dir", "ctest/mapping") + "/" + testClassName + ".json"
         // If the default file is not present, throw an exception
         classLevelConfigMappingFile = cTestClass.configMappingFile();
         if (classLevelConfigMappingFile.isEmpty()) {
-            classLevelConfigMappingFile = new File(USED_CONFIG_FILE_DIR, testClassName + ".json").getAbsolutePath();
+            classLevelConfigMappingFile = new File(CONFIG_MAPPING_DIR, testClassName + ".json").getAbsolutePath();
             if (classLevelConfigMappingFile.isEmpty()) {
                 throw new InitializationError("Class-level configuration file is not specified.");
             }
@@ -212,7 +212,7 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
                     originalStatement.evaluate();
                 } finally {
                     if (saveUsedParamToFile) {
-                        ConfigUsage.writeToJson(configUsage, new File(USED_CONFIG_FILE_DIR, testClassName + ".json"));
+                        ConfigUsage.writeToJson(configUsage, new File(CONFIG_MAPPING_DIR, testClassName + ".json"));
                     }
                 }
             }

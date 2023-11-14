@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import static edu.illinois.Names.USED_CONFIG_FILE_DIR;
+import static edu.illinois.Names.CONFIG_MAPPING_DIR;
 import static edu.illinois.Options.saveUsedParamToFile;
 
 /**
@@ -129,7 +129,7 @@ public interface CTestRunner {
      */
     default Set<String> getRequiredParametersFromDefaultFile(String className, String methodName) throws IOException {
         Set<String> params = new HashSet<>();
-        File defaultFile = new File(USED_CONFIG_FILE_DIR, Utils.getTestMethodFullName(className, methodName) + ".json");
+        File defaultFile = new File(CONFIG_MAPPING_DIR, Utils.getTestMethodFullName(className, methodName) + ".json");
         if (defaultFile.exists()) {
             params.addAll(getParametersFromMappingFile(defaultFile.getAbsolutePath()));
         }

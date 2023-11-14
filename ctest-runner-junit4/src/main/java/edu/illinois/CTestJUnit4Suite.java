@@ -13,6 +13,7 @@ import java.util.List;
  * Author: Shuai Wang
  * Date:  10/18/23
  */
+@Deprecated
 public class CTestJUnit4Suite extends Suite {
 
     public CTestJUnit4Suite(Class<?> klass, RunnerBuilder builder) throws InitializationError {

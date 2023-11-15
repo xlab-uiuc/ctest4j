@@ -1,5 +1,6 @@
 package edu.illinois.junit5;
 
+import edu.illinois.CTestClass;
 import edu.illinois.CTestJunit5Extension;
 import edu.illinois.Configuration;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * Date:  11/1/23
  */
 @ExtendWith(CTestJunit5Extension.class)
+@CTestClass
 public class NormalTest {
     @Test
     public void test() {

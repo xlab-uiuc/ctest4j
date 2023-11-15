@@ -52,4 +52,13 @@ public class TestConfigRegex {
         String [] expectedParameters = {"ctest.conf.param1", "ctest.conf.anotherconf.param1", "ctest.conf.anotherconf.param2"};
         Assert.assertArrayEquals(expectedParameters, parameters.toArray());
     }
+
+/*    @Test
+    public void testNestedRegex() {
+        String configRegex = "ctest.conf.(param1|anotherconf.(param1|param2))";
+        ConfigRegex configRegexObj = new ConfigRegex(configRegex);
+        ArrayList<String> parameters = configRegexObj.getParameters();
+        String [] expectedParameters = {"ctest.conf.param1", "ctest.conf.anotherconf.param1", "ctest.conf.anotherconf.param2"};
+        Assert.assertArrayEquals(expectedParameters, parameters.toArray());
+    }*/
 }

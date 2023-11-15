@@ -27,6 +27,11 @@ public class Utils {
      * @param content
      */
     public static void writeStringToFile(final String path, final String content) {
+        // If the file dir does not exist, create it
+        File file = new File(path);
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
             writer.write(content);
         } catch (IOException e) {

@@ -25,7 +25,7 @@ import static edu.illinois.Utils.getTestMethodFullName;
  */
 // TODO: Write test cases for this class
 public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestRunner {
-    protected String classLevelConfigMappingFile;
+    protected String classLevelConfigMappingFilePath;
     protected Set<String> classLevelParameters;
     protected Map<String, Set<String>> methodLevelParametersFromMappingFile;
     protected final ConfigUsage configUsage = new ConfigUsage();
@@ -52,17 +52,18 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
         // If the file is not specified, use the default file =>
         // System.getProperty("ctest.mapping.dir", "ctest/mapping") + "/" + testClassName + ".json"
         // If the default file is not present, throw an exception
-        classLevelConfigMappingFile = cTestClass.configMappingFile();
-        if (classLevelConfigMappingFile.isEmpty()) {
-            classLevelConfigMappingFile = new File(CONFIG_MAPPING_DIR, testClassName + ".json").getAbsolutePath();
-            if (classLevelConfigMappingFile.isEmpty()) {
+        classLevelConfigMappingFilePath = cTestClass.configMappingFile();
+        if (classLevelConfigMappingFilePath.isEmpty()) {
+            File classLevelConfigMappingFile = new File(CONFIG_MAPPING_DIR, testClassName + ".json");
+            if (!classLevelConfigMappingFile.exists()) {
                 throw new InitializationError("Class-level configuration file is not specified.");
             }
+            classLevelConfigMappingFilePath = classLevelConfigMappingFile.getAbsolutePath();
         }
         // Retrieve class-level parameters if present
-        classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), classLevelConfigMappingFile, cTestClass.regex());
+        classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), classLevelConfigMappingFilePath, cTestClass.regex());
         // Retrieve method-level parameters if present
-        methodLevelParametersFromMappingFile = getAllMethodLevelParametersFromMappingFile(classLevelConfigMappingFile);
+        methodLevelParametersFromMappingFile = getAllMethodLevelParametersFromMappingFile(classLevelConfigMappingFilePath);
         // Set the current test class name
         ConfigTracker.setCurrentTestClassName(klass.getName());
     }

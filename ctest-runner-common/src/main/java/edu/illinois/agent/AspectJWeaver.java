@@ -1,11 +1,14 @@
 package edu.illinois.agent;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.annotation.AfterReturning;
 
 import edu.illinois.ConfigTracker;
 
@@ -20,9 +23,6 @@ public class AspectJWeaver {
 
     @Before("getPointCut(name)")
     public void beforeGetMethod(JoinPoint joinPoint, String name) {
-        String className = joinPoint.getSignature().getDeclaringType().getName();
-        String methodName = joinPoint.getSignature().getName();
-        System.out.println("Class Name: " + className + " ---- Method Name: " + methodName + " ---- Input Value: " + name);
         ConfigTracker.markParamAsUsed(name);
     }
 
@@ -34,9 +34,6 @@ public class AspectJWeaver {
     
     @Before("getRawPointCut(name)")
     public void beforeGetRawMethod(JoinPoint joinPoint, String name) {
-        String className = joinPoint.getSignature().getDeclaringType().getName();
-        String methodName = joinPoint.getSignature().getName();
-        System.out.println("Class Name: " + className + " ---- Method Name: " + methodName + " ---- Input Value: " + name);
         ConfigTracker.markParamAsUsed(name);
     }
 
@@ -48,9 +45,6 @@ public class AspectJWeaver {
     
     @Before("getWithDefaultPointCut(name, defaultValue)")
     public void beforeGetRawMethod(JoinPoint joinPoint, String name, String defaultValue) {
-        String className = joinPoint.getSignature().getDeclaringType().getName();
-        String methodName = joinPoint.getSignature().getName();
-        System.out.println("Class Name: " + className + " ---- Method Name: " + methodName + " ---- Input Value: " + name + " ---- Default Value: " + defaultValue);
         ConfigTracker.markParamAsUsed(name);
     }
 
@@ -67,12 +61,25 @@ public class AspectJWeaver {
         }
     }
 
-    // @Pointcut("execution(org.apache.hadoop.conf.Configuration.new(..))")
-    // public void configurationConstructor() {}
+     @Pointcut("execution(org.apache.hadoop.conf.Configuration.new(..))")
+     public void configurationConstructor() {}
 
-    // @After("configurationConstructor() && this(config)")
-    // public void afterConfigurationConstructor(JoinPoint joinPoint, Configuration config) {
-    //     ConfigTracker.injectConfig((arg1, arg2) -> config.set(arg1, (String) arg2));
-    // }
+     @After("configurationConstructor() && this(config)")
+     public void afterConfigurationConstructor(JoinPoint joinPoint, Object config) {
+         try {
+             Class<?> configClass = Class.forName("org.apache.hadoop.conf.Configuration");
+             Method setMethod = configClass.getMethod("set", String.class, String.class);
+
+             ConfigTracker.injectConfig((arg1, arg2) -> {
+                 try {
+                     setMethod.invoke(config, arg1, arg2);
+                 } catch (IllegalAccessException | InvocationTargetException e) {
+                     throw new RuntimeException("wrong");
+                 }
+             });
+         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException e) {
+             throw new RuntimeException("wrong");
+         }
+     }
 }
 

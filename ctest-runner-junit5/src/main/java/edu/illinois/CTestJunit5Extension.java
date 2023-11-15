@@ -2,7 +2,6 @@ package edu.illinois;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.*;
-import org.junit.runners.model.InitializationError;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,8 +10,6 @@ import java.util.*;
 
 import static edu.illinois.Names.CONFIG_MAPPING_DIR;
 import static edu.illinois.Names.TRACKING_LOG_PREFIX;
-import static edu.illinois.Options.saveUsedParamToFile;
-import static edu.illinois.Utils.getTestMethodFullName;
 
 /**
  * Author: Shuai Wang
@@ -103,9 +100,7 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
 
     @Override
     public void afterAll(ExtensionContext extensionContext) throws Exception {
-        if (saveUsedParamToFile) {
-            ConfigUsage.writeToJson(configUsage, new File(CONFIG_MAPPING_DIR, className + ".json"));
-        }
+        writeConfigUsageToJson(configUsage, new File(CONFIG_MAPPING_DIR, className + ".json"));
     }
 
     @Override

@@ -16,15 +16,12 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import static edu.illinois.Names.CONFIG_MAPPING_DIR;
-import static edu.illinois.Options.saveUsedParamToFile;
-import static edu.illinois.Utils.getTestMethodFullName;
 
 /**
  * Design B: Only CTestClass Annotation and treat all the test methods as @CTest
  * Author: Shuai Wang
  * Date:  11/10/23
  */
-// TODO: Write test cases for this class
 public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestRunner {
     protected Set<String> classLevelParameters;
     protected Map<String, Set<String>> methodLevelParametersFromMappingFile;
@@ -36,10 +33,6 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
         initializeRunner(klass);
     }
 
-    /**
-     * Initialize the runner.
-     * @CTestClass annotation is required and the class-level configuration file is required.
-     */
     @Override
     public void initializeRunner(Object context) throws AnnotationFormatError, IOException {
         Class<?> klass = (Class<?>) context;
@@ -199,9 +192,7 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
                 try {
                     originalStatement.evaluate();
                 } finally {
-                    if (saveUsedParamToFile) {
-                        ConfigUsage.writeToJson(configUsage, new File(CONFIG_MAPPING_DIR, testClassName + ".json"));
-                    }
+                    writeConfigUsageToJson(configUsage, new File(CONFIG_MAPPING_DIR, testClassName + ".json"));
                 }
             }
         };

@@ -22,7 +22,6 @@ public interface CTestRunner {
     /**
      * Initialize the runner.
      * @param context the context to initialize the runner
-     * @throws Exception if the initialization fails
      */
     void initializeRunner(Object context) throws AnnotationFormatError, IOException;
 
@@ -46,6 +45,9 @@ public interface CTestRunner {
                 getAllMethodLevelParametersFromMappingFile(mappingFile)};
     }
 
+    /**
+     * Get the configuration parameter name set from the given regex.
+     */
     default Set<String> getParametersFromRegex(String regex) {
         Set<String> params = new HashSet<>();
         if (!regex.isEmpty()) {
@@ -177,9 +179,9 @@ public interface CTestRunner {
         }
     }
 
-    default void writeConfigToFile(String fileName) {
+    default void writeConfigUsageToJson(ConfigUsage configUsage, File targetFile) {
         if (saveUsedParamToFile) {
-            ConfigTracker.writeConfigToFile(fileName);
+            ConfigUsage.writeToJson(configUsage, targetFile);
         }
     }
 }

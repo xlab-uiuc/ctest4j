@@ -7,6 +7,7 @@ import edu.illinois.parser.XmlConfigurationParser;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.annotation.AnnotationFormatError;
 import java.util.*;
 
 import static edu.illinois.Names.CONFIG_MAPPING_DIR;
@@ -20,10 +21,30 @@ public interface CTestRunner {
 
     /**
      * Initialize the runner.
-     * @param kclass the test class
+     * @param context the context to initialize the runner
      * @throws Exception if the initialization fails
      */
-    void initializeRunner(Class<?> kclass) throws Exception;
+    void initializeRunner(Object context) throws AnnotationFormatError, IOException;
+
+    /**
+     * Initialize the class-level and method-level parameters from the mapping file.
+     */
+    default Object[] initalizeParameterSet(String testClassName, String mappingFile,
+                                           String[] annotationValue, String annotationRegex) throws IOException {
+        // Get classLevel and methodLevel parameters from the mapping file
+        File classLevelConfigMappingFile = new File(mappingFile);
+        if (!classLevelConfigMappingFile.exists()) {
+            // Search the default file set by the system property "ctest.mapping.dir" (default to "ctest/mapping")
+            classLevelConfigMappingFile = new File(CONFIG_MAPPING_DIR, testClassName + ".json");
+            if (!classLevelConfigMappingFile.exists()) {
+                return new Object[]{new HashSet<>(), new HashMap<>()};
+            }
+            mappingFile = classLevelConfigMappingFile.getAbsolutePath();
+        }
+        return new Object[]{
+                getUnionClassParameters(new HashSet<>(Arrays.asList(annotationValue)), mappingFile, annotationRegex),
+                getAllMethodLevelParametersFromMappingFile(mappingFile)};
+    }
 
     default Set<String> getParametersFromRegex(String regex) {
         Set<String> params = new HashSet<>();

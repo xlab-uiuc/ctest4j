@@ -11,6 +11,7 @@ import org.junit.runners.model.Statement;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.annotation.AnnotationFormatError;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -25,7 +26,6 @@ import static edu.illinois.Utils.getTestMethodFullName;
  */
 // TODO: Write test cases for this class
 public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestRunner {
-    protected String classLevelConfigMappingFilePath;
     protected Set<String> classLevelParameters;
     protected Map<String, Set<String>> methodLevelParametersFromMappingFile;
     protected final ConfigUsage configUsage = new ConfigUsage();
@@ -41,31 +41,19 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
      * @CTestClass annotation is required and the class-level configuration file is required.
      */
     @Override
-    public void initializeRunner(Class<?> klass) throws InitializationError, IOException {
+    public void initializeRunner(Object context) throws AnnotationFormatError, IOException {
+        Class<?> klass = (Class<?>) context;
+        // Set the current test class name
+        ConfigTracker.setCurrentTestClassName(klass.getName());
         // Retrieve class-level parameters if present
         CTestClass cTestClass = klass.getAnnotation(CTestClass.class);
         if (cTestClass == null) {
-            throw new InitializationError("CTestClass annotation is not present in class " + klass.getName());
+            throw new AnnotationFormatError("CTestClass annotation is not present in class " + klass.getName());
         }
-
         // Get classLevel and methodLevel parameters from the mapping file
-        // If the file is not specified, use the default file =>
-        // System.getProperty("ctest.mapping.dir", "ctest/mapping") + "/" + testClassName + ".json"
-        // If the default file is not present, throw an exception
-        classLevelConfigMappingFilePath = cTestClass.configMappingFile();
-        if (classLevelConfigMappingFilePath.isEmpty()) {
-            File classLevelConfigMappingFile = new File(CONFIG_MAPPING_DIR, testClassName + ".json");
-            if (!classLevelConfigMappingFile.exists()) {
-                throw new InitializationError("Class-level configuration file is not specified.");
-            }
-            classLevelConfigMappingFilePath = classLevelConfigMappingFile.getAbsolutePath();
-        }
-        // Retrieve class-level parameters if present
-        classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), classLevelConfigMappingFilePath, cTestClass.regex());
-        // Retrieve method-level parameters if present
-        methodLevelParametersFromMappingFile = getAllMethodLevelParametersFromMappingFile(classLevelConfigMappingFilePath);
-        // Set the current test class name
-        ConfigTracker.setCurrentTestClassName(klass.getName());
+        Object[] values = initalizeParameterSet(testClassName, cTestClass.configMappingFile(), cTestClass.value(), cTestClass.regex());
+        classLevelParameters = (Set<String>) values[0];
+        methodLevelParametersFromMappingFile = (Map<String, Set<String>>) values[1];
     }
 
     /**

@@ -23,24 +23,13 @@ import static edu.illinois.Utils.getTestMethodFullName;
  * Date:  10/13/23
  */
 public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRunner {
-    protected final Set<String> classLevelParameters;
+    protected Set<String> classLevelParameters;
     protected final ConfigUsage configUsage = new ConfigUsage();
     protected final String testClassName = getTestClass().getJavaClass().getName();
 
-    public CTestJUnit4Runner(Class<?> klass) throws InitializationError {
+    public CTestJUnit4Runner(Class<?> klass) throws IOException, InitializationError {
         super(klass);
-        // Retrieve class-level parameters if present
-        CTestClass cTestClass = klass.getAnnotation(CTestClass.class);
-        if (cTestClass != null) {
-            try {
-                classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), cTestClass.configMappingFile(), cTestClass.regex());
-            } catch (IOException e) {
-                throw new RuntimeException("Unable to parse configuration file from class " + klass.getName() + " Annotation", e);
-            }
-        } else {
-            classLevelParameters = new HashSet<>();
-        }
-        ConfigTracker.setCurrentTestClassName(klass.getName());
+        initializeRunner(klass);
     }
 
     /**
@@ -192,7 +181,19 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
     }
 
     @Override
-    public void initializeRunner(Class<?> kclass) throws Exception {
-
+    public void initializeRunner(Object context) throws IOException {
+        Class<?> klass = (Class<?>) context;
+        // Retrieve class-level parameters if present
+        CTestClass cTestClass = klass.getAnnotation(CTestClass.class);
+        if (cTestClass != null) {
+            try {
+                classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), cTestClass.configMappingFile(), cTestClass.regex());
+            } catch (IOException e) {
+                throw new IOException("Unable to parse configuration file from class " + klass.getName() + " Annotation", e);
+            }
+        } else {
+            classLevelParameters = new HashSet<>();
+        }
+        ConfigTracker.setCurrentTestClassName(klass.getName());
     }
 }

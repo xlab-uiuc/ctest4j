@@ -6,10 +6,8 @@ import org.junit.runners.model.InitializationError;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.lang.annotation.AnnotationFormatError;
+import java.util.*;
 
 import static edu.illinois.Names.CONFIG_MAPPING_DIR;
 import static edu.illinois.Names.TRACKING_LOG_PREFIX;
@@ -22,7 +20,6 @@ import static edu.illinois.Utils.getTestMethodFullName;
  */
 public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
         BeforeEachCallback, AfterEachCallback, AfterAllCallback {
-    protected String classLevelConfigMappingFilePath;
     /** A list of configuration parameter name that all methods in the test class will use */
     protected Set<String> classLevelParameters;
     protected Map<String, Set<String>> methodLevelParametersFromMappingFile;
@@ -38,32 +35,8 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
      * @throws Exception
      */
     @Override
-    public void beforeAll(ExtensionContext extensionContext) throws InitializationError, IOException {
-        // Retrieve class-level parameters
-        className = extensionContext.getRequiredTestClass().getName();
-        CTestClass cTestClass = extensionContext.getRequiredTestClass().getAnnotation(CTestClass.class);
-        if (cTestClass == null) {
-            throw new InitializationError("CTestClass annotation is not present in class " + className);
-        }
-
-        // Get classLevel and methodLevel parameters from the mapping file
-        // If the file is not specified, use the default file =>
-        // System.getProperty("ctest.mapping.dir", "ctest/mapping") + "/" + testClassName + ".json"
-        // If the default file is not present, throw an exception
-        classLevelConfigMappingFilePath = cTestClass.configMappingFile();
-        if (classLevelConfigMappingFilePath.isEmpty()) {
-            File classLevelConfigMappingFile = new File(CONFIG_MAPPING_DIR, className + ".json");
-            if (!classLevelConfigMappingFile.exists()) {
-                throw new InitializationError("Class-level configuration file is not specified.");
-            }
-            classLevelConfigMappingFilePath = classLevelConfigMappingFile.getAbsolutePath();
-        }
-        // Retrieve class-level parameters if present
-        classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), classLevelConfigMappingFilePath, cTestClass.regex());
-        // Retrieve method-level parameters if present
-        methodLevelParametersFromMappingFile = getAllMethodLevelParametersFromMappingFile(classLevelConfigMappingFilePath);
-        // Set the current test class name
-        ConfigTracker.setCurrentTestClassName(className);
+    public void beforeAll(ExtensionContext extensionContext) throws Exception {
+        initializeRunner(extensionContext);
         ConfigTracker.startTestClass();
     }
 
@@ -165,7 +138,20 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
 
 
     @Override
-    public void initializeRunner(Class<?> kclass) throws Exception {
-        // Do nothing
+    public void initializeRunner(Object context) throws AnnotationFormatError, IOException {
+        ExtensionContext extensionContext = (ExtensionContext) context;
+        // Retrieve class-level parameters
+        className = extensionContext.getRequiredTestClass().getName();
+        // Set the current test class name
+        ConfigTracker.setCurrentTestClassName(className);
+        CTestClass cTestClass = extensionContext.getRequiredTestClass().getAnnotation(CTestClass.class);
+        if (cTestClass == null) {
+            throw new AnnotationFormatError("CTestClass annotation is not present in class " + className);
+        }
+
+        // Get classLevel and methodLevel parameters from the mapping file
+        Object[] values = initalizeParameterSet(className, cTestClass.configMappingFile(), cTestClass.value(), cTestClass.regex());
+        classLevelParameters = (Set<String>) values[0];
+        methodLevelParametersFromMappingFile = (Map<String, Set<String>>) values[1];
     }
 }

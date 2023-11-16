@@ -128,9 +128,15 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
+                Throwable fromTestThrowable = null;
                 try {
                     originalStatement.evaluate();
+                } catch (Throwable throwable) {
+                    fromTestThrowable = throwable;
                 } finally {
+                    if (shouldThorwException(fromTestThrowable)) {
+                        throw fromTestThrowable;
+                    }
                     ConfigTracker.updateConfigUsage(configUsage, method.getName());
                     if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
                         CTest cTest = method.getAnnotation(CTest.class);
@@ -139,10 +145,8 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
                                     method.getName(), cTest.configMappingFile(), cTest.regex(),
                                     new HashSet<>(Arrays.asList(cTest.value())), classLevelParameters)) {
                                 if (!ConfigTracker.isParameterUsed(param)) {
-                                    if (cTest.expected() != CTest.None.class) {
-                                        if (cTest.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
-                                            return;
-                                        }
+                                    if (isUnUsedParamException(cTest.expected())) {
+                                        return;
                                     }
                                     throw new UnUsedConfigParamException(param + " was not used during the test.");
                                 }

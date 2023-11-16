@@ -67,18 +67,20 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
         if (cTest != null) {
             try {
                 if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
+                    boolean hasUnusedExpected = isUnUsedParamException(cTest.expected());
+                    boolean meetUnusedException = false;
                     for (String param : getUnionMethodParameters(methodName, cTest.regex(),
                             new HashSet<>(Arrays.asList(cTest.value())))) {
                         if (!ConfigTracker.isParameterUsed(param)) {
-                            Class<? extends Throwable> expected = cTest.expected();
-                            if (expected != CTest.None.class) {
-                                if (expected.isAssignableFrom(UnUsedConfigParamException.class)) {
-                                    return;
-                                } else {
-                                    throw new UnUsedConfigParamException(param + " was not used during the test.");
-                                }
+                            if (hasUnusedExpected) {
+                                meetUnusedException = true;
+                                break;
                             }
+                            throw new UnUsedConfigParamException(param + " was not used during the test.");
                         }
+                    }
+                    if (hasUnusedExpected && !meetUnusedException) {
+                        throw new RuntimeException("The test method " + methodName + " does not meet the expected exception " + cTest.expected());
                     }
                 }
             } catch (IOException e) {

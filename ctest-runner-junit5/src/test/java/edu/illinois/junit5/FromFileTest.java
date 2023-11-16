@@ -8,13 +8,23 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * Date:  11/2/23
  */
 @ExtendWith(CTestJunit5Extension.class)
-@CTestClass(file = "src/test/resources/config.json")
+@CTestClass(configMappingFile = "src/test/resources/FromFileTest.json")
 public class FromFileTest {
-    @CTest()
+    @CTest
     public void test() {
         Configuration conf = new Configuration();
-        conf.get("file-param1");
+        conf.get("class-parameter1");
+        conf.get("class-parameter2");
+        conf.get("method-parameter1");
+        conf.get("method-parameter2");
     }
 
-
+    @CTest(expected = UnUsedConfigParamException.class)
+    public void testWouldFail() {
+        Configuration conf = new Configuration();
+        conf.get("class-parameter1");
+        conf.get("class-parameter2");
+        conf.get("method-parameter1");
+        // Missing method-parameter2 so the test would fail
+    }
 }

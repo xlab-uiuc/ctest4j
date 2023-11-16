@@ -140,9 +140,15 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
+                Throwable fromTestThrowable = null;
                 try {
                     originalStatement.evaluate();
+                } catch (Throwable throwable) {
+                    fromTestThrowable = throwable;
                 } finally {
+                    if (shouldThorwException(fromTestThrowable)) {
+                        throw fromTestThrowable;
+                    }
                     ConfigTracker.updateConfigUsage(configUsage, method.getName());
                     if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
                         CTest cTest = method.getAnnotation(CTest.class);
@@ -150,10 +156,8 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
                             for (String param : getUnionMethodParameters(method.getName(), cTest.regex(),
                                     new HashSet<>(Arrays.asList(cTest.value())))) {
                                 if (!ConfigTracker.isParameterUsed(param)) {
-                                    if (cTest.expected() != CTest.None.class) {
-                                        if (cTest.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
-                                            return;
-                                        }
+                                    if (isUnUsedParamException(cTest.expected())) {
+                                        return;
                                     }
                                     throw new UnUsedConfigParamException(param + " was not used during the test.");
                                 }
@@ -163,10 +167,8 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
                         if (testAnnotation != null) {
                             for (String param : getUnionMethodParameters(method.getName(), "", new HashSet<>())) {
                                 if (!ConfigTracker.isParameterUsed(param)) {
-                                    if (testAnnotation.expected() != Test.None.class) {
-                                        if (testAnnotation.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
-                                            return;
-                                        }
+                                    if (isUnUsedParamException(testAnnotation.expected())) {
+                                        return;
                                     }
                                     throw new UnUsedConfigParamException(param + " was not used during the test.");
                                 }

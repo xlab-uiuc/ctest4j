@@ -28,21 +28,32 @@ public interface CTestRunner {
     /**
      * Initialize the class-level and method-level parameters from the mapping file.
      */
-    default Object[] initalizeParameterSet(String testClassName, String mappingFile,
-                                           String[] annotationValue, String annotationRegex) throws IOException {
-        // Get classLevel and methodLevel parameters from the mapping file
-        File classLevelConfigMappingFile = new File(mappingFile);
-        if (!classLevelConfigMappingFile.exists()) {
-            // Search the default file set by the system property "ctest.mapping.dir" (default to "ctest/mapping")
-            classLevelConfigMappingFile = new File(CONFIG_MAPPING_DIR, testClassName + ".json");
-            if (!classLevelConfigMappingFile.exists()) {
-                return new Object[]{new HashSet<>(), new HashMap<>()};
-            }
-            mappingFile = classLevelConfigMappingFile.getAbsolutePath();
+    default Object[] initalizeParameterSet(String testClassName, String mappingFilePath, String[] annotationValue, String annotationRegex) throws IOException {
+        mappingFilePath = resolveMappingFilePath(mappingFilePath, testClassName);
+        if (mappingFilePath.isEmpty()) {
+            return new Object[]{new HashSet<>(), new HashMap<>()};
         }
-        return new Object[]{
-                getUnionClassParameters(new HashSet<>(Arrays.asList(annotationValue)), mappingFile, annotationRegex),
-                getAllMethodLevelParametersFromMappingFile(mappingFile)};
+
+        File configFile = new File(mappingFilePath);
+        if (!configFile.exists()) {
+            throw new IOException("The configuration mapping file " + mappingFilePath + " does not exist.");
+        }
+
+        Set<String> classParams = getUnionClassParameters(new HashSet<>(Arrays.asList(annotationValue)), mappingFilePath, annotationRegex);
+        Map<String, Set<String>> methodParams = getAllMethodLevelParametersFromMappingFile(mappingFilePath);
+
+        return new Object[]{classParams, methodParams};
+    }
+
+    /**
+     * Resolve the mapping file path. If the mapping file path is empty, try the default mapping file path.
+     */
+    private String resolveMappingFilePath(String mappingFile, String testClassName) {
+        if (mappingFile.isEmpty()) {
+            File defaultMappingFile = new File(CONFIG_MAPPING_DIR, testClassName + ".json");
+            return defaultMappingFile.exists() ? defaultMappingFile.getAbsolutePath() : mappingFile;
+        }
+        return mappingFile;
     }
 
     /**
@@ -183,5 +194,19 @@ public interface CTestRunner {
         if (saveUsedParamToFile) {
             ConfigUsage.writeToJson(configUsage, targetFile);
         }
+    }
+
+    /**
+     * Check whether the exception is an UnUsedConfigParamException.
+     */
+    default boolean isUnUsedParamException(Class<? extends Throwable> expected) {
+        return expected.isAssignableFrom(UnUsedConfigParamException.class);
+    }
+
+    /**
+     * Swallow the exception thrown from test method if the exception is an Assertion Error that expects UnUsedConfigParamException.
+     */
+    default boolean shouldThorwException(Throwable throwable) {
+        return throwable != null && !throwable.getMessage().equals("Expected exception: edu.illinois.UnUsedConfigParamException");
     }
 }

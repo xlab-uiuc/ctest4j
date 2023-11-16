@@ -15,7 +15,6 @@ public @interface CTestClass {
     /** A shared list of configuration parameter name for all methods in the test class. */
     String[] value() default {};
     String[] optional() default {};
-    String file() default "";
     String configMappingFile() default "";
     String regex() default "";
 }

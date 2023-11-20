@@ -162,7 +162,6 @@ def run_tests_to_track(output_dir: str, config_used_dir: str="src/test/resources
         child = subprocess.Popen(cmd, stdout=f)
         child.wait()
     print_log("output saved to " + output_dir + "/mvn_compile.txt")
-    print_log("run test code")
     cmd = ["mvn", "surefire:test", "-Dmode=default", "-Dconfig.used.dir=" + config_used_dir, "-Dsave.used.config=true"]
     print_log("run tests: " + " ".join(cmd))
     with open(output_dir + "/mvn_track.txt", "w") as f:
@@ -261,11 +260,16 @@ def annotate_test_method(class_method_pair: Dict, target_dir: str, config_used_d
                     f.write(contents)
     return class_method_pair
 
-def run_ctests(target_dir: str):
-    pass
+def run_ctests(output_dir: str, config_used_dir: str="src/test/resources/used_config"):
+    cmd = ["mvn", "surefire:test", "-Dmode=default", "-Dconfig.used.dir=" + config_used_dir, "-Dsave.used.config=false"]
+    print_log("run CTests: " + " ".join(cmd))
+    with open(output_dir + "/mvn_ctest.txt", "w") as f:
+        child = subprocess.Popen(cmd, stdout=f)
+        child.wait()
+    print_log("output saved to " + output_dir + "/mvn_ctest.txt")
 
 # Core section
-def auto_annotate_script(project: str, test_module:str, project_dir: str, project_test_dir: str, used_config_dir: str):
+def auto_annotate_script(project: str, test_module:str, project_dir: str, project_test_dir: str, config_used_dir: str):
     # with open("test.java", "r+") as f:
     #     add_import(f)
     # print_log("import information added")
@@ -277,14 +281,15 @@ def auto_annotate_script(project: str, test_module:str, project_dir: str, projec
         # add import and runwith to all test classes
         add_runwith_for_all(project_test_dir)
         # run all tests to track parameter usage, save those in "src/test/resources/used_config"
-        run_tests_to_track(cwd, used_config_dir)
+        run_tests_to_track(cwd, config_used_dir)
         # read used config dir and analyze json file in "src/test/resources/used_config"
-        class_method_pair = get_class_method_pair(used_config_dir)
+        class_method_pair = get_class_method_pair(config_used_dir)
         # add corresponding @CTest annotation for child class and super class
-        remaining = annotate_test_method(class_method_pair, project_test_dir, used_config_dir)
+        remaining = annotate_test_method(class_method_pair, project_test_dir, config_used_dir)
         print_log("remaining:")
         for k, v in remaining.items():
             print(k, "->", v)
+        run_ctests(cwd, config_used_dir)
 
 def test():
     change_working_dir(os.getcwd() + "/../app/hadoop/hadoop-common-project/hadoop-common")
@@ -298,7 +303,7 @@ def test():
 # python auto_annotate.py hadoop-common junit4 ../app/hadoop/hadoop-common-project/hadoop-common src/test/java/org/apache/hadoop src/test/resources/used_config
 if __name__ == "__main__":
     if len(sys.argv) != 6:
-        print_log("usage $project $test_module $project_dir $project_test_dir $used_config_dir")
+        print_log("usage $project $test_module $project_dir $project_test_dir $config_used_dir")
     if sys.argv[1] not in PROJECTS_SUPPORTED:
         print_log("project not supported")
         exit

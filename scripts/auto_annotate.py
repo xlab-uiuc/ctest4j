@@ -12,16 +12,15 @@ import subprocess
 from typing import List, Dict
 
 # Constant section
-PROJECTS_SUPPORTED = ["hadoop-common"]
+PROJECTS_SUPPORTED = ["hadoop-common", "hdfs"]
 
 TEST_MODULES_SUPPORTED = ["junit4"]
 
-TEST_IMPORT = "import org.junit.runner.RunWith;\n\
-import edu.illinois.CTestJUnit4Runner;\n\
-import edu.illinois.CTestClass;\n\
-import edu.illinois.CTest;\n\n"
+JAVA_DEPENDENCY = {"junit4": "    <dependency>\n      <groupId>edu.illinois</groupId>\n      <artifactId>ctest-runner-junit4</artifactId>\n      <version>1.0-SNAPSHOT</version>\n      <scope>compile</scope>\n    </dependency>\n"}
 
-ABSTRACT_IMPORT = "import edu.illinois.CTest;\n\n"
+IMPORT_NORMAL = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
+
+IMPORT_ABSTRACT = {"junit4": "import edu.illinois.CTest;\n\n"}
 
 # Utility section
 def print_log(message: str):
@@ -53,7 +52,7 @@ def get_class_and_method_name(target_dir) -> Dict:
             results[class_name] = [].append(method_name)
     return results
 
-def get_config_file_by_method_name(target_dir, method_name):
+def get_config_file_by_method_name(target_dir: str, method_name: str):
     if not os.path.isdir(target_dir):
         return None
     entries = os.listdir(target_dir)
@@ -61,21 +60,21 @@ def get_config_file_by_method_name(target_dir, method_name):
         if method_name + ".json" in entry:
             return entry
 
-def add_dependency(project, test_module):
+def add_dependency(project: str, test_module: str):
     print_log("add dependency information for " + project + " with " + test_module)
     if project == "hadoop-common":
         with open("pom.xml", "r+") as f:
             contents = f.readlines()
             for index, content in enumerate(contents):
                 if "</dependencies>" in content and "ctest-runner-junit4" not in contents[index - 4]:
-                    contents[index] = "    <dependency>\n      <groupId>edu.illinois</groupId>\n      <artifactId>ctest-runner-junit4</artifactId>\n      <version>1.0-SNAPSHOT</version>\n      <scope>compile</scope>\n    </dependency>\n" + contents[index]
+                    contents[index] = JAVA_DEPENDENCY[test_module] + contents[index]
                     break
             contents = "".join(contents)
             f.seek(0)
             f.write(contents)
 
 # Require file to be opened as r+ mode, require file to be written back by caller
-def add_import_and_runwith(f=None, test_class=True):
+def add_import_and_runwith(f=None, test_class: bool=True, test_module: str="junit4"):
     if f is None:
         print_log("file does not exist")
         return None
@@ -107,31 +106,35 @@ def add_import_and_runwith(f=None, test_class=True):
                 package_or_import_seen = True
             if package_or_import_seen and not import_added and re.match("import static .*", content) is not None:
                 if not abstract_class and test_class:
-                    contents[index] = TEST_IMPORT + content
+                    contents[index] = IMPORT_NORMAL[test_module] + content
                 if abstract_class and not test_class:
-                    contents[index] = ABSTRACT_IMPORT + content
+                    contents[index] = IMPORT_ABSTRACT[test_module] + content
+                    print_log("abstract import added for " + f.name)
                 import_added = True
             if package_or_import_seen and not import_added and re.match("\/\*\*", content) is not None:
                 if not abstract_class and test_class:
-                    contents[index] = TEST_IMPORT + content
+                    contents[index] = IMPORT_NORMAL[test_module] + content
                 if abstract_class and not test_class:
-                    contents[index] = ABSTRACT_IMPORT + content
+                    contents[index] = IMPORT_ABSTRACT[test_module] + content
+                    print_log("abstract import added for " + f.name)
                 import_added = True
             # add @RunWith and import (rare case)
-            if package_or_import_seen and re.match(".*class +\w+ +{", content) is not None:
+            if package_or_import_seen and re.match(".*class +\w+.*{", content) is not None:
                 if not abstract_class and test_class:
                     contents[index] = "@RunWith(CTestJUnit4Runner.class)\n" + content
+                    print_log("normal import and @RunWith added for " + f.name)
                 if not import_added:
                     if not abstract_class and test_class:
-                        contents[index] = TEST_IMPORT + contents[index]
+                        contents[index] = IMPORT_NORMAL[test_module] + contents[index]
                     if abstract_class and not test_class:
-                        contents[index] = ABSTRACT_IMPORT + contents[index]
+                        contents[index] = IMPORT_ABSTRACT[test_module] + contents[index]
+                        print_log("abstract import added for " + f.name)
                     import_added = True
                 break
         # contents = "".join(contents)
         # f.seek(0)
         # f.write(contents)
-        print_log("test import and @RunWith added for " + f.name)
+        # print_log("test import and @RunWith added for " + f.name)
     return contents
 
 def add_runwith_for_all(target_dir: str):
@@ -153,14 +156,15 @@ def add_runwith_for_all(target_dir: str):
                     f.write(contents)
 
 def run_tests_to_track(output_dir: str, config_used_dir: str="src/test/resources/used_config"):
-    print_log("compile source code")
     cmd = ["mvn", "clean", "test-compile"]
+    print_log("compile test code: " + " ".join(cmd))
     with open(output_dir + "/mvn_compile.txt", "w") as f:
         child = subprocess.Popen(cmd, stdout=f)
         child.wait()
     print_log("output saved to " + output_dir + "/mvn_compile.txt")
     print_log("run test code")
     cmd = ["mvn", "surefire:test", "-Dmode=default", "-Dconfig.used.dir=" + config_used_dir, "-Dsave.used.config=true"]
+    print_log("run tests: " + " ".join(cmd))
     with open(output_dir + "/mvn_track.txt", "w") as f:
         child = subprocess.Popen(cmd, stdout=f)
         child.wait()
@@ -195,9 +199,15 @@ def annotate_test_method(class_method_pair: Dict, target_dir: str, config_used_d
     class_name_striped = {re.search("\.\w+$", i).group()[1:]: i for i in list(class_method_pair)}
     for dir_path, dir_name, files in os.walk(target_dir):
         for file_name in files:
-            if file_name[:-5] in class_name_striped:
+            full_file_name = dir_path + "/" + file_name
+            class_name = None
+            for i in list(class_method_pair):
+                if re.search(i + "$", full_file_name.replace("/", ".")[:-5]) is not None:
+                    class_name = i
+                    break
+            if class_name is not None:
                 # print(file_name)
-                with open(dir_path + "/" + file_name, "r+") as f:
+                with open(full_file_name, "r+") as f:
                     contents = f.readlines()
                     # handle super class import imformation
                     abstract_class = False
@@ -208,61 +218,85 @@ def annotate_test_method(class_method_pair: Dict, target_dir: str, config_used_d
                         contents = add_import_and_runwith(f, False)
                         if contents is None:
                             raise ValueError("Function add_import_and_runwith() failed: Abstract class already has @CTest")
-                    test_methods = class_method_pair[class_name_striped[file_name[:-5]]]
-                    for index, content in enumerate(contents):
-                        test_method_name = re.search(" test\w+\(", content)
+                    test_methods = class_method_pair[class_name]
+                    for index in range(len(contents) - 2):
+                        content = contents[index]
+                    # for index, content in enumerate(contents):
+                        # test_method_name = re.search(" test\w+\(.*\).*{", content)
+                        test_method_name = re.search("\w+\(.*\).*{", content[:-1] + contents[index + 1][:-1] + contents[index + 2][:-1])
                         if test_method_name is None:
                             continue
-                        test_method_name = test_method_name.group()[1:-1]
+                        test_method_name = test_method_name.group()
+                        test_method_name = test_method_name[:test_method_name.index("(")]
                         if test_method_name in test_methods:
-                            if re.search("@Test *\(", contents[index - 1]) is not None:
-                                contents[index - 1] = contents[index - 1].replace("@Test(", "@CTest(file=\"" + config_used_dir + "/" + class_name_striped[file_name[:-5]] + "_" + test_method_name + ".json\", ")
-                                class_method_pair[class_name_striped[file_name[:-5]]].remove(test_method_name)
-                            elif "@Test" in contents[index - 1]:
-                                contents[index - 1] = contents[index - 1].replace("@Test", "@CTest(file=\"" + config_used_dir + "/" + class_name_striped[file_name[:-5]] + "_" + test_method_name + ".json\")")
-                                class_method_pair[class_name_striped[file_name[:-5]]].remove(test_method_name)
+                            # loop back to search for @Test
+                            offset = 0
+                            for i in range(index):
+                                offset = i
+                                if "@Test" in contents[index - offset]:
+                                    break
+                                if offset == 0:
+                                    continue
+                                if "@Override" in contents[index - offset] or "@SuppressWarnings" in contents[index - offset] or "/**" in contents[index - offset] or "/*" in contents[index - offset] or " *" in contents[index - offset] or "*/" in contents[index - offset]:
+                                    continue
+                                else:
+                                    break
+                            if re.search("@Test *\( *\w+", contents[index - offset]) is not None:
+                                contents[index - offset] = contents[index - offset].replace("@Test(", "@CTest(file=\"" + config_used_dir + "/" + class_name + "_" + test_method_name + ".json\", ")
+                                class_method_pair[class_name].remove(test_method_name)
+                            elif "@Test" in contents[index - offset]:
+                                contents[index - offset] = contents[index - offset].replace("@Test", "@CTest(file=\"" + config_used_dir + "/" + class_name + "_" + test_method_name + ".json\")")
+                                class_method_pair[class_name].remove(test_method_name)
+                    if len(class_method_pair[class_name]) == 0:
+                        del class_method_pair[class_name]
                     contents = "".join(contents)
                     f.seek(0)
                     f.write(contents)
     return class_method_pair
 
+def run_ctests(target_dir: str):
+    pass
+
 # Core section
-def auto_annotate_script(project: str, test_module:str, test_file_dir: str, used_config_dir: str):
+def auto_annotate_script(project: str, test_module:str, project_dir: str, project_test_dir: str, used_config_dir: str):
     # with open("test.java", "r+") as f:
     #     add_import(f)
     # print_log("import information added")
     print_log("======================================================================")
     if project == "hadoop-common":
         cwd = os.getcwd()
-        change_working_dir(os.getcwd() + "/../app/hadoop/hadoop-common-project/hadoop-common")
+        change_working_dir(project_dir)
         add_dependency(project, test_module)
         # add import and runwith to all test classes
-        add_runwith_for_all(test_file_dir)
+        add_runwith_for_all(project_test_dir)
         # run all tests to track parameter usage, save those in "src/test/resources/used_config"
         run_tests_to_track(cwd, used_config_dir)
         # read used config dir and analyze json file in "src/test/resources/used_config"
         class_method_pair = get_class_method_pair(used_config_dir)
         # add corresponding @CTest annotation for child class and super class
-        remaining = annotate_test_method(class_method_pair, test_file_dir, used_config_dir)
+        remaining = annotate_test_method(class_method_pair, project_test_dir, used_config_dir)
         print_log("remaining:")
-        print(remaining)
+        for k, v in remaining.items():
+            print(k, "->", v)
 
 def test():
     change_working_dir(os.getcwd() + "/../app/hadoop/hadoop-common-project/hadoop-common")
     # add_dependency("hadoop-common", "junit4")
     # add_runwith_for_all("src/test/java/org/apache/hadoop/crypto")
     class_method_pair = get_class_method_pair("src/test/resources/used_config")
-    annotate_test_method(class_method_pair, "src/test/java/org/apache/hadoop/crypto", "src/test/resources/used_config")
+    remaining = annotate_test_method(class_method_pair, "src/test/java/org/apache/hadoop", "src/test/resources/used_config")
+    for k, v in remaining.items():
+        print(k, "->", v)
 
-# python auto_annotate.py hadoop-common junit4 src/test/java/org/apache/hadoop src/test/resources/used_config
+# python auto_annotate.py hadoop-common junit4 ../app/hadoop/hadoop-common-project/hadoop-common src/test/java/org/apache/hadoop src/test/resources/used_config
 if __name__ == "__main__":
-    if len(sys.argv) != 5:
-        print_log("usage $project $test_module $test_file_dir $used_config_dir")
+    if len(sys.argv) != 6:
+        print_log("usage $project $test_module $project_dir $project_test_dir $used_config_dir")
     if sys.argv[1] not in PROJECTS_SUPPORTED:
         print_log("project not supported")
         exit
     if sys.argv[2] not in TEST_MODULES_SUPPORTED:
         print_log("test module not supported")
         exit
-    # test()
-    auto_annotate_script(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+    test()
+    # auto_annotate_script(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])

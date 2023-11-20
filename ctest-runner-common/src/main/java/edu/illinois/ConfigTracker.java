@@ -202,7 +202,7 @@ public class ConfigTracker {
      * and record the used parameters. This method would write the used parameters to a file.
      */
     public static void writeConfigToFile(String fileName) {
-        Utils.writeParamSetToJson(ConfigTracker.getAllUsedParams(), ConfigTracker.getAllSetParams(), new File(USED_CONFIG_FILE_DIR, fileName + ".json"));
+        Utils.writeParamSetToJson(ConfigTracker.getAllUsedParams(), ConfigTracker.getAllSetParams(), new File(CONFIG_MAPPING_DIR, fileName + ".json"));
     }
 
     // Internal methods

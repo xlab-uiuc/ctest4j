@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static edu.illinois.Names.USED_CONFIG_FILE_DIR;
+import static edu.illinois.Names.CONFIG_MAPPING_DIR;
 import static edu.illinois.Options.saveUsedParamToFile;
 import static edu.illinois.Utils.getTestMethodFullName;
 
@@ -23,24 +23,13 @@ import static edu.illinois.Utils.getTestMethodFullName;
  * Date:  10/13/23
  */
 public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRunner {
-    protected final Set<String> classLevelParameters;
+    protected Set<String> classLevelParameters;
     protected final ConfigUsage configUsage = new ConfigUsage();
     protected final String testClassName = getTestClass().getJavaClass().getName();
 
-    public CTestJUnit4Runner(Class<?> klass) throws InitializationError {
+    public CTestJUnit4Runner(Class<?> klass) throws IOException, InitializationError {
         super(klass);
-        // Retrieve class-level parameters if present
-        CTestClass cTestClass = klass.getAnnotation(CTestClass.class);
-        if (cTestClass != null) {
-            try {
-                classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), cTestClass.configMappingFile());
-            } catch (IOException e) {
-                throw new RuntimeException("Unable to parse configuration file from class " + klass.getName() + " Annotation", e);
-            }
-        } else {
-            classLevelParameters = new HashSet<>();
-        }
-        ConfigTracker.setCurrentTestClassName(klass.getName());
+        initializeRunner(klass);
     }
 
     /**
@@ -139,20 +128,25 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
+                Throwable fromTestThrowable = null;
                 try {
                     originalStatement.evaluate();
+                } catch (Throwable throwable) {
+                    fromTestThrowable = throwable;
                 } finally {
+                    if (shouldThorwException(fromTestThrowable)) {
+                        throw fromTestThrowable;
+                    }
                     ConfigTracker.updateConfigUsage(configUsage, method.getName());
                     if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
                         CTest cTest = method.getAnnotation(CTest.class);
                         if (cTest != null) {
                             for (String param : getUnionMethodParameters(getTestClass().getJavaClass().getName(),
-                                    method.getName(), cTest.configMappingFile(), new HashSet<>(Arrays.asList(cTest.value())), classLevelParameters)) {
+                                    method.getName(), cTest.configMappingFile(), cTest.regex(),
+                                    new HashSet<>(Arrays.asList(cTest.value())), classLevelParameters)) {
                                 if (!ConfigTracker.isParameterUsed(param)) {
-                                    if (cTest.expected() != CTest.None.class) {
-                                        if (cTest.expected().isAssignableFrom(UnUsedConfigParamException.class)) {
-                                            return;
-                                        }
+                                    if (isUnUsedParamException(cTest.expected())) {
+                                        return;
                                     }
                                     throw new UnUsedConfigParamException(param + " was not used during the test.");
                                 }
@@ -184,14 +178,26 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
                 try {
                     originalStatement.evaluate();
                 } finally {
-                    ConfigUsage.writeToJson(configUsage, new File(USED_CONFIG_FILE_DIR, testClassName + ".json"));
+                    ConfigUsage.writeToJson(configUsage, new File(CONFIG_MAPPING_DIR, testClassName + ".json"));
                 }
             }
         };
     }
 
     @Override
-    public void initializeRunner(Class<?> kclass) throws Exception {
-
+    public void initializeRunner(Object context) throws IOException {
+        Class<?> klass = (Class<?>) context;
+        // Retrieve class-level parameters if present
+        CTestClass cTestClass = klass.getAnnotation(CTestClass.class);
+        if (cTestClass != null) {
+            try {
+                classLevelParameters = getUnionClassParameters(new HashSet<>(Arrays.asList(cTestClass.value())), cTestClass.configMappingFile(), cTestClass.regex());
+            } catch (IOException e) {
+                throw new IOException("Unable to parse configuration file from class " + klass.getName() + " Annotation", e);
+            }
+        } else {
+            classLevelParameters = new HashSet<>();
+        }
+        ConfigTracker.setCurrentTestClassName(klass.getName());
     }
 }

@@ -8,19 +8,23 @@ import org.junit.runner.RunWith;
  * Date:  10/17/23
  */
 @RunWith(CTestJUnit4Runner.class)
-@CTestClass(value = {"class-parameter1", "class-parameter2"}, configMappingFile = "src/test/resources/config.json")
+@CTestClass(value = {"class-parameter1", "class-parameter2"}, regex = "regex-parameter(1|2)", configMappingFile = "src/test/resources/config.json")
 public class FromAllTest {
-    @CTest({"method-parameter1", "method-parameter2"})
+    @CTest(value = {"method-parameter1", "method-parameter2"}, regex = "method-regex(1|2)")
     public void test() {
         Configuration conf = new Configuration();
         // From class annotation
         conf.get("class-parameter1");
         conf.get("class-parameter2");
+        conf.get("regex-parameter1");
+        conf.get("regex-parameter2");
         // From file path
         conf.get("file-param1");
         // From method annotation
         conf.get("method-parameter1");
         conf.get("method-parameter2");
+        conf.get("method-regex1");
+        conf.get("method-regex2");
     }
 
     /**
@@ -72,6 +76,40 @@ public class FromAllTest {
         // From method annotation
         conf.get("method-parameter1");
         conf.get("method-parameter2");
+    }
+
+    @CTest(value = {"method-parameter1", "method-parameter2"}, expected = UnUsedConfigParamException.class)
+    public void testFailDueToClassRegex() {
+        Configuration conf = new Configuration();
+        // From class annotation
+        conf.get("class-parameter1");
+        conf.get("class-parameter2");
+        conf.get("regex-parameter1");
+        // The test would fail because it never uses "regex-parameter2".
+
+        // From file path
+        conf.get("file-param1");
+        // From method annotation
+        conf.get("method-parameter1");
+        conf.get("method-parameter2");
+    }
+
+    @CTest(value = {"method-parameter1", "method-parameter2"}, regex = "method-regex(1|2)", expected = UnUsedConfigParamException.class)
+    public void testFailDueToMethodRegex() {
+        Configuration conf = new Configuration();
+        // From class annotation
+        conf.get("class-parameter1");
+        conf.get("class-parameter2");
+        conf.get("regex-parameter1");
+        conf.get("regex-parameter2");
+        // From file path
+        conf.get("file-param1");
+        // From method annotation
+        conf.get("method-parameter1");
+        conf.get("method-parameter2");
+
+        // The test would fail because it never uses "method-regex2".
+        conf.get("method-regex1");
     }
 
 }

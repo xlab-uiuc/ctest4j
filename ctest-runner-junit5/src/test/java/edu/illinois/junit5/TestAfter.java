@@ -1,6 +1,7 @@
 package edu.illinois.junit5;
 
 import edu.illinois.CTest;
+import edu.illinois.CTestClass;
 import edu.illinois.CTestJunit5Extension;
 import edu.illinois.Configuration;
 import org.junit.jupiter.api.AfterEach;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * Date:  11/7/23
  */
 @ExtendWith(CTestJunit5Extension.class)
+@CTestClass
 public class TestAfter {
     Configuration conf = null;
 

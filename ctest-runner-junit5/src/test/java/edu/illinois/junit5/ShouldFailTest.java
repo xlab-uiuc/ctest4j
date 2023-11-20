@@ -8,7 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * Date:  11/2/23
  */
 @ExtendWith(CTestJunit5Extension.class)
-@CTestClass(file = "src/test/resources/config.json")
+@CTestClass(configMappingFile = "src/test/resources/ShouldFailTest.json")
 public class ShouldFailTest {
 
     /**

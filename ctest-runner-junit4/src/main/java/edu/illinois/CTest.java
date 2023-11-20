@@ -15,6 +15,7 @@ public @interface CTest {
     String[] value() default {};
     String[] optional() default {};
     String configMappingFile() default "";
+    String regex() default "";
 
     /** =============================== Copied From @Test annotation =================================== */
     static class None extends Throwable {

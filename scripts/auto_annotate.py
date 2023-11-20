@@ -241,11 +241,18 @@ def annotate_test_method(class_method_pair: Dict, target_dir: str, config_used_d
                                     continue
                                 else:
                                     break
-                            if re.search("@Test *\( *\w+", contents[index - offset]) is not None:
-                                contents[index - offset] = contents[index - offset].replace("@Test(", "@CTest(file=\"" + config_used_dir + "/" + class_name + "_" + test_method_name + ".json\", ")
+                            match_str = re.search("@Test *\( *\w+", contents[index - offset])
+                            if match_str is not None:
+                                match_str = match_str.group()
+                                contents[index - offset] = contents[index - offset].replace(match_str[:match_str.index("(") + 1], "@CTest(file=\"" + config_used_dir + "/" + class_name + "_" + test_method_name + ".json\", ")
                                 class_method_pair[class_name].remove(test_method_name)
                             elif "@Test" in contents[index - offset]:
-                                contents[index - offset] = contents[index - offset].replace("@Test", "@CTest(file=\"" + config_used_dir + "/" + class_name + "_" + test_method_name + ".json\")")
+                                match_str = re.search("@Test *\( *\)", contents[index - offset])
+                                if match_str is None:
+                                    match_str = "@Test"
+                                else:
+                                    match_str = match_str.group()
+                                contents[index - offset] = contents[index - offset].replace(match_str, "@CTest(file=\"" + config_used_dir + "/" + class_name + "_" + test_method_name + ".json\")")
                                 class_method_pair[class_name].remove(test_method_name)
                     if len(class_method_pair[class_name]) == 0:
                         del class_method_pair[class_name]

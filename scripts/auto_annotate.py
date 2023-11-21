@@ -310,5 +310,5 @@ if __name__ == "__main__":
     if sys.argv[2] not in TEST_MODULES_SUPPORTED:
         print_log("test module not supported")
         exit
-    test()
-    # auto_annotate_script(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
+    # test()
+    auto_annotate_script(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])

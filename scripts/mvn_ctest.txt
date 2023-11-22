@@ -19,10 +19,1455 @@
 [[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
 [[1;34mINFO[m] 
 [[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:3.0.0-M1:test[m [1m(default-cli)[m @ [36mhadoop-common[0;1m ---[m
-[[1;34mINFO[m] No tests to run.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m]  T E S T S
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestLocalFSFileContextMainOperations[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m75[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.642 s - in org.apache.hadoop.fs.[1mTestLocalFSFileContextMainOperations[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.protocolPB.[1mTestFSSerialization[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.1 s - in org.apache.hadoop.fs.protocolPB.[1mTestFSSerialization[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestLocalFSFileContextCreateMkdir[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m11[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.218 s - in org.apache.hadoop.fs.[1mTestLocalFSFileContextCreateMkdir[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestTruncatedInputBug[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.173 s - in org.apache.hadoop.fs.[1mTestTruncatedInputBug[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.statistics.[1mTestDynamicIOStatistics[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m16[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.125 s - in org.apache.hadoop.fs.statistics.[1mTestDynamicIOStatistics[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.statistics.[1mTestIOStatisticsSetters[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m15[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.097 s - in org.apache.hadoop.fs.statistics.[1mTestIOStatisticsSetters[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.statistics.[1mTestEmptyIOStatistics[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.116 s - in org.apache.hadoop.fs.statistics.[1mTestEmptyIOStatistics[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.statistics.[1mTestMeanStatistic[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m16[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.194 s - in org.apache.hadoop.fs.statistics.[1mTestMeanStatistic[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.statistics.[1mTestDurationTracking[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m13[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.797 s - in org.apache.hadoop.fs.statistics.[1mTestDurationTracking[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.statistics.[1mTestIOStatisticsStore[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.207 s - in org.apache.hadoop.fs.statistics.[1mTestIOStatisticsStore[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.statistics.[1mTestIOStatisticsSnapshot[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.195 s - in org.apache.hadoop.fs.statistics.[1mTestIOStatisticsSnapshot[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.http.[1mTestHttpFileSystem[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.208 s - in org.apache.hadoop.fs.http.[1mTestHttpFileSystem[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestChecksumFs[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.231 s - in org.apache.hadoop.fs.[1mTestChecksumFs[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestGlobPattern[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.072 s - in org.apache.hadoop.fs.[1mTestGlobPattern[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestLocalFSCopyFromLocal[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m19[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.767 s - in org.apache.hadoop.fs.[1mTestLocalFSCopyFromLocal[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFcLocalFsUtil[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.172 s - in org.apache.hadoop.fs.[1mTestFcLocalFsUtil[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestVectoredReadUtils[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m12[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.259 s - in org.apache.hadoop.fs.[1mTestVectoredReadUtils[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFileSystemCanonicalization[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m16[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.136 s - in org.apache.hadoop.fs.[1mTestFileSystemCanonicalization[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestGlobExpander[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.046 s - in org.apache.hadoop.fs.[1mTestGlobExpander[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFsShellTouch[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.216 s - in org.apache.hadoop.fs.[1mTestFsShellTouch[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestSymlinkLocalFSFileContext[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m63[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m3[m, Time elapsed: 0.849 s - in org.apache.hadoop.fs.[1mTestSymlinkLocalFSFileContext[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestQuotaUsage[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.082 s - in org.apache.hadoop.fs.[1mTestQuotaUsage[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestGetFileBlockLocations[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.194 s - in org.apache.hadoop.fs.[1mTestGetFileBlockLocations[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFilterFileSystem[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m14[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.402 s - in org.apache.hadoop.fs.[1mTestFilterFileSystem[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFsShellReturnCode[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.503 s - in org.apache.hadoop.fs.[1mTestFsShellReturnCode[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.ftp.[1mTestFTPFileSystem[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.317 s - in org.apache.hadoop.fs.ftp.[1mTestFTPFileSystem[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestViewFSOverloadSchemeCentralMountTableConfig[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.23 s - in org.apache.hadoop.fs.viewfs.[1mTestViewFSOverloadSchemeCentralMountTableConfig[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestViewfsFileStatus[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.504 s - in org.apache.hadoop.fs.viewfs.[1mTestViewfsFileStatus[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestViewFileSystemOverloadSchemeLocalFileSystem[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.201 s - in org.apache.hadoop.fs.viewfs.[1mTestViewFileSystemOverloadSchemeLocalFileSystem[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestViewFsLocalFs[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m66[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.939 s - in org.apache.hadoop.fs.viewfs.[1mTestViewFsLocalFs[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestFcMainOperationsLocalFs[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m73[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.751 s - in org.apache.hadoop.fs.viewfs.[1mTestFcMainOperationsLocalFs[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestFcCreateMkdirLocalFs[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m11[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.248 s - in org.apache.hadoop.fs.viewfs.[1mTestFcCreateMkdirLocalFs[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestViewFsTrash[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.368 s - in org.apache.hadoop.fs.viewfs.[1mTestViewFsTrash[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestViewFileSystemDelegation[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.412 s - in org.apache.hadoop.fs.viewfs.[1mTestViewFileSystemDelegation[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestHCFSMountTableConfigLoader[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.186 s - in org.apache.hadoop.fs.viewfs.[1mTestHCFSMountTableConfigLoader[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestRegexMountPointInterceptorFactory[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.047 s - in org.apache.hadoop.fs.viewfs.[1mTestRegexMountPointInterceptorFactory[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestRegexMountPoint[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.149 s - in org.apache.hadoop.fs.viewfs.[1mTestRegexMountPoint[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestViewFsWithAuthorityLocalFs[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m66[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.952 s - in org.apache.hadoop.fs.viewfs.[1mTestViewFsWithAuthorityLocalFs[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestViewFsOverloadSchemeListStatus[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.192 s - in org.apache.hadoop.fs.viewfs.[1mTestViewFsOverloadSchemeListStatus[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestRegexMountPointResolvedDstPathReplaceInterceptor[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.05 s - in org.apache.hadoop.fs.viewfs.[1mTestRegexMountPointResolvedDstPathReplaceInterceptor[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestViewFileSystemWithAuthorityLocalFileSystem[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m86[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m1[m, Time elapsed: 1.199 s - in org.apache.hadoop.fs.viewfs.[1mTestViewFileSystemWithAuthorityLocalFileSystem[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestChRootedFs[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m14[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.478 s - in org.apache.hadoop.fs.viewfs.[1mTestChRootedFs[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestChRootedFileSystem[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m22[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.542 s - in org.apache.hadoop.fs.viewfs.[1mTestChRootedFileSystem[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestFSMainOperationsLocalFileSystem[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m50[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.562 s - in org.apache.hadoop.fs.viewfs.[1mTestFSMainOperationsLocalFileSystem[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestFcPermissionsLocalFs[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.208 s - in org.apache.hadoop.fs.viewfs.[1mTestFcPermissionsLocalFs[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestViewFileSystemLocalFileSystem[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m88[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m1[m, Time elapsed: 1.193 s - in org.apache.hadoop.fs.viewfs.[1mTestViewFileSystemLocalFileSystem[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestViewFsURIs[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.148 s - in org.apache.hadoop.fs.viewfs.[1mTestViewFsURIs[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestViewFileSystemDelegationTokenSupport[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.166 s - in org.apache.hadoop.fs.viewfs.[1mTestViewFileSystemDelegationTokenSupport[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.viewfs.[1mTestViewFsConfig[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.146 s - in org.apache.hadoop.fs.viewfs.[1mTestViewFsConfig[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestAfsCheckPath[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.078 s - in org.apache.hadoop.fs.[1mTestAfsCheckPath[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestDefaultUri[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.17 s - in org.apache.hadoop.fs.[1mTestDefaultUri[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestDelegationTokenRenewer[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.528 s - in org.apache.hadoop.fs.[1mTestDelegationTokenRenewer[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFileContextResolveAfs[m
+[[1;31mERROR[m] [1;31mTests [0;1mrun: [0;1m1[m, Failures: 0, [1;31mErrors: [0;1;31m1[m, Skipped: 0, Time elapsed: 0.18 s[1;31m <<< FAILURE![m - in org.apache.hadoop.fs.[1mTestFileContextResolveAfs[m
+[[1;31mERROR[m] testFileContextResolveAfs(org.apache.hadoop.fs.TestFileContextResolveAfs)  Time elapsed: 0.147 s  <<< ERROR!
+java.io.IOException: Error 1 creating symlink file:/home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/test/data/TestFileContextResolveAfs2 to /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/test/data/TestFileContextResolveAfs1
+	at org.apache.hadoop.fs.RawLocalFileSystem.createSymlink(RawLocalFileSystem.java:1197)
+	at org.apache.hadoop.fs.DelegateToFileSystem.createSymlink(DelegateToFileSystem.java:249)
+	at org.apache.hadoop.fs.FilterFs.createSymlink(FilterFs.java:304)
+	at org.apache.hadoop.fs.FileContext$21.next(FileContext.java:1590)
+	at org.apache.hadoop.fs.FileContext$21.next(FileContext.java:1586)
+	at org.apache.hadoop.fs.FSLinkResolver.resolve(FSLinkResolver.java:90)
+	at org.apache.hadoop.fs.FileContext.createSymlink(FileContext.java:1593)
+	at org.apache.hadoop.fs.TestFileContextResolveAfs.testFileContextResolveAfs(TestFileContextResolveAfs.java:67)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:299)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:293)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+[[1;34mINFO[m] Running org.apache.hadoop.fs.permission.[1mTestFsPermission[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.134 s - in org.apache.hadoop.fs.permission.[1mTestFsPermission[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.permission.[1mTestAcl[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.086 s - in org.apache.hadoop.fs.permission.[1mTestAcl[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFsOptions[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.047 s - in org.apache.hadoop.fs.[1mTestFsOptions[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestAvroFSInput[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.183 s - in org.apache.hadoop.fs.[1mTestAvroFSInput[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestSymlinkLocalFSFileSystem[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m63[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m7[m, Time elapsed: 0.712 s - in org.apache.hadoop.fs.[1mTestSymlinkLocalFSFileSystem[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestHardLink[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.112 s - in org.apache.hadoop.fs.[1mTestHardLink[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestLocatedFileStatus[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.24 s - in org.apache.hadoop.fs.[1mTestLocatedFileStatus[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestDelegateToFileSystem[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.118 s - in org.apache.hadoop.fs.[1mTestDelegateToFileSystem[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFileSystemInitialization[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.172 s - in org.apache.hadoop.fs.[1mTestFileSystemInitialization[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestDFVariations[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.093 s - in org.apache.hadoop.fs.[1mTestDFVariations[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.sftp.[1mTestSFTPFileSystem[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m13[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.127 s - in org.apache.hadoop.fs.sftp.[1mTestSFTPFileSystem[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestLocalFsFCStatistics[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.684 s - in org.apache.hadoop.fs.[1mTestLocalFsFCStatistics[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestDU[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.144 s - in org.apache.hadoop.fs.[1mTestDU[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFsUrlConnectionPath[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.157 s - in org.apache.hadoop.fs.[1mTestFsUrlConnectionPath[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.impl.[1mTestFutureIO[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.058 s - in org.apache.hadoop.fs.impl.[1mTestFutureIO[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.impl.prefetch.[1mTestExecutorServiceFuturePool[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.096 s - in org.apache.hadoop.fs.impl.prefetch.[1mTestExecutorServiceFuturePool[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.impl.prefetch.[1mTestFilePosition[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.109 s - in org.apache.hadoop.fs.impl.prefetch.[1mTestFilePosition[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.impl.prefetch.[1mTestBlockCache[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.189 s - in org.apache.hadoop.fs.impl.prefetch.[1mTestBlockCache[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.impl.prefetch.[1mTestBlockOperations[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.093 s - in org.apache.hadoop.fs.impl.prefetch.[1mTestBlockOperations[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.impl.prefetch.[1mTestBlockData[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.088 s - in org.apache.hadoop.fs.impl.prefetch.[1mTestBlockData[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.impl.prefetch.[1mTestBoundedResourcePool[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.089 s - in org.apache.hadoop.fs.impl.prefetch.[1mTestBoundedResourcePool[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.impl.prefetch.[1mTestBufferPool[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.095 s - in org.apache.hadoop.fs.impl.prefetch.[1mTestBufferPool[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.impl.prefetch.[1mTestBufferData[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.094 s - in org.apache.hadoop.fs.impl.prefetch.[1mTestBufferData[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.impl.prefetch.[1mTestRetryer[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.098 s - in org.apache.hadoop.fs.impl.prefetch.[1mTestRetryer[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.impl.prefetch.[1mTestValidate[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m15[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.105 s - in org.apache.hadoop.fs.impl.prefetch.[1mTestValidate[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.store.[1mTestFSBuilderSupport[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.115 s - in org.apache.hadoop.fs.store.[1mTestFSBuilderSupport[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.store.[1mTestDataBlocks[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.171 s - in org.apache.hadoop.fs.store.[1mTestDataBlocks[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.store.[1mTestEtagChecksum[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.05 s - in org.apache.hadoop.fs.store.[1mTestEtagChecksum[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.ftp.[1mTestFTPContractMkdir[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m8[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m8[m, Time elapsed: 0.134 s - in org.apache.hadoop.fs.contract.ftp.[1mTestFTPContractMkdir[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.ftp.[1mTestFTPContractOpen[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m19[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m19[m, Time elapsed: 0.139 s - in org.apache.hadoop.fs.contract.ftp.[1mTestFTPContractOpen[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.ftp.[1mTestFTPContractDelete[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m8[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m8[m, Time elapsed: 0.122 s - in org.apache.hadoop.fs.contract.ftp.[1mTestFTPContractDelete[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.ftp.[1mTestFTPContractCreate[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m16[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m16[m, Time elapsed: 0.132 s - in org.apache.hadoop.fs.contract.ftp.[1mTestFTPContractCreate[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.ftp.[1mTestFTPContractRename[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m10[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m10[m, Time elapsed: 0.121 s - in org.apache.hadoop.fs.contract.ftp.[1mTestFTPContractRename[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractVectoredRead[m
+[[1;31mERROR[m] [1;31mTests [0;1mrun: [0;1m1[m, Failures: 0, [1;31mErrors: [0;1;31m1[m, Skipped: 0, Time elapsed: 0.029 s[1;31m <<< FAILURE![m - in org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractVectoredRead[m
+[[1;31mERROR[m] initializationError(org.apache.hadoop.fs.contract.localfs.TestLocalFSContractVectoredRead)  Time elapsed: 0.002 s  <<< ERROR!
+org.junit.runners.model.InvalidTestClassError: 
+Invalid test class 'org.apache.hadoop.fs.contract.localfs.TestLocalFSContractVectoredRead':
+  1. Test class should have exactly one public zero-argument constructor
+	at org.junit.runners.ParentRunner.validate(ParentRunner.java:525)
+	at org.junit.runners.ParentRunner.<init>(ParentRunner.java:92)
+	at org.junit.runners.BlockJUnit4ClassRunner.<init>(BlockJUnit4ClassRunner.java:74)
+	at edu.illinois.CTestJUnit4Runner.<init>(CTestJUnit4Runner.java:31)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+	at org.junit.internal.builders.AnnotatedBuilder.buildRunner(AnnotatedBuilder.java:104)
+	at org.junit.internal.builders.AnnotatedBuilder.runnerForClass(AnnotatedBuilder.java:86)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
+	at org.junit.internal.builders.AllDefaultPossibilitiesBuilder.runnerForClass(AllDefaultPossibilitiesBuilder.java:37)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
+	at org.junit.internal.requests.ClassRequest.createRunner(ClassRequest.java:28)
+	at org.junit.internal.requests.MemoizingRequest.getRunner(MemoizingRequest.java:19)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:362)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractCreate[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m17[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.323 s - in org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractCreate[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractStreamIOStatistics[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.224 s - in org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractStreamIOStatistics[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractMkdir[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.255 s - in org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractMkdir[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractContentSummary[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.209 s - in org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractContentSummary[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractRename[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.262 s - in org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractRename[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractSeek[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m18[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.331 s - in org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractSeek[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractLoaded[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.179 s - in org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractLoaded[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractDelete[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.211 s - in org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractDelete[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractAppend[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m8[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m8[m, Time elapsed: 0.193 s - in org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractAppend[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractGetFileStatus[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m20[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.468 s - in org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractGetFileStatus[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractOpen[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m19[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.275 s - in org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractOpen[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractSetTimes[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.157 s - in org.apache.hadoop.fs.contract.localfs.[1mTestLocalFSContractSetTimes[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.rawlocal.[1mTestRawLocalContractUnderlyingFileBehavior[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.086 s - in org.apache.hadoop.fs.contract.rawlocal.[1mTestRawLocalContractUnderlyingFileBehavior[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractRename[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m11[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.264 s - in org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractRename[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractAppend[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.22 s - in org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractAppend[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractPathHandle[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m56[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m36[m, Time elapsed: 8.462 s - in org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractPathHandle[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractMkdir[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.251 s - in org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractMkdir[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractGetFileStatus[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m20[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.434 s - in org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractGetFileStatus[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractDelete[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.205 s - in org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractDelete[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractCreate[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m16[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.286 s - in org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractCreate[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.rawlocal.[1mTestRawLocalContractVectoredRead[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m34[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.347 s - in org.apache.hadoop.fs.contract.rawlocal.[1mTestRawLocalContractVectoredRead[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractOpen[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m19[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.256 s - in org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractOpen[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractSeek[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m18[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.296 s - in org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractSeek[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractSetTimes[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.162 s - in org.apache.hadoop.fs.contract.rawlocal.[1mTestRawlocalContractSetTimes[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.contract.sftp.[1mTestSFTPContractSeek[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m18[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.684 s - in org.apache.hadoop.fs.contract.sftp.[1mTestSFTPContractSeek[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestListFiles[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.206 s - in org.apache.hadoop.fs.[1mTestListFiles[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestLocalFileSystem[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m29[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m1[m, Time elapsed: 0.822 s - in org.apache.hadoop.fs.[1mTestLocalFileSystem[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.audit.[1mTestCommonAuditContext[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.117 s - in org.apache.hadoop.fs.audit.[1mTestCommonAuditContext[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFileStatus[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m12[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.103 s - in org.apache.hadoop.fs.[1mTestFileStatus[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestLocalDirAllocator[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m45[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.36 s - in org.apache.hadoop.fs.[1mTestLocalDirAllocator[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestDelegateToFsCheckPath[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.119 s - in org.apache.hadoop.fs.[1mTestDelegateToFsCheckPath[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestContentSummary[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m15[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.223 s - in org.apache.hadoop.fs.[1mTestContentSummary[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFilterFs[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.161 s - in org.apache.hadoop.fs.[1mTestFilterFs[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFileSystemStorageStatistics[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.091 s - in org.apache.hadoop.fs.[1mTestFileSystemStorageStatistics[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFsShellList[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.219 s - in org.apache.hadoop.fs.[1mTestFsShellList[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFileContext[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.163 s - in org.apache.hadoop.fs.[1mTestFileContext[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestDFCachingGetSpaceUsed[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.106 s - in org.apache.hadoop.fs.[1mTestDFCachingGetSpaceUsed[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFsShell[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.357 s - in org.apache.hadoop.fs.[1mTestFsShell[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFileUtil[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m48[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.739 s - in org.apache.hadoop.fs.[1mTestFileUtil[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFileSystemCaching[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m17[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.474 s - in org.apache.hadoop.fs.[1mTestFileSystemCaching[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestBlockLocation[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.062 s - in org.apache.hadoop.fs.[1mTestBlockLocation[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestChecksumFileSystem[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m11[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.264 s - in org.apache.hadoop.fs.[1mTestChecksumFileSystem[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestHarFileSystem[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.175 s - in org.apache.hadoop.fs.[1mTestHarFileSystem[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFSMainOperationsLocalFileSystem[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m50[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.507 s - in org.apache.hadoop.fs.[1mTestFSMainOperationsLocalFileSystem[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestHarFileSystemBasics[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m12[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.38 s - in org.apache.hadoop.fs.[1mTestHarFileSystemBasics[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFileContextDeleteOnExit[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.197 s - in org.apache.hadoop.fs.[1mTestFileContextDeleteOnExit[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestAclCommands[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.195 s - in org.apache.hadoop.fs.shell.[1mTestAclCommands[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestCopy[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.459 s - in org.apache.hadoop.fs.shell.[1mTestCopy[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestCount[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m26[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.423 s - in org.apache.hadoop.fs.shell.[1mTestCount[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestXAttrCommands[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.164 s - in org.apache.hadoop.fs.shell.[1mTestXAttrCommands[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestFsShellConcat[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.53 s - in org.apache.hadoop.fs.shell.[1mTestFsShellConcat[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestCopyToLocal[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.323 s - in org.apache.hadoop.fs.shell.[1mTestCopyToLocal[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.find.[1mTestFilterExpression[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m11[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.26 s - in org.apache.hadoop.fs.shell.find.[1mTestFilterExpression[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.find.[1mTestPrint0[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.419 s - in org.apache.hadoop.fs.shell.find.[1mTestPrint0[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.find.[1mTestFind[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m24[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.546 s - in org.apache.hadoop.fs.shell.find.[1mTestFind[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.find.[1mTestResult[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m18[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.063 s - in org.apache.hadoop.fs.shell.find.[1mTestResult[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.find.[1mTestAnd[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.241 s - in org.apache.hadoop.fs.shell.find.[1mTestAnd[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.find.[1mTestIname[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.423 s - in org.apache.hadoop.fs.shell.find.[1mTestIname[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.find.[1mTestName[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.42 s - in org.apache.hadoop.fs.shell.find.[1mTestName[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.find.[1mTestPrint[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.419 s - in org.apache.hadoop.fs.shell.find.[1mTestPrint[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestCpCommand[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.366 s - in org.apache.hadoop.fs.shell.[1mTestCpCommand[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestLs[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m36[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.507 s - in org.apache.hadoop.fs.shell.[1mTestLs[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestPathData[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m12[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m2[m, Time elapsed: 0.344 s - in org.apache.hadoop.fs.shell.[1mTestPathData[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestCopyFromLocal[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.312 s - in org.apache.hadoop.fs.shell.[1mTestCopyFromLocal[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestCopyPreserveFlag[m
+[[1;31mERROR[m] [1;31mTests [0;1mrun: [0;1m18[m, [1;31mFailures: [0;1;31m1[m, Errors: 0, Skipped: 0, Time elapsed: 0.449 s[1;31m <<< FAILURE![m - in org.apache.hadoop.fs.shell.[1mTestCopyPreserveFlag[m
+[[1;31mERROR[m] testDirectoryCpWithP(org.apache.hadoop.fs.shell.TestCopyPreserveFlag)  Time elapsed: 0.188 s  <<< FAILURE!
+java.lang.AssertionError: expected:<23456000> but was:<1700632225097>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:647)
+	at org.junit.Assert.assertEquals(Assert.java:633)
+	at org.apache.hadoop.fs.shell.TestCopyPreserveFlag.assertAttributesPreserved(TestCopyPreserveFlag.java:104)
+	at org.apache.hadoop.fs.shell.TestCopyPreserveFlag.testDirectoryCpWithP(TestCopyPreserveFlag.java:229)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:299)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:293)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestPathExceptions[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.049 s - in org.apache.hadoop.fs.shell.[1mTestPathExceptions[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestCommandFactory[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.088 s - in org.apache.hadoop.fs.shell.[1mTestCommandFactory[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestTail[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.08 s - in org.apache.hadoop.fs.shell.[1mTestTail[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestTextCommand[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.246 s - in org.apache.hadoop.fs.shell.[1mTestTextCommand[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestMove[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.432 s - in org.apache.hadoop.fs.shell.[1mTestMove[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.shell.[1mTestPrintableString[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.049 s - in org.apache.hadoop.fs.shell.[1mTestPrintableString[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestTrash[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 20.798 s - in org.apache.hadoop.fs.[1mTestTrash[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestGetSpaceUsed[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.118 s - in org.apache.hadoop.fs.[1mTestGetSpaceUsed[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFsShellCopy[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m21[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m4[m, Time elapsed: 0.447 s - in org.apache.hadoop.fs.[1mTestFsShellCopy[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFcLocalFsPermission[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.196 s - in org.apache.hadoop.fs.[1mTestFcLocalFsPermission[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestFileSystemTokens[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.379 s - in org.apache.hadoop.fs.[1mTestFileSystemTokens[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestStat[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.183 s - in org.apache.hadoop.fs.[1mTestStat[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestPath[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m23[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m3[m, Time elapsed: 0.272 s - in org.apache.hadoop.fs.[1mTestPath[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestLocalFileSystemPermission[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.218 s - in org.apache.hadoop.fs.[1mTestLocalFileSystemPermission[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestRawLocalFileSystemContract[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m44[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m19[m, Time elapsed: 0.32 s - in org.apache.hadoop.fs.[1mTestRawLocalFileSystemContract[m
+[[1;34mINFO[m] Running org.apache.hadoop.fs.[1mTestCommandFormat[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.051 s - in org.apache.hadoop.fs.[1mTestCommandFormat[m
+[[1;34mINFO[m] Running org.apache.hadoop.net.[1mTestTableMapping[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.146 s - in org.apache.hadoop.net.[1mTestTableMapping[m
+[[1;34mINFO[m] Running org.apache.hadoop.net.[1mTestNetworkTopologyWithNodeGroup[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.085 s - in org.apache.hadoop.net.[1mTestNetworkTopologyWithNodeGroup[m
+[[1;34mINFO[m] Running org.apache.hadoop.net.unix.[1mTestDomainSocketWatcher[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m6[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m6[m, Time elapsed: 0.084 s - in org.apache.hadoop.net.unix.[1mTestDomainSocketWatcher[m
+[[1;34mINFO[m] Running org.apache.hadoop.net.unix.[1mTestDomainSocket[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m17[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m17[m, Time elapsed: 0.091 s - in org.apache.hadoop.net.unix.[1mTestDomainSocket[m
+[[1;34mINFO[m] Running org.apache.hadoop.net.[1mTestMockDomainNameResolver[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.111 s - in org.apache.hadoop.net.[1mTestMockDomainNameResolver[m
+[[1;34mINFO[m] Running org.apache.hadoop.net.[1mTestDNS[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m12[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.167 s - in org.apache.hadoop.net.[1mTestDNS[m
+[[1;34mINFO[m] Running org.apache.hadoop.net.[1mTestSwitchMapping[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.114 s - in org.apache.hadoop.net.[1mTestSwitchMapping[m
+[[1;34mINFO[m] Running org.apache.hadoop.net.[1mTestNetUtils[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m47[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.203 s - in org.apache.hadoop.net.[1mTestNetUtils[m
+[[1;34mINFO[m] Running org.apache.hadoop.net.[1mTestStaticMapping[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.157 s - in org.apache.hadoop.net.[1mTestStaticMapping[m
+[[1;34mINFO[m] Running org.apache.hadoop.net.[1mTestSocketIOWithTimeout[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.184 s - in org.apache.hadoop.net.[1mTestSocketIOWithTimeout[m
+[[1;34mINFO[m] Running org.apache.hadoop.net.[1mTestScriptBasedMappingWithDependency[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.757 s - in org.apache.hadoop.net.[1mTestScriptBasedMappingWithDependency[m
+[[1;34mINFO[m] Running org.apache.hadoop.net.[1mTestClusterTopology[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.131 s - in org.apache.hadoop.net.[1mTestClusterTopology[m
+[[1;34mINFO[m] Running org.apache.hadoop.net.[1mTestScriptBasedMapping[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.133 s - in org.apache.hadoop.net.[1mTestScriptBasedMapping[m
+[[1;34mINFO[m] Running org.apache.hadoop.net.[1mTestDNSDomainNameResolver[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.081 s - in org.apache.hadoop.net.[1mTestDNSDomainNameResolver[m
+[[1;34mINFO[m] Running org.apache.hadoop.cli.[1mTestCLI[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.204 s - in org.apache.hadoop.cli.[1mTestCLI[m
+[[1;34mINFO[m] Running org.apache.hadoop.http.[1mTestHttpRequestLog[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.094 s - in org.apache.hadoop.http.[1mTestHttpRequestLog[m
+[[1;34mINFO[m] Running org.apache.hadoop.http.[1mTestHtmlQuoting[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.205 s - in org.apache.hadoop.http.[1mTestHtmlQuoting[m
+[[1;34mINFO[m] Running org.apache.hadoop.http.[1mTestGlobalFilter[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.295 s - in org.apache.hadoop.http.[1mTestGlobalFilter[m
+[[1;34mINFO[m] Running org.apache.hadoop.http.[1mTestHttpServerLogs[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.292 s - in org.apache.hadoop.http.[1mTestHttpServerLogs[m
+[[1;34mINFO[m] Running org.apache.hadoop.http.[1mTestAuthenticationSessionCookie[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.566 s - in org.apache.hadoop.http.[1mTestAuthenticationSessionCookie[m
+[[1;34mINFO[m] Running org.apache.hadoop.http.[1mTestHttpCookieFlag[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.569 s - in org.apache.hadoop.http.[1mTestHttpCookieFlag[m
+[[1;34mINFO[m] Running org.apache.hadoop.http.lib.[1mTestStaticUserWebFilter[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.275 s - in org.apache.hadoop.http.lib.[1mTestStaticUserWebFilter[m
+[[1;34mINFO[m] Running org.apache.hadoop.http.[1mTestServletFilter[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.237 s - in org.apache.hadoop.http.[1mTestServletFilter[m
+[[1;34mINFO[m] Running org.apache.hadoop.http.[1mTestHttpServer[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m26[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.453 s - in org.apache.hadoop.http.[1mTestHttpServer[m
+[[1;34mINFO[m] Running org.apache.hadoop.http.[1mTestHttpServerLifecycle[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.289 s - in org.apache.hadoop.http.[1mTestHttpServerLifecycle[m
+[[1;34mINFO[m] Running org.apache.hadoop.http.[1mTestSSLHttpServer[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.696 s - in org.apache.hadoop.http.[1mTestSSLHttpServer[m
+[[1;34mINFO[m] Running org.apache.hadoop.http.[1mTestIsActiveServlet[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.225 s - in org.apache.hadoop.http.[1mTestIsActiveServlet[m
+[[1;34mINFO[m] Running org.apache.hadoop.http.[1mTestHttpServerWithSpnego[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.558 s - in org.apache.hadoop.http.[1mTestHttpServerWithSpnego[m
+[[1;34mINFO[m] Running org.apache.hadoop.http.[1mTestHttpServerWebapps[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.177 s - in org.apache.hadoop.http.[1mTestHttpServerWebapps[m
+[[1;34mINFO[m] Running org.apache.hadoop.http.[1mTestSSLHttpServerConfigs[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.71 s - in org.apache.hadoop.http.[1mTestSSLHttpServerConfigs[m
+[[1;34mINFO[m] Running org.apache.hadoop.http.[1mTestHttpRequestLogAppender[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.049 s - in org.apache.hadoop.http.[1mTestHttpRequestLogAppender[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.sink.ganglia.[1mTestGangliaSink[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.101 s - in org.apache.hadoop.metrics2.sink.ganglia.[1mTestGangliaSink[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.sink.[1mTestRollingFileSystemSink[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.195 s - in org.apache.hadoop.metrics2.sink.[1mTestRollingFileSystemSink[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.sink.[1mTestPrometheusMetricsSink[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.202 s - in org.apache.hadoop.metrics2.sink.[1mTestPrometheusMetricsSink[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.sink.[1mTestFileSink[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.171 s - in org.apache.hadoop.metrics2.sink.[1mTestFileSink[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.sink.[1mTestRollingFileSystemSinkWithLocal[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 20.33 s - in org.apache.hadoop.metrics2.sink.[1mTestRollingFileSystemSinkWithLocal[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.lib.[1mTestMutableMetrics[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m11[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 30.409 s - in org.apache.hadoop.metrics2.lib.[1mTestMutableMetrics[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.lib.[1mTestMetricsAnnotations[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.239 s - in org.apache.hadoop.metrics2.lib.[1mTestMetricsAnnotations[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.lib.[1mTestInterns[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.083 s - in org.apache.hadoop.metrics2.lib.[1mTestInterns[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.lib.[1mTestUniqNames[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.048 s - in org.apache.hadoop.metrics2.lib.[1mTestUniqNames[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.lib.[1mTestMutableRollingAverages[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 23.268 s - in org.apache.hadoop.metrics2.lib.[1mTestMutableRollingAverages[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.lib.[1mTestMetricsRegistry[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.27 s - in org.apache.hadoop.metrics2.lib.[1mTestMetricsRegistry[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.source.[1mTestJvmMetrics[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.466 s - in org.apache.hadoop.metrics2.source.[1mTestJvmMetrics[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.impl.[1mTestGraphiteMetrics[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.23 s - in org.apache.hadoop.metrics2.impl.[1mTestGraphiteMetrics[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.impl.[1mTestMetricsCollectorImpl[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.101 s - in org.apache.hadoop.metrics2.impl.[1mTestMetricsCollectorImpl[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.impl.[1mTestSinkQueue[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.323 s - in org.apache.hadoop.metrics2.impl.[1mTestSinkQueue[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.impl.[1mTestMetricsSystemImpl[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m14[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.355 s - in org.apache.hadoop.metrics2.impl.[1mTestMetricsSystemImpl[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.impl.[1mTestMetricsVisitor[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.191 s - in org.apache.hadoop.metrics2.impl.[1mTestMetricsVisitor[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.impl.[1mTestMetricsConfig[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.116 s - in org.apache.hadoop.metrics2.impl.[1mTestMetricsConfig[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.impl.[1mTestMetricsSourceAdapter[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.315 s - in org.apache.hadoop.metrics2.impl.[1mTestMetricsSourceAdapter[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.impl.[1mTestGangliaMetrics[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.169 s - in org.apache.hadoop.metrics2.impl.[1mTestGangliaMetrics[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.impl.[1mTestStatsDMetrics[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.214 s - in org.apache.hadoop.metrics2.impl.[1mTestStatsDMetrics[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.util.[1mTestSampleQuantiles[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.232 s - in org.apache.hadoop.metrics2.util.[1mTestSampleQuantiles[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.util.[1mTestMBeans[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.116 s - in org.apache.hadoop.metrics2.util.[1mTestMBeans[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.util.[1mTestSampleStat[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.046 s - in org.apache.hadoop.metrics2.util.[1mTestSampleStat[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.util.[1mTestMetricsCache[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.357 s - in org.apache.hadoop.metrics2.util.[1mTestMetricsCache[m
+[[1;34mINFO[m] Running org.apache.hadoop.metrics2.filter.[1mTestPatternFilter[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.243 s - in org.apache.hadoop.metrics2.filter.[1mTestPatternFilter[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.random.[1mTestOpensslSecureRandom[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.096 s - in org.apache.hadoop.crypto.random.[1mTestOpensslSecureRandom[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.random.[1mTestOsSecureRandom[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.13 s - in org.apache.hadoop.crypto.random.[1mTestOsSecureRandom[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.[1mTestCryptoOutputStreamClosing[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.283 s - in org.apache.hadoop.crypto.[1mTestCryptoOutputStreamClosing[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.[1mTestCryptoStreams[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m19[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.522 s - in org.apache.hadoop.crypto.[1mTestCryptoStreams[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.[1mTestCryptoStreamsNormal[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m18[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m12[m, Time elapsed: 0.29 s - in org.apache.hadoop.crypto.[1mTestCryptoStreamsNormal[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.[1mTestOpensslCipher[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m3[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m3[m, Time elapsed: 0.102 s - in org.apache.hadoop.crypto.[1mTestOpensslCipher[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.[1mTestCryptoCodec[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m3[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m2[m, Time elapsed: 6.122 s - in org.apache.hadoop.crypto.[1mTestCryptoCodec[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.[1mTestCryptoStreamsWithJceAesCtrCryptoCodec[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m19[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.545 s - in org.apache.hadoop.crypto.[1mTestCryptoStreamsWithJceAesCtrCryptoCodec[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.[1mTestCryptoStreamsForLocalFS[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m18[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m9[m, Time elapsed: 0.521 s - in org.apache.hadoop.crypto.[1mTestCryptoStreamsForLocalFS[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.key.[1mTestKeyProviderDelegationTokenExtension[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.311 s - in org.apache.hadoop.crypto.key.[1mTestKeyProviderDelegationTokenExtension[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.key.[1mTestValueQueue[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.53 s - in org.apache.hadoop.crypto.key.[1mTestValueQueue[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.key.[1mTestKeyProvider[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.145 s - in org.apache.hadoop.crypto.key.[1mTestKeyProvider[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.key.kms.[1mTestKMSClientProvider[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.222 s - in org.apache.hadoop.crypto.key.kms.[1mTestKMSClientProvider[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.key.kms.[1mTestLoadBalancingKMSClientProvider[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m25[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.804 s - in org.apache.hadoop.crypto.key.kms.[1mTestLoadBalancingKMSClientProvider[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.key.[1mTestCachingKeyProvider[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.909 s - in org.apache.hadoop.crypto.key.[1mTestCachingKeyProvider[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.key.[1mTestKeyProviderFactory[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.752 s - in org.apache.hadoop.crypto.key.[1mTestKeyProviderFactory[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.key.[1mTestKeyProviderCryptoExtension[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.205 s - in org.apache.hadoop.crypto.key.[1mTestKeyProviderCryptoExtension[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.key.[1mTestKeyShell[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.651 s - in org.apache.hadoop.crypto.key.[1mTestKeyShell[m
+[[1;34mINFO[m] Running org.apache.hadoop.crypto.[1mTestCryptoStreamsWithOpensslAesCtrCryptoCodec[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m1[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m1[m, Time elapsed: 0.084 s - in org.apache.hadoop.crypto.[1mTestCryptoStreamsWithOpensslAesCtrCryptoCodec[m
+[[1;34mINFO[m] Running org.apache.hadoop.jmx.[1mTestJMXJsonServlet[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.38 s - in org.apache.hadoop.jmx.[1mTestJMXJsonServlet[m
+[[1;34mINFO[m] Running org.apache.hadoop.conf.[1mTestConfServlet[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.397 s - in org.apache.hadoop.conf.[1mTestConfServlet[m
+[[1;34mINFO[m] Running org.apache.hadoop.conf.[1mTestDeprecatedKeys[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.16 s - in org.apache.hadoop.conf.[1mTestDeprecatedKeys[m
+[[1;34mINFO[m] Running org.apache.hadoop.conf.[1mTestConfigRedactor[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.108 s - in org.apache.hadoop.conf.[1mTestConfigRedactor[m
+[[1;34mINFO[m] Running org.apache.hadoop.conf.[1mTestConfiguration[m
+[[1;34mINFO[m] Running org.apache.hadoop.conf.[1mTestGetInstances[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.112 s - in org.apache.hadoop.conf.[1mTestGetInstances[m
+[[1;34mINFO[m] Running org.apache.hadoop.conf.[1mTestStorageUnit[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m13[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.054 s - in org.apache.hadoop.conf.[1mTestStorageUnit[m
+[[1;34mINFO[m] Running org.apache.hadoop.conf.[1mTestReconfiguration[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.573 s - in org.apache.hadoop.conf.[1mTestReconfiguration[m
+[[1;34mINFO[m] Running org.apache.hadoop.conf.[1mTestConfigurationSubclass[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.116 s - in org.apache.hadoop.conf.[1mTestConfigurationSubclass[m
+[[1;34mINFO[m] Running org.apache.hadoop.conf.[1mTestCommonConfigurationFields[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.136 s - in org.apache.hadoop.conf.[1mTestCommonConfigurationFields[m
+[[1;34mINFO[m] Running org.apache.hadoop.conf.[1mTestConfigurationDeprecation[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.103 s - in org.apache.hadoop.conf.[1mTestConfigurationDeprecation[m
+[[1;34mINFO[m] Running org.apache.hadoop.service.[1mTestGlobalStateChangeListener[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.09 s - in org.apache.hadoop.service.[1mTestGlobalStateChangeListener[m
+[[1;34mINFO[m] Running org.apache.hadoop.service.launcher.[1mTestServiceLauncherCreationFailures[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.132 s - in org.apache.hadoop.service.launcher.[1mTestServiceLauncherCreationFailures[m
+[[1;34mINFO[m] Running org.apache.hadoop.service.launcher.[1mTestServiceConf[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.512 s - in org.apache.hadoop.service.launcher.[1mTestServiceConf[m
+[[1;34mINFO[m] Running org.apache.hadoop.service.launcher.[1mTestServiceLauncher[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m22[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.663 s - in org.apache.hadoop.service.launcher.[1mTestServiceLauncher[m
+[[1;34mINFO[m] Running org.apache.hadoop.service.launcher.[1mTestServiceLauncherInnerMethods[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.224 s - in org.apache.hadoop.service.launcher.[1mTestServiceLauncherInnerMethods[m
+[[1;34mINFO[m] Running org.apache.hadoop.service.launcher.[1mTestServiceInterruptHandling[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.093 s - in org.apache.hadoop.service.launcher.[1mTestServiceInterruptHandling[m
+[[1;34mINFO[m] Running org.apache.hadoop.service.[1mTestServiceOperations[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.218 s - in org.apache.hadoop.service.[1mTestServiceOperations[m
+[[1;34mINFO[m] Running org.apache.hadoop.service.[1mTestServiceLifecycle[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m18[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.12 s - in org.apache.hadoop.service.[1mTestServiceLifecycle[m
+[[1;34mINFO[m] Running org.apache.hadoop.service.[1mTestCompositeService[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m42[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.113 s - in org.apache.hadoop.service.[1mTestCompositeService[m
+[[1;34mINFO[m] Running org.apache.hadoop.ha.[1mTestZKFailoverControllerStress[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 94.756 s - in org.apache.hadoop.ha.[1mTestZKFailoverControllerStress[m
+[[1;34mINFO[m] Running org.apache.hadoop.ha.[1mTestZKFailoverController[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m22[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 49.159 s - in org.apache.hadoop.ha.[1mTestZKFailoverController[m
+[[1;34mINFO[m] Running org.apache.hadoop.ha.[1mTestActiveStandbyElectorRealZK[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.269 s - in org.apache.hadoop.ha.[1mTestActiveStandbyElectorRealZK[m
+[[1;34mINFO[m] Running org.apache.hadoop.ha.[1mTestActiveStandbyElector[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m24[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.336 s - in org.apache.hadoop.ha.[1mTestActiveStandbyElector[m
+[[1;34mINFO[m] Running org.apache.hadoop.ha.[1mTestHealthMonitorWithDedicatedHealthAddress[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.048 s - in org.apache.hadoop.ha.[1mTestHealthMonitorWithDedicatedHealthAddress[m
+[[1;34mINFO[m] Running org.apache.hadoop.ha.[1mTestFailoverController[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m17[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.365 s - in org.apache.hadoop.ha.[1mTestFailoverController[m
+[[1;34mINFO[m] Running org.apache.hadoop.ha.[1mTestShellCommandFencer[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.377 s - in org.apache.hadoop.ha.[1mTestShellCommandFencer[m
+[[1;34mINFO[m] Running org.apache.hadoop.ha.[1mTestHAAdmin[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.115 s - in org.apache.hadoop.ha.[1mTestHAAdmin[m
+[[1;34mINFO[m] Running org.apache.hadoop.ha.[1mTestHealthMonitor[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.049 s - in org.apache.hadoop.ha.[1mTestHealthMonitor[m
+[[1;34mINFO[m] Running org.apache.hadoop.ha.[1mTestSshFenceByTcpPort[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m4[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m1[m, Time elapsed: 3.288 s - in org.apache.hadoop.ha.[1mTestSshFenceByTcpPort[m
+[[1;34mINFO[m] Running org.apache.hadoop.ha.[1mTestNodeFencer[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.288 s - in org.apache.hadoop.ha.[1mTestNodeFencer[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestIPCServerResponder[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.554 s - in org.apache.hadoop.ipc.[1mTestIPCServerResponder[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestMiniRPCBenchmark[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.21 s - in org.apache.hadoop.ipc.[1mTestMiniRPCBenchmark[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestResponseBuffer[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.048 s - in org.apache.hadoop.ipc.[1mTestResponseBuffer[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestRpcWritable[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.105 s - in org.apache.hadoop.ipc.[1mTestRpcWritable[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestProtoBufRPCCompatibility[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.216 s - in org.apache.hadoop.ipc.[1mTestProtoBufRPCCompatibility[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestProcessingDetails[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.081 s - in org.apache.hadoop.ipc.[1mTestProcessingDetails[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestMultipleProtocolServer[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.231 s - in org.apache.hadoop.ipc.[1mTestMultipleProtocolServer[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestRPC[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m32[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 33.307 s - in org.apache.hadoop.ipc.[1mTestRPC[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestWeightedRoundRobinMultiplexer[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.136 s - in org.apache.hadoop.ipc.[1mTestWeightedRoundRobinMultiplexer[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestSaslRPC[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m95[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.809 s - in org.apache.hadoop.ipc.[1mTestSaslRPC[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestIdentityProviders[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.153 s - in org.apache.hadoop.ipc.[1mTestIdentityProviders[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestRPCCallBenchmark[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.208 s - in org.apache.hadoop.ipc.[1mTestRPCCallBenchmark[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestWeightedTimeCostProvider[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.113 s - in org.apache.hadoop.ipc.[1mTestWeightedTimeCostProvider[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestSocketFactory[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.161 s - in org.apache.hadoop.ipc.[1mTestSocketFactory[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestRPCServerShutdown[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.305 s - in org.apache.hadoop.ipc.[1mTestRPCServerShutdown[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.metrics.[1mTestRpcMetrics[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.157 s - in org.apache.hadoop.ipc.metrics.[1mTestRpcMetrics[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.metrics.[1mTestDecayRpcSchedulerDetailedMetrics[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.199 s - in org.apache.hadoop.ipc.metrics.[1mTestDecayRpcSchedulerDetailedMetrics[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestFairCallQueue[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m28[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.473 s - in org.apache.hadoop.ipc.[1mTestFairCallQueue[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestRetryCacheMetrics[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.243 s - in org.apache.hadoop.ipc.[1mTestRetryCacheMetrics[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestRpcServerHandoff[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.224 s - in org.apache.hadoop.ipc.[1mTestRpcServerHandoff[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestServer[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.329 s - in org.apache.hadoop.ipc.[1mTestServer[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestRPCCompatibility[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.104 s - in org.apache.hadoop.ipc.[1mTestRPCCompatibility[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestIPC[m
+[[1;31mERROR[m] [1;31mTests [0;1mrun: [0;1m44[m, [1;31mFailures: [0;1;31m2[m, Errors: 0, Skipped: 0, Time elapsed: 87.08 s[1;31m <<< FAILURE![m - in org.apache.hadoop.ipc.[1mTestIPC[m
+[[1;31mERROR[m] testUserBinding(org.apache.hadoop.ipc.TestIPC)  Time elapsed: 0.053 s  <<< FAILURE!
+Wanted but not invoked:
+socket.bind(DovelyW-1/127.0.1.1:0);
+-> at org.apache.hadoop.ipc.TestIPC.checkUserBinding(TestIPC.java:1745)
+
+However, there were exactly 5 interactions with this mock:
+socket.setTcpNoDelay(true);
+-> at org.apache.hadoop.ipc.Client$Connection.setupConnection(Client.java:610)
+
+socket.setKeepAlive(true);
+-> at org.apache.hadoop.ipc.Client$Connection.setupConnection(Client.java:611)
+
+socket.getChannel();
+-> at org.apache.hadoop.net.NetUtils.connect(NetUtils.java:584)
+
+socket.connect(0.0.0.0/0.0.0.0:0, 20000);
+-> at org.apache.hadoop.net.NetUtils.connect(NetUtils.java:598)
+
+socket.close();
+-> at org.apache.hadoop.ipc.Client$Connection.closeConnection(Client.java:882)
+
+
+	at org.apache.hadoop.ipc.TestIPC.checkUserBinding(TestIPC.java:1745)
+	at org.apache.hadoop.ipc.TestIPC.testUserBinding(TestIPC.java:1724)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+
+[[1;31mERROR[m] testProxyUserBinding(org.apache.hadoop.ipc.TestIPC)  Time elapsed: 0.003 s  <<< FAILURE!
+Wanted but not invoked:
+socket.bind(DovelyW-1/127.0.1.1:0);
+-> at org.apache.hadoop.ipc.TestIPC.checkUserBinding(TestIPC.java:1745)
+
+However, there were exactly 5 interactions with this mock:
+socket.setTcpNoDelay(true);
+-> at org.apache.hadoop.ipc.Client$Connection.setupConnection(Client.java:610)
+
+socket.setKeepAlive(true);
+-> at org.apache.hadoop.ipc.Client$Connection.setupConnection(Client.java:611)
+
+socket.getChannel();
+-> at org.apache.hadoop.net.NetUtils.connect(NetUtils.java:584)
+
+socket.connect(0.0.0.0/0.0.0.0:0, 20000);
+-> at org.apache.hadoop.net.NetUtils.connect(NetUtils.java:598)
+
+socket.close();
+-> at org.apache.hadoop.ipc.Client$Connection.closeConnection(Client.java:882)
+
+
+	at org.apache.hadoop.ipc.TestIPC.checkUserBinding(TestIPC.java:1745)
+	at org.apache.hadoop.ipc.TestIPC.testProxyUserBinding(TestIPC.java:1729)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestDecayRpcScheduler[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m13[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.564 s - in org.apache.hadoop.ipc.[1mTestDecayRpcScheduler[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestReuseRpcConnections[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.255 s - in org.apache.hadoop.ipc.[1mTestReuseRpcConnections[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestProtoBufRpc[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m18[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m8[m, Time elapsed: 6.411 s - in org.apache.hadoop.ipc.[1mTestProtoBufRpc[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestProtoBufRpcServerHandoff[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.23 s - in org.apache.hadoop.ipc.[1mTestProtoBufRpcServerHandoff[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestCallQueueManager[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.597 s - in org.apache.hadoop.ipc.[1mTestCallQueueManager[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestCallerContext[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.113 s - in org.apache.hadoop.ipc.[1mTestCallerContext[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestRPCWaitForProxy[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.137 s - in org.apache.hadoop.ipc.[1mTestRPCWaitForProxy[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestAsyncIPC[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 27.632 s - in org.apache.hadoop.ipc.[1mTestAsyncIPC[m
+[[1;34mINFO[m] Running org.apache.hadoop.ipc.[1mTestRetryCache[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.091 s - in org.apache.hadoop.ipc.[1mTestRetryCache[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestReadWriteDiskValidator[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.117 s - in org.apache.hadoop.util.[1mTestReadWriteDiskValidator[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestProtoUtil[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.076 s - in org.apache.hadoop.util.[1mTestProtoUtil[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestLightWeightGSet[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.083 s - in org.apache.hadoop.util.[1mTestLightWeightGSet[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestGenericsUtil[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.111 s - in org.apache.hadoop.util.[1mTestGenericsUtil[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestSysInfoLinux[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.101 s - in org.apache.hadoop.util.[1mTestSysInfoLinux[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.bloom.[1mTestBloomFilters[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.686 s - in org.apache.hadoop.util.bloom.[1mTestBloomFilters[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestDataChecksum[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.941 s - in org.apache.hadoop.util.[1mTestDataChecksum[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestGSet[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.455 s - in org.apache.hadoop.util.[1mTestGSet[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.functional.[1mTestRemoteIterators[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m19[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.117 s - in org.apache.hadoop.util.functional.[1mTestRemoteIterators[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.functional.[1mTestTaskPool[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m60[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.866 s - in org.apache.hadoop.util.functional.[1mTestTaskPool[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestApplicationClassLoader[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.183 s - in org.apache.hadoop.util.[1mTestApplicationClassLoader[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestHttpExceptionUtils[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.358 s - in org.apache.hadoop.util.[1mTestHttpExceptionUtils[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestUTF8ByteArrayUtils[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.06 s - in org.apache.hadoop.util.[1mTestUTF8ByteArrayUtils[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestConfTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m14[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.127 s - in org.apache.hadoop.util.[1mTestConfTest[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestXMLUtils[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m11[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.233 s - in org.apache.hadoop.util.[1mTestXMLUtils[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestSignalLogger[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.082 s - in org.apache.hadoop.util.[1mTestSignalLogger[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestStringInterner[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.051 s - in org.apache.hadoop.util.[1mTestStringInterner[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestStopWatch[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.051 s - in org.apache.hadoop.util.[1mTestStopWatch[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestCacheableIPList[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.196 s - in org.apache.hadoop.util.[1mTestCacheableIPList[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestRunJar[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.338 s - in org.apache.hadoop.util.[1mTestRunJar[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestLimitInputStream[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.064 s - in org.apache.hadoop.util.[1mTestLimitInputStream[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestStringUtils[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m19[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.125 s - in org.apache.hadoop.util.[1mTestStringUtils[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestCrcComposer[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.095 s - in org.apache.hadoop.util.[1mTestCrcComposer[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestPureJavaCrc32[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.107 s - in org.apache.hadoop.util.[1mTestPureJavaCrc32[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestChunkedArrayList[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.177 s - in org.apache.hadoop.util.[1mTestChunkedArrayList[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestInstrumentedReadWriteLock[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.087 s - in org.apache.hadoop.util.[1mTestInstrumentedReadWriteLock[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestShell[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m26[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.175 s - in org.apache.hadoop.util.[1mTestShell[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestIntrusiveCollection[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.098 s - in org.apache.hadoop.util.[1mTestIntrusiveCollection[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestDirectBufferPool[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.063 s - in org.apache.hadoop.util.[1mTestDirectBufferPool[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestDiskCheckerWithDiskIo[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.119 s - in org.apache.hadoop.util.[1mTestDiskCheckerWithDiskIo[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.curator.[1mTestZKCuratorManager[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.953 s - in org.apache.hadoop.util.curator.[1mTestZKCuratorManager[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestMachineList[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m14[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.09 s - in org.apache.hadoop.util.[1mTestMachineList[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestWinUtils[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m11[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m11[m, Time elapsed: 0.084 s - in org.apache.hadoop.util.[1mTestWinUtils[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestProgress[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.082 s - in org.apache.hadoop.util.[1mTestProgress[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestNativeCodeLoader[m
+[[1;31mERROR[m] [1;31mTests [0;1mrun: [0;1m1[m, [1;31mFailures: [0;1;31m1[m, Errors: 0, Skipped: 0, Time elapsed: 0.079 s[1;31m <<< FAILURE![m - in org.apache.hadoop.util.[1mTestNativeCodeLoader[m
+[[1;31mERROR[m] testNativeCodeLoaded(org.apache.hadoop.util.TestNativeCodeLoader)  Time elapsed: 0.04 s  <<< FAILURE!
+java.lang.AssertionError: TestNativeCodeLoader: libhadoop.so testing was required, but libhadoop.so was not loaded.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.apache.hadoop.util.TestNativeCodeLoader.testNativeCodeLoaded(TestNativeCodeLoader.java:52)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at edu.illinois.CTestJUnit4Runner$2.evaluate(CTestJUnit4Runner.java:117)
+	at edu.illinois.CTestJUnit4Runner$3.evaluate(CTestJUnit4Runner.java:133)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at edu.illinois.CTestJUnit4Runner$1.evaluate(CTestJUnit4Runner.java:102)
+	at edu.illinois.CTestJUnit4Runner$4.evaluate(CTestJUnit4Runner.java:179)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestLightWeightCache[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.428 s - in org.apache.hadoop.util.[1mTestLightWeightCache[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestBasicDiskValidator[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m14[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.525 s - in org.apache.hadoop.util.[1mTestBasicDiskValidator[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestShutdownThreadsHelper[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.087 s - in org.apache.hadoop.util.[1mTestShutdownThreadsHelper[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestExitUtil[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.103 s - in org.apache.hadoop.util.[1mTestExitUtil[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestJsonSerialization[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.303 s - in org.apache.hadoop.util.[1mTestJsonSerialization[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestPreconditions[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.088 s - in org.apache.hadoop.util.[1mTestPreconditions[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestJarFinder[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.777 s - in org.apache.hadoop.util.[1mTestJarFinder[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestLists[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.097 s - in org.apache.hadoop.util.[1mTestLists[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestDiskValidatorFactory[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.052 s - in org.apache.hadoop.util.[1mTestDiskValidatorFactory[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestAsyncDiskService[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.082 s - in org.apache.hadoop.util.[1mTestAsyncDiskService[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestAutoCloseableLock[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.05 s - in org.apache.hadoop.util.[1mTestAutoCloseableLock[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestOptions[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.047 s - in org.apache.hadoop.util.[1mTestOptions[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestIdentityHashStore[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.086 s - in org.apache.hadoop.util.[1mTestIdentityHashStore[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestReflectionUtils[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.157 s - in org.apache.hadoop.util.[1mTestReflectionUtils[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestSysInfoWindows[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.084 s - in org.apache.hadoop.util.[1mTestSysInfoWindows[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestGenericOptionsParser[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.248 s - in org.apache.hadoop.util.[1mTestGenericOptionsParser[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestCloseableReferenceCount[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.06 s - in org.apache.hadoop.util.[1mTestCloseableReferenceCount[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.hash.[1mTestHash[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.111 s - in org.apache.hadoop.util.hash.[1mTestHash[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestLightWeightResizableGSet[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.182 s - in org.apache.hadoop.util.[1mTestLightWeightResizableGSet[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestNativeLibraryChecker[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.12 s - in org.apache.hadoop.util.[1mTestNativeLibraryChecker[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestIndexedSort[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.222 s - in org.apache.hadoop.util.[1mTestIndexedSort[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestInstrumentedLock[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.226 s - in org.apache.hadoop.util.[1mTestInstrumentedLock[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestDurationInfo[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.099 s - in org.apache.hadoop.util.[1mTestDurationInfo[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestTime[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.055 s - in org.apache.hadoop.util.[1mTestTime[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestCrcUtil[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m13[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.104 s - in org.apache.hadoop.util.[1mTestCrcUtil[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestFindClass[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m16[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.154 s - in org.apache.hadoop.util.[1mTestFindClass[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestClassUtil[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.052 s - in org.apache.hadoop.util.[1mTestClassUtil[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestFileBasedIPList[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.083 s - in org.apache.hadoop.util.[1mTestFileBasedIPList[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestDiskChecker[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m14[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.496 s - in org.apache.hadoop.util.[1mTestDiskChecker[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestLineReader[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.085 s - in org.apache.hadoop.util.[1mTestLineReader[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestShutdownHookManager[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.147 s - in org.apache.hadoop.util.[1mTestShutdownHookManager[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestZKUtil[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.096 s - in org.apache.hadoop.util.[1mTestZKUtil[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestNativeCrc32[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m22[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m22[m, Time elapsed: 0.069 s - in org.apache.hadoop.util.[1mTestNativeCrc32[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestCpuTimeTracker[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.055 s - in org.apache.hadoop.util.[1mTestCpuTimeTracker[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestVersionUtil[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.091 s - in org.apache.hadoop.util.[1mTestVersionUtil[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestHostsFileReader[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.108 s - in org.apache.hadoop.util.[1mTestHostsFileReader[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestFastNumberFormat[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.052 s - in org.apache.hadoop.util.[1mTestFastNumberFormat[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestWeakReferenceMap[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.115 s - in org.apache.hadoop.util.[1mTestWeakReferenceMap[m
+[[1;34mINFO[m] Running org.apache.hadoop.util.[1mTestClasspath[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.118 s - in org.apache.hadoop.util.[1mTestClasspath[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestIngressPortBasedResolver[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.109 s - in org.apache.hadoop.security.[1mTestIngressPortBasedResolver[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestCompositeGroupMapping[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.15 s - in org.apache.hadoop.security.[1mTestCompositeGroupMapping[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestUGILoginFromKeytab[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m12[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.629 s - in org.apache.hadoop.security.[1mTestUGILoginFromKeytab[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.http.[1mTestXFrameOptionsFilter[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.239 s - in org.apache.hadoop.security.http.[1mTestXFrameOptionsFilter[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.http.[1mTestCrossOriginFilter[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m12[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.251 s - in org.apache.hadoop.security.http.[1mTestCrossOriginFilter[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.http.[1mTestRestCsrfPreventionFilter[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.256 s - in org.apache.hadoop.security.http.[1mTestRestCsrfPreventionFilter[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestGroupFallback[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.161 s - in org.apache.hadoop.security.[1mTestGroupFallback[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.alias.[1mTestCredentialProvider[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.08 s - in org.apache.hadoop.security.alias.[1mTestCredentialProvider[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.alias.[1mTestCredentialProviderFactory[m
+[[1;31mERROR[m] [1;31mTests [0;1mrun: [0;1m7[m, Failures: 0, [1;31mErrors: [0;1;31m1[m, Skipped: 0, Time elapsed: 1.216 s[1;31m <<< FAILURE![m - in org.apache.hadoop.security.alias.[1mTestCredentialProviderFactory[m
+[[1;31mERROR[m] testFactory(org.apache.hadoop.security.alias.TestCredentialProviderFactory)  Time elapsed: 0.156 s  <<< ERROR!
+org.apache.hadoop.fs.ChecksumException: Checksum error: file:/home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/test/data/creds/test.jks at 0 exp: -1435668994 got: 1244095408
+	at org.apache.hadoop.fs.FSInputChecker.verifySums(FSInputChecker.java:352)
+	at org.apache.hadoop.fs.FSInputChecker.readChecksumChunk(FSInputChecker.java:308)
+	at org.apache.hadoop.fs.FSInputChecker.read1(FSInputChecker.java:257)
+	at org.apache.hadoop.fs.FSInputChecker.read(FSInputChecker.java:202)
+	at java.base/java.io.DataInputStream.read(DataInputStream.java:149)
+	at java.base/java.io.InputStream.readNBytes(InputStream.java:396)
+	at java.base/java.io.InputStream.readAllBytes(InputStream.java:333)
+	at java.base/com.sun.crypto.provider.JceKeyStore.engineLoad(JceKeyStore.java:699)
+	at java.base/java.security.KeyStore.load(KeyStore.java:1479)
+	at org.apache.hadoop.security.alias.AbstractJavaKeyStoreProvider.locateKeystore(AbstractJavaKeyStoreProvider.java:326)
+	at org.apache.hadoop.security.alias.AbstractJavaKeyStoreProvider.<init>(AbstractJavaKeyStoreProvider.java:86)
+	at org.apache.hadoop.security.alias.KeyStoreProvider.<init>(KeyStoreProvider.java:49)
+	at org.apache.hadoop.security.alias.JavaKeyStoreProvider.<init>(JavaKeyStoreProvider.java:42)
+	at org.apache.hadoop.security.alias.JavaKeyStoreProvider.<init>(JavaKeyStoreProvider.java:35)
+	at org.apache.hadoop.security.alias.JavaKeyStoreProvider$Factory.createProvider(JavaKeyStoreProvider.java:68)
+	at org.apache.hadoop.security.alias.CredentialProviderFactory.getProviders(CredentialProviderFactory.java:91)
+	at org.apache.hadoop.security.alias.TestCredentialProviderFactory.testFactory(TestCredentialProviderFactory.java:84)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at edu.illinois.CTestJUnit4Runner$2.evaluate(CTestJUnit4Runner.java:117)
+	at edu.illinois.CTestJUnit4Runner$3.evaluate(CTestJUnit4Runner.java:133)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at edu.illinois.CTestJUnit4Runner$1.evaluate(CTestJUnit4Runner.java:102)
+	at edu.illinois.CTestJUnit4Runner$4.evaluate(CTestJUnit4Runner.java:179)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+
+[[1;34mINFO[m] Running org.apache.hadoop.security.alias.[1mTestCredShell[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m12[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.46 s - in org.apache.hadoop.security.alias.[1mTestCredShell[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestCredentials[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.141 s - in org.apache.hadoop.security.[1mTestCredentials[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestKDiag[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m13[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.375 s - in org.apache.hadoop.security.[1mTestKDiag[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.authorize.[1mTestProxyUsers[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m17[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.171 s - in org.apache.hadoop.security.authorize.[1mTestProxyUsers[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.authorize.[1mTestDefaultImpersonationProvider[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.301 s - in org.apache.hadoop.security.authorize.[1mTestDefaultImpersonationProvider[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.authorize.[1mTestProxyServers[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.11 s - in org.apache.hadoop.security.authorize.[1mTestProxyServers[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.authorize.[1mTestAccessControlList[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.31 s - in org.apache.hadoop.security.authorize.[1mTestAccessControlList[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.authorize.[1mTestServiceAuthorization[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.165 s - in org.apache.hadoop.security.authorize.[1mTestServiceAuthorization[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestNullGroupsMapping[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.046 s - in org.apache.hadoop.security.[1mTestNullGroupsMapping[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestRuleBasedLdapGroupsMapping[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.256 s - in org.apache.hadoop.security.[1mTestRuleBasedLdapGroupsMapping[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestSecurityUtil[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m21[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.441 s - in org.apache.hadoop.security.[1mTestSecurityUtil[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.token.[1mTestToken[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.137 s - in org.apache.hadoop.security.token.[1mTestToken[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.token.delegation.[1mTestZKDelegationTokenSecretManager[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.113 s - in org.apache.hadoop.security.token.delegation.[1mTestZKDelegationTokenSecretManager[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.token.delegation.web.[1mTestDelegationTokenManager[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.16 s - in org.apache.hadoop.security.token.delegation.web.[1mTestDelegationTokenManager[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.token.delegation.web.[1mTestDelegationTokenAuthenticationHandlerWithMocks[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.452 s - in org.apache.hadoop.security.token.delegation.web.[1mTestDelegationTokenAuthenticationHandlerWithMocks[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.token.delegation.web.[1mTestWebDelegationToken[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m12[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.78 s - in org.apache.hadoop.security.token.delegation.web.[1mTestWebDelegationToken[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.token.delegation.[1mTestDelegationToken[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m19[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 30.757 s - in org.apache.hadoop.security.token.delegation.[1mTestDelegationToken[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.token.[1mTestDtUtilShell[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m11[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.473 s - in org.apache.hadoop.security.token.[1mTestDtUtilShell[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestShellBasedUnixGroupsMapping[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.296 s - in org.apache.hadoop.security.[1mTestShellBasedUnixGroupsMapping[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestWhitelistBasedResolver[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.128 s - in org.apache.hadoop.security.[1mTestWhitelistBasedResolver[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestUGIWithMiniKdc[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.739 s - in org.apache.hadoop.security.[1mTestUGIWithMiniKdc[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestLdapGroupsMappingWithPosixGroup[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.308 s - in org.apache.hadoop.security.[1mTestLdapGroupsMappingWithPosixGroup[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestProxyUserFromEnv[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.147 s - in org.apache.hadoop.security.[1mTestProxyUserFromEnv[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.authentication.server.[1mTestProxyUserAuthenticationFilter[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.361 s - in org.apache.hadoop.security.authentication.server.[1mTestProxyUserAuthenticationFilter[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestAuthenticationFilter[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.244 s - in org.apache.hadoop.security.[1mTestAuthenticationFilter[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestLdapGroupsMappingWithBindUserSwitch[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.781 s - in org.apache.hadoop.security.[1mTestLdapGroupsMappingWithBindUserSwitch[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestDoAsEffectiveUser[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.325 s - in org.apache.hadoop.security.[1mTestDoAsEffectiveUser[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestKDiagNoKDC[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.199 s - in org.apache.hadoop.security.[1mTestKDiagNoKDC[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestLdapGroupsMapping[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m12[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.006 s - in org.apache.hadoop.security.[1mTestLdapGroupsMapping[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestUGIWithExternalKdc[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m1[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m1[m, Time elapsed: 0.043 s - in org.apache.hadoop.security.[1mTestUGIWithExternalKdc[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.ssl.[1mTestDelegatingSSLSocketFactory[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m2[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m2[m, Time elapsed: 0.076 s - in org.apache.hadoop.security.ssl.[1mTestDelegatingSSLSocketFactory[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.ssl.[1mTestSSLFactory[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m16[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.879 s - in org.apache.hadoop.security.ssl.[1mTestSSLFactory[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.ssl.[1mTestReloadingX509TrustManager[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.366 s - in org.apache.hadoop.security.ssl.[1mTestReloadingX509TrustManager[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.ssl.[1mTestReloadingX509KeyManager[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.364 s - in org.apache.hadoop.security.ssl.[1mTestReloadingX509KeyManager[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestUserFromEnv[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.142 s - in org.apache.hadoop.security.[1mTestUserFromEnv[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestUserGroupInformation[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m41[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.569 s - in org.apache.hadoop.security.[1mTestUserGroupInformation[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestRaceWhenRelogin[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.692 s - in org.apache.hadoop.security.[1mTestRaceWhenRelogin[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestLdapGroupsMappingWithFailover[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.337 s - in org.apache.hadoop.security.[1mTestLdapGroupsMappingWithFailover[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestFixKerberosTicketOrder[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.533 s - in org.apache.hadoop.security.[1mTestFixKerberosTicketOrder[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestHttpCrossOriginFilterInitializer[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.107 s - in org.apache.hadoop.security.[1mTestHttpCrossOriginFilterInitializer[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestLdapGroupsMappingWithOneQuery[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.315 s - in org.apache.hadoop.security.[1mTestLdapGroupsMappingWithOneQuery[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestJNIGroupsMapping[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m1[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m1[m, Time elapsed: 0.075 s - in org.apache.hadoop.security.[1mTestJNIGroupsMapping[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestGroupsCaching[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m16[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.897 s - in org.apache.hadoop.security.[1mTestGroupsCaching[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestNetgroupCache[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.048 s - in org.apache.hadoop.security.[1mTestNetgroupCache[m
+[[1;34mINFO[m] Running org.apache.hadoop.security.[1mTestShellBasedIdMapping[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.479 s - in org.apache.hadoop.security.[1mTestShellBasedIdMapping[m
+[[1;34mINFO[m] Running org.apache.hadoop.test.[1mTestMultithreadedTestUtil[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.091 s - in org.apache.hadoop.test.[1mTestMultithreadedTestUtil[m
+[[1;34mINFO[m] Running org.apache.hadoop.test.[1mTestJUnitSetup[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.079 s - in org.apache.hadoop.test.[1mTestJUnitSetup[m
+[[1;34mINFO[m] Running org.apache.hadoop.test.[1mTestTimedOutTestsListener[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.195 s - in org.apache.hadoop.test.[1mTestTimedOutTestsListener[m
+[[1;34mINFO[m] Running org.apache.hadoop.test.[1mTestLambdaTestUtils[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m43[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.625 s - in org.apache.hadoop.test.[1mTestLambdaTestUtils[m
+[[1;34mINFO[m] Running org.apache.hadoop.test.[1mTestGenericTestUtils[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.092 s - in org.apache.hadoop.test.[1mTestGenericTestUtils[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestBoundedByteArrayOutputStream[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.048 s - in org.apache.hadoop.io.[1mTestBoundedByteArrayOutputStream[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestObjectWritableProtos[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.101 s - in org.apache.hadoop.io.[1mTestObjectWritableProtos[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestSortedMapWritable[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.091 s - in org.apache.hadoop.io.[1mTestSortedMapWritable[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestSequenceFileSerialization[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.203 s - in org.apache.hadoop.io.[1mTestSequenceFileSerialization[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.compress.[1mTestCompressorDecompressor[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.122 s - in org.apache.hadoop.io.compress.[1mTestCompressorDecompressor[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.compress.[1mTestDecompressorStream[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.051 s - in org.apache.hadoop.io.compress.[1mTestDecompressorStream[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.compress.[1mTestCompressionStreamReuse[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m4[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m1[m, Time elapsed: 1.158 s - in org.apache.hadoop.io.compress.[1mTestCompressionStreamReuse[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.compress.[1mTestBlockDecompressorStream[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.048 s - in org.apache.hadoop.io.compress.[1mTestBlockDecompressorStream[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.compress.[1mTestCodecFactory[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.121 s - in org.apache.hadoop.io.compress.[1mTestCodecFactory[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.compress.lz4.[1mTestLz4CompressorDecompressor[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m14[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.235 s - in org.apache.hadoop.io.compress.lz4.[1mTestLz4CompressorDecompressor[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.compress.zstd.[1mTestZStandardCompressorDecompressor[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m20[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m20[m, Time elapsed: 0.115 s - in org.apache.hadoop.io.compress.zstd.[1mTestZStandardCompressorDecompressor[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.compress.[1mTestBZip2Codec[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.327 s - in org.apache.hadoop.io.compress.[1mTestBZip2Codec[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.compress.snappy.[1mTestSnappyCompressorDecompressor[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m16[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.17 s - in org.apache.hadoop.io.compress.snappy.[1mTestSnappyCompressorDecompressor[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.compress.zlib.[1mTestZlibCompressorDecompressor[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m10[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m10[m, Time elapsed: 0.086 s - in org.apache.hadoop.io.compress.zlib.[1mTestZlibCompressorDecompressor[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.compress.[1mTestCodecPool[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.141 s - in org.apache.hadoop.io.compress.[1mTestCodecPool[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.compress.bzip2.[1mTestBzip2CompressorDecompressor[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m2[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m2[m, Time elapsed: 0.106 s - in org.apache.hadoop.io.compress.bzip2.[1mTestBzip2CompressorDecompressor[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.compress.bzip2.[1mTestBZip2TextFileWriter[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.158 s - in org.apache.hadoop.io.compress.bzip2.[1mTestBZip2TextFileWriter[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.compress.[1mTestGzipCodec[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.13 s - in org.apache.hadoop.io.compress.[1mTestGzipCodec[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.compress.[1mTestCodec[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m26[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m4[m, Time elapsed: 14.273 s - in org.apache.hadoop.io.compress.[1mTestCodec[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.compress.[1mTestCompressorStream[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.05 s - in org.apache.hadoop.io.compress.[1mTestCompressorStream[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestVersionedWritable[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.087 s - in org.apache.hadoop.io.[1mTestVersionedWritable[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestSequenceFileSync[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.272 s - in org.apache.hadoop.io.[1mTestSequenceFileSync[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.codec.[1mTestHHXORErasureCodec[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.085 s - in org.apache.hadoop.io.erasurecode.codec.[1mTestHHXORErasureCodec[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.[1mTestCodecRegistry[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.083 s - in org.apache.hadoop.io.erasurecode.[1mTestCodecRegistry[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.rawcoder.[1mTestRSRawCoder[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m17[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.159 s - in org.apache.hadoop.io.erasurecode.rawcoder.[1mTestRSRawCoder[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.rawcoder.[1mTestRSRawCoderInteroperable2[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m17[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m17[m, Time elapsed: 0.085 s - in org.apache.hadoop.io.erasurecode.rawcoder.[1mTestRSRawCoderInteroperable2[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.rawcoder.[1mTestCoderUtil[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.047 s - in org.apache.hadoop.io.erasurecode.rawcoder.[1mTestCoderUtil[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.rawcoder.[1mTestRSRawCoderInteroperable1[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m17[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m17[m, Time elapsed: 0.084 s - in org.apache.hadoop.io.erasurecode.rawcoder.[1mTestRSRawCoderInteroperable1[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.rawcoder.[1mTestRawErasureCoderBenchmark[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m4[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m1[m, Time elapsed: 9.071 s - in org.apache.hadoop.io.erasurecode.rawcoder.[1mTestRawErasureCoderBenchmark[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.rawcoder.[1mTestDecodingValidator[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m24[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m8[m, Time elapsed: 0.123 s - in org.apache.hadoop.io.erasurecode.rawcoder.[1mTestDecodingValidator[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.rawcoder.[1mTestXORRawCoder[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.125 s - in org.apache.hadoop.io.erasurecode.rawcoder.[1mTestXORRawCoder[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.rawcoder.[1mTestDummyRawCoder[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.089 s - in org.apache.hadoop.io.erasurecode.rawcoder.[1mTestDummyRawCoder[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.rawcoder.[1mTestRSLegacyRawCoder[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m17[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.153 s - in org.apache.hadoop.io.erasurecode.rawcoder.[1mTestRSLegacyRawCoder[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.rawcoder.[1mTestXORRawCoderInteroperable2[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m7[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m7[m, Time elapsed: 0.081 s - in org.apache.hadoop.io.erasurecode.rawcoder.[1mTestXORRawCoderInteroperable2[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.rawcoder.[1mTestNativeRSRawCoder[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m18[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m18[m, Time elapsed: 0.085 s - in org.apache.hadoop.io.erasurecode.rawcoder.[1mTestNativeRSRawCoder[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.rawcoder.[1mTestXORRawCoderInteroperable1[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m7[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m7[m, Time elapsed: 0.084 s - in org.apache.hadoop.io.erasurecode.rawcoder.[1mTestXORRawCoderInteroperable1[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.rawcoder.[1mTestNativeXORRawCoder[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m8[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m8[m, Time elapsed: 0.082 s - in org.apache.hadoop.io.erasurecode.rawcoder.[1mTestNativeXORRawCoder[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.[1mTestCodecRawCoderMapping[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.146 s - in org.apache.hadoop.io.erasurecode.[1mTestCodecRawCoderMapping[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.coder.[1mTestXORCoder[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.161 s - in org.apache.hadoop.io.erasurecode.coder.[1mTestXORCoder[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.coder.[1mTestRSErasureCoder[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.299 s - in org.apache.hadoop.io.erasurecode.coder.[1mTestRSErasureCoder[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.coder.[1mTestHHXORErasureCoder[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.327 s - in org.apache.hadoop.io.erasurecode.coder.[1mTestHHXORErasureCoder[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.erasurecode.[1mTestECSchema[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.056 s - in org.apache.hadoop.io.erasurecode.[1mTestECSchema[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestDataByteBuffers[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.058 s - in org.apache.hadoop.io.[1mTestDataByteBuffers[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestTextNonUTF8[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.087 s - in org.apache.hadoop.io.[1mTestTextNonUTF8[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestSetFile[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.599 s - in org.apache.hadoop.io.[1mTestSetFile[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.serializer.[1mTestSerializationFactory[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.121 s - in org.apache.hadoop.io.serializer.[1mTestSerializationFactory[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.serializer.avro.[1mTestAvroSerialization[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.163 s - in org.apache.hadoop.io.serializer.avro.[1mTestAvroSerialization[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.serializer.[1mTestWritableSerialization[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.112 s - in org.apache.hadoop.io.serializer.[1mTestWritableSerialization[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestEnumSetWritable[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.14 s - in org.apache.hadoop.io.[1mTestEnumSetWritable[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestIOUtils[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m14[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.236 s - in org.apache.hadoop.io.[1mTestIOUtils[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestArrayPrimitiveWritable[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.088 s - in org.apache.hadoop.io.[1mTestArrayPrimitiveWritable[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestArrayFile[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.539 s - in org.apache.hadoop.io.[1mTestArrayFile[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestSecureIOUtils[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m4[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m1[m, Time elapsed: 0.178 s - in org.apache.hadoop.io.[1mTestSecureIOUtils[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestMapWritable[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.092 s - in org.apache.hadoop.io.[1mTestMapWritable[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestUTF8[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.156 s - in org.apache.hadoop.io.[1mTestUTF8[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.retry.[1mTestDefaultRetryPolicy[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.122 s - in org.apache.hadoop.io.retry.[1mTestDefaultRetryPolicy[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.retry.[1mTestConnectionRetryPolicy[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.126 s - in org.apache.hadoop.io.retry.[1mTestConnectionRetryPolicy[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.retry.[1mTestRetryProxy[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m15[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.261 s - in org.apache.hadoop.io.retry.[1mTestRetryProxy[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.retry.[1mTestFailoverProxy[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.102 s - in org.apache.hadoop.io.retry.[1mTestFailoverProxy[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestMD5Hash[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.094 s - in org.apache.hadoop.io.[1mTestMD5Hash[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestBooleanWritable[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.095 s - in org.apache.hadoop.io.[1mTestBooleanWritable[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestSequenceFile[m
+[[1;31mERROR[m] [1;31mTests [0;1mrun: [0;1m11[m, [1;31mFailures: [0;1;31m1[m, Errors: 0, Skipped: 0, Time elapsed: 3.176 s[1;31m <<< FAILURE![m - in org.apache.hadoop.io.[1mTestSequenceFile[m
+[[1;31mERROR[m] testRecursiveSeqFileCreate(org.apache.hadoop.io.TestSequenceFile)  Time elapsed: 0.011 s  <<< FAILURE!
+java.lang.AssertionError: Expected an IOException due to missing parent
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.apache.hadoop.io.TestSequenceFile.testRecursiveSeqFileCreate(TestSequenceFile.java:670)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at edu.illinois.CTestJUnit4Runner$2.evaluate(CTestJUnit4Runner.java:117)
+	at edu.illinois.CTestJUnit4Runner$3.evaluate(CTestJUnit4Runner.java:133)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at edu.illinois.CTestJUnit4Runner$1.evaluate(CTestJUnit4Runner.java:102)
+	at edu.illinois.CTestJUnit4Runner$4.evaluate(CTestJUnit4Runner.java:179)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestMapFile[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m22[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.656 s - in org.apache.hadoop.io.[1mTestMapFile[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestMoreWeakReferencedElasticByteBufferPool[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.086 s - in org.apache.hadoop.io.[1mTestMoreWeakReferencedElasticByteBufferPool[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestBloomMapFile[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.598 s - in org.apache.hadoop.io.[1mTestBloomMapFile[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestText[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m18[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.259 s - in org.apache.hadoop.io.[1mTestText[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestGenericWritable[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.119 s - in org.apache.hadoop.io.[1mTestGenericWritable[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestTFile[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.279 s - in org.apache.hadoop.io.file.tfile.[1mTestTFile[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestTFileUnsortedByteArrays[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.213 s - in org.apache.hadoop.io.file.tfile.[1mTestTFileUnsortedByteArrays[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestTFileComparator2[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.25 s - in org.apache.hadoop.io.file.tfile.[1mTestTFileComparator2[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestVLong[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.375 s - in org.apache.hadoop.io.file.tfile.[1mTestVLong[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestTFileLzoCodecsByteArrays[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m25[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.113 s - in org.apache.hadoop.io.file.tfile.[1mTestTFileLzoCodecsByteArrays[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestCompression[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.111 s - in org.apache.hadoop.io.file.tfile.[1mTestCompression[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestTFileSplit[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.863 s - in org.apache.hadoop.io.file.tfile.[1mTestTFileSplit[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestTFileNoneCodecsByteArrays[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m25[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.318 s - in org.apache.hadoop.io.file.tfile.[1mTestTFileNoneCodecsByteArrays[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestTFileNoneCodecsStreams[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m19[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.338 s - in org.apache.hadoop.io.file.tfile.[1mTestTFileNoneCodecsStreams[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestTFileJClassComparatorByteArrays[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m25[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.459 s - in org.apache.hadoop.io.file.tfile.[1mTestTFileJClassComparatorByteArrays[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestTFileComparators[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.184 s - in org.apache.hadoop.io.file.tfile.[1mTestTFileComparators[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestTFileNoneCodecsJClassComparatorByteArrays[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m25[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.331 s - in org.apache.hadoop.io.file.tfile.[1mTestTFileNoneCodecsJClassComparatorByteArrays[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestTFileByteArrays[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m25[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.439 s - in org.apache.hadoop.io.file.tfile.[1mTestTFileByteArrays[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestTFileStreams[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m19[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.324 s - in org.apache.hadoop.io.file.tfile.[1mTestTFileStreams[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestTFileLzoCodecsStreams[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m19[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.128 s - in org.apache.hadoop.io.file.tfile.[1mTestTFileLzoCodecsStreams[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestTFileSeqFileComparison[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.201 s - in org.apache.hadoop.io.file.tfile.[1mTestTFileSeqFileComparison[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.file.tfile.[1mTestTFileSeek[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.761 s - in org.apache.hadoop.io.file.tfile.[1mTestTFileSeek[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestArrayWritable[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.088 s - in org.apache.hadoop.io.[1mTestArrayWritable[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestSequenceFileAppend[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m5[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m3[m, Time elapsed: 0.22 s - in org.apache.hadoop.io.[1mTestSequenceFileAppend[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.nativeio.[1mTestNativeIO[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m28[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m28[m, Time elapsed: 0.088 s - in org.apache.hadoop.io.nativeio.[1mTestNativeIO[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.nativeio.[1mTestSharedFileDescriptorFactory[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m3[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m3[m, Time elapsed: 0.085 s - in org.apache.hadoop.io.nativeio.[1mTestSharedFileDescriptorFactory[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestWritableName[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.122 s - in org.apache.hadoop.io.[1mTestWritableName[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestBytesWritable[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.085 s - in org.apache.hadoop.io.[1mTestBytesWritable[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestDefaultStringifier[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.127 s - in org.apache.hadoop.io.[1mTestDefaultStringifier[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestWritable[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.11 s - in org.apache.hadoop.io.[1mTestWritable[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestWeakReferencedElasticByteBufferPool[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m10[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.064 s - in org.apache.hadoop.io.[1mTestWeakReferencedElasticByteBufferPool[m
+[[1;34mINFO[m] Running org.apache.hadoop.io.[1mTestWritableUtils[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.081 s - in org.apache.hadoop.io.[1mTestWritableUtils[m
+[[1;34mINFO[m] Running org.apache.hadoop.tools.[1mTestCommandShell[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.091 s - in org.apache.hadoop.tools.[1mTestCommandShell[m
+[[1;34mINFO[m] Running org.apache.hadoop.log.[1mTestLogThrottlingHelper[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.058 s - in org.apache.hadoop.log.[1mTestLogThrottlingHelper[m
+[[1;34mINFO[m] Running org.apache.hadoop.log.[1mTestLogLevel[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.061 s - in org.apache.hadoop.log.[1mTestLogLevel[m
+[[1;34mINFO[m] Running org.apache.hadoop.log.[1mTestLog4Json[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.146 s - in org.apache.hadoop.log.[1mTestLog4Json[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] Results:
+[[1;34mINFO[m] 
+[[1;31mERROR[m] [1;31mFailures: [m
+[[1;31mERROR[m] [1;31m  TestCopyPreserveFlag.testDirectoryCpWithP:229->assertAttributesPreserved:104 expected:<23456000> but was:<1700632225097>[m
+[[1;31mERROR[m] [1;31m  TestSequenceFile.testRecursiveSeqFileCreate:670 Expected an IOException due to missing parent[m
+[[1;31mERROR[m] [1;31m  TestIPC.testProxyUserBinding:1729->checkUserBinding:1745 
+Wanted but not invoked:
+socket.bind(DovelyW-1/127.0.1.1:0);
+-> at org.apache.hadoop.ipc.TestIPC.checkUserBinding(TestIPC.java:1745)
+
+However, there were exactly 5 interactions with this mock:
+socket.setTcpNoDelay(true);
+-> at org.apache.hadoop.ipc.Client$Connection.setupConnection(Client.java:610)
+
+socket.setKeepAlive(true);
+-> at org.apache.hadoop.ipc.Client$Connection.setupConnection(Client.java:611)
+
+socket.getChannel();
+-> at org.apache.hadoop.net.NetUtils.connect(NetUtils.java:584)
+
+socket.connect(0.0.0.0/0.0.0.0:0, 20000);
+-> at org.apache.hadoop.net.NetUtils.connect(NetUtils.java:598)
+
+socket.close();
+-> at org.apache.hadoop.ipc.Client$Connection.closeConnection(Client.java:882)
+
+[m
+[[1;31mERROR[m] [1;31m  TestIPC.testUserBinding:1724->checkUserBinding:1745 
+Wanted but not invoked:
+socket.bind(DovelyW-1/127.0.1.1:0);
+-> at org.apache.hadoop.ipc.TestIPC.checkUserBinding(TestIPC.java:1745)
+
+However, there were exactly 5 interactions with this mock:
+socket.setTcpNoDelay(true);
+-> at org.apache.hadoop.ipc.Client$Connection.setupConnection(Client.java:610)
+
+socket.setKeepAlive(true);
+-> at org.apache.hadoop.ipc.Client$Connection.setupConnection(Client.java:611)
+
+socket.getChannel();
+-> at org.apache.hadoop.net.NetUtils.connect(NetUtils.java:584)
+
+socket.connect(0.0.0.0/0.0.0.0:0, 20000);
+-> at org.apache.hadoop.net.NetUtils.connect(NetUtils.java:598)
+
+socket.close();
+-> at org.apache.hadoop.ipc.Client$Connection.closeConnection(Client.java:882)
+
+[m
+[[1;31mERROR[m] [1;31m  TestNativeCodeLoader.testNativeCodeLoaded:52 TestNativeCodeLoader: libhadoop.so testing was required, but libhadoop.so was not loaded.[m
+[[1;31mERROR[m] [1;31mErrors: [m
+[[1;31mERROR[m] [1;31m  TestFileContextResolveAfs.testFileContextResolveAfs:67 » IO Error 1 creating s...[m
+[[1;31mERROR[m] [1;31m  TestLocalFSContractVectoredRead.initializationError » InvalidTestClass Invalid...[m
+[[1;31mERROR[m] [1;31m  TestCredentialProviderFactory.testFactory:84 » Checksum Checksum error: file:/...[m
+[[1;34mINFO[m] 
+[[1;31mERROR[m] [1;31mTests run: 4829, Failures: 5, Errors: 3, Skipped: 379[m
+[[1;34mINFO[m] 
+[[1;31mERROR[m] There was a timeout or other error in the fork
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
 [[1;34mINFO[m] [1;32mBUILD SUCCESS[m
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
-[[1;34mINFO[m] Total time:  0.610 s
-[[1;34mINFO[m] Finished at: 2023-11-21T02:47:41+08:00
+[[1;34mINFO[m] Total time:  34:48 min
+[[1;34mINFO[m] Finished at: 2023-11-22T14:22:29+08:00
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m

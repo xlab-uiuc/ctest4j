@@ -1,103 +1,158 @@
-[[1;34mINFO[m] Scanning for projects...
-[[1;34mINFO[m] ------------------------------------------------------------------------
-[[1;34mINFO[m] Detecting the operating system and CPU architecture
-[[1;34mINFO[m] ------------------------------------------------------------------------
-[[1;34mINFO[m] os.detected.name: linux
-[[1;34mINFO[m] os.detected.arch: x86_64
-[[1;34mINFO[m] os.detected.bitness: 64
-[[1;34mINFO[m] os.detected.version: 5.10
-[[1;34mINFO[m] os.detected.version.major: 5
-[[1;34mINFO[m] os.detected.version.minor: 10
-[[1;34mINFO[m] os.detected.release: ubuntu
-[[1;34mINFO[m] os.detected.release.version: 20.04
-[[1;34mINFO[m] os.detected.release.like.ubuntu: true
-[[1;34mINFO[m] os.detected.release.like.debian: true
-[[1;34mINFO[m] os.detected.classifier: linux-x86_64
-[[1;34mINFO[m] 
-[[1;34mINFO[m] [1m------------------< [0;36morg.apache.hadoop:hadoop-common[0;1m >-------------------[m
-[[1;34mINFO[m] [1mBuilding Apache Hadoop Common 3.3.6[m
-[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
-[[1;34mINFO[m] 
-[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:3.1.0:clean[m [1m(default-clean)[m @ [36mhadoop-common[0;1m ---[m
-[[1;34mINFO[m] Deleting /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target
-[[1;34mINFO[m] Deleting /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/site/markdown (includes = [UnixShellAPI.md], excludes = [])
-[[1;34mINFO[m] Deleting /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/site/resources (includes = [configuration.xsl, core-default.xml], excludes = [])
-[[1;34mINFO[m] 
-[[1;34mINFO[m] [1m--- [0;32mmaven-antrun-plugin:1.7:run[m [1m(create-testdirs)[m @ [36mhadoop-common[0;1m ---[m
-[[1;34mINFO[m] Executing tasks
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Detecting the operating system and CPU architecture
+[INFO] ------------------------------------------------------------------------
+[INFO] os.detected.name: linux
+[INFO] os.detected.arch: x86_64
+[INFO] os.detected.bitness: 64
+[INFO] os.detected.version: 5.10
+[INFO] os.detected.version.major: 5
+[INFO] os.detected.version.minor: 10
+[INFO] os.detected.release: ubuntu
+[INFO] os.detected.release.version: 20.04
+[INFO] os.detected.release.like.ubuntu: true
+[INFO] os.detected.release.like.debian: true
+[INFO] os.detected.classifier: linux-x86_64
+[INFO] 
+[INFO] ------------------< org.apache.hadoop:hadoop-common >-------------------
+[INFO] Building Apache Hadoop Common 3.3.6
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ hadoop-common ---
+[INFO] Deleting /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target
+[INFO] Deleting /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/site/markdown (includes = [UnixShellAPI.md], excludes = [])
+[INFO] Deleting /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/site/resources (includes = [configuration.xsl, core-default.xml], excludes = [])
+[INFO] 
+[INFO] --- maven-antrun-plugin:1.7:run (create-testdirs) @ hadoop-common ---
+[INFO] Executing tasks
 
 main:
     [mkdir] Created dir: /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/test-dir
     [mkdir] Created dir: /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/test/data
-[[1;34mINFO[m] Executed tasks
-[[1;34mINFO[m] 
-[[1;34mINFO[m] [1m--- [0;32mprotobuf-maven-plugin:0.5.1:compile[m [1m(src-compile-protoc)[m @ [36mhadoop-common[0;1m ---[m
-[[1;34mINFO[m] Compiling 14 proto file(s) to /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/generated-sources/java
-[[1;34mINFO[m] 
-[[1;34mINFO[m] [1m--- [0;32mprotobuf-maven-plugin:0.5.1:compile[m [1m(src-compile-protoc-legacy)[m @ [36mhadoop-common[0;1m ---[m
-[[1;34mINFO[m] Compiling 1 proto file(s) to /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/generated-sources/java
-[[1;34mINFO[m] 
-[[1;34mINFO[m] [1m--- [0;32mmaven-enforcer-plugin:3.0.0-M1:enforce[m [1m(banned-illegal-imports)[m @ [36mhadoop-common[0;1m ---[m
-[[1;34mINFO[m] 
-[[1;34mINFO[m] [1m--- [0;32mreplacer:1.5.3:replace[m [1m(replace-generated-sources)[m @ [36mhadoop-common[0;1m ---[m
-[[1;34mINFO[m] Replacement run on 14 files.
-[[1;34mINFO[m] 
-[[1;34mINFO[m] [1m--- [0;32mreplacer:1.5.3:replace[m [1m(replace-sources)[m @ [36mhadoop-common[0;1m ---[m
-[[1;34mINFO[m] Replacement run on 1140 files.
-[[1;34mINFO[m] 
-[[1;34mINFO[m] [1m--- [0;32mreplacer:1.5.3:replace[m [1m(replace-guava)[m @ [36mhadoop-common[0;1m ---[m
-[[1;34mINFO[m] Replacement run on 1857 files.
-[[1;34mINFO[m] 
-[[1;34mINFO[m] [1m--- [0;32mhadoop-maven-plugins:3.3.6:version-info[m [1m(version-info)[m @ [36mhadoop-common[0;1m ---[m
-[[1;34mINFO[m] SCM: GIT
-[[1;34mINFO[m] Computed MD5: 4613cec3cbcdbe94eeb62e224edec98d
-[[1;34mINFO[m] 
-[[1;34mINFO[m] [1m--- [0;32mhadoop-maven-plugins:3.3.6:resource-gz[m [1m(resource-gz)[m @ [36mhadoop-common[0;1m ---[m
-[[1;34mINFO[m] Compressing /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/webapps/static/hadoop.css to /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/webapps/static/hadoop.css.gz
-[[1;34mINFO[m] 
-[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:resources[m [1m(default-resources)[m @ [36mhadoop-common[0;1m ---[m
-[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
-[[1;34mINFO[m] Copying 10 resources
-[[1;34mINFO[m] Copying 1 resource
-[[1;34mINFO[m] 
-[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.1:compile[m [1m(default-compile)[m @ [36mhadoop-common[0;1m ---[m
-[[1;34mINFO[m] Compiling 1160 source files to /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/classes
-[[1;34mINFO[m] -------------------------------------------------------------
-[[1;33mWARNING[m] COMPILATION WARNING : 
-[[1;34mINFO[m] -------------------------------------------------------------
-[[1;33mWARNING[m] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/FastByteComparisons.java:[27,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
-[[1;33mWARNING[m] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[26,16] sun.misc.Signal is internal proprietary API and may be removed in a future release
-[[1;33mWARNING[m] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[27,16] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
-[[1;33mWARNING[m] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/nativeio/NativeIO.java:[48,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
-[[1;33mWARNING[m] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[21,16] sun.misc.Signal is internal proprietary API and may be removed in a future release
-[[1;33mWARNING[m] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[22,16] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
-[[1;33mWARNING[m] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/FastByteComparisons.java:[27,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
-[[1;33mWARNING[m] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[26,16] sun.misc.Signal is internal proprietary API and may be removed in a future release
-[[1;33mWARNING[m] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[27,16] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
-[[1;33mWARNING[m] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/nativeio/NativeIO.java:[48,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
-[[1;33mWARNING[m] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[21,16] sun.misc.Signal is internal proprietary API and may be removed in a future release
-[[1;33mWARNING[m] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[22,16] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
-[[1;34mINFO[m] 12 warnings 
-[[1;34mINFO[m] -------------------------------------------------------------
-[[1;34mINFO[m] -------------------------------------------------------------
-[[1;31mERROR[m] COMPILATION ERROR : 
-[[1;34mINFO[m] -------------------------------------------------------------
-[[1;31mERROR[m] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/conf/Configuration.java:[114,20] package edu.illionis does not exist
-[[1;34mINFO[m] 1 error
-[[1;34mINFO[m] -------------------------------------------------------------
-[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
-[[1;34mINFO[m] [1;31mBUILD FAILURE[m
-[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
-[[1;34mINFO[m] Total time:  3.232 s
-[[1;34mINFO[m] Finished at: 2023-11-21T02:47:38+08:00
-[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
-[[1;31mERROR[m] Failed to execute goal [32morg.apache.maven.plugins:maven-compiler-plugin:3.1:compile[m [1m(default-compile)[m on project [36mhadoop-common[m: [1;31mCompilation failure[m
-[[1;31mERROR[m] [1;31m/home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/conf/Configuration.java:[114,20] package edu.illionis does not exist[m
-[[1;31mERROR[m] [1;31m[m
-[[1;31mERROR[m] -> [1m[Help 1][m
-[[1;31mERROR[m] 
-[[1;31mERROR[m] To see the full stack trace of the errors, re-run Maven with the [1m-e[m switch.
-[[1;31mERROR[m] Re-run Maven using the [1m-X[m switch to enable full debug logging.
-[[1;31mERROR[m] 
-[[1;31mERROR[m] For more information about the errors and possible solutions, please read the following articles:
-[[1;31mERROR[m] [1m[Help 1][m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.1:compile (src-compile-protoc) @ hadoop-common ---
+[INFO] Compiling 14 proto file(s) to /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/generated-sources/java
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.1:compile (src-compile-protoc-legacy) @ hadoop-common ---
+[INFO] Compiling 1 proto file(s) to /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/generated-sources/java
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.0.0-M1:enforce (banned-illegal-imports) @ hadoop-common ---
+[INFO] 
+[INFO] --- replacer:1.5.3:replace (replace-generated-sources) @ hadoop-common ---
+[INFO] Replacement run on 14 files.
+[INFO] 
+[INFO] --- replacer:1.5.3:replace (replace-sources) @ hadoop-common ---
+[INFO] Replacement run on 1140 files.
+[INFO] 
+[INFO] --- replacer:1.5.3:replace (replace-guava) @ hadoop-common ---
+[INFO] Replacement run on 1857 files.
+[INFO] 
+[INFO] --- hadoop-maven-plugins:3.3.6:version-info (version-info) @ hadoop-common ---
+[INFO] SCM: GIT
+[INFO] Computed MD5: e67973fd791437846999b633da682
+[INFO] 
+[INFO] --- hadoop-maven-plugins:3.3.6:resource-gz (resource-gz) @ hadoop-common ---
+[INFO] Compressing /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/webapps/static/hadoop.css to /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/webapps/static/hadoop.css.gz
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ hadoop-common ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 10 resources
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ hadoop-common ---
+[INFO] Compiling 1160 source files to /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/classes
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/FastByteComparisons.java:[27,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[26,16] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[27,16] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/nativeio/NativeIO.java:[48,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[21,16] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[22,16] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/FastByteComparisons.java:[27,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[26,16] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[27,16] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/nativeio/NativeIO.java:[48,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[21,16] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[22,16] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/FastByteComparisons.java:[27,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[26,16] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[27,16] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/nativeio/NativeIO.java:[48,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[21,16] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[22,16] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/FastByteComparisons.java:[134,20] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/FastByteComparisons.java:[134,20] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/FastByteComparisons.java:[134,20] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/FastByteComparisons.java:[140,22] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/FastByteComparisons.java:[145,29] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[42,42] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[42,42] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[42,42] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[71,11] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[71,11] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[71,11] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[92,20] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[93,7] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[113,5] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[126,22] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[126,22] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/service/launcher/IrqHandler.java:[126,22] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/nativeio/NativeIO.java:[895,17] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/nativeio/NativeIO.java:[897,7] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/nativeio/NativeIO.java:[897,24] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[44,43] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[44,43] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[44,43] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[46,19] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[46,19] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[46,19] sun.misc.SignalHandler is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[50,39] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[50,21] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[59,24] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[59,24] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/SignalLogger.java:[59,24] sun.misc.Signal is internal proprietary API and may be removed in a future release
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/conf/Configuration.java: Some input files use or override a deprecated API.
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/conf/Configuration.java: Recompile with -Xlint:deprecation for details.
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/fs/FileSystem.java: Some input files use unchecked or unsafe operations.
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/fs/FileSystem.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- avro-maven-plugin:1.7.7:schema (generate-avro-test-sources) @ hadoop-common ---
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.1:test-compile (src-test-compile-protoc) @ hadoop-common ---
+[INFO] Compiling 2 proto file(s) to /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/generated-test-sources/java
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.1:test-compile (src-test-compile-protoc-legacy) @ hadoop-common ---
+[INFO] Compiling 2 proto file(s) to /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/generated-test-sources/java
+[INFO] 
+[INFO] --- replacer:1.5.3:replace (replace-test-sources) @ hadoop-common ---
+[INFO] Replacement run on 711 files.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ hadoop-common ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 35 resources
+[INFO] 
+[INFO] --- maven-antrun-plugin:1.7:run (create-log-dir) @ hadoop-common ---
+[INFO] Executing tasks
+
+main:
+   [delete] Deleting directory /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/test/data
+    [mkdir] Created dir: /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/test/data
+    [mkdir] Created dir: /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/log
+     [copy] Copying 8 files to /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/test-classes
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- replacer:1.5.3:replace (replace-generated-test-sources) @ hadoop-common ---
+[INFO] Replacement run on 3 files.
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ hadoop-common ---
+[INFO] Compiling 717 source files to /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/target/test-classes
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/test/java/org/apache/hadoop/security/ssl/KeyStoreTestUtil.java: Some input files use or override a deprecated API.
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/test/java/org/apache/hadoop/security/ssl/KeyStoreTestUtil.java: Recompile with -Xlint:deprecation for details.
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/test/java/org/apache/hadoop/test/LambdaTestUtils.java: Some input files use unchecked or unsafe operations.
+[WARNING] /home/dovely/Ctest/ctest-runner/app/hadoop/hadoop-common-project/hadoop-common/src/test/java/org/apache/hadoop/test/LambdaTestUtils.java: Recompile with -Xlint:unchecked for details.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  9.379 s
+[INFO] Finished at: 2023-11-22T15:25:42+08:00
+[INFO] ------------------------------------------------------------------------

@@ -22,6 +22,8 @@ IMPORT_NORMAL = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinoi
 
 IMPORT_ABSTRACT = {"junit4": "import edu.illinois.CTest;\n\n"}
 
+LOG_FILES = {"compile": "log/compile.txt", "track": "log/track.txt", "ctest": "ctest.txt"}
+
 # Utility section
 def print_log(message: str):
     print("<<<ctest-runner-script>>> " + message)
@@ -156,13 +158,13 @@ def add_runwith_for_all(target_dir: str):
                     f.write(contents)
 
 def run_tests_to_track(output_dir: str, config_used_dir: str="src/test/resources/used_config"):
-    cmd = ["mvn", "clean", "test-compile"]
+    cmd = ["mvn", "-B", "clean", "test-compile"]
     print_log("compile test code: " + " ".join(cmd))
     with open(output_dir + "/mvn_compile.txt", "w") as f:
         child = subprocess.Popen(cmd, stdout=f)
         child.wait()
     print_log("output saved to " + output_dir + "/mvn_compile.txt")
-    cmd = ["mvn", "surefire:test", "-Dmode=default", "-Dconfig.used.dir=" + config_used_dir, "-Dsave.used.config=true"]
+    cmd = ["mvn", "-B", "surefire:test", "-Dmode=default", "-Dconfig.used.dir=" + config_used_dir, "-Dsave.used.config=true"]
     print_log("run tests: " + " ".join(cmd))
     with open(output_dir + "/mvn_track.txt", "w") as f:
         child = subprocess.Popen(cmd, stdout=f)
@@ -261,7 +263,7 @@ def annotate_test_method(class_method_pair: Dict, target_dir: str, config_used_d
     return class_method_pair
 
 def run_ctests(output_dir: str, config_used_dir: str="src/test/resources/used_config"):
-    cmd = ["mvn", "surefire:test", "-Dmode=default", "-Dconfig.used.dir=" + config_used_dir, "-Dsave.used.config=false"]
+    cmd = ["mvn", "-B", "surefire:test", "-Dmode=default", "-Dconfig.used.dir=" + config_used_dir, "-Dsave.used.config=false"]
     print_log("run CTests: " + " ".join(cmd))
     with open(output_dir + "/mvn_ctest.txt", "w") as f:
         child = subprocess.Popen(cmd, stdout=f)

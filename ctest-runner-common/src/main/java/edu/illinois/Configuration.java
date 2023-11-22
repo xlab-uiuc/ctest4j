@@ -31,7 +31,7 @@ public class Configuration {
     }
 
     public void set(String name, String value) {
-        ConfigTracker.markParmaAsSet(name);
+        ConfigTracker.markParamAsSet(name);
         configMap.put(name, value);
     }
 }

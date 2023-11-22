@@ -1,9 +1,8 @@
-package edu.illinois.junit4;
+package edu.illinois.junit4.designA;
 
 import edu.illinois.CTest;
 import edu.illinois.CTestJUnit4Runner;
 import edu.illinois.Configuration;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -23,7 +22,6 @@ public class TestBeforeClassAndBefore {
 
     @Before
     public void setUp2() {
-        System.out.println("In setUp");
         conf = new Configuration();
         conf.get("before");
     }
@@ -31,5 +29,10 @@ public class TestBeforeClassAndBefore {
     @CTest(value = {"beforeClass", "before", "param1"})
     public void test() {
         conf.get("param1");
+    }
+
+    @CTest(value = {"beforeClass", "before", "param2"})
+    public void test2() {
+        conf.get("param2");
     }
 }

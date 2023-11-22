@@ -22,6 +22,14 @@ public class Configuration {
         System.out.println("In get: " + name + " value: null");
         return "null";
     }
+    public String get(String name, String defaultValue) {
+        String value = get(name);
+        if (value.equals("null")) {
+            return defaultValue;
+        }
+        return value;
+    }
+
     public void set(String name, String value) {
         ConfigTracker.markParmaAsSet(name);
         configMap.put(name, value);

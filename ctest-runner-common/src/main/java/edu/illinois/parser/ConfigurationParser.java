@@ -20,5 +20,9 @@ public interface ConfigurationParser {
     Set<String> parseConfigNameSet(String configFilePath) throws IOException;
 
     Map<String, String> parseConfigNameValueMap(String configFilePath) throws IOException;
+
+    Set<String> getClassLevelRequiredConfigParam(String configFilePath) throws IOException;
+
+    Map<String, Set<String>> getMethodLevelRequiredConfigParam(String configFilePath) throws IOException;
 }
 

@@ -1,32 +1,34 @@
-package edu.illinois.junit5;
+package edu.illinois.junit4.designB;
 
 import edu.illinois.*;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 
 /**
  * Author: Shuai Wang
- * Date:  11/2/23
+ * Date:  11/10/23
  */
-@ExtendWith(CTestJunit5Extension.class)
-@CTestClass(configMappingFile = "src/test/resources/FromAllTest.json",
+@RunWith(CTestJUnit4Runner2.class)
+@CTestClass(configMappingFile = "src/test/resources/designB/FromAllTest.json",
         value = {"parameter1", "parameter2"}, regex = "regex-parameter(1|2)")
 public class FromAllTest {
     Configuration conf = null;
-    @BeforeAll
+    @BeforeClass
     public static void beforeClass() {
         Configuration conf = new Configuration();
         conf.get("beforeClass");
     }
 
-    @BeforeEach
+    @Before
     public void before() {
         conf = new Configuration();
         conf.get("before");
     }
 
-    @CTest
+    @Test
     public void testTestAnnotation() {
         conf.get("testTestAnnotation");
         conf.get("parameter1");
@@ -44,7 +46,7 @@ public class FromAllTest {
         conf.get("regex-parameter2");
     }
 
-    @CTest(expected = UnUsedConfigParamException.class)
+    @Test(expected = UnUsedConfigParamException.class)
     public void testTestAnnotationFail() {
         conf.get("testTestAnnotationFail");
         conf.get("parameter1");
@@ -65,7 +67,7 @@ public class FromAllTest {
         // "never-used" from the mapping file is never used so the test would fail
     }
 
-    @CTest(expected = UnUsedConfigParamException.class)
+    @Test(expected = UnUsedConfigParamException.class)
     public void testTestClassAnnotationFail() {
         conf.get("testTestClassAnnotationFail");
         // "parameter1" is never used so the test would fail
@@ -83,7 +85,7 @@ public class FromAllTest {
         conf.get("regex-parameter2");
     }
 
-    @CTest(expected = UnUsedConfigParamException.class)
+    @Test(expected = UnUsedConfigParamException.class)
     public void testTestClassRegexFail() {
         conf.get("testTestClassRegexFail");
         conf.get("parameter1");

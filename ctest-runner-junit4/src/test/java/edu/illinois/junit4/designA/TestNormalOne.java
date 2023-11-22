@@ -1,4 +1,4 @@
-package edu.illinois.junit4;
+package edu.illinois.junit4.designA;
 
 import edu.illinois.Configuration;
 import org.junit.Test;

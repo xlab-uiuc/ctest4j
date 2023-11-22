@@ -13,6 +13,7 @@ import java.util.List;
  * Author: Shuai Wang
  * Date:  10/18/23
  */
+@Deprecated
 public class CTestJUnit4Suite extends Suite {
 
     public CTestJUnit4Suite(Class<?> klass, RunnerBuilder builder) throws InitializationError {
@@ -35,8 +36,8 @@ public class CTestJUnit4Suite extends Suite {
                     continue;
                 }
                 try {
-                    runners.add(new CTestJUnit4SuiteRunner(testClass));
-                } catch (InitializationError initializationError) {
+                    runners.add(new CTestJUnit4Runner(testClass));
+                } catch (Exception initializationError) {
                     failedKlasses.add(testClass);
                 }
             }

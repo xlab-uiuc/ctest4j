@@ -14,7 +14,8 @@ public @interface CTest {
     /** A list of configuration parameter name as input for a single test method */
     String[] value() default {};
     String[] optional() default {};
-    String file() default "";
+    String configMappingFile() default "";
+    String regex() default "";
 
     /** =============================== Copied From @Test annotation =================================== */
     static class None extends Throwable {

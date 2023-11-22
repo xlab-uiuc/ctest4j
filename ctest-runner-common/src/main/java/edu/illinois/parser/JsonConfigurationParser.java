@@ -4,6 +4,8 @@ package edu.illinois.parser;
  * Author: Shuai Wang
  * Date:  10/17/23
  */
+import edu.illinois.ConfigUsage;
+
 import javax.json.*;
 import java.io.FileReader;
 import java.io.IOException;
@@ -61,5 +63,21 @@ public class JsonConfigurationParser implements ConfigurationParser {
             configNameValueMap.put(entry.getKey(), ((JsonString)entry.getValue()).getString());
         }
         return configNameValueMap;
+    }
+
+    /**
+     * Parse the JSON configuration file and return the set of parameters that must be used in each test method.
+     */
+    @Override
+    public Set<String> getClassLevelRequiredConfigParam(String configFilePath) throws IOException {
+        return ConfigUsage.fromFile(configFilePath).getClassLevelParams();
+    }
+
+    /**
+     * Parse the JSON configuration file and return the map of method name and its required configuration parameters.
+     */
+    @Override
+    public Map<String, Set<String>> getMethodLevelRequiredConfigParam(String configFilePath) throws IOException {
+        return ConfigUsage.fromFile(configFilePath).getMethodLevelParams();
     }
 }

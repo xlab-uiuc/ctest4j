@@ -21,4 +21,14 @@ public class XmlConfigurationParser implements ConfigurationParser {
     public Map<String, String> parseConfigNameValueMap(String configFilePath) throws IOException {
         return new HashMap<>();
     }
+
+    @Override
+    public Set<String> getClassLevelRequiredConfigParam(String configFilePath) throws IOException {
+        return null;
+    }
+
+    @Override
+    public Map<String, Set<String>> getMethodLevelRequiredConfigParam(String configFilePath) throws IOException {
+        return null;
+    }
 }

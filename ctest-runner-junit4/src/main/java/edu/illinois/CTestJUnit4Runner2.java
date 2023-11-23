@@ -4,6 +4,7 @@ package edu.illinois;
 import org.junit.Test;
 import org.junit.internal.runners.statements.ExpectException;
 import org.junit.internal.runners.statements.FailOnTimeout;
+import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
@@ -31,6 +32,24 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
     public CTestJUnit4Runner2(Class<?> klass) throws InitializationError, IOException {
         super(klass);
         initializeRunner(klass);
+    }
+
+    @Override
+    protected void collectInitializationErrors(List<Throwable> errors) {
+        validateNestedRunWith(errors);
+        super.collectInitializationErrors(errors);
+    }
+
+    /**
+     * Check if the parent class has another RunWith annotation.
+     * @param errors
+     */
+    protected void validateNestedRunWith(List<Throwable> errors) {
+        // If the parent class has another RunWith annotation, skip the validation
+        Class<?> parentClass = getTestClass().getJavaClass().getSuperclass();
+        if (parentClass.getAnnotation(RunWith.class) != null) {
+            errors.add(new Exception("CTestJUnit4Runner does not support nested RunWith annotations"));
+        }
     }
 
     @Override

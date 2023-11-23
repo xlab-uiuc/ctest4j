@@ -23,7 +23,7 @@ IMPORT_NORMAL = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinoi
 
 IMPORT_ABSTRACT = {"junit4": "import edu.illinois.CTest;\n\n"}
 
-LOG_FILES = {"compile": "log/compile.txt", "track": "log/track.txt", "ctest": "ctest.txt"}
+LOG_FILES = {"compile": "compile.txt", "track": "track.txt", "ctest": "ctest.txt"}
 
 # Utility section
 def print_log(message: str):
@@ -63,9 +63,12 @@ def get_config_file_by_method_name(target_dir: str, method_name: str):
         if method_name + ".json" in entry:
             return entry
         
-def check_or_create_dir(target_dir: str):
+def check_or_create_dir(target_dir: str, exception: bool=False):
     if not os.path.isdir(target_dir):
-        os.makedirs(target_dir)
+        if not exception:
+            os.makedirs(target_dir)
+        else:
+            raise ValueError("Incorrect path: " + target_dir)
 
 def add_dependency(project: str, test_module: str):
     print_log("add dependency information for " + project + " with " + test_module)
@@ -175,7 +178,11 @@ def run_tests_to_track(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
     t2 = time.process_time()
     cmd = ["mvn", "-B", "clean", "test-compile"]
     print_log("compile test code: " + " ".join(cmd))
-    with open(output_dir + "/mvn_compile.txt", "w") as f:
+    log_file = LOG_FILES["compile"]
+    tmp_index = log_file.index(".")
+    t = time.localtime()
+    log_file = log_file[:tmp_index] + "_{:02d}{:02d}{:02d}".format(t.tm_hour, t.tm_min, t.tm_sec) + log_file[tmp_index:]
+    with open(output_dir + "/" + log_file, "w") as f:
         child = subprocess.Popen(cmd, stdout=f)
         child.wait()
     print_log("perf_conter() time: " + str(time.perf_counter() - t1) + "s")
@@ -186,7 +193,11 @@ def run_tests_to_track(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
     t2 = time.process_time()
     cmd = ["mvn", "-B", "surefire:test", "-Dmode=default", "-Dctest.mapping.dir=" + ctest_mapping_dir, "-Dctest.config.save=true"]
     print_log("run tests: " + " ".join(cmd))
-    with open(output_dir + "/mvn_track.txt", "w") as f:
+    log_file = LOG_FILES["track"]
+    tmp_index = log_file.index(".")
+    t = time.localtime()
+    log_file = log_file[:tmp_index] + "_{:02d}{:02d}{:02d}".format(t.tm_hour, t.tm_min, t.tm_sec) + log_file[tmp_index:]
+    with open(output_dir + "/" + log_file, "w") as f:
         child = subprocess.Popen(cmd, stdout=f)
         child.wait()
     print_log("perf_conter() time: " + str(time.perf_counter() - t1) + "s")
@@ -289,7 +300,11 @@ def run_ctests(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
     t2 = time.process_time()
     cmd = ["mvn", "-B", "surefire:test", "-Dmode=default", "-Dctest.mapping.dir=" + ctest_mapping_dir, "-Dctest.config.save=false"]
     print_log("run CTests: " + " ".join(cmd))
-    with open(output_dir + "/mvn_ctest.txt", "w") as f:
+    log_file = LOG_FILES["ctest"]
+    tmp_index = log_file.index(".")
+    t = time.localtime()
+    log_file = log_file[:tmp_index] + "_{:02d}{:02d}{:02d}".format(t.tm_hour, t.tm_min, t.tm_sec) + log_file[tmp_index:]
+    with open(output_dir + "/" + log_file, "w") as f:
         child = subprocess.Popen(cmd, stdout=f)
         child.wait()
     print_log("perf_conter() time: " + str(time.perf_counter() - t1) + "s")
@@ -303,14 +318,17 @@ def auto_annotate_script(project: str, test_module:str, project_dir: str, projec
     # print_log("import information added")
     print_log("======================================================================")
     if project == "hadoop-common":
-        cwd = os.getcwd()
+        log_dir = os.getcwd() + "/log"
+        check_or_create_dir(log_dir)
+        check_or_create_dir(project_dir, True)
+        check_or_create_dir(project_test_dir, True)
+        check_or_create_dir(ctest_mapping_dir)
         change_working_dir(project_dir)
         add_dependency(project, test_module)
         # add import and runwith to all test classes
         add_runwith_for_all(project_test_dir)
         # run all tests to track parameter usage, save those in "ctest/mapping"
-        check_or_create_dir(ctest_mapping_dir)
-        run_tests_to_track(cwd, ctest_mapping_dir)
+        run_tests_to_track(log_dir, ctest_mapping_dir)
         # read used config dir and analyze json file in "ctest/mapping"
         class_method_pair = get_class_method_pair(ctest_mapping_dir)
         # add corresponding @CTest annotation for child class and super class
@@ -318,9 +336,14 @@ def auto_annotate_script(project: str, test_module:str, project_dir: str, projec
         print_log("remaining:")
         for k, v in remaining.items():
             print(k, "->", v)
-        run_ctests(cwd, ctest_mapping_dir)
+        run_ctests(log_dir, ctest_mapping_dir)
 
 def test():
+    log_dir = os.getcwd() + "/log"
+    check_or_create_dir(log_dir)
+    # check_or_create_dir(project_dir)
+    # check_or_create_dir(project_test_dir)
+    # check_or_create_dir(ctest_mapping_dir)
     change_working_dir(os.getcwd() + "/../app/hadoop/hadoop-common-project/hadoop-common")
     # add_dependency("hadoop-common", "junit4")
     # add_runwith_for_all("src/test/java/org/apache/hadoop/crypto")
@@ -328,6 +351,7 @@ def test():
     remaining = annotate_test_method(class_method_pair, "src/test/java/org/apache/hadoop", "ctest/mapping")
     for k, v in remaining.items():
         print(k, "->", v)
+    run_ctests(log_dir, "ctest/mapping")
 
 # python auto_annotate.py hadoop-common junit4 ../app/hadoop/hadoop-common-project/hadoop-common src/test/java/org/apache/hadoop ctest/mapping
 if __name__ == "__main__":
@@ -339,5 +363,5 @@ if __name__ == "__main__":
     if sys.argv[2] not in TEST_MODULES_SUPPORTED:
         print_log("test module not supported")
         exit
-    # test()
-    auto_annotate_script(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
+    test()
+    # auto_annotate_script(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])

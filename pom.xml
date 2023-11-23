@@ -104,7 +104,6 @@
                 <artifactId>maven-plugin-plugin</artifactId>
                 <version>3.6.0</version>
             </plugin>
-
         </plugins>
     </build>
 

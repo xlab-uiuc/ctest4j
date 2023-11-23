@@ -3,6 +3,7 @@ package edu.illinois;
 import org.junit.Test;
 import org.junit.internal.runners.statements.ExpectException;
 import org.junit.internal.runners.statements.FailOnTimeout;
+import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
@@ -32,6 +33,24 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
         initializeRunner(klass);
     }
 
+    @Override
+    protected void collectInitializationErrors(List<Throwable> errors) {
+        validateNestedRunWith(errors);
+        super.collectInitializationErrors(errors);
+    }
+
+    /**
+     * Check if the parent class has another RunWith annotation.
+     * @param errors
+     */
+    protected void validateNestedRunWith(List<Throwable> errors) {
+        // If the parent class has another RunWith annotation, skip the validation
+        Class<?> parentClass = getTestClass().getJavaClass().getSuperclass();
+        if (parentClass.getAnnotation(RunWith.class) != null) {
+            errors.add(new Exception("CTestJUnit4Runner does not support nested RunWith annotations"));
+        }
+    }
+
     /**
      * Get all the test methods with @Test and @CTest annotations.
      * @return a list of test methods.
@@ -56,13 +75,13 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
     @Override
     protected Statement possiblyExpectingExceptions(FrameworkMethod method, Object test, Statement next) {
         // From @CTest annotation
-        CTest cTest = method.getAnnotation(CTest.class);
+        /*CTest cTest = method.getAnnotation(CTest.class);
         if (cTest != null) {
             Class<? extends Throwable> configTestExpectedException = cTest.expected();
             if (configTestExpectedException != CTest.None.class) {
                 return new ExpectException(next, configTestExpectedException);
             }
-        }
+        }*/
         return super.possiblyExpectingExceptions(method, test, next);
     }
 
@@ -139,7 +158,7 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
                     }
                     ConfigTracker.updateConfigUsage(configUsage, method.getName());
                     if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
-                        CTest cTest = method.getAnnotation(CTest.class);
+                        /*CTest cTest = method.getAnnotation(CTest.class);
                         if (cTest != null) {
                             for (String param : getUnionMethodParameters(getTestClass().getJavaClass().getName(),
                                     method.getName(), cTest.configMappingFile(), cTest.regex(),
@@ -151,7 +170,7 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
                                     throw new UnUsedConfigParamException(param + " was not used during the test.");
                                 }
                             }
-                        }
+                        }*/
                         Test testAnnotation = method.getAnnotation(Test.class);
                         if (testAnnotation != null) {
                             if (saveUsedParamToFile) {

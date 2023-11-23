@@ -2,6 +2,7 @@ ctest/
 config/
 target/
 app/
+log/
 .idea/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

@@ -8,6 +8,7 @@
 import os
 import re
 import sys
+import time
 import subprocess
 from typing import List, Dict
 
@@ -61,6 +62,10 @@ def get_config_file_by_method_name(target_dir: str, method_name: str):
     for entry in entries:
         if method_name + ".json" in entry:
             return entry
+        
+def check_or_create_dir(target_dir: str):
+    if not os.path.isdir(target_dir):
+        os.makedirs(target_dir)
 
 def add_dependency(project: str, test_module: str):
     print_log("add dependency information for " + project + " with " + test_module)
@@ -89,9 +94,12 @@ def add_import_and_runwith(f=None, test_class: bool=True, test_module: str="juni
     abstract_class = False
     target_file = True
     annotate_test = False
+    ctest_annotation_seen = False
     for content in contents:
         if re.search(" +abstract +class +\w+ +{", content) is not None:
             abstract_class = True
+        if "import edu.illinois.CTest" in content or "import edu.illinois.CTestClass" in content:
+            ctest_annotation_seen = True 
         # if "@RunWith" in content
         if "@RunWith" in content:
             target_file = False
@@ -108,27 +116,32 @@ def add_import_and_runwith(f=None, test_class: bool=True, test_module: str="juni
                 package_or_import_seen = True
             if package_or_import_seen and not import_added and re.match("import static .*", content) is not None:
                 if not abstract_class and test_class:
+                    # CHANGE content -> contents[index]
                     contents[index] = IMPORT_NORMAL[test_module] + content
-                if abstract_class and not test_class:
+                if abstract_class and not test_class and not ctest_annotation_seen:
+                    # CHANGE content -> contents[index]
                     contents[index] = IMPORT_ABSTRACT[test_module] + content
                     print_log("abstract import added for " + f.name)
                 import_added = True
             if package_or_import_seen and not import_added and re.match("\/\*\*", content) is not None:
                 if not abstract_class and test_class:
+                    # CHANGE content -> contents[index]
                     contents[index] = IMPORT_NORMAL[test_module] + content
-                if abstract_class and not test_class:
+                if abstract_class and not test_class and not ctest_annotation_seen:
+                    # CHANGE content -> contents[index]
                     contents[index] = IMPORT_ABSTRACT[test_module] + content
                     print_log("abstract import added for " + f.name)
                 import_added = True
             # add @RunWith and import (rare case)
             if package_or_import_seen and re.match(".*class +\w+.*{", content) is not None:
                 if not abstract_class and test_class:
+                    # CHANGE content -> contents[index]
                     contents[index] = "@RunWith(CTestJUnit4Runner.class)\n" + content
                     print_log("normal import and @RunWith added for " + f.name)
                 if not import_added:
                     if not abstract_class and test_class:
                         contents[index] = IMPORT_NORMAL[test_module] + contents[index]
-                    if abstract_class and not test_class:
+                    if abstract_class and not test_class and not ctest_annotation_seen:
                         contents[index] = IMPORT_ABSTRACT[test_module] + contents[index]
                         print_log("abstract import added for " + f.name)
                     import_added = True
@@ -157,18 +170,27 @@ def add_runwith_for_all(target_dir: str):
                     f.seek(0)
                     f.write(contents)
 
-def run_tests_to_track(output_dir: str, config_used_dir: str="src/test/resources/used_config"):
+def run_tests_to_track(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
+    t1 = time.perf_counter()
+    t2 = time.process_time()
     cmd = ["mvn", "-B", "clean", "test-compile"]
     print_log("compile test code: " + " ".join(cmd))
     with open(output_dir + "/mvn_compile.txt", "w") as f:
         child = subprocess.Popen(cmd, stdout=f)
         child.wait()
+    print_log("perf_conter() time: " + str(time.perf_counter() - t1) + "s")
+    print_log("process_time() time: " + str(time.process_time() - t2) + "s")
     print_log("output saved to " + output_dir + "/mvn_compile.txt")
-    cmd = ["mvn", "-B", "surefire:test", "-Dmode=default", "-Dconfig.used.dir=" + config_used_dir, "-Dsave.used.config=true"]
+
+    t1 = time.perf_counter()
+    t2 = time.process_time()
+    cmd = ["mvn", "-B", "surefire:test", "-Dmode=default", "-Dctest.mapping.dir=" + ctest_mapping_dir, "-Dctest.config.save=true"]
     print_log("run tests: " + " ".join(cmd))
     with open(output_dir + "/mvn_track.txt", "w") as f:
         child = subprocess.Popen(cmd, stdout=f)
         child.wait()
+    print_log("perf_conter() time: " + str(time.perf_counter() - t1) + "s")
+    print_log("process_time() time: " + str(time.process_time() - t2) + "s")
     print_log("output saved to " + output_dir + "/mvn_track.txt")
 
 def get_class_method_pair(target_dir: str):
@@ -182,7 +204,8 @@ def get_class_method_pair(target_dir: str):
                 continue
             tmp = file_name.split("_", 1)
             if len(tmp) != 2:
-                raise ValueError("Cannot resolve class and method name.")
+                continue
+                # raise ValueError("Cannot resolve class and method name.")
             class_name = tmp[0]
             method_name = tmp[1][:-5]
             if class_name in class_method_pair:
@@ -191,13 +214,12 @@ def get_class_method_pair(target_dir: str):
                 class_method_pair[class_name] = [method_name]
     return class_method_pair
 
-def annotate_test_method(class_method_pair: Dict, target_dir: str, config_used_dir: str):
+def annotate_test_method(class_method_pair: Dict, target_dir: str, ctest_mapping_dir: str):
     print_log("annotate ctests in " + target_dir)
-    if class_method_pair is None or target_dir is None:
-        return None
-    super_class = []
+    if class_method_pair is None or not os.path.isdir(ctest_mapping_dir):
+        raise ValueError("Could not get class_method_pair or ctest_mapping_dir not available")
     # handle normal class test annotation
-    class_name_striped = {re.search("\.\w+$", i).group()[1:]: i for i in list(class_method_pair)}
+    # class_name_striped = {re.search("\.\w+$", i).group()[1:]: i for i in list(class_method_pair)}
     for dir_path, dir_name, files in os.walk(target_dir):
         for file_name in files:
             full_file_name = dir_path + "/" + file_name
@@ -245,7 +267,7 @@ def annotate_test_method(class_method_pair: Dict, target_dir: str, config_used_d
                             match_str = re.search("@Test *\( *\w+", contents[index - offset])
                             if match_str is not None:
                                 match_str = match_str.group()
-                                contents[index - offset] = contents[index - offset].replace(match_str[:match_str.index("(") + 1], "@CTest(file=\"" + config_used_dir + "/" + class_name + "_" + test_method_name + ".json\", ")
+                                contents[index - offset] = contents[index - offset].replace(match_str[:match_str.index("(") + 1], "@CTest(file=\"" + ctest_mapping_dir + "/" + class_name + "_" + test_method_name + ".json\", ")
                                 class_method_pair[class_name].remove(test_method_name)
                             elif "@Test" in contents[index - offset]:
                                 match_str = re.search("@Test *\( *\)", contents[index - offset])
@@ -253,7 +275,7 @@ def annotate_test_method(class_method_pair: Dict, target_dir: str, config_used_d
                                     match_str = "@Test"
                                 else:
                                     match_str = match_str.group()
-                                contents[index - offset] = contents[index - offset].replace(match_str, "@CTest(file=\"" + config_used_dir + "/" + class_name + "_" + test_method_name + ".json\")")
+                                contents[index - offset] = contents[index - offset].replace(match_str, "@CTest(file=\"" + ctest_mapping_dir + "/" + class_name + "_" + test_method_name + ".json\")")
                                 class_method_pair[class_name].remove(test_method_name)
                     if len(class_method_pair[class_name]) == 0:
                         del class_method_pair[class_name]
@@ -262,16 +284,20 @@ def annotate_test_method(class_method_pair: Dict, target_dir: str, config_used_d
                     f.write(contents)
     return class_method_pair
 
-def run_ctests(output_dir: str, config_used_dir: str="src/test/resources/used_config"):
-    cmd = ["mvn", "-B", "surefire:test", "-Dmode=default", "-Dconfig.used.dir=" + config_used_dir, "-Dsave.used.config=false"]
+def run_ctests(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
+    t1 = time.perf_counter()
+    t2 = time.process_time()
+    cmd = ["mvn", "-B", "surefire:test", "-Dmode=default", "-Dctest.mapping.dir=" + ctest_mapping_dir, "-Dctest.config.save=false"]
     print_log("run CTests: " + " ".join(cmd))
     with open(output_dir + "/mvn_ctest.txt", "w") as f:
         child = subprocess.Popen(cmd, stdout=f)
         child.wait()
+    print_log("perf_conter() time: " + str(time.perf_counter() - t1) + "s")
+    print_log("process_time() time: " + str(time.process_time() - t2) + "s")
     print_log("output saved to " + output_dir + "/mvn_ctest.txt")
 
 # Core section
-def auto_annotate_script(project: str, test_module:str, project_dir: str, project_test_dir: str, config_used_dir: str):
+def auto_annotate_script(project: str, test_module:str, project_dir: str, project_test_dir: str, ctest_mapping_dir: str):
     # with open("test.java", "r+") as f:
     #     add_import(f)
     # print_log("import information added")
@@ -282,30 +308,31 @@ def auto_annotate_script(project: str, test_module:str, project_dir: str, projec
         add_dependency(project, test_module)
         # add import and runwith to all test classes
         add_runwith_for_all(project_test_dir)
-        # run all tests to track parameter usage, save those in "src/test/resources/used_config"
-        run_tests_to_track(cwd, config_used_dir)
-        # read used config dir and analyze json file in "src/test/resources/used_config"
-        class_method_pair = get_class_method_pair(config_used_dir)
+        # run all tests to track parameter usage, save those in "ctest/mapping"
+        check_or_create_dir(ctest_mapping_dir)
+        run_tests_to_track(cwd, ctest_mapping_dir)
+        # read used config dir and analyze json file in "ctest/mapping"
+        class_method_pair = get_class_method_pair(ctest_mapping_dir)
         # add corresponding @CTest annotation for child class and super class
-        remaining = annotate_test_method(class_method_pair, project_test_dir, config_used_dir)
+        remaining = annotate_test_method(class_method_pair, project_test_dir, ctest_mapping_dir)
         print_log("remaining:")
         for k, v in remaining.items():
             print(k, "->", v)
-        run_ctests(cwd, config_used_dir)
+        run_ctests(cwd, ctest_mapping_dir)
 
 def test():
     change_working_dir(os.getcwd() + "/../app/hadoop/hadoop-common-project/hadoop-common")
     # add_dependency("hadoop-common", "junit4")
     # add_runwith_for_all("src/test/java/org/apache/hadoop/crypto")
-    class_method_pair = get_class_method_pair("src/test/resources/used_config")
-    remaining = annotate_test_method(class_method_pair, "src/test/java/org/apache/hadoop", "src/test/resources/used_config")
+    class_method_pair = get_class_method_pair("ctest/mapping")
+    remaining = annotate_test_method(class_method_pair, "src/test/java/org/apache/hadoop", "ctest/mapping")
     for k, v in remaining.items():
         print(k, "->", v)
 
-# python auto_annotate.py hadoop-common junit4 ../app/hadoop/hadoop-common-project/hadoop-common src/test/java/org/apache/hadoop src/test/resources/used_config
+# python auto_annotate.py hadoop-common junit4 ../app/hadoop/hadoop-common-project/hadoop-common src/test/java/org/apache/hadoop ctest/mapping
 if __name__ == "__main__":
     if len(sys.argv) != 6:
-        print_log("usage $project $test_module $project_dir $project_test_dir $config_used_dir")
+        print_log("usage $project $test_module $project_dir $project_test_dir $ctest_mapping_dir")
     if sys.argv[1] not in PROJECTS_SUPPORTED:
         print_log("project not supported")
         exit

@@ -91,7 +91,7 @@ public class ConfigTracker {
      * Mark a parameter as set in the current test method or class
      * @param param the parameter that has been set
      */
-    public static void markParmaAsSet(String param) {
+    public static void markParamAsSet(String param) {
         if (trackClassParam) {
             classSetParmas.add(param);
         } else {

@@ -187,7 +187,7 @@ def run_tests_to_track(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
         child.wait()
     print_log("perf_conter() time: " + str(time.perf_counter() - t1) + "s")
     print_log("process_time() time: " + str(time.process_time() - t2) + "s")
-    print_log("output saved to " + output_dir + "/mvn_compile.txt")
+    print_log("output saved to " + output_dir + "/" + log_file)
 
     t1 = time.perf_counter()
     t2 = time.process_time()
@@ -202,7 +202,7 @@ def run_tests_to_track(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
         child.wait()
     print_log("perf_conter() time: " + str(time.perf_counter() - t1) + "s")
     print_log("process_time() time: " + str(time.process_time() - t2) + "s")
-    print_log("output saved to " + output_dir + "/mvn_track.txt")
+    print_log("output saved to " + output_dir + "/" + log_file)
 
 def get_class_method_pair(target_dir: str):
     print_log("get used config in " + target_dir)
@@ -309,7 +309,7 @@ def run_ctests(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
         child.wait()
     print_log("perf_conter() time: " + str(time.perf_counter() - t1) + "s")
     print_log("process_time() time: " + str(time.process_time() - t2) + "s")
-    print_log("output saved to " + output_dir + "/mvn_ctest.txt")
+    print_log("output saved to " + output_dir + "/" + log_file)
 
 # Core section
 def auto_annotate_script(project: str, test_module:str, project_dir: str, project_test_dir: str, ctest_mapping_dir: str):
@@ -321,13 +321,13 @@ def auto_annotate_script(project: str, test_module:str, project_dir: str, projec
         log_dir = os.getcwd() + "/log"
         check_or_create_dir(log_dir)
         check_or_create_dir(project_dir, True)
-        check_or_create_dir(project_test_dir, True)
-        check_or_create_dir(ctest_mapping_dir)
         change_working_dir(project_dir)
         add_dependency(project, test_module)
         # add import and runwith to all test classes
+        check_or_create_dir(project_test_dir, True)
         add_runwith_for_all(project_test_dir)
         # run all tests to track parameter usage, save those in "ctest/mapping"
+        check_or_create_dir(ctest_mapping_dir)
         run_tests_to_track(log_dir, ctest_mapping_dir)
         # read used config dir and analyze json file in "ctest/mapping"
         class_method_pair = get_class_method_pair(ctest_mapping_dir)
@@ -363,5 +363,5 @@ if __name__ == "__main__":
     if sys.argv[2] not in TEST_MODULES_SUPPORTED:
         print_log("test module not supported")
         exit
-    test()
-    # auto_annotate_script(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
+    # test()
+    auto_annotate_script(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])

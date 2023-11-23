@@ -25,6 +25,10 @@ public class Names {
     public static final String CONFIG_MAPPING_DIR = System.getProperty("ctest.mapping.dir", "ctest/mapping");
     /** The seperator between test class name and test method name */
     public static final String TEST_CLASS_METHOD_SEPERATOR = "_";
+    /** The method to get the value of the configuration parameter */
+    public static final String CTEST_GETTER = "ctest.getter";
+    /** The method to set the value of the configuration parameter */
+    public static final String CTEST_SETTER = "ctest.setter";
     /**
      * Get the ASM version based on the java version
      * @param javaVersion java version

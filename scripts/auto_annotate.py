@@ -21,6 +21,8 @@ JAVA_DEPENDENCY = {"junit4": "    <dependency>\n      <groupId>edu.illinois</gro
 
 IMPORT_NORMAL = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
 
+IMPORT_NORMAL_2 = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner2;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
+
 IMPORT_ABSTRACT = {"junit4": "import edu.illinois.CTest;\n\n"}
 
 LOG_FILES = {"compile": "compile.txt", "track": "track.txt", "ctest": "ctest.txt"}
@@ -155,6 +157,77 @@ def add_import_and_runwith(f=None, test_class: bool=True, test_module: str="juni
         # print_log("test import and @RunWith added for " + f.name)
     return contents
 
+def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="junit4"):
+    if f is None:
+        print_log("file does not exist")
+        return None
+    if f.mode != "r+":
+        print_log("file opened in wrong mode")
+        return None
+    f.seek(0)
+    contents = f.readlines()
+    # check existing @RunWith present or not, @Test present or not to select targets and add relavent information
+    abstract_class = False
+    target_file = True
+    annotate_test = False
+    ctest_annotation_seen = False
+    for content in contents:
+        if re.search(" +abstract +class +\w+ +{", content) is not None:
+            abstract_class = True
+        if "import edu.illinois.CTest" in content or "import edu.illinois.CTestClass" in content:
+            ctest_annotation_seen = True 
+        # if "@RunWith" in content
+        if "@RunWith" in content:
+            target_file = False
+            break
+        else:
+            if "@Test" in content:
+                annotate_test = True
+    if target_file and annotate_test:
+        import_added = False
+        package_or_import_seen = False
+        for index, content in enumerate(contents):
+            # add import
+            if not package_or_import_seen and (re.match("package .*", content) is not None or re.match("import (?:(?!static)).*", content) is not None):
+                package_or_import_seen = True
+            if package_or_import_seen and not import_added and re.match("import static .*", content) is not None:
+                if not abstract_class and test_class:
+                    # CHANGE content -> contents[index]
+                    contents[index] = IMPORT_NORMAL_2[test_module] + content
+                if abstract_class and not test_class and not ctest_annotation_seen:
+                    # CHANGE content -> contents[index]
+                    contents[index] = IMPORT_ABSTRACT[test_module] + content
+                    print_log("abstract import added for " + f.name)
+                import_added = True
+            if package_or_import_seen and not import_added and re.match("\/\*\*", content) is not None:
+                if not abstract_class and test_class:
+                    # CHANGE content -> contents[index]
+                    contents[index] = IMPORT_NORMAL_2[test_module] + content
+                if abstract_class and not test_class and not ctest_annotation_seen:
+                    # CHANGE content -> contents[index]
+                    contents[index] = IMPORT_ABSTRACT[test_module] + content
+                    print_log("abstract import added for " + f.name)
+                import_added = True
+            # add @RunWith and import (rare case)
+            if package_or_import_seen and re.match(".*class +\w+.*{", content) is not None:
+                if not abstract_class and test_class:
+                    # CHANGE content -> contents[index]
+                    contents[index] = "@RunWith(CTestJUnit4Runner2.class)\n" + content
+                    print_log("normal import and @RunWith added for " + f.name)
+                if not import_added:
+                    if not abstract_class and test_class:
+                        contents[index] = IMPORT_NORMAL_2[test_module] + contents[index]
+                    if abstract_class and not test_class and not ctest_annotation_seen:
+                        contents[index] = IMPORT_ABSTRACT[test_module] + contents[index]
+                        print_log("abstract import added for " + f.name)
+                    import_added = True
+                break
+        # contents = "".join(contents)
+        # f.seek(0)
+        # f.write(contents)
+        # print_log("test import and @RunWith added for " + f.name)
+    return contents
+
 def add_runwith_for_all(target_dir: str):
     print_log("add import information and @RunWith in " + target_dir)
     # search all test class
@@ -173,6 +246,24 @@ def add_runwith_for_all(target_dir: str):
                     f.seek(0)
                     f.write(contents)
 
+def add_runwith_for_all_2(target_dir: str):
+    print_log("add import information and @RunWith in " + target_dir)
+    # search all test class
+    if not os.path.isdir(target_dir):
+        return None
+    # entries = os.listdir(target_dir)
+    # for entry in entries:
+    #     if os.path.isdir(target_dir + entry)
+    for dir_path, dir_name, files in os.walk(target_dir):
+        # print(f"found dir: {dir_path}")
+        for file_name in files:
+            if ".java" in file_name:
+                with open(dir_path + "/" + file_name, "r+") as f:
+                    contents = add_import_and_runwith_2(f, True)
+                    contents = "".join(contents)
+                    f.seek(0)
+                    f.write(contents)
+
 def run_tests_to_track(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
     t1 = time.perf_counter()
     t2 = time.process_time()
@@ -181,7 +272,7 @@ def run_tests_to_track(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
     log_file = LOG_FILES["compile"]
     tmp_index = log_file.index(".")
     t = time.localtime()
-    log_file = log_file[:tmp_index] + "_{:02d}{:02d}{:02d}".format(t.tm_hour, t.tm_min, t.tm_sec) + log_file[tmp_index:]
+    log_file = log_file[:tmp_index] + "_{:02d}{:02d}{:02d}{:02d}".format(t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min) + log_file[tmp_index:]
     with open(output_dir + "/" + log_file, "w") as f:
         child = subprocess.Popen(cmd, stdout=f)
         child.wait()
@@ -196,7 +287,7 @@ def run_tests_to_track(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
     log_file = LOG_FILES["track"]
     tmp_index = log_file.index(".")
     t = time.localtime()
-    log_file = log_file[:tmp_index] + "_{:02d}{:02d}{:02d}".format(t.tm_hour, t.tm_min, t.tm_sec) + log_file[tmp_index:]
+    log_file = log_file[:tmp_index] + "_{:02d}{:02d}{:02d}{:02d}".format(t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min) + log_file[tmp_index:]
     with open(output_dir + "/" + log_file, "w") as f:
         child = subprocess.Popen(cmd, stdout=f)
         child.wait()
@@ -204,7 +295,7 @@ def run_tests_to_track(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
     print_log("process_time() time: " + str(time.process_time() - t2) + "s")
     print_log("output saved to " + output_dir + "/" + log_file)
 
-def get_class_method_pair(target_dir: str):
+def get_class_method_pair(target_dir: str) -> Dict:
     print_log("get used config in " + target_dir)
     if not os.path.isdir(target_dir):
         return None
@@ -225,7 +316,21 @@ def get_class_method_pair(target_dir: str):
                 class_method_pair[class_name] = [method_name]
     return class_method_pair
 
-def annotate_test_method(class_method_pair: Dict, target_dir: str, ctest_mapping_dir: str):
+def get_class_list(target_dir: str) -> List:
+    print_log("get used config in " + target_dir)
+    if not os.path.isdir(target_dir):
+        return None
+    class_list = []
+    for dir_path, dir_name, files in os.walk(target_dir):
+        for file_name in files:
+            # do not support class name with "_"
+            if ".json" not in file_name or "_" in file_name:
+                continue
+            else:
+                class_list.append(file_name[:-5])
+    return class_list            
+
+def annotate_test_method(class_method_pair: Dict, target_dir: str, ctest_mapping_dir: str) -> Dict:
     print_log("annotate ctests in " + target_dir)
     if class_method_pair is None or not os.path.isdir(ctest_mapping_dir):
         raise ValueError("Could not get class_method_pair or ctest_mapping_dir not available")
@@ -295,6 +400,33 @@ def annotate_test_method(class_method_pair: Dict, target_dir: str, ctest_mapping
                     f.write(contents)
     return class_method_pair
 
+def annotate_test_method_2(class_list: List, target_dir: str, ctest_mapping_dir: str) -> List:
+    print_log("annotate ctests in " + target_dir)
+    if class_list is None or not os.path.isdir(ctest_mapping_dir):
+        raise ValueError("Could not get class_method_pair or ctest_mapping_dir not available")
+    # handle normal class test annotation
+    # class_name_striped = {re.search("\.\w+$", i).group()[1:]: i for i in list(class_method_pair)}
+    for dir_path, dir_name, files in os.walk(target_dir):
+        for file_name in files:
+            full_file_name = dir_path + "/" + file_name
+            class_name = None
+            for i in class_list:
+                if re.search(i + "$", full_file_name.replace("/", ".")[:-5]) is not None:
+                    class_name = i
+                    break 
+            if class_name is not None:
+                # print(file_name)
+                with open(full_file_name, "r+") as f:
+                    contents = f.readlines()
+                    for index, content in enumerate(contents):
+                        if "@RunWith(CTestJUnit4Runner.class)" in content:
+                            contents[index] = content.replace("CTestJUnit4Runner", "CTestJUnit4Runner2") + "@CTestClass(configMappingFile=\"" + ctest_mapping_dir + "/" + class_name + ".json\")\n"
+                            class_list.remove(class_name)
+                    contents = "".join(contents)
+                    f.seek(0)
+                    f.write(contents)
+    return class_list
+
 def run_ctests(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
     t1 = time.perf_counter()
     t2 = time.process_time()
@@ -303,7 +435,7 @@ def run_ctests(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
     log_file = LOG_FILES["ctest"]
     tmp_index = log_file.index(".")
     t = time.localtime()
-    log_file = log_file[:tmp_index] + "_{:02d}{:02d}{:02d}".format(t.tm_hour, t.tm_min, t.tm_sec) + log_file[tmp_index:]
+    log_file = log_file[:tmp_index] + "_{:02d}{:02d}{:02d}{:02d}".format(t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min) + log_file[tmp_index:]
     with open(output_dir + "/" + log_file, "w") as f:
         child = subprocess.Popen(cmd, stdout=f)
         child.wait()
@@ -338,6 +470,29 @@ def auto_annotate_script(project: str, test_module:str, project_dir: str, projec
             print(k, "->", v)
         run_ctests(log_dir, ctest_mapping_dir)
 
+def auto_annotate_script_2(project: str, test_module: str, project_dir: str, project_test_dir: str, ctest_mapping_dir: str):
+    print_log("======================================================================")
+    if project == "hadoop-common":
+        log_dir = os.getcwd() + "/log"
+        check_or_create_dir(log_dir)
+        check_or_create_dir(project_dir, True)
+        change_working_dir(project_dir)
+        add_dependency(project, test_module)
+        # add import and runwith to all test classes
+        check_or_create_dir(project_test_dir, True)
+        add_runwith_for_all(project_test_dir)
+        # run all tests to track parameter usage, save those in "ctest/mapping"
+        check_or_create_dir(ctest_mapping_dir)
+        run_tests_to_track(log_dir, ctest_mapping_dir)
+        # read used config dir and analyze json file in "ctest/mapping"
+        class_list = get_class_list(ctest_mapping_dir)
+        # add corresponding @CTest annotation for child class and super class
+        remaining = annotate_test_method_2(class_list, project_test_dir, ctest_mapping_dir)
+        print_log("remaining:")
+        for i in remaining:
+            print(i)
+        run_ctests(log_dir, ctest_mapping_dir)
+
 def test():
     log_dir = os.getcwd() + "/log"
     check_or_create_dir(log_dir)
@@ -364,4 +519,4 @@ if __name__ == "__main__":
         print_log("test module not supported")
         exit
     # test()
-    auto_annotate_script(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
+    auto_annotate_script_2(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])

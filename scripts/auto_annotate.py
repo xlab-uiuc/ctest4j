@@ -419,6 +419,8 @@ def annotate_test_method_2(class_list: List, target_dir: str, ctest_mapping_dir:
                 with open(full_file_name, "r+") as f:
                     contents = f.readlines()
                     for index, content in enumerate(contents):
+                        if "import edu.illinois.CTestJUnit4Runner;" in content:
+                            contents[index] = contents[index].replace("import edu.illinois.CTestJUnit4Runner", "import edu.illinois.CTestJUnit4Runner2")
                         if "@RunWith(CTestJUnit4Runner.class)" in content:
                             contents[index] = content.replace("CTestJUnit4Runner", "CTestJUnit4Runner2") + "@CTestClass(configMappingFile=\"" + ctest_mapping_dir + "/" + class_name + ".json\")\n"
                             class_list.remove(class_name)
@@ -433,7 +435,7 @@ def run_ctests(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
     t2 = time.process_time()
     cmd_1 = ["mvn", "-B", "clean", "test-compile"]
     cmd_2 = ["mvn", "-B", "surefire:test", "-Dmode=default", "-Dctest.mapping.dir=" + ctest_mapping_dir, "-Dctest.config.save=false"]
-    print_log("run CTests: " + " ".join(cmd))
+    print_log("run CTests: " + " ".join(cmd_2))
     log_file = LOG_FILES["ctest"]
     tmp_index = log_file.index(".")
     t = time.localtime()

@@ -428,16 +428,20 @@ def annotate_test_method_2(class_list: List, target_dir: str, ctest_mapping_dir:
     return class_list
 
 def run_ctests(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
+    # recompile ctests
     t1 = time.perf_counter()
     t2 = time.process_time()
-    cmd = ["mvn", "-B", "surefire:test", "-Dmode=default", "-Dctest.mapping.dir=" + ctest_mapping_dir, "-Dctest.config.save=false"]
+    cmd_1 = ["mvn", "-B", "clean", "test-compile"]
+    cmd_2 = ["mvn", "-B", "surefire:test", "-Dmode=default", "-Dctest.mapping.dir=" + ctest_mapping_dir, "-Dctest.config.save=false"]
     print_log("run CTests: " + " ".join(cmd))
     log_file = LOG_FILES["ctest"]
     tmp_index = log_file.index(".")
     t = time.localtime()
     log_file = log_file[:tmp_index] + "_{:02d}{:02d}{:02d}{:02d}".format(t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min) + log_file[tmp_index:]
     with open(output_dir + "/" + log_file, "w") as f:
-        child = subprocess.Popen(cmd, stdout=f)
+        child = subprocess.Popen(cmd_1, stdout=f)
+        child.wait()
+        child = subprocess.Popen(cmd_2, stdout=f)
         child.wait()
     print_log("perf_conter() time: " + str(time.perf_counter() - t1) + "s")
     print_log("process_time() time: " + str(time.process_time() - t2) + "s")

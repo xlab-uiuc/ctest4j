@@ -23,6 +23,7 @@ public class Names {
     public static final String CONFIG_CLI_INJECT_PROPERTY = "config.inject.cli";
     /** The directory of files that stores the used configuration parameters by each test */
     public static final String CONFIG_MAPPING_DIR = System.getProperty("ctest.mapping.dir", "ctest/mapping");
+    public static final String CONFIG_SAVE_DIR = System.getProperty("ctest.config.save.dir", "ctest/saved_mapping");
     /** The seperator between test class name and test method name */
     public static final String TEST_CLASS_METHOD_SEPERATOR = "_";
     /**

@@ -16,7 +16,7 @@ import java.lang.annotation.AnnotationFormatError;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static edu.illinois.Names.CONFIG_MAPPING_DIR;
+import static edu.illinois.Names.CONFIG_SAVE_DIR;
 
 /**
  * Design B: Only CTestClass Annotation and treat all the test methods as @CTest
@@ -213,7 +213,7 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
                 try {
                     originalStatement.evaluate();
                 } finally {
-                    writeConfigUsageToJson(configUsage, new File(CONFIG_MAPPING_DIR, testClassName + ".json"));
+                    writeConfigUsageToJson(configUsage, new File(CONFIG_SAVE_DIR, testClassName + ".json"));
                 }
             }
         };

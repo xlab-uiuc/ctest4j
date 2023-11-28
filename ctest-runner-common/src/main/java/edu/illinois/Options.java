@@ -9,7 +9,7 @@ public class Options {
 
     public static Modes mode = Modes.valueOf(System.getProperty("mode", "DEFAULT").toUpperCase());
 
-    public static Boolean saveUsedParamToFile = Boolean.valueOf(System.getProperty("ctest.config.save", "true"));
+    public static Boolean saveUsedParamToFile = Boolean.valueOf(System.getProperty("ctest.config.save", "false"));
 
     public static Boolean ctestSuiteTracking = Boolean.valueOf(System.getProperty("ctest.suite.tracking", "false"));
 }

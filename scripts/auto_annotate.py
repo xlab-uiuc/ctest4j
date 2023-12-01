@@ -13,7 +13,9 @@ import subprocess
 from typing import List, Dict
 
 # Constant section
-PROJECTS_SUPPORTED = ["hadoop-common", "hdfs"]
+# If you want to test more projects, add their names in the PROJECTS_POTENTIAL field and run the script with corresponding arguments.
+PROJECTS_SUPPORTED = ["hadoop-common", "hadoop-hdfs"]
+PROJECTS_POTENTIAL = ["mapreduce-client-core"]
 
 TEST_MODULES_SUPPORTED = ["junit4"]
 
@@ -74,7 +76,7 @@ def check_or_create_dir(target_dir: str, exception: bool=False):
 
 def add_dependency(project: str, test_module: str):
     print_log("add dependency information for " + project + " with " + test_module)
-    if project == "hadoop-common":
+    if project in PROJECTS_SUPPORTED or project in PROJECTS_POTENTIAL:
         with open("pom.xml", "r+") as f:
             contents = f.readlines()
             for index, content in enumerate(contents):
@@ -212,7 +214,7 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
             if package_or_import_seen and re.match(".*class +\w+.*{", content) is not None:
                 if not abstract_class and test_class:
                     # CHANGE content -> contents[index]
-                    contents[index] = "@RunWith(CTestJUnit4Runner2.class)\n" + content
+                    contents[index] = "@RunWith(CTestJUnit4Runner2.class)\n@CTestClass()\n" + content
                     print_log("normal import and @RunWith added for " + f.name)
                 if not import_added:
                     if not abstract_class and test_class:
@@ -264,7 +266,7 @@ def add_runwith_for_all_2(target_dir: str):
                     f.seek(0)
                     f.write(contents)
 
-def run_tests_to_track(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
+def run_tests_to_track(project:str, output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
     t1 = time.perf_counter()
     t2 = time.process_time()
     cmd = ["mvn", "-B", "clean", "test-compile"]
@@ -272,7 +274,7 @@ def run_tests_to_track(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
     log_file = LOG_FILES["compile"]
     tmp_index = log_file.index(".")
     t = time.localtime()
-    log_file = log_file[:tmp_index] + "_{:02d}{:02d}{:02d}{:02d}".format(t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min) + log_file[tmp_index:]
+    log_file = project.replace("-", "_") + "_" + log_file[:tmp_index] + "_{:02d}{:02d}{:02d}{:02d}".format(t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min) + log_file[tmp_index:]
     with open(output_dir + "/" + log_file, "w") as f:
         child = subprocess.Popen(cmd, stdout=f)
         child.wait()
@@ -287,7 +289,7 @@ def run_tests_to_track(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
     log_file = LOG_FILES["track"]
     tmp_index = log_file.index(".")
     t = time.localtime()
-    log_file = log_file[:tmp_index] + "_{:02d}{:02d}{:02d}{:02d}".format(t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min) + log_file[tmp_index:]
+    log_file = project.replace("-", "_") + "_" + log_file[:tmp_index] + "_{:02d}{:02d}{:02d}{:02d}".format(t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min) + log_file[tmp_index:]
     with open(output_dir + "/" + log_file, "w") as f:
         child = subprocess.Popen(cmd, stdout=f)
         child.wait()
@@ -419,17 +421,17 @@ def annotate_test_method_2(class_list: List, target_dir: str, ctest_mapping_dir:
                 with open(full_file_name, "r+") as f:
                     contents = f.readlines()
                     for index, content in enumerate(contents):
-                        if "import edu.illinois.CTestJUnit4Runner;" in content:
-                            contents[index] = contents[index].replace("import edu.illinois.CTestJUnit4Runner", "import edu.illinois.CTestJUnit4Runner2")
-                        if "@RunWith(CTestJUnit4Runner.class)" in content:
-                            contents[index] = content.replace("CTestJUnit4Runner", "CTestJUnit4Runner2") + "@CTestClass(configMappingFile=\"" + ctest_mapping_dir + "/" + class_name + ".json\")\n"
+                        # if "import edu.illinois.CTestJUnit4Runner;" in content:
+                        #     contents[index] = contents[index].replace("import edu.illinois.CTestJUnit4Runner", "import edu.illinois.CTestJUnit4Runner2")
+                        if "@CTestClass()" in content:
+                            contents[index] = content.replace("@CTestClass()", "@CTestClass(configMappingFile=\"" + ctest_mapping_dir + "/" + class_name + ".json\")")
                             class_list.remove(class_name)
                     contents = "".join(contents)
                     f.seek(0)
                     f.write(contents)
     return class_list
 
-def run_ctests(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
+def run_ctests(project:str, output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
     # recompile ctests
     t1 = time.perf_counter()
     t2 = time.process_time()
@@ -439,7 +441,7 @@ def run_ctests(output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
     log_file = LOG_FILES["ctest"]
     tmp_index = log_file.index(".")
     t = time.localtime()
-    log_file = log_file[:tmp_index] + "_{:02d}{:02d}{:02d}{:02d}".format(t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min) + log_file[tmp_index:]
+    log_file = project.replace("-", "_") + "_" + log_file[:tmp_index] + "_{:02d}{:02d}{:02d}{:02d}".format(t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min) + log_file[tmp_index:]
     with open(output_dir + "/" + log_file, "w") as f:
         child = subprocess.Popen(cmd_1, stdout=f)
         child.wait()
@@ -455,7 +457,7 @@ def auto_annotate_script(project: str, test_module:str, project_dir: str, projec
     #     add_import(f)
     # print_log("import information added")
     print_log("======================================================================")
-    if project == "hadoop-common":
+    if project in PROJECTS_SUPPORTED or project in PROJECTS_POTENTIAL:
         log_dir = os.getcwd() + "/log"
         check_or_create_dir(log_dir)
         check_or_create_dir(project_dir, True)
@@ -466,7 +468,7 @@ def auto_annotate_script(project: str, test_module:str, project_dir: str, projec
         add_runwith_for_all(project_test_dir)
         # run all tests to track parameter usage, save those in "ctest/mapping"
         check_or_create_dir(ctest_mapping_dir)
-        run_tests_to_track(log_dir, ctest_mapping_dir)
+        run_tests_to_track(project, log_dir, ctest_mapping_dir)
         # read used config dir and analyze json file in "ctest/mapping"
         class_method_pair = get_class_method_pair(ctest_mapping_dir)
         # add corresponding @CTest annotation for child class and super class
@@ -474,11 +476,11 @@ def auto_annotate_script(project: str, test_module:str, project_dir: str, projec
         print_log("remaining:")
         for k, v in remaining.items():
             print(k, "->", v)
-        run_ctests(log_dir, ctest_mapping_dir)
+        run_ctests(project, log_dir, ctest_mapping_dir)
 
 def auto_annotate_script_2(project: str, test_module: str, project_dir: str, project_test_dir: str, ctest_mapping_dir: str):
     print_log("======================================================================")
-    if project == "hadoop-common":
+    if project in PROJECTS_SUPPORTED or project in PROJECTS_POTENTIAL:
         log_dir = os.getcwd() + "/log"
         check_or_create_dir(log_dir)
         check_or_create_dir(project_dir, True)
@@ -486,10 +488,10 @@ def auto_annotate_script_2(project: str, test_module: str, project_dir: str, pro
         add_dependency(project, test_module)
         # add import and runwith to all test classes
         check_or_create_dir(project_test_dir, True)
-        add_runwith_for_all(project_test_dir)
+        add_runwith_for_all_2(project_test_dir)
         # run all tests to track parameter usage, save those in "ctest/mapping"
         check_or_create_dir(ctest_mapping_dir)
-        run_tests_to_track(log_dir, ctest_mapping_dir)
+        run_tests_to_track(project, log_dir, ctest_mapping_dir)
         # read used config dir and analyze json file in "ctest/mapping"
         class_list = get_class_list(ctest_mapping_dir)
         # add corresponding @CTest annotation for child class and super class
@@ -497,32 +499,34 @@ def auto_annotate_script_2(project: str, test_module: str, project_dir: str, pro
         print_log("remaining:")
         for i in remaining:
             print(i)
-        run_ctests(log_dir, ctest_mapping_dir)
+        run_ctests(project, log_dir, ctest_mapping_dir)
 
-def test():
+def test(project: str, test_module: str, project_dir: str, project_test_dir: str, ctest_mapping_dir: str):
     log_dir = os.getcwd() + "/log"
     check_or_create_dir(log_dir)
     # check_or_create_dir(project_dir)
     # check_or_create_dir(project_test_dir)
     # check_or_create_dir(ctest_mapping_dir)
-    change_working_dir(os.getcwd() + "/../app/hadoop/hadoop-common-project/hadoop-common")
-    # add_dependency("hadoop-common", "junit4")
-    # add_runwith_for_all("src/test/java/org/apache/hadoop/crypto")
+    change_working_dir(project_dir)
+    add_dependency(project, "junit4")
+    add_runwith_for_all_2(project_test_dir)
+    run_tests_to_track(project, log_dir, ctest_mapping_dir)
     class_method_pair = get_class_method_pair("ctest/mapping")
-    remaining = annotate_test_method(class_method_pair, "src/test/java/org/apache/hadoop", "ctest/mapping")
+    remaining = annotate_test_method_2(class_method_pair, project_test_dir, "ctest/mapping")
     for k, v in remaining.items():
         print(k, "->", v)
-    run_ctests(log_dir, "ctest/mapping")
+    # run_ctests(project, log_dir, "ctest/mapping")
 
 # python auto_annotate.py hadoop-common junit4 ../app/hadoop/hadoop-common-project/hadoop-common src/test/java/org/apache/hadoop ctest/mapping
+# python auto_annotate.py hadoop-hdfs junit4 ../app/hadoop/hadoop-hdfs-project/hadoop-hdfs src/test/java/org/apache/hadoop ctest/mapping
 if __name__ == "__main__":
     if len(sys.argv) != 6:
         print_log("usage $project $test_module $project_dir $project_test_dir $ctest_mapping_dir")
-    if sys.argv[1] not in PROJECTS_SUPPORTED:
+    if sys.argv[1] not in PROJECTS_SUPPORTED or sys.argv[1] not in PROJECTS_POTENTIAL:
         print_log("project not supported")
         exit
     if sys.argv[2] not in TEST_MODULES_SUPPORTED:
         print_log("test module not supported")
         exit
-    # test()
+    # test(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
     auto_annotate_script_2(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])

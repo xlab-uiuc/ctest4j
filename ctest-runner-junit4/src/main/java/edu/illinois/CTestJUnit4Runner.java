@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static edu.illinois.Names.CONFIG_MAPPING_DIR;
+import static edu.illinois.Names.CONFIG_SAVE_DIR;
 import static edu.illinois.Options.saveUsedParamToFile;
 import static edu.illinois.Utils.getTestMethodFullName;
 
@@ -197,7 +197,7 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
                 try {
                     originalStatement.evaluate();
                 } finally {
-                    ConfigUsage.writeToJson(configUsage, new File(CONFIG_MAPPING_DIR, testClassName + ".json"));
+                    ConfigUsage.writeToJson(configUsage, new File(CONFIG_SAVE_DIR, testClassName + ".json"));
                 }
             }
         };

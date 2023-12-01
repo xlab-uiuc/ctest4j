@@ -8,8 +8,7 @@ import java.io.IOException;
 import java.lang.annotation.AnnotationFormatError;
 import java.util.*;
 
-import static edu.illinois.Names.CONFIG_MAPPING_DIR;
-import static edu.illinois.Names.TRACKING_LOG_PREFIX;
+import static edu.illinois.Names.*;
 
 /**
  * Author: Shuai Wang
@@ -102,7 +101,7 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
 
     @Override
     public void afterAll(ExtensionContext extensionContext) throws Exception {
-        writeConfigUsageToJson(configUsage, new File(CONFIG_MAPPING_DIR, className + ".json"));
+        writeConfigUsageToJson(configUsage, new File(CONFIG_SAVE_DIR, className + ".json"));
     }
 
     @Override

@@ -10,7 +10,7 @@ if [ -z "$RUNNER_APP_DIR" ]; then
   exit 1
 fi
 
-if RUNNER_BRANCH is not set, send info
+# if RUNNER_BRANCH is not set, send info
 if [ -z "$RUNNER_BRANCH" ]; then
   echo "Please set RUNNER_BRANCH"
   exit 1

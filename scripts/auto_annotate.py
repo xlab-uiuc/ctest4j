@@ -15,7 +15,8 @@ from typing import List, Dict
 # Constant section
 # If you want to test more projects, add their names in the PROJECTS_POTENTIAL field and run the script with corresponding arguments.
 PROJECTS_SUPPORTED = ["hadoop-common", "hadoop-hdfs"]
-PROJECTS_POTENTIAL = ["mapreduce-client-core", "alluxio", "bookkeeper", "camel", "druid", "flink", "hbase", "hive"]
+PROJECTS_POTENTIAL = ["mapreduce-client-core", "alluxio-core-common", "bookkeeper-common", "camel-core", "druid-benchmarks", "flink-core", "hive-common", "kylin-core-common", "netty-common", "nifi-commons",\
+                        "redisson", "rocketmq-common", "spark-core", "zeppelin-interpreter", "zookeeper-server"]
 
 TEST_MODULES_SUPPORTED = ["junit4"]
 
@@ -75,14 +76,28 @@ def check_or_create_dir(target_dir: str, exception: bool=False):
             raise ValueError("Incorrect path: " + target_dir)
 
 def add_dependency(project: str, test_module: str):
-    print_log("add dependency information for " + project + " with " + test_module)
     if project in PROJECTS_SUPPORTED or project in PROJECTS_POTENTIAL:
+        print_log("add dependency information for " + project + " with " + test_module)
         with open("pom.xml", "r+") as f:
+            added = False
             contents = f.readlines()
             for index, content in enumerate(contents):
                 if "</dependencies>" in content and "ctest-runner-junit4" not in contents[index - 4]:
                     contents[index] = JAVA_DEPENDENCY[test_module] + contents[index]
+                    added = True
                     break
+            if not added:
+                for index, content in enumerate(contents):
+                    if "<build>" in content:
+                        contents[index] = "  <dependencies>\n" + JAVA_DEPENDENCY[test_module] + "  </dependencies>\n\n" + contents[index]
+                        added = True
+                        break
+            if not added:
+                for index, content in enumerate(contents):
+                    if "</project>" in content:
+                        contents[index] = "  <dependencies>\n" + JAVA_DEPENDENCY[test_module] + "  </dependencies>\n\n" + contents[index]
+                        added = True
+                        break
             contents = "".join(contents)
             f.seek(0)
             f.write(contents)
@@ -536,11 +551,12 @@ def test(project: str, test_module: str, project_dir: str, project_test_dir: str
 if __name__ == "__main__":
     if len(sys.argv) != 6:
         print_log("usage $project $test_module $project_dir $project_test_dir $ctest_mapping_dir")
-    if sys.argv[1] not in PROJECTS_SUPPORTED or sys.argv[1] not in PROJECTS_POTENTIAL:
+        exit(1)
+    if sys.argv[1] not in PROJECTS_SUPPORTED and sys.argv[1] not in PROJECTS_POTENTIAL:
         print_log("project not supported")
-        exit
+        exit(1)
     if sys.argv[2] not in TEST_MODULES_SUPPORTED:
         print_log("test module not supported")
-        exit
+        exit(1)
     test(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
     # auto_annotate_script_2(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])

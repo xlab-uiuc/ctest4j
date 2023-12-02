@@ -15,7 +15,7 @@ from typing import List, Dict
 # Constant section
 # If you want to test more projects, add their names in the PROJECTS_POTENTIAL field and run the script with corresponding arguments.
 PROJECTS_SUPPORTED = ["hadoop-common", "hadoop-hdfs"]
-PROJECTS_POTENTIAL = ["mapreduce-client-core"]
+PROJECTS_POTENTIAL = ["mapreduce-client-core", "alluxio", "bookkeeper", "camel", "druid", "flink", "hbase", "hive"]
 
 TEST_MODULES_SUPPORTED = ["junit4"]
 
@@ -510,11 +510,11 @@ def test(project: str, test_module: str, project_dir: str, project_test_dir: str
     change_working_dir(project_dir)
     add_dependency(project, "junit4")
     add_runwith_for_all_2(project_test_dir)
-    run_tests_to_track(project, log_dir, ctest_mapping_dir)
-    class_method_pair = get_class_method_pair("ctest/mapping")
-    remaining = annotate_test_method_2(class_method_pair, project_test_dir, "ctest/mapping")
-    for k, v in remaining.items():
-        print(k, "->", v)
+    # run_tests_to_track(project, log_dir, ctest_mapping_dir)
+    # class_method_pair = get_class_method_pair("ctest/mapping")
+    # remaining = annotate_test_method_2(class_method_pair, project_test_dir, "ctest/mapping")
+    # for k, v in remaining.items():
+    #     print(k, "->", v)
     # run_ctests(project, log_dir, "ctest/mapping")
 
 # python auto_annotate.py hadoop-common junit4 ../app/hadoop/hadoop-common-project/hadoop-common src/test/java/org/apache/hadoop ctest/mapping
@@ -528,5 +528,5 @@ if __name__ == "__main__":
     if sys.argv[2] not in TEST_MODULES_SUPPORTED:
         print_log("test module not supported")
         exit
-    # test(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
-    auto_annotate_script_2(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
+    test(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
+    # auto_annotate_script_2(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])

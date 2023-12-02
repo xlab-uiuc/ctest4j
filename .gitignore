@@ -3,6 +3,7 @@ config/
 target/
 app/
 log/
+docker/apps/**/
 .idea/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

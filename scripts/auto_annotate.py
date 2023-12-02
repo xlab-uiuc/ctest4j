@@ -231,40 +231,54 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
     return contents
 
 def add_runwith_for_all(target_dir: str):
-    print_log("add import information and @RunWith in " + target_dir)
-    # search all test class
-    if not os.path.isdir(target_dir):
-        return None
-    # entries = os.listdir(target_dir)
-    # for entry in entries:
-    #     if os.path.isdir(target_dir + entry)
-    for dir_path, dir_name, files in os.walk(target_dir):
-        # print(f"found dir: {dir_path}")
-        for file_name in files:
-            if ".java" in file_name:
-                with open(dir_path + "/" + file_name, "r+") as f:
-                    contents = add_import_and_runwith(f, True)
-                    contents = "".join(contents)
-                    f.seek(0)
-                    f.write(contents)
+    modules = []
+    if not os.path.isdir(target_dir + "/src/test"): # /src/test/java
+        for i in os.listdir(target_dir):
+            if os.path.isdir(i + "/src/test"):
+                modules.append(i + "/src/test")
+    if len(modules) == 0:
+        if not os.path.isdir(target_dir + "/src/test"):
+            raise ValueError("Does not support current project file hierarchy.")
+        else:
+            modules.append("src/test")
+    for test_dir in modules:
+        print_log("add import information and @RunWith in " + test_dir)
+        # search all test class
+        # entries = os.listdir(target_dir)
+        # for entry in entries:
+        #     if os.path.isdir(target_dir + entry)
+        for dir_path, dir_name, files in os.walk(test_dir):
+            # print(f"found dir: {dir_path}")
+            for file_name in files:
+                if ".java" in file_name:
+                    with open(dir_path + "/" + file_name, "r+") as f:
+                        contents = add_import_and_runwith(f, True)
+                        contents = "".join(contents)
+                        f.seek(0)
+                        f.write(contents)
 
 def add_runwith_for_all_2(target_dir: str):
-    print_log("add import information and @RunWith in " + target_dir)
-    # search all test class
-    if not os.path.isdir(target_dir):
-        return None
-    # entries = os.listdir(target_dir)
-    # for entry in entries:
-    #     if os.path.isdir(target_dir + entry)
-    for dir_path, dir_name, files in os.walk(target_dir):
-        # print(f"found dir: {dir_path}")
-        for file_name in files:
-            if ".java" in file_name:
-                with open(dir_path + "/" + file_name, "r+") as f:
-                    contents = add_import_and_runwith_2(f, True)
-                    contents = "".join(contents)
-                    f.seek(0)
-                    f.write(contents)
+    modules = []
+    if not os.path.isdir(target_dir + "/src/test"): # /src/test/java
+        for i in os.listdir(target_dir):
+            if os.path.isdir(i + "/src/test"):
+                modules.append(i + "/src/test")
+    if len(modules) == 0:
+        if not os.path.isdir(target_dir + "/src/test"):
+            raise ValueError("Does not support current project file hierarchy.")
+        else:
+            modules.append("src/test")
+    for test_dir in modules:
+        print_log("add import information and @RunWith in " + test_dir)
+        for dir_path, dir_name, files in os.walk(test_dir):
+            # print(f"found dir: {dir_path}")
+            for file_name in files:
+                if ".java" in file_name:
+                    with open(dir_path + "/" + file_name, "r+") as f:
+                        contents = add_import_and_runwith_2(f, True)
+                        contents = "".join(contents)
+                        f.seek(0)
+                        f.write(contents)
 
 def run_tests_to_track(project:str, output_dir: str, ctest_mapping_dir: str="ctest/mapping"):
     t1 = time.perf_counter()
@@ -509,7 +523,7 @@ def test(project: str, test_module: str, project_dir: str, project_test_dir: str
     # check_or_create_dir(ctest_mapping_dir)
     change_working_dir(project_dir)
     add_dependency(project, "junit4")
-    add_runwith_for_all_2(project_test_dir)
+    add_runwith_for_all(project_test_dir)
     # run_tests_to_track(project, log_dir, ctest_mapping_dir)
     # class_method_pair = get_class_method_pair("ctest/mapping")
     # remaining = annotate_test_method_2(class_method_pair, project_test_dir, "ctest/mapping")
@@ -517,8 +531,8 @@ def test(project: str, test_module: str, project_dir: str, project_test_dir: str
     #     print(k, "->", v)
     # run_ctests(project, log_dir, "ctest/mapping")
 
-# python auto_annotate.py hadoop-common junit4 ../app/hadoop/hadoop-common-project/hadoop-common src/test/java/org/apache/hadoop ctest/mapping
-# python auto_annotate.py hadoop-hdfs junit4 ../app/hadoop/hadoop-hdfs-project/hadoop-hdfs src/test/java/org/apache/hadoop ctest/mapping
+# python auto_annotate.py hadoop-common junit4 ../app/hadoop/hadoop-common-project/hadoop-common . ctest/mapping
+# python auto_annotate.py hadoop-hdfs junit4 ../app/hadoop/hadoop-hdfs-project/hadoop-hdfs . ctest/mapping
 if __name__ == "__main__":
     if len(sys.argv) != 6:
         print_log("usage $project $test_module $project_dir $project_test_dir $ctest_mapping_dir")

@@ -1,6 +1,6 @@
 FROM ubuntu:bionic
 
-LABEL Shaui Wang<shuaiwang516@gmail.com>
+LABEL Shuai Wang<shuaiwang516@gmail.com>
 
 WORKDIR /root
 

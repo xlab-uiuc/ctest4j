@@ -33,6 +33,8 @@ public class ConfigTracker {
     private static final Map<String, File> testClassToConfigFile = new HashMap<>();
     /** Whether to inject config parameters from a file */
     private static final boolean injectFromFile;
+    /** The set of configuration object ids that already done the injection */
+    private static Set<Integer> confObjectIds = new HashSet<>();
 
     static {
         injectFromFile = constructTestClzToConfigFileMap();
@@ -76,6 +78,15 @@ public class ConfigTracker {
         } else {
             methodUsedParams.add(param);
         }
+    }
+
+    /**
+     * Not only mark a parameter as used, but also inject the parameter into the configuration class.
+     * The purpose of this method is to make the configuration API instrumentation easier.
+     */
+    public static <T> void markParamAsUsed(int confObjectId, BiConsumer<String, T> configSetterMethod, String param) {
+        injectConfig(confObjectId, configSetterMethod);
+        markParamAsUsed(param);
     }
 
     /**
@@ -195,6 +206,20 @@ public class ConfigTracker {
         }
         // The CLI injection would override the file injection for the common parameters
         injectFromCLI(configSetterMethod);
+    }
+
+    /**
+     * This method can be directly added to the getter method for easier API instrumentation;
+     * Every time the getter method is called, we check whether the current configruation object
+     * is already injected with the config parameters based on the object id.
+     * If not, we inject the config parameters.
+     */
+    public static <T> void injectConfig(int confObjectId, BiConsumer<String, T> configSetterMethod) {
+        if (confObjectIds.contains(confObjectId)) {
+            return;
+        }
+        confObjectIds.add(confObjectId);
+        injectConfig(configSetterMethod);
     }
 
     /**

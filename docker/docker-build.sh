@@ -21,10 +21,10 @@ if [ -z "$TAG" ]; then
   exit 1
 fi
 
-# if FUZZ_APP_DIR is not exist or not a directory, return error
+# if RUNNER_APP_DIR is not exist or not a directory, return error
 if [ ! -d "$RUNNER_APP_DIR" ]; then
   echo "${RUNNER_APP_DIR} is not a directory"
   exit 1
 fi
 
-docker build --build-arg RUNNER_APP_DIR=${FUZZ_APP_DIR} --build-arg RUNNER_BRANCH=${RUNNER_BRANCH} --no-cache -t shuaiwang516/runner-image:${TAG} -f Dockerfile .
+docker build --build-arg RUNNER_APP_DIR=${RUNNER_APP_DIR} --build-arg RUNNER_BRANCH=${RUNNER_BRANCH} --no-cache -t shuaiwang516/runner-image:${TAG} -f Dockerfile .

@@ -15,7 +15,7 @@ from typing import List, Dict
 # Constant section
 # If you want to test more projects, add their names in the PROJECTS_POTENTIAL field and run the script with corresponding arguments.
 PROJECTS_SUPPORTED = ["hadoop-common", "hadoop-hdfs"]
-PROJECTS_POTENTIAL = ["mapreduce-client-core", "alluxio-core-common", "bookkeeper-common", "camel-core", "druid-benchmarks", "flink-core", "hive-common", "kylin-core-common", "netty-common", "nifi-commons",\
+PROJECTS_POTENTIAL = ["mapreduce-client-core", "alluxio-core-common", "bookkeeper-common", "camel-core", "druid-processing", "flink-core", "hive-common", "kylin-core-common", "netty-common", "nifi-commons",\
                         "redisson", "rocketmq-common", "spark-core", "zeppelin-interpreter", "zookeeper-server"]
 
 TEST_MODULES_SUPPORTED = ["junit4"]
@@ -82,10 +82,11 @@ def add_dependency(project: str, test_module: str):
             added = False
             contents = f.readlines()
             for index, content in enumerate(contents):
-                if "</dependencies>" in content and "ctest-runner-junit4" not in contents[index - 4]:
-                    contents[index] = JAVA_DEPENDENCY[test_module] + contents[index]
+                if "</dependencies>" in content and "dependencyManagement" not in contents[index + 1]:
                     added = True
-                    break
+                    if "ctest-runner-junit4" not in contents[index - 4]:
+                        contents[index] = JAVA_DEPENDENCY[test_module] + contents[index]
+                        break
             if not added:
                 for index, content in enumerate(contents):
                     if "<build>" in content:
@@ -546,8 +547,8 @@ def test(project: str, test_module: str, project_dir: str, project_test_dir: str
     #     print(k, "->", v)
     # run_ctests(project, log_dir, "ctest/mapping")
 
-# python auto_annotate.py hadoop-common junit4 ../app/hadoop/hadoop-common-project/hadoop-common . ctest/mapping
-# python auto_annotate.py hadoop-hdfs junit4 ../app/hadoop/hadoop-hdfs-project/hadoop-hdfs . ctest/mapping
+# python auto_annotate.py hadoop-common junit4 ../app/hadoop/hadoop-common-project/hadoop-common . ctest/saved_mapping
+# python auto_annotate.py hadoop-hdfs junit4 ../app/hadoop/hadoop-hdfs-project/hadoop-hdfs . ctest/saved_mapping
 if __name__ == "__main__":
     if len(sys.argv) != 6:
         print_log("usage $project $test_module $project_dir $project_test_dir $ctest_mapping_dir")
@@ -558,5 +559,5 @@ if __name__ == "__main__":
     if sys.argv[2] not in TEST_MODULES_SUPPORTED:
         print_log("test module not supported")
         exit(1)
-    test(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
-    # auto_annotate_script_2(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
+    # test(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
+    auto_annotate_script_2(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])

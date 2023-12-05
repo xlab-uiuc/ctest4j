@@ -31,7 +31,7 @@ public interface CTestRunner {
     default Object[] initalizeParameterSet(String testClassName, String mappingFilePath, String[] annotationValue, String annotationRegex) throws IOException {
         mappingFilePath = resolveMappingFilePath(mappingFilePath, testClassName);
         if (mappingFilePath.isEmpty()) {
-            return new Object[]{new HashSet<>(), new HashMap<>()};
+            return new Object[]{getValueAndRegexClassParameters(new HashSet<>(Arrays.asList(annotationValue)), annotationRegex), new HashMap<>()};
         }
 
         File configFile = new File(mappingFilePath);
@@ -130,13 +130,22 @@ public interface CTestRunner {
      * @return a set of parameters that every test method in the class must use
      */
     default Set<String> getUnionClassParameters(Set<String> classLevelParameters, String classConfigFile, String classRegex) throws IOException {
+        Set<String> result = new HashSet<>(getValueAndRegexClassParameters(classLevelParameters, classRegex));
         if (!classConfigFile.isEmpty()) {
-            classLevelParameters.addAll(getParametersFromMappingFile(classConfigFile));
+            result.addAll(getParametersFromMappingFile(classConfigFile));
         }
+        return result;
+    }
+
+    /**
+     * Get the parameters from the regex and the parameters from the class-level annotation.
+     */
+    default Set<String> getValueAndRegexClassParameters(Set<String> classLevelParameters, String classRegex) throws IOException {
+        Set<String> result = new HashSet<>(classLevelParameters);
         if (!classRegex.isEmpty()) {
-            classLevelParameters.addAll(getParametersFromRegex(classRegex));
+            result.addAll(getParametersFromRegex(classRegex));
         }
-        return classLevelParameters;
+        return result;
     }
 
     /**

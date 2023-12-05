@@ -5,10 +5,8 @@ import edu.illinois.parser.JsonConfigurationParser;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
 
 import static edu.illinois.Names.*;
@@ -20,21 +18,21 @@ import static edu.illinois.Names.*;
 public class ConfigTracker {
     private static boolean trackClassParam = false;
     /** The set of parameters that have been used in the current test class */
-    private static final Set<String> classUsedParmas = new HashSet<>();
+    private static final Set<String> classUsedParmas = Collections.synchronizedSet(new HashSet<>());
     /** The set of parameters that have been set in the current test class */
-    private static final Set<String> classSetParmas = new HashSet<>();
+    private static final Set<String> classSetParmas = Collections.synchronizedSet(new HashSet<>());
     /** The set of parameters that have been used in the current test method */
-    private static final Set<String> methodUsedParams = new HashSet<>();
+    private static final Set<String> methodUsedParams = Collections.synchronizedSet(new HashSet<>());
     /** The set of parameters that have been set in the current test method */
-    private static final Set<String> methodSetParmas = new HashSet<>();
+    private static final Set<String> methodSetParmas = Collections.synchronizedSet(new HashSet<>());
     /** The name of the current test class */
     private static String currentTestClassName = null;
     /** The map from test class name to the configuration file */
-    private static final Map<String, File> testClassToConfigFile = new HashMap<>();
+    private static final Map<String, File> testClassToConfigFile = new ConcurrentHashMap<>();
     /** Whether to inject config parameters from a file */
     private static final boolean injectFromFile;
     /** The set of configuration object ids that already done the injection */
-    private static Set<Integer> confObjectIds = new HashSet<>();
+    private static Set<Integer> confObjectIds = Collections.synchronizedSet(new HashSet<>());
 
     static {
         injectFromFile = constructTestClzToConfigFileMap();

@@ -183,7 +183,7 @@ WORKDIR /home/ctestrunner
 
 # copy evaluation projects and ctest-runner repo to home dir
 ARG RUNNER_APP_DIR
-COPY ${RUNNER_APP_DIR}/* /home/ctestrunner/
+COPY ${RUNNER_APP_DIR}/ /home/ctestrunner/
 
 # use java11 for the install next
 ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64

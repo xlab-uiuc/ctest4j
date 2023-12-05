@@ -27,4 +27,5 @@ if [ ! -d "$RUNNER_APP_DIR" ]; then
   exit 1
 fi
 
+(cd $RUNNER_APP_DIR && bash pull_and_clean.sh)
 docker build --build-arg RUNNER_APP_DIR=${RUNNER_APP_DIR} --build-arg RUNNER_BRANCH=${RUNNER_BRANCH} --no-cache -t shuaiwang516/runner-image:${TAG} -f Dockerfile .

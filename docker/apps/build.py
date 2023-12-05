@@ -22,7 +22,7 @@ def build_app(app_name):
 def build_hadoop_for_hbase():
     app_name = "hadoop"
     app_dir = os.path.join(ROOT_DIR, app_name)
-    branch = "hbase"
+    branch = "ctest-eval-hbase"
     module = 'hadoop-common-project/hadoop-common'
     mvn_cmd = "mvn -B clean install -DskipTests -am -pl {}".format(module)
     build_cmd = "cd {} && git checkout {} && {}".format(app_dir, branch, mvn_cmd)

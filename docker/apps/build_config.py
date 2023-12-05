@@ -1,5 +1,4 @@
 # This is the configuration file for building all the applications in docker 
-import os
 build_modules = {
     'hbase': ['ctest-eval', ['hbase-common', 'hbase-server']],
     'hadoop': ['ctest-eval', ['hadoop-common-project/hadoop-common', 
@@ -11,4 +10,5 @@ build_modules = {
     'alluxio': ['ctest-eval', ['core/common']],
     'kylin': ['ctest-eval', ['core-common', 'core-cube', 'core-job', 'core-metadata', 'core-metrics', 'core-storage']],
     'flink': ['ctest-eval', ['flink-core']],
+    'camel': ['ctest-eval', ['core/camel-base', 'core/camel-core']],
 }

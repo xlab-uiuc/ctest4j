@@ -1,25 +1,29 @@
 import os, time, sys
-from utils import LOG, is_proj_supported, get_poject_vanilla_branch, get_proj_ctest_branch, get_proj_path, mvn_clean_and_build_cmd, vanilla_mvn_cmd, mapping_collection_mvn_cmd, ctest_runner_mvn_cmd
+from utils import LOG, is_proj_supported, get_poject_vanilla_branch, get_proj_ctest_branch, get_proj_path, mvn_clean_and_build_cmd, vanilla_mvn_cmd, mapping_collection_mvn_cmd, ctest_runner_mvn_cmd, write_to_file
 from pathlib import Path
 
 CUR_DIR = Path.cwd()
-MVN_COMMAND = 'mvn -B clean test'
 
+def run_vanilla_test(proj_path, branch):
+    os.chdir(proj_path)
+    os.system('pwd')
 
-def run_vanilla_test(branch):
     # checkout to the branch
     LOG('[VANILLA-RND] Checkout to branch {}'.format(branch))
     os.system('git checkout {}'.format(branch))
     # mvn clean and build
+    LOG('[VANILLA-RND] mvn clean and build')
     os.system(mvn_clean_and_build_cmd())
     # run the test
+    LOG('[VANILLA-RND] Run the test')
     start_time = time.time()
     os.system(vanilla_mvn_cmd())
     end_time = time.time()
     return end_time - start_time
 
 
-def run_ctest_test(branch):
+def run_ctest_test(proj_path, branch):
+    os.chdir(proj_path)
     # checkout to the branch
     LOG('[CTEST-RND] Checkout to branch {}'.format(branch))
     os.system('git checkout {}'.format(branch))
@@ -27,12 +31,14 @@ def run_ctest_test(branch):
     os.system(mvn_clean_and_build_cmd())
     
     # run the test
+    LOG('[CTEST-RND] Run the collection phase')
     start_time = time.time()
     os.system(mapping_collection_mvn_cmd())
     end_time = time.time()
     annotation_time = end_time - start_time
     
     # run the test with ctest runner
+    LOG('[CTEST-RND] Run the test with ctest runner')
     start_time = time.time()
     os.system(ctest_runner_mvn_cmd())
     end_time = time.time()
@@ -56,11 +62,11 @@ def run(target_proj):
         return
 
     # run vanilla test
-    vanilla_time = run_vanilla_test(proj_vanilla_branch)
+    vanilla_time = run_vanilla_test(proj_abs_path, proj_vanilla_branch)
     # TODO: run script to add all annotations
 
     # run mapping collection and ctest-runner test
-    annotation_time, ctest_time = run_ctest_test(proj_ctest_branch)
+    annotation_time, ctest_time = run_ctest_test(proj_abs_path, proj_ctest_branch)
     return vanilla_time, annotation_time, ctest_time
 
 
@@ -69,4 +75,7 @@ if __name__ == '__main__':
         print('Usage: python run.py <target-project>')
         exit(1)
     target_proj = sys.argv[1]
-    run(target_proj)
+    vanilla_time, annotation_time, ctest_time = run(target_proj)
+    write_to_file(f'{target_proj}-time.txt', 'Vanilla_Test_Time:{}\tAnnotation_Time:{}\tCTest_Time:{}'.format(vanilla_time, annotation_time, ctest_time))
+    
+

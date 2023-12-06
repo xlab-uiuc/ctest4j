@@ -67,6 +67,7 @@ def run(target_proj):
 
     # run mapping collection and ctest-runner test
     annotation_time, ctest_time = run_ctest_test(proj_abs_path, proj_ctest_branch)
+    os.chdir(CUR_DIR)
     return vanilla_time, annotation_time, ctest_time
 
 

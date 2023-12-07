@@ -1,3 +1,5 @@
+SUPPORTED_PROJECTS = ['hbase', 'hcommon', 'hdfs', 'yarn', 'mapreduce', 'hive', 'zeppelin', 'alluxio', 'kylin', 'flink', 'camel']
+
 build_modules = {
     'hbase': ['ctest-eval', ['hbase-common', 'hbase-server']],
     'hadoop': ['ctest-eval', ['hadoop-common-project/hadoop-common', 
@@ -41,3 +43,19 @@ PROJ_PATH_DICT = {
     'camel': 'camel/core/camel-core',
 }
 
+# TODO: The version may need fix
+PROJ_JUNIT_VERSION_DICT = {
+    'hbase': 'junit4',
+    'hcommon': 'junit4',
+    'hdfs': 'junit4',
+    'yarn': 'junit4',
+    'mapreduce': 'junit4',
+    'hive': 'junit4',
+    'zeppelin': 'junit4',
+    'alluxio': 'junit4',
+    'kylin': 'junit4',
+    'flink': 'junit4',
+    'camel': 'junit4',
+}
+
+   

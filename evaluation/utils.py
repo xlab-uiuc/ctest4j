@@ -23,8 +23,15 @@ def get_proj_ctest_branch(proj) -> str:
 
 
 def get_proj_path(proj) -> Path:
-    print(config.PROJ_PATH_DICT[proj])
     return Path(config.PROJ_PATH_DICT[proj])
+
+
+def get_proj_abs_path(proj, cur_dir: Path) -> Path:
+    return cur_dir.parent.parent / get_proj_path(proj)
+
+
+def get_proj_junit_version(proj) -> str:
+    return config.PROJ_JUNIT_VERSION_DICT[proj]
 
 
 def mvn_clean_and_build_cmd() -> str:
@@ -32,12 +39,12 @@ def mvn_clean_and_build_cmd() -> str:
 
 
 def vanilla_mvn_cmd() -> str:
-    return 'mvn -B surefire:test'
+    return 'mvn -B surefire:test -Dtest=TestConfiguration'
 
 
 def mapping_collection_mvn_cmd() -> str:
-    return 'mvn -B surefire:test -Dctest.config.save'
+    return 'mvn -B surefire:test -Dctest.config.save -Dtest=TestConfiguration'
 
 
 def ctest_runner_mvn_cmd() -> str:
-    return 'mvn -B surefire:test -Dctest.mapping.dir=ctest/saved_mapping/'
+    return 'mvn -B surefire:test -Dctest.mapping.dir=ctest/saved_mapping/ -Dtest=TestConfiguration'

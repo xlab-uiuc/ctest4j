@@ -1,0 +1,7 @@
+{
+  "classLevelParams":["class-parameter1", "class-parameter2"],
+  "methodLevelParams": {
+    "test":["method-parameter1", "method-parameter2"],
+    "testWouldFail":["method-parameter1", "method-parameter2"]
+  }
+}

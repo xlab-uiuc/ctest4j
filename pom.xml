@@ -5,18 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.illinois</groupId>
-    <artifactId>CTestRunner</artifactId>
+    <artifactId>ctest-runner</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>maven-plugin</packaging>
+    <packaging>pom</packaging>
+    <modules>
+        <module>ctest-runner-junit4</module>
+        <module>ctest-runner-common</module>
+        <module>ctest-runner-junit5</module>
+    </modules>
     <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <!-- Dependencies for Parsers -->
         <dependency>
             <groupId>javax.json</groupId>
             <artifactId>javax.json-api</artifactId>
@@ -28,23 +25,6 @@
             <version>1.1.4</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.ow2.asm</groupId>
-            <artifactId>asm</artifactId>
-            <version>9.2</version>
-        </dependency>
-
-        <!-- Dependencies for Log4j -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.17.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.17.2</version>
-        </dependency>
 
         <dependency>
             <groupId>org.apache.maven</groupId>
@@ -68,13 +48,12 @@
 
 
     <build>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
 <!--                <configuration>
-                    <argLine>-javaagent:/Users/allenwang/.m2/repository/edu/illinois/CTestRunner/1.0-SNAPSHOT/CTestRunner-1.0-SNAPSHOT.jar</argLine>
+                    <argLine>-javaagent:/Users/allenwang/.m2/repository/edu/illinois/edu.illinois.CTestRunner/1.0-SNAPSHOT/edu.illinois.CTestRunner-1.0-SNAPSHOT.jar</argLine>
                     <systemPropertyVariables>
                         <configurationClassName>edu/illinois/Configuration</configurationClassName>
                         <configurationGetterMethod>get(Ljava/lang/String;)Ljava/lang/String;</configurationGetterMethod>

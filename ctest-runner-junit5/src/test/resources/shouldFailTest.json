@@ -1,0 +1,10 @@
+{
+  "classLevelParams":["class-parameter1", "class-parameter2", "file-param1"],
+  "methodLevelParams":{
+    "testWouldFail":["file-param2"],
+    "testFailDueToMethodAnnotation":[],
+    "testShouldFail":["class-parameter1"],
+    "testFailDueToClassAnnotation":[],
+    "testFailDueToConfigFile":[]
+  }
+}

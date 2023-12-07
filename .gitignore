@@ -1,9 +1,12 @@
+ctest/
 config/
 target/
+docker/apps/**/
 .idea/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+__pycache__/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

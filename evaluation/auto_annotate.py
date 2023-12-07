@@ -18,15 +18,19 @@ PROJECTS_SUPPORTED = ["hadoop-common", "hadoop-hdfs"]
 PROJECTS_POTENTIAL = ["mapreduce-client-core", "alluxio-core-common", "bookkeeper-common", "camel-core", "druid-processing", "flink-core", "hive-common", "kylin-core-common", "netty-common", "nifi-commons",\
                         "redisson", "rocketmq-common", "spark-core", "zeppelin-interpreter", "zookeeper-server"]
 
-TEST_MODULES_SUPPORTED = ["junit4"]
+TEST_MODULES_SUPPORTED = ["junit4", "junit5"]
 
-JAVA_DEPENDENCY = {"junit4": "    <dependency>\n      <groupId>edu.illinois</groupId>\n      <artifactId>ctest-runner-junit4</artifactId>\n      <version>1.0-SNAPSHOT</version>\n      <scope>compile</scope>\n    </dependency>\n"}
+JAVA_DEPENDENCY = {"junit4": "    <dependency>\n      <groupId>edu.illinois</groupId>\n      <artifactId>ctest-runner-junit4</artifactId>\n      <version>1.0-SNAPSHOT</version>\n      <scope>compile</scope>\n    </dependency>\n",
+                   "junit5": "    <dependency>\n      <groupId>edu.illinois</groupId>\n      <artifactId>ctest-runner-junit4</artifactId>\n      <version>1.0-SNAPSHOT</version>\n      <scope>compile</scope>\n    </dependency>\n"}
 
-IMPORT_NORMAL = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
+IMPORT_NORMAL = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
+                 "junit5": "org.junit.jupiter.api.extension.ExtendWith;\nimport edu.illinois.CTestJunit5Extension;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
 
-IMPORT_NORMAL_2 = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner2;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
+IMPORT_NORMAL_2 = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner2;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
+                   "junit5": "org.junit.jupiter.api.extension.ExtendWith;\nimport edu.illinois.CTestJunit5Extension;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
 
-IMPORT_ABSTRACT = {"junit4": "import edu.illinois.CTest;\n\n"}
+IMPORT_ABSTRACT = {"junit4": "import edu.illinois.CTest;\n\n",
+                   "junit5": "import edu.illinois.CTest;\n\n"}
 
 LOG_FILES = {"compile": "compile.txt", "track": "track.txt", "ctest": "ctest.txt"}
 

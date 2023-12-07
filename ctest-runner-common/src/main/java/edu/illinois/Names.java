@@ -30,6 +30,8 @@ public class Names {
     public static final String CTEST_GETTER = "ctest.getter";
     /** The method to set the value of the configuration parameter */
     public static final String CTEST_SETTER = "ctest.setter";
+    /** The method to inject the value of the configuration parameter */
+    public static final String CTEST_INJECTER = "ctest.injecter";
     /**
      * Get the ASM version based on the java version
      * @param javaVersion java version

@@ -39,12 +39,12 @@ def mvn_clean_and_build_cmd() -> str:
 
 
 def vanilla_mvn_cmd() -> str:
-    return 'mvn -B surefire:test -Dtest=TestConfiguration'
+    return 'mvn -B surefire:test'
 
 
 def mapping_collection_mvn_cmd() -> str:
-    return 'mvn -B surefire:test -Dctest.config.save -Dtest=TestConfiguration'
+    return 'mvn -B surefire:test -Dctest.config.save'
 
 
 def ctest_runner_mvn_cmd() -> str:
-    return 'mvn -B surefire:test -Dctest.mapping.dir=ctest/saved_mapping/ -Dtest=TestConfiguration'
+    return 'mvn -B surefire:test -Dctest.mapping.dir=ctest/saved_mapping/'

@@ -15,7 +15,7 @@ build_modules = {
 }
 
 PROJ_VANILLA_BRANCH_DICT = {
-    'hbase': 'rel/2.5.6',
+    'hbase': 'ctest/2.5.6',
     'hcommon': 'rel/release-3.3.6',
     'hdfs': 'rel/release-3.3.6',
     'yarn': 'rel/release-3.3.6',

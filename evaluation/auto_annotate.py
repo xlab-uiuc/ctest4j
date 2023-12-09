@@ -221,7 +221,7 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
                     contents[index] = IMPORT_ABSTRACT[test_module] + content
                     print_log("abstract import added for " + f.name)
                 import_added = True
-            if package_or_import_seen and not import_added and re.match("\/\*\*", content) is not None:
+            if package_or_import_seen and not import_added and (re.match("\/\*\*", content) is not None or re.match("@Category", content) is not None):
                 if not abstract_class and test_class:
                     # CHANGE content -> contents[index]
                     contents[index] = IMPORT_NORMAL_2[test_module] + content

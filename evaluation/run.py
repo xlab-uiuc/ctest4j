@@ -1,6 +1,6 @@
 import os, time, sys
 from auto_annotate import auto_annotate_script_2
-from utils import LOG, is_proj_supported, get_poject_vanilla_branch, get_proj_ctest_branch, get_proj_path, get_proj_junit_version, get_proj_abs_path, mvn_clean_and_build_cmd, vanilla_mvn_cmd, mapping_collection_mvn_cmd, ctest_runner_mvn_cmd, write_to_file
+from utils import LOG, is_proj_supported, get_poject_vanilla_branch, get_proj_ctest_branch, get_proj_path, get_proj_junit_version, get_proj_abs_path, mvn_clean_and_build_cmd, vanilla_mvn_cmd, mapping_collection_mvn_cmd, ctest_runner_mvn_cmd, append_to_file
 from pathlib import Path
 
 CUR_DIR = Path.cwd()
@@ -100,6 +100,7 @@ if __name__ == '__main__':
         exit(1)
     target_proj = sys.argv[1]
     vanilla_time, annotation_time, collection_time, ctest_time = run(target_proj)
-    write_to_file(f'{target_proj}-time.tsv', 'Vanilla_Test_Time:{}\tAnnotation_Time:{}\tCollection_Time:{}\tCTest_Time:{}'.format(vanilla_time, annotation_time, collection_time, ctest_time))
+    cur_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    append_to_file(f'{target_proj}-time.tsv', 'Start_Date:{}\tVanilla_Test_Time:{}\tAnnotation_Time:{}\tCollection_Time:{}\tCTest_Time:{}'.format(cur_time, vanilla_time, annotation_time, collection_time, ctest_time))
     
 

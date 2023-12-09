@@ -9,7 +9,12 @@ def write_to_file(file_path, content):
     with open(file_path, 'w') as f:
         f.write(content)
 
-        
+
+def append_to_file(file_path, content):
+    with open(file_path, 'a') as f:
+        f.write(content)
+
+
 def is_proj_supported(proj) -> bool:
     return proj in config.PROJ_PATH_DICT.keys()
 

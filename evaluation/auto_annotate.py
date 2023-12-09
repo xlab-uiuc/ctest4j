@@ -210,6 +210,7 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
         package_or_import_seen = False
         for index, content in enumerate(contents):
             # add import
+            """ Option 1
             if not package_or_import_seen and (re.match("package .*", content) is not None or re.match("import (?:(?!static)).*", content) is not None):
                 package_or_import_seen = True
             if package_or_import_seen and not import_added and re.match("import static .*", content) is not None:
@@ -232,6 +233,28 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
                 import_added = True
             # add @RunWith and import (rare case)
             if package_or_import_seen and re.match(".*class +\w+.*{", content) is not None:
+                if not abstract_class and test_class:
+                    # CHANGE content -> contents[index]
+                    contents[index] = "@RunWith(CTestJUnit4Runner2.class)\n@CTestClass()\n" + content
+                    print_log("normal import and @RunWith added for " + f.name)
+                if not import_added:
+                    if not abstract_class and test_class:
+                        contents[index] = IMPORT_NORMAL_2[test_module] + contents[index]
+                    if abstract_class and not test_class and not ctest_annotation_seen:
+                        contents[index] = IMPORT_ABSTRACT[test_module] + contents[index]
+                        print_log("abstract import added for " + f.name)
+                    import_added = True
+                break
+            """
+            """ Option 2 """
+            if re.match("import .*;", content) is not None:
+                if not abstract_class and test_class:
+                    contents[index] = IMPORT_NORMAL_2[test_module] + content
+                if abstract_class and not test_class and not ctest_annotation_seen:
+                    contents[index] = IMPORT_ABSTRACT[test_module] + content
+                    print_log("abstract import added for " + f.name)
+                import_added = True
+            if re.match(".*class +\w+.*{", content) is not None:
                 if not abstract_class and test_class:
                     # CHANGE content -> contents[index]
                     contents[index] = "@RunWith(CTestJUnit4Runner2.class)\n@CTestClass()\n" + content

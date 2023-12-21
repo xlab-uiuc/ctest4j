@@ -247,7 +247,7 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
                 break
             """
             """ Option 2 """
-            if re.match("import .*;", content) is not None:
+            if re.match("import .*;", content) is not None and not import_added:
                 if not abstract_class and test_class:
                     contents[index] = IMPORT_NORMAL_2[test_module] + content
                 if abstract_class and not test_class and not ctest_annotation_seen:
@@ -310,7 +310,7 @@ def add_runwith_for_all_2(target_dir: str):
         if not os.path.isdir(target_dir + "/src/test"):
             raise ValueError("Does not support current project file hierarchy.")
         else:
-            modules.append("src/test")
+            modules.append(target_dir + "/src/test")
     for test_dir in modules:
         print_log("add import information and @RunWith in " + test_dir)
         for dir_path, dir_name, files in os.walk(test_dir):

@@ -18,13 +18,17 @@ import static edu.illinois.Names.*;
 public class ConfigTracker {
     private static boolean trackClassParam = false;
     /** The set of parameters that have been used in the current test class */
-    private static final Set<String> classUsedParmas = Collections.synchronizedSet(new HashSet<>());
+    //private static final Set<String> classUsedParams = Collections.synchronizedSet(new HashSet<>());
+    private static final ThreadLocal<Set<String>> classUsedParams = ThreadLocal.withInitial(HashSet::new);
     /** The set of parameters that have been set in the current test class */
-    private static final Set<String> classSetParmas = Collections.synchronizedSet(new HashSet<>());
+    //private static final Set<String> classSetParmas = Collections.synchronizedSet(new HashSet<>());
+    private static final ThreadLocal<Set<String>> classSetParams = ThreadLocal.withInitial(HashSet::new);
     /** The set of parameters that have been used in the current test method */
-    private static final Set<String> methodUsedParams = Collections.synchronizedSet(new HashSet<>());
+    //private static final Set<String> methodUsedParams = Collections.synchronizedSet(new HashSet<>());
+    private static final ThreadLocal<Set<String>> methodUsedParams = ThreadLocal.withInitial(HashSet::new);
     /** The set of parameters that have been set in the current test method */
-    private static final Set<String> methodSetParmas = Collections.synchronizedSet(new HashSet<>());
+    //private static final Set<String> methodSetParmas = Collections.synchronizedSet(new HashSet<>());
+    private static final ThreadLocal<Set<String>> methodSetParams = ThreadLocal.withInitial(HashSet::new);
     /** The name of the current test class */
     private static String currentTestClassName = null;
     /** The map from test class name to the configuration file */
@@ -32,7 +36,11 @@ public class ConfigTracker {
     /** Whether to inject config parameters from a file */
     private static final boolean injectFromFile;
     /** The set of configuration object ids that already done the injection */
-    private static Set<Integer> confObjectIds = Collections.synchronizedSet(new HashSet<>());
+    //private static Set<Integer> confObjectIds = Collections.synchronizedSet(new HashSet<>());
+    private static final ThreadLocal<Set<Integer>> confObjectIds = ThreadLocal.withInitial(HashSet::new);
+
+    /** The configuration parameters key-value pairs that will be injected */
+    private static final ThreadLocal<Map<String, String>> injectedParams = ThreadLocal.withInitial(HashMap::new);
 
     static {
         injectFromFile = constructTestClzToConfigFileMap();
@@ -43,8 +51,8 @@ public class ConfigTracker {
      */
     public static void startTestClass() {
         trackClassParam = true;
-        classUsedParmas.clear();
-        classSetParmas.clear();
+        classUsedParams.get().clear();
+        classSetParams.get().clear();
     }
 
     /**
@@ -53,8 +61,8 @@ public class ConfigTracker {
     public static void startTestMethod() {
         // Stop tracking class-level parameters once a test method is started
         trackClassParam = false;
-        methodUsedParams.clear();
-        methodSetParmas.clear();
+        methodUsedParams.get().clear();
+        methodSetParams.get().clear();
     }
 
     /**
@@ -63,7 +71,7 @@ public class ConfigTracker {
      * @return true if the parameter has been used, false otherwise
      */
     public static boolean isParameterUsed(String param) {
-        return methodUsedParams.contains(param) || classUsedParmas.contains(param);
+        return methodUsedParams.get().contains(param) || classUsedParams.get().contains(param);
     }
 
     /**
@@ -72,9 +80,9 @@ public class ConfigTracker {
      */
     public static void markParamAsUsed(String param) {
         if (trackClassParam) {
-            classUsedParmas.add(param);
+            classUsedParams.get().add(param);
         } else {
-            methodUsedParams.add(param);
+            methodUsedParams.get().add(param);
         }
     }
 
@@ -93,7 +101,7 @@ public class ConfigTracker {
      * @return true if the parameter has been set, false otherwise
      */
     public static boolean isParameterSet(String param) {
-        return methodSetParmas.contains(param) || classSetParmas.contains(param);
+        return methodSetParams.get().contains(param) || classSetParams.get().contains(param);
     }
 
     /**
@@ -102,9 +110,9 @@ public class ConfigTracker {
      */
     public static void markParamAsSet(String param) {
         if (trackClassParam) {
-            classSetParmas.add(param);
+            classSetParams.get().add(param);
         } else {
-            methodSetParmas.add(param);
+            methodSetParams.get().add(param);
         }
     }
 
@@ -113,7 +121,7 @@ public class ConfigTracker {
      * @return the set of parameters that have been used in the current test method
      */
     public static Set<String> getMethodUsedParams() {
-        return methodUsedParams;
+        return methodUsedParams.get();
     }
 
     /**
@@ -121,7 +129,7 @@ public class ConfigTracker {
      * @return the set of parameters that have been set in the current test method
      */
     public static Set<String> getSetParams() {
-        return methodSetParmas;
+        return methodSetParams.get();
     }
 
 
@@ -129,16 +137,16 @@ public class ConfigTracker {
      * Get the set of parameters that have been used in the current test class
      * @return the set of parameters that have been used in the current test class
      */
-    public static Set<String> getClassUsedParmas() {
-        return classUsedParmas;
+    public static Set<String> getClassUsedParams() {
+        return classUsedParams.get();
     }
 
     /**
      * Get the set of parameters that have been set in the current test class
      * @return the set of parameters that have been set in the current test class
      */
-    public static Set<String> getClassSetParmas() {
-        return classSetParmas;
+    public static Set<String> getClassSetParams() {
+        return classSetParams.get();
     }
 
 
@@ -148,8 +156,8 @@ public class ConfigTracker {
      */
     public static Set<String> getAllUsedParams() {
         Set<String> allUsedParams = new HashSet<>();
-        allUsedParams.addAll(methodUsedParams);
-        allUsedParams.addAll(classUsedParmas);
+        allUsedParams.addAll(methodUsedParams.get());
+        allUsedParams.addAll(classUsedParams.get());
         return allUsedParams;
     }
 
@@ -159,8 +167,8 @@ public class ConfigTracker {
      */
     public static Set<String> getAllSetParams() {
         Set<String> allSetParams = new HashSet<>();
-        allSetParams.addAll(methodSetParmas);
-        allSetParams.addAll(classSetParmas);
+        allSetParams.addAll(methodSetParams.get());
+        allSetParams.addAll(classSetParams.get());
         return allSetParams;
     }
 
@@ -178,6 +186,17 @@ public class ConfigTracker {
      */
     public static String getCurrentTestClassName() {
         return currentTestClassName;
+    }
+
+    /**
+     * Get the injected value of a config parameter
+     */
+    public static String getConfigParamValue(String param, String defaultValue) {
+        Map<String, String> params = getInjectedParams();
+        if (params.containsKey(param)) {
+            return params.get(param);
+        }
+        return defaultValue;
     }
 
     /**
@@ -207,16 +226,51 @@ public class ConfigTracker {
     }
 
     /**
+     * Construct the map of injected configuration parameters
+     */
+    private static void constructInjectedParamMap() {
+        if (Options.mode != Modes.DEFAULT && Options.mode != Modes.INJECTING) {
+            return;
+        }
+        if (injectFromFile) {
+            try {
+                File configFile = testClassToConfigFile.get(currentTestClassName);
+                if (configFile != null) {
+                    ConfigurationParser parser = new JsonConfigurationParser();
+                    Map<String, String> configNameValueMap = parser.parseConfigNameValueMap(configFile.getAbsolutePath());
+                    injectedParams.get().putAll(configNameValueMap);
+                }
+            } catch (IOException e){
+                Log.ERROR("Unable to inject config from file: " + e.getMessage());
+            }
+        }
+        // The CLI injection would override the file injection for the common parameters
+        injectFromCLI((k, v) -> injectedParams.get().put(k, v.toString()));
+    }
+
+    /**
+     * Get the map of injected configuration parameters
+     */
+    private static Map<String, String> getInjectedParams() {
+        if (Options.mode != Modes.DEFAULT && Options.mode != Modes.INJECTING) {
+            return new HashMap<>();
+        } else if (injectedParams.get().isEmpty()) {
+            constructInjectedParamMap();
+        }
+        return injectedParams.get();
+    }
+
+    /**
      * This method can be directly added to the getter method for easier API instrumentation;
      * Every time the getter method is called, we check whether the current configruation object
      * is already injected with the config parameters based on the object id.
      * If not, we inject the config parameters.
      */
     public static <T> void injectConfig(int confObjectId, BiConsumer<String, T> configSetterMethod) {
-        if (confObjectIds.contains(confObjectId)) {
+        if (confObjectIds.get().contains(confObjectId)) {
             return;
         }
-        confObjectIds.add(confObjectId);
+        confObjectIds.get().add(confObjectId);
         injectConfig(configSetterMethod);
     }
 
@@ -292,8 +346,8 @@ public class ConfigTracker {
      * Update the config usage for the current test method
      */
     public static void updateConfigUsage(ConfigUsage configUsage, String methodName) {
-        configUsage.addMethodLevelParams(methodName, methodUsedParams);
-        configUsage.addClassLevelParams(classUsedParmas);
+        configUsage.addMethodLevelParams(methodName, methodUsedParams.get());
+        configUsage.addClassLevelParams(classUsedParams.get());
     }
 }
 

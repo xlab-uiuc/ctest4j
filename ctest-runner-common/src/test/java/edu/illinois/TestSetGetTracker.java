@@ -43,4 +43,10 @@ public class TestSetGetTracker {
         expected.add("param2");
         Assert.assertEquals(expected, ConfigTracker.getSetParams());
     }
+
+    @Test
+    public void testGetInjectParams() {
+        String value = ConfigTracker.getConfigParamValue("param1", "not-injected");
+        System.out.println("value: " + value);
+    }
 }

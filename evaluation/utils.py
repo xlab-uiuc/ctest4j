@@ -5,6 +5,9 @@ def LOG(msg):
     print(f"[CTEST-RUNNER-EVAL] {msg}")
 
 
+def get_junit_version(proj) -> str:
+    return config.PROJ_JUNIT_VERSION_DICT[proj]
+
 def write_to_file(file_path, content):
     with open(file_path, 'w') as f:
         f.write(content)

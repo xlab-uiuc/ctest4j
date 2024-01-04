@@ -300,7 +300,7 @@ def add_runwith_for_all(target_dir: str):
                         f.seek(0)
                         f.write(contents)
 
-def add_runwith_for_all_2(target_dir: str):
+def add_runwith_for_all_2(target_dir: str, junit_version: str="junit4"):
     modules = []
     if not os.path.isdir(target_dir + "/src/test"): # /src/test/java
         for i in os.listdir(target_dir):
@@ -318,7 +318,7 @@ def add_runwith_for_all_2(target_dir: str):
             for file_name in files:
                 if ".java" in file_name:
                     with open(dir_path + "/" + file_name, "r+") as f:
-                        contents = add_import_and_runwith_2(f, True)
+                        contents = add_import_and_runwith_2(f, True, junit_version)
                         contents = "".join(contents)
                         f.seek(0)
                         f.write(contents)
@@ -536,7 +536,7 @@ def auto_annotate_script(project: str, test_module:str, project_dir: str, projec
         run_ctests(project, log_dir, ctest_mapping_dir)
 
         
-def auto_annotate_script_2(project: str, project_dir: str):
+def auto_annotate_script_2(project: str, project_dir: str, junit_version: str):
     print_log("======================================================================")
     print_log("project: " + project)
     log_dir = os.getcwd() + "/log"
@@ -549,7 +549,7 @@ def auto_annotate_script_2(project: str, project_dir: str):
     # add import and runwith to all test classes
     print_log("add import and runwith to all test classes")
     check_or_create_dir(project_dir, True)
-    add_runwith_for_all_2(project_dir)
+    add_runwith_for_all_2(project_dir, junit_version)
 
         
 def test(project: str, test_module: str, project_dir: str, project_test_dir: str, ctest_mapping_dir: str):

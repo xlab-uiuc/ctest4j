@@ -58,7 +58,7 @@ PROJ_JUNIT_VERSION_DICT = {
     'alluxio': 'junit4',
     'kylin': 'junit4',
     'flink': 'junit4',
-    'camel': 'junit4',
+    'camel': 'junit5',
     'zookeeper': 'junit5'
 }
 

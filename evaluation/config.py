@@ -16,10 +16,10 @@ build_modules = {
 
 PROJ_VANILLA_BRANCH_DICT = {
     'hbase': 'ctest/2.5.6',
-    'hcommon': 'rel/release-3.3.6',
-    'hdfs': 'rel/release-3.3.6',
-    'yarn': 'rel/release-3.3.6',
-    'mapreduce': 'rel/release-3.3.6',
+    'hcommon': 'ctest-eval-vanilla',
+    'hdfs': 'ctest-eval-vanilla',
+    'yarn': 'ctest-eval-vanilla',
+    'mapreduce': 'ctest-eval-vanilla',
     'hive': 'rel/release-3.1.3',
     'zeppelin': 'v0.10.1',
     'alluxio': 'v2.9.3',

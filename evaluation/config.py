@@ -25,7 +25,7 @@ PROJ_VANILLA_BRANCH_DICT = {
     'zeppelin': 'v0.10.1',
     'alluxio': 'v2.9.3',
     'kylin': 'kylin-4.0.4',
-    'flink': 'release-1.18.0',
+    'flink': 'ctest-eval-vanilla',
     'camel': 'camel-3.21.2',
     'zookeeper': 'release-3.9.1'
 }

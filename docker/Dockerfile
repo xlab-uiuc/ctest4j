@@ -65,6 +65,7 @@ RUN apt-get -q update \
         software-properties-common \
         sudo \
         valgrind \
+        emacs \
         wget \
         zlib1g-dev \
     && apt-get clean \

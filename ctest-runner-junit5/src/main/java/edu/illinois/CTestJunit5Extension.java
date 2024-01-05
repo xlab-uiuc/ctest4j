@@ -142,7 +142,15 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
         ConfigTracker.setCurrentTestClassName(className);
         CTestClass cTestClass = extensionContext.getRequiredTestClass().getAnnotation(CTestClass.class);
         if (cTestClass == null) {
-            throw new AnnotationFormatError("CTestClass annotation is not present in class " + className);
+            // this class may extend from another class that has the @CTestClass annotation, check it
+            Class<?> superClass = extensionContext.getRequiredTestClass().getSuperclass();
+            if (superClass != null) {
+                cTestClass = superClass.getAnnotation(CTestClass.class);
+            }
+            if (cTestClass == null) {
+                throw new AnnotationFormatError("CTestClass annotation is not present in class " + className
+                        + " or its super class.");
+            }
         }
 
         // Get classLevel and methodLevel parameters from the mapping file

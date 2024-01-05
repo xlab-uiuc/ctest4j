@@ -23,7 +23,7 @@ PROJ_VANILLA_BRANCH_DICT = {
     'mapreduce': 'ctest-eval-vanilla',
     'hive': 'rel/release-3.1.3',
     'zeppelin': 'v0.10.1',
-    'alluxio': 'v2.9.3',
+    'alluxio': 'ctest-eval-vanilla',
     'kylin': 'kylin-4.0.4',
     'flink': 'ctest-eval-vanilla',
     'camel': 'camel-3.21.2',

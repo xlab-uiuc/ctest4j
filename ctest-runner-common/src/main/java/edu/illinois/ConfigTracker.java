@@ -17,8 +17,9 @@ import static edu.illinois.Names.*;
  */
 public class ConfigTracker {
 
+    /** Whether to inject config parameters from a file */
     private static final boolean injectFromFile;
-
+    /** The map that maintains the test usage tracker for each test class and method */
     private static final ConcurrentHashMap<String, TestTracker> testTrackerMap = new ConcurrentHashMap<>();
     /** The map from test class name to the configuration file */
     private static final Map<String, File> testClassToConfigFile = new ConcurrentHashMap<>();
@@ -27,57 +28,43 @@ public class ConfigTracker {
         injectFromFile = constructTestClzToConfigFileMap();
     }
 
+    /**
+     * Check whether the test tracker map contains the test name.
+     */
     private static boolean trackerContains(String testName) {
         return testTrackerMap.containsKey(testName);
     }
 
+    /**
+     * Add a test tracker to the test tracker map.
+     */
     private static void trackerAdd(String testName, TestTracker tracker) {
         testTrackerMap.put(testName, tracker);
     }
 
+    /**
+     * Get the test tracker from the test tracker map
+     * If the test tracker does not exist, create a new one and add it to the map to prevent NPE.
+     */
     private static TestTracker trackerGet(String testName, boolean isMethodTracker) {
         if (!trackerContains(testName)) {
-            if (isMethodTracker) {
-                trackerAdd(testName, new TestMethodTracker());
-            } else {
-                trackerAdd(testName, new TestClassTracker());
-            }
+            TestTracker tracker = isMethodTracker? new TestMethodTracker() : new TestClassTracker();
+            trackerAdd(testName, tracker);
         }
         return testTrackerMap.get(testName);
     }
 
     /**
-     * Start tracking class-level parameters
-     */
-/*
-    @Deprecated
-    public static void startTestClass() {
-        String className = Utils.inferTestClassNameFromStackTrace();
-        if (!trackerContains(className)) {
-            trackerAdd(className, new TestClassTracker());
-        }
-        TestClassTracker testClassTracker = (TestClassTracker) trackerGet(className, false);
-        testClassTracker.startTrackingClassParam();
-    }
-*/
-
-    /**
      * Start a new test method, clear the set of used parameters
      */
     public static void startTestMethod(String className, String methodName) {
-/*
-        String[] names = Utils.getTestClassAndMethodName();
-        String className = names[0];
-        String testName = names[1];
-*/
         // Stop tracking class-level parameters once a test method is started
         if (!trackerContains(className)) {
             trackerAdd(className, new TestClassTracker());
         }
         ((TestClassTracker) trackerGet(className, false)).stopTrackingClassParam();
-        methodName = className + TEST_CLASS_METHOD_SEPERATOR + methodName;
         // Start tracking method-level parameters with a new TestMethodTracker
-        trackerAdd(methodName, new TestMethodTracker());
+        trackerAdd(Utils.getFullTestName(className, methodName), new TestMethodTracker());
     }
 
     /**
@@ -85,10 +72,19 @@ public class ConfigTracker {
      * @param param the parameter to check
      * @return true if the parameter has been used, false otherwise
      */
-    public static boolean isParameterUsed(String className, String testName, String param) {
-        testName = className + TEST_CLASS_METHOD_SEPERATOR + testName;
+    public static boolean isParameterUsed(String className, String methodName, String param) {
         return (trackerGet(className, false)).isParameterUsed(param) ||
-                (trackerGet(testName, true)).isParameterUsed(param);
+                (trackerGet(Utils.getFullTestName(className, methodName), true)).isParameterUsed(param);
+    }
+
+    /**
+     * Check whether a parameter has been set in the current test method or class
+     * @param param the parameter to check
+     * @return true if the parameter has been set, false otherwise
+     */
+    public static boolean isParameterSet(String className, String methodName, String param) {
+        return (trackerGet(className, false)).isParameterSet(param) ||
+                (trackerGet(Utils.getFullTestName(className, methodName), true)).isParameterSet(param);
     }
 
     /**
@@ -101,9 +97,7 @@ public class ConfigTracker {
             trackerGet(className, false).addUsedParam(param);
         } else {
             try {
-                String[] names = Utils.getTestClassAndMethodName();
-                String testName = names[1];
-                trackerGet(testName, true).addUsedParam(param);
+                trackerGet(Utils.getTestClassAndMethodName()[1], true).addUsedParam(param);
             } catch (IOException e) {
                 // If catch IOException, it means that we are still in class-level setup method
                 trackerGet(className, false).addUsedParam(param);
@@ -121,23 +115,6 @@ public class ConfigTracker {
     }
 
     /**
-     * Check whether a parameter has been set in the current test method or class
-     * @param param the parameter to check
-     * @return true if the parameter has been set, false otherwise
-     */
-    public static boolean isParameterSet(String param) {
-        try {
-            String[] names = Utils.getTestClassAndMethodName();
-            String className = names[0];
-            String testName = names[1];
-            return (trackerGet(className, false)).isParameterSet(param) ||
-                    (trackerGet(testName, true)).isParameterSet(param);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
      * Mark a parameter as set in the current test method or class
      * @param param the parameter that has been set
      */
@@ -147,9 +124,7 @@ public class ConfigTracker {
             trackerGet(className, false).addSetParam(param);
         } else {
             try {
-                String[] names = Utils.getTestClassAndMethodName();
-                String testName = names[1];
-                trackerGet(testName, true).addSetParam(param);
+                trackerGet(Utils.getTestClassAndMethodName()[1], true).addSetParam(param);
             } catch (IOException e) {
                 // If catch IOException, it means that we are still in class-level setup method
                 trackerGet(className, false).addSetParam(param);
@@ -159,20 +134,23 @@ public class ConfigTracker {
 
     /**
      * Get the set of parameters that have been used in the current test method
+     * @param fullTestMethodName the name of the test method,
+     *                           should be the full name with the format of "testClassName_testMethodName"
      * @return the set of parameters that have been used in the current test method
      */
-    public static Set<String> getMethodUsedParams(String methodName) {
-        return (trackerGet(methodName, true)).getUsedParams();
+    public static Set<String> getMethodUsedParams(String fullTestMethodName) {
+        return (trackerGet(fullTestMethodName, true)).getUsedParams();
     }
 
     /**
      * Get the set of parameters that have been set in the current test method
+     * @param fullTestMethodName the name of the test method,
+     *                           should be the full name with the format of "testClassName_testMethodName"
      * @return the set of parameters that have been set in the current test method
      */
-    public static Set<String> getMethodSetParams(String methodName) {
-        return (trackerGet(methodName, true)).getSetParams();
+    public static Set<String> getMethodSetParams(String fullTestMethodName) {
+        return (trackerGet(fullTestMethodName, true)).getSetParams();
     }
-
 
     /**
      * Get the set of parameters that have been used in the current test class
@@ -196,10 +174,10 @@ public class ConfigTracker {
      * @return the set of all parameters that have been used in the current test class and method
      */
     public static Set<String> getAllUsedParams(String className, String methodName) {
-        methodName = className + TEST_CLASS_METHOD_SEPERATOR + methodName;
+        String fullTestMethodName = Utils.getFullTestName(className, methodName);
         Set<String> allUsedParams = new HashSet<>();
         allUsedParams.addAll(getClassUsedParams(className));
-        allUsedParams.addAll(getMethodUsedParams(methodName));
+        allUsedParams.addAll(getMethodUsedParams(fullTestMethodName));
         return allUsedParams;
     }
 
@@ -208,10 +186,10 @@ public class ConfigTracker {
      * @return the set of all parameters that have been set in the current test class and method
      */
     public static Set<String> getAllSetParams(String className, String methodName) {
-        methodName = className + TEST_CLASS_METHOD_SEPERATOR + methodName;
+        String fullTestName = Utils.getFullTestName(className, methodName);
         Set<String> allSetParams = new HashSet<>();
         allSetParams.addAll(getClassSetParams(className));
-        allSetParams.addAll(getMethodSetParams(methodName));
+        allSetParams.addAll(getMethodSetParams(fullTestName));
         return allSetParams;
     }
 
@@ -314,7 +292,7 @@ public class ConfigTracker {
      * and record the used parameters. This method would write the used parameters to a file.
      */
     public static void writeConfigToFile(String className, String methodName, String fileName) {
-        methodName = className + TEST_CLASS_METHOD_SEPERATOR + methodName;
+        methodName = Utils.getFullTestName(className, methodName);
         Utils.writeParamSetToJson(ConfigTracker.getAllUsedParams(className, methodName),
                 ConfigTracker.getAllSetParams(className, methodName), new File(CONFIG_SAVE_DIR, fileName + ".json"));
     }
@@ -384,9 +362,9 @@ public class ConfigTracker {
      * Update the config usage for the current test method
      */
     public static void updateConfigUsage(ConfigUsage configUsage, String className, String methodName) {
-        methodName = className + TEST_CLASS_METHOD_SEPERATOR + methodName;
+        String fullTestName = Utils.getFullTestName(className, methodName);
         configUsage.addClassLevelParams(getClassUsedParams(className));
-        configUsage.addMethodLevelParams(methodName, getMethodUsedParams(methodName));
+        configUsage.addMethodLevelParams(fullTestName, getMethodUsedParams(fullTestName));
     }
 }
 

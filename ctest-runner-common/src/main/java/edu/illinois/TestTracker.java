@@ -18,12 +18,7 @@ public class TestTracker {
     protected final Set<String> setParams = Collections.synchronizedSet(new HashSet<>());
     /** The name of the current test class */
 
-
-
-
-    public TestTracker() {
-
-    }
+    public TestTracker() {}
 
     public Set<String> getUsedParams() {
         return usedParams;
@@ -32,7 +27,6 @@ public class TestTracker {
     public Set<String> getSetParams() {
         return setParams;
     }
-
 
     public void addUsedParam(String param) {
         usedParams.add(param);

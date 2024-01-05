@@ -196,4 +196,15 @@ public class Utils {
         String className = fullName.split(Names.TEST_CLASS_METHOD_SEPERATOR)[0];
         return new String[]{className, fullName};
     }
+
+    /**
+     * Return the full name of a test method as the format of "testClassName_testMethodName"
+     */
+    public static String getFullTestName(String className, String methodName) {
+        // If this is already a full name with the separator, return it directly
+        if (methodName.contains(Names.TEST_CLASS_METHOD_SEPERATOR)) {
+            return methodName;
+        }
+        return className + Names.TEST_CLASS_METHOD_SEPERATOR + methodName;
+    }
 }

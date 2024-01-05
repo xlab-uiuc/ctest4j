@@ -28,10 +28,13 @@ public class ConfigUsage {
 
     /**
      * Add a set of method-level parameters.
+     * @param fullTestMethodName the full name of the test method,
+     *                           including the class name with the format of "class_method"
+     * @param methodLevelParams the set of method-level parameters
      */
-    public void addMethodLevelParams(String methodName, Set<String> methodLevelParams) {
+    public void addMethodLevelParams(String fullTestMethodName, Set<String> methodLevelParams) {
         Set<String> params = new HashSet<>(methodLevelParams);
-        this.methodLevelParams.put(methodName, Collections.unmodifiableSet(params));
+        this.methodLevelParams.put(fullTestMethodName, Collections.unmodifiableSet(params));
     }
 
     /**

@@ -25,7 +25,7 @@ public class TestSetGetTracker {
         Set<String> expected = new HashSet<>();
         expected.add("param1");
         expected.add("param2");
-        Assert.assertEquals(expected, ConfigTracker.getMethodUsedParams());
+        Assert.assertEquals(expected, ConfigTracker.getAllUsedParams("edu.illinois.TestSetGetTracker", "testGetTracker"));
     }
 
     /**
@@ -41,7 +41,7 @@ public class TestSetGetTracker {
         Set<String> expected = new HashSet<>();
         expected.add("param1");
         expected.add("param2");
-        Assert.assertEquals(expected, ConfigTracker.getSetParams());
+        Assert.assertEquals(expected, ConfigTracker.getAllSetParams("edu.illinois.TestSetGetTracker", "testSetTracker"));
     }
 
     @Test

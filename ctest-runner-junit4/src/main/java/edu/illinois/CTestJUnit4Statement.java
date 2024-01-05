@@ -30,9 +30,9 @@ public class CTestJUnit4Statement extends Statement {
         } finally {
             if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
                 for (String param : params) {
-                    if (!ConfigTracker.isParameterUsed(param)) {
+                    /*if (!ConfigTracker.isParameterUsed(param)) {
                         throw new UnUsedConfigParamException(param + " was not used during the test.");
-                    }
+                    }*/
                 }
             }
         }

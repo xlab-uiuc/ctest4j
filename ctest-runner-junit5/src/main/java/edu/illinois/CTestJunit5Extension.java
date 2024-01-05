@@ -33,7 +33,7 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
     @Override
     public void beforeAll(ExtensionContext extensionContext) throws Exception {
         initializeRunner(extensionContext);
-        ConfigTracker.startTestClass();
+        //ConfigTracker.startTestClass();
     }
 
     /**
@@ -46,7 +46,7 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
         if (Options.mode == Modes.BASE) {
             return;
         }
-        ConfigTracker.startTestMethod();
+        ConfigTracker.startTestMethod(extensionContext.getRequiredTestClass().getName(), extensionContext.getRequiredTestMethod().getName());
         methodName = extensionContext.getRequiredTestMethod().getName();
     }
 
@@ -60,7 +60,7 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
         if (Options.mode == Modes.BASE) {
             return;
         }
-        ConfigTracker.updateConfigUsage(configUsage, methodName);
+        ConfigTracker.updateConfigUsage(configUsage, className, methodName);
         // Retrieve method-level parameters
         CTest cTest = extensionContext.getRequiredTestMethod().getAnnotation(CTest.class);
         if (cTest != null) {
@@ -70,7 +70,7 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
                     boolean meetUnusedException = false;
                     for (String param : getUnionMethodParameters(methodName, cTest.regex(),
                             new HashSet<>(Arrays.asList(cTest.value())))) {
-                        if (!ConfigTracker.isParameterUsed(param)) {
+                        if (!ConfigTracker.isParameterUsed(className, methodName, param)) {
                             if (hasUnusedExpected) {
                                 meetUnusedException = true;
                                 break;
@@ -89,10 +89,10 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
         Test test = extensionContext.getRequiredTestMethod().getAnnotation(Test.class);
         if (test != null) {
             Log.INFO(TRACKING_LOG_PREFIX, className + "#" + methodName,
-                    "uses configuration parameters: " + ConfigTracker.getAllUsedParams() + " and set parameters: " +
-                            ConfigTracker.getAllSetParams());
+                    "uses configuration parameters: " + ConfigTracker.getAllUsedParams(className, methodName) + " and set parameters: " +
+                            ConfigTracker.getAllSetParams(className, methodName));
             for (String param : getUnionMethodParameters(methodName, "", new HashSet<>())) {
-                if (!ConfigTracker.isParameterUsed(param)) {
+                if (!ConfigTracker.isParameterUsed(className, methodName, param)) {
                     throw new UnUsedConfigParamException(param + " was not used during the test.");
                 }
             }
@@ -138,8 +138,6 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
         ExtensionContext extensionContext = (ExtensionContext) context;
         // Retrieve class-level parameters
         className = extensionContext.getRequiredTestClass().getName();
-        // Set the current test class name
-        ConfigTracker.setCurrentTestClassName(className);
         CTestClass cTestClass = extensionContext.getRequiredTestClass().getAnnotation(CTestClass.class);
         if (cTestClass == null) {
             // this class may extend from another class that has the @CTestClass annotation, check it

@@ -55,8 +55,6 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
     @Override
     public void initializeRunner(Object context) throws AnnotationFormatError, IOException {
         Class<?> klass = (Class<?>) context;
-        // Set the current test class name
-        ConfigTracker.setCurrentTestClassName(klass.getName());
         // Retrieve class-level parameters if present
         CTestClass cTestClass = klass.getAnnotation(CTestClass.class);
         if (cTestClass == null) {
@@ -137,7 +135,7 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
-                ConfigTracker.startTestClass();
+                //ConfigTracker.startTestClass();
                 originalStatement.evaluate();
             }
         };
@@ -152,7 +150,7 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
-                ConfigTracker.startTestMethod();
+                ConfigTracker.startTestMethod(method.getDeclaringClass().getName(), method.getName());
                 originalStatement.evaluate();
             }
         };
@@ -176,13 +174,13 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
                     if (shouldThorwException(fromTestThrowable)) {
                         throw fromTestThrowable;
                     }
-                    ConfigTracker.updateConfigUsage(configUsage, method.getName());
+                    ConfigTracker.updateConfigUsage(configUsage, testClassName, method.getName());
                     if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
                         CTest cTest = method.getAnnotation(CTest.class);
                         if (cTest != null) {
                             for (String param : getUnionMethodParameters(method.getName(), cTest.regex(),
                                     new HashSet<>(Arrays.asList(cTest.value())))) {
-                                if (!ConfigTracker.isParameterUsed(param)) {
+                                if (!ConfigTracker.isParameterUsed(testClassName, method.getName(), param)) {
                                     if (isUnUsedParamException(cTest.expected())) {
                                         return;
                                     }
@@ -193,7 +191,7 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
                         Test testAnnotation = method.getAnnotation(Test.class);
                         if (testAnnotation != null) {
                             for (String param : getUnionMethodParameters(method.getName(), "", new HashSet<>())) {
-                                if (!ConfigTracker.isParameterUsed(param)) {
+                                if (!ConfigTracker.isParameterUsed(testClassName, method.getName(), param)) {
                                     if (isUnUsedParamException(testAnnotation.expected())) {
                                         return;
                                     }

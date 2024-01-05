@@ -189,6 +189,7 @@ public interface CTestRunner {
         return params;
     }
 
+/*
     default void checkCTestParameterUsage(Set<String> params) throws UnUsedConfigParamException {
         if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
             for (String param : params) {
@@ -198,6 +199,7 @@ public interface CTestRunner {
             }
         }
     }
+*/
 
     default void writeConfigUsageToJson(ConfigUsage configUsage, File targetFile) {
         if (saveUsedParamToFile) {

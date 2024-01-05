@@ -34,9 +34,12 @@ IMPORT_ABSTRACT = {"junit4": "import edu.illinois.CTest;\n\n",
 
 LOG_FILES = {"compile": "compile.txt", "track": "track.txt", "ctest": "ctest.txt"}
 
+PRINT_LOG = False
+
 # Utility section
 def print_log(message: str):
-    print("<<<ctest-runner-script>>> " + message)
+    if PRINT_LOG:
+        print("<<<ctest-runner-script>>> " + message)
 
 def change_working_dir(target_dir: str):
     current = os.getcwd()

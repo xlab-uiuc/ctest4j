@@ -27,7 +27,7 @@ PROJ_VANILLA_BRANCH_DICT = {
     'kylin': 'kylin-4.0.4',
     'flink': 'ctest-eval-vanilla',
     'camel': 'camel-3.21.2',
-    'zookeeper': 'release-3.9.1'
+    'zookeeper': 'ctest-eval-vanilla'
 }
 
 

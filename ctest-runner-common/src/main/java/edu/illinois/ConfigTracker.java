@@ -2,6 +2,9 @@ package edu.illinois;
 
 import edu.illinois.parser.ConfigurationParser;
 import edu.illinois.parser.JsonConfigurationParser;
+import edu.illinois.track.TestClassTracker;
+import edu.illinois.track.TestMethodTracker;
+import edu.illinois.track.TestTracker;
 
 import java.io.File;
 import java.io.IOException;

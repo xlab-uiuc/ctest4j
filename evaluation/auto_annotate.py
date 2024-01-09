@@ -24,10 +24,10 @@ JAVA_DEPENDENCY = {"junit4": "    <dependency>\n      <groupId>edu.illinois</gro
                    "junit5": "    <dependency>\n      <groupId>edu.illinois</groupId>\n      <artifactId>ctest-runner-junit4</artifactId>\n      <version>1.0-SNAPSHOT</version>\n      <scope>compile</scope>\n    </dependency>\n"}
 
 IMPORT_NORMAL = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
-                 "junit5": "import org.junit.jupiter.api.extension.ExtendWith;\nimport edu.illinois.CTestJunit5Extension;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
+                 "junit5": "import org.junit.jupiter.api.extension.ExtendWith;\nimport edu.illinois.CTestJUnit5Extension;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
 
 IMPORT_NORMAL_2 = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner2;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
-                   "junit5": "import org.junit.jupiter.api.extension.ExtendWith;\nimport edu.illinois.CTestJunit5Extension;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
+                   "junit5": "import org.junit.jupiter.api.extension.ExtendWith;\nimport edu.illinois.CTestJUnit5Extension;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
 
 IMPORT_ABSTRACT = {"junit4": "import edu.illinois.CTest;\n\n",
                    "junit5": "import edu.illinois.CTest;\n\n"}
@@ -263,7 +263,7 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
                     if test_module == "junit4":
                         contents[index] = "@RunWith(CTestJUnit4Runner2.class)\n@CTestClass()\n" + content
                     else:
-                        contents[index] = "@ExtendWith(CTestJunit5Extension.class)\n@CTestClass()\n" + content
+                        contents[index] = "@ExtendWith(CTestJUnit5Extension.class)\n@CTestClass()\n" + content
                     print_log("normal import and @RunWith added for " + f.name)
                 if not import_added:
                     if not abstract_class and test_class:

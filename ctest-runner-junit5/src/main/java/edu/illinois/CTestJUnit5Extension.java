@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.*;
 import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.AnnotationFormatError;
+import java.lang.reflect.Method;
 import java.util.*;
 
 import static edu.illinois.Names.*;
@@ -14,8 +15,8 @@ import static edu.illinois.Names.*;
  * Author: Shuai Wang
  * Date:  11/1/23
  */
-public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
-        BeforeEachCallback, AfterEachCallback, AfterAllCallback {
+public class CTestJUnit5Extension implements CTestRunner, ExecutionCondition,
+        BeforeAllCallback, BeforeEachCallback, AfterEachCallback, AfterAllCallback {
     /** A list of configuration parameter name that all methods in the test class will use */
     protected Set<String> classLevelParameters;
     protected Map<String, Set<String>> methodLevelParametersFromMappingFile;
@@ -24,6 +25,8 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
     private String className;
     /** The name of the test method */
     private String methodName;
+    /** The set of configuration parameters to be tested for runtime selection purpose. */
+    protected final Set<String> selectionParams = new HashSet<>();
 
     /**
      * Initialize the class-level parameters.
@@ -134,5 +137,46 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
         Object[] values = initalizeParameterSet(className, cTestClass.configMappingFile(), cTestClass.value(), cTestClass.regex());
         classLevelParameters = (Set<String>) values[0];
         methodLevelParametersFromMappingFile = (Map<String, Set<String>>) values[1];
+        selectionParams.addAll(Utils.getSelectionParameters(
+                System.getProperty(Names.CTEST_SELECTION_PARAMETER_PROPERTY)));
     }
+
+    @Override
+    public ConditionEvaluationResult evaluateExecutionCondition(ExtensionContext extensionContext) {
+        Optional<Method> testMethod = extensionContext.getTestMethod();
+        if (testMethod.isPresent()) {
+            boolean ignoreTest = false;
+            try {
+                ignoreTest = isTestIgnored(extensionContext);
+            } catch (IOException e) {
+                Log.ERROR("Error while checking if test is ignored: " + e);
+            }
+            if (ignoreTest) {
+                return ConditionEvaluationResult.disabled("CTest is disabled for " + testMethod.get().getName());
+            }
+        }
+        return ConditionEvaluationResult.enabled("");
+    }
+
+    private boolean isTestIgnored(ExtensionContext extensionContext) throws IOException {
+        if (selectionParams.isEmpty()) {
+            return false;
+        }
+        methodName = extensionContext.getRequiredTestMethod().getName();
+        Set<String> usedParams = new HashSet<>();
+        CTest cTest = extensionContext.getRequiredTestMethod().getAnnotation(CTest.class);
+        if (cTest != null) {
+            usedParams.addAll(getUnionMethodParameters(className, methodName, cTest.regex(),
+                    classLevelParameters, methodLevelParametersFromMappingFile, new HashSet<>(Arrays.asList(cTest.value()))));
+            return isCurrentTestIgnored(selectionParams, usedParams);
+        }
+        Test test = extensionContext.getRequiredTestMethod().getAnnotation(Test.class);
+        if (test != null) {
+            usedParams.addAll(getUnionMethodParameters(className, methodName, "",
+                    classLevelParameters, methodLevelParametersFromMappingFile, new HashSet<>()));
+            return isCurrentTestIgnored(selectionParams, usedParams);
+        }
+        return false;
+    }
+
 }

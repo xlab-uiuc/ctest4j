@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class TestClassSelector {
     /** The set of configuration parameters to be tested. */
     protected final Set<String> targetParams;
-    protected final File mappingDir = new File(Names.CONFIG_MAPPING_DIR);
+    protected File mappingDir = new File(Names.CONFIG_MAPPING_DIR);
 
     public TestClassSelector(Set<String> params) {
         targetParams = new HashSet<>(params);
@@ -23,6 +23,11 @@ public class TestClassSelector {
 
     public TestClassSelector() {
         this(new HashSet<>());
+    }
+
+    public TestClassSelector(File mappingDir, Set<String> params) {
+        this(params);
+        this.mappingDir = mappingDir;
     }
 
     public void addTargetParam(String param) {

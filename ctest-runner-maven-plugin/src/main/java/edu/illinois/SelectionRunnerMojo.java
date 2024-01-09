@@ -33,12 +33,13 @@ public class SelectionRunnerMojo extends AbstractMojo {
     @Parameter(property="project")
     protected MavenProject project;
 
-    @Parameter(property=Names.CONFIG_PARAMETER_LIST_PROPERTY)
-    protected List<String> configParameterList;
+    @Parameter(property=Names.CTEST_SELECTION_PARAMETER_PROPERTY)
+    protected String configParameterListStr;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        TestClassSelector testClassSelector = new TestClassSelector(new HashSet<>(configParameterList));
+        TestClassSelector testClassSelector = new TestClassSelector(
+                new HashSet<>(Utils.getSelectionParameters(configParameterListStr)));
         Set<String> selectedTests = testClassSelector.select();
         getLog().debug("Selected test classes: " + selectedTests);
 

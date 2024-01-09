@@ -22,7 +22,8 @@ public class Names {
     /** The command-line argument that specifies the configuration value to be injected */
     public static final String CONFIG_CLI_INJECT_PROPERTY = "config.inject.cli";
     /** The property that contains the target parameters to be tested, seperated by comma */
-    public static final String CONFIG_PARAMETER_LIST_PROPERTY = "config.parameter.list";
+    public static final String CTEST_SELECTION_PARAMETER_PROPERTY = "ctest.selection.parameter";
+    public static final Boolean CTEST_RUNTIME_SELECTION = Boolean.valueOf(System.getProperty("ctest.runtime.selection", "false"));
     /** The directory of files that stores the used configuration parameters by each test */
     public static final String CONFIG_MAPPING_DIR = System.getProperty("ctest.mapping.dir", "ctest/mapping");
     public static final String CONFIG_SAVE_DIR = System.getProperty("ctest.config.save.dir", "ctest/saved_mapping");

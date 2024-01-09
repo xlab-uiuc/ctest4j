@@ -153,24 +153,24 @@ public interface CTestRunner {
      * @return a set of parameters that the test method must use
      * @throws IOException if the parsing fails
      */
-    default Set<String> getUnionMethodParameters(String className, String methodName, String methodLevelConfigMappingFile,
-                                                 String methodLevelRegex, Set<String> methodLevelParameters,
-                                                 Set<String> classLevelParameters) throws IOException {
+
+    default Set<String> getUnionMethodParameters(String testClassName, String methodName, String methodRegex,
+                                                 Set<String> classLevelParameters, Map<String, Set<String>> methodLevelParametersFromMappingFile,
+                                                 Set<String> methodLevelParamsFromAnnotation) {
+        methodName = Utils.getFullTestName(testClassName, methodName);
         Set<String> allMethodLevelParameters = new HashSet<>();
-        // Retrieve method-level parameters if present
-        allMethodLevelParameters.addAll(methodLevelParameters);
         // Retrieve class-level parameters if present
         allMethodLevelParameters.addAll(classLevelParameters);
-
-        // Retrieve file-level parameters if present
-        if (!methodLevelConfigMappingFile.isEmpty()) {
-            allMethodLevelParameters.addAll(getParametersFromMappingFile(methodLevelConfigMappingFile));
-        } else {
-            allMethodLevelParameters.addAll(getRequiredParametersFromDefaultFile(className, methodName));
+        // Retrieve method-level parameters if present
+        Set<String> methodLevelParameters = methodLevelParametersFromMappingFile.get(methodName);
+        if (methodLevelParameters != null) {
+            allMethodLevelParameters.addAll(methodLevelParameters);
         }
+        allMethodLevelParameters.addAll(methodLevelParamsFromAnnotation);
+
         // Retrieve regex-level parameters if present
-        if (!methodLevelRegex.isEmpty()) {
-            allMethodLevelParameters.addAll(getParametersFromRegex(methodLevelRegex));
+        if (!methodRegex.isEmpty()) {
+            allMethodLevelParameters.addAll(getParametersFromRegex(methodRegex));
         }
         return allMethodLevelParameters;
     }
@@ -219,5 +219,13 @@ public interface CTestRunner {
      */
     default boolean shouldThorwException(Throwable throwable) {
         return throwable != null && !throwable.getMessage().equals("Expected exception: edu.illinois.UnUsedConfigParamException");
+    }
+
+    default boolean isCurrentTestIgnored(Set<String> targetParams, Set<String> usedParams) {
+        if (Names.CTEST_RUNTIME_SELECTION && !targetParams.isEmpty()) {
+            // return true if none of the parameters in targetParams is used
+            return Collections.disjoint(targetParams, usedParams);
+        }
+        return false;
     }
 }

@@ -23,6 +23,7 @@ import static edu.illinois.Utils.getTestMethodFullName;
  * Author: Shuai Wang
  * Date:  10/13/23
  */
+@Deprecated
 public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRunner {
     protected Set<String> classLevelParameters;
     protected final ConfigUsage configUsage = new ConfigUsage();

@@ -1,13 +1,11 @@
 package edu.illinois;
 import org.junit.runners.model.FrameworkMethod;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -126,7 +124,7 @@ public class Utils {
     }
 
     public static String getTestMethodFullName(String className, String methodName) {
-        return className + Names.TEST_CLASS_METHOD_SEPERATOR + methodName;
+        return getFullTestName(className, methodName);
     }
 
     private static boolean isLibraryClass(String className) {
@@ -206,5 +204,52 @@ public class Utils {
             return methodName;
         }
         return className + Names.TEST_CLASS_METHOD_SEPERATOR + methodName;
+    }
+
+    /**
+     * Get the set of configuration parameters specified for ctest selection.
+     * @return null if the parameter list is not specified or empty; otherwise, return the set of parameters
+     */
+    public static Set<String> getSelectionParameters(String parameterStr) {
+        if (parameterStr == null || parameterStr.isEmpty()) {
+             return new HashSet<>();
+        }
+        Set<String> selectionParams = new HashSet<>();
+        // If the parameter list starts with "@", it means that the parameter list is stored in a file
+        if (parameterStr.startsWith("@")) {
+            selectionParams.addAll(
+                    getConfigParameterListFromFile(new File(parameterStr.substring(1))));
+        } else {
+            selectionParams.addAll(List.of(parameterStr.split(",")));
+        }
+        // Remove a possible empty string in the set.
+        selectionParams.remove("");
+        return selectionParams;
+    }
+
+    /**
+     * Get the set of configuration parameters from the file
+     * Each line of the file should be a configuration parameter
+     */
+    public static Set<String> getConfigParameterListFromFile(File file) {
+        Set<String> configParameterList = new HashSet<>();
+        // Read the file line by line
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                line = line.trim();
+                if (!line.isEmpty()) {
+                    configParameterList.add(line);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("Cannot find the target configuration parameter list file "
+                    + file.getAbsolutePath());
+        } catch (IOException e) {
+            throw new RuntimeException("Error while reading the target configuration parameter list file "
+                    + file.getAbsolutePath());
+        }
+        return configParameterList;
     }
 }

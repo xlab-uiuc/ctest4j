@@ -1,6 +1,5 @@
 package edu.illinois;
 
-import edu.illinois.select.TestSelector;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.BuildPluginManager;
@@ -39,18 +38,17 @@ public class SelectionRunnerMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        TestSelector testSelector = new TestSelector(new HashSet<>(configParameterList));
-        Set<String> selectedTests = testSelector.select();
-        System.out.println("Selected test classes: " + selectedTests);
+        TestClassSelector testClassSelector = new TestClassSelector(new HashSet<>(configParameterList));
+        Set<String> selectedTests = testClassSelector.select();
+        getLog().debug("Selected test classes: " + selectedTests);
 
         // If no test class is selected, skip test execution
-        if (selectedTests == null) {
+        if (selectedTests == null || selectedTests.isEmpty()) {
             getLog().info("[CTEST-RUNNER] No test class is selected. Skipping test execution.");
             getLog().info("[CTEST-RUNNER] To run all tests without selection, " +
                     "please directly invoke Maven Surefire with goal \"test\".");
             return;
         }
-
         runTests(selectedTests);
     }
 

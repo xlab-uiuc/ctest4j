@@ -1,6 +1,4 @@
-package edu.illinois.select;
-
-import edu.illinois.Names;
+package edu.illinois;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -14,16 +12,16 @@ import java.util.stream.Collectors;
  * Author: Shuai Wang
  * Date:  1/7/24
  */
-public class TestSelector {
+public class TestClassSelector {
     /** The set of configuration parameters to be tested. */
     protected final Set<String> targetParams;
     protected final File mappingDir = new File(Names.CONFIG_MAPPING_DIR);
 
-    public TestSelector(Set<String> params) {
+    public TestClassSelector(Set<String> params) {
         targetParams = new HashSet<>(params);
     }
 
-    public TestSelector() {
+    public TestClassSelector() {
         this(new HashSet<>());
     }
 

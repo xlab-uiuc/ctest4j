@@ -1,11 +1,11 @@
 # Configuration Test (CTest) Runner
 
 ## What is CTest Runner?
-CTest Runner is a customized JUnit test runner that allows you to write and run configuration test (ctest) easily.
 
-The runner provides a set of annotations that allow you to specify a ctest and the expected results, which is similar to parameterized tests.
-CTest Runner executes ctest in parallel with the user-defined configuration and verifies the correctness of the given configuration.
-CTest Runner also provides ctest selection feature that only runs the ctest that uses the given configuration under test to speed up the test execution.
+CTest Runner is a specialized JUnit test runner designed to simplify the process of writing and executing configuration tests (ctests). 
+It offers a range of annotations for defining a ctest and its expected outcomes, similar to parameterized tests. 
+The runner executes ctests concurrently using configurations set by the user, ensuring the accuracy of these configurations. 
+Additionally, CTest Runner features a ctest selection option, which enables the execution of only those ctests that utilize the specific configuration being tested to speed up the testing process.
 
 ## Download CTest Runner
 ### Build from source

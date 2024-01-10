@@ -1,0 +1,11 @@
+{
+  "classLevelParams":["beforeClass-parameter", "before-parameter",
+    "parameter1", "parameter2",
+    "regex-parameter1", "regex-parameter2"],
+  "methodLevelParams":{
+    "testCTestMethodAnnotationFail":["testCTestMethodAnnotationFail","parameter1","parameter2"],
+    "testTestAnnotation":["testTestAnnotation","parameter1","parameter2"],
+    "testTestClassAnnotationFail":["testTestClassAnnotationFail","parameter1"],
+    "testCTestAnnotation":["testCTestAnnotation","parameter1","parameter2"]
+  }
+}

@@ -12,6 +12,7 @@
         <module>ctest-runner-junit4</module>
         <module>ctest-runner-common</module>
         <module>ctest-runner-junit5</module>
+        <module>ctest-runner-maven-plugin</module>
     </modules>
     <dependencies>
         <dependency>
@@ -61,6 +62,7 @@
                     </systemPropertyVariables>
                 </configuration>-->
             </plugin>
+<!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -74,7 +76,9 @@
                     </archive>
                 </configuration>
             </plugin>
+-->
 
+<!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -97,13 +101,14 @@
                     </execution>
                 </executions>
             </plugin>
+-->
 
 
-            <plugin>
+<!--            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
                 <version>3.6.0</version>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 

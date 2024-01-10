@@ -9,7 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * Author: Shuai Wang
  * Date:  11/2/23
  */
-@ExtendWith(CTestJunit5Extension.class)
+@ExtendWith(CTestJUnit5Extension.class)
 @CTestClass(configMappingFile = "src/test/resources/FromAllTest.json",
         value = {"parameter1", "parameter2"}, regex = "regex-parameter(1|2)")
 public class FromAllTest {

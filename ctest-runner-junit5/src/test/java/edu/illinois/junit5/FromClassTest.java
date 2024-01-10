@@ -7,7 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * Author: Shuai Wang
  * Date:  11/2/23
  */
-@ExtendWith(CTestJunit5Extension.class)
+@ExtendWith(CTestJUnit5Extension.class)
 @CTestClass({"class-parameter1", "class-parameter2"})
 public class FromClassTest {
     @CTest

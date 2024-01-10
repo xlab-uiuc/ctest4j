@@ -26,11 +26,13 @@ public class ConfigTrackJUnit4Statement extends Statement {
         try {
             base.evaluate();
         } finally {
-            Log.INFO(TRACKING_LOG_PREFIX, method.getDeclaringClass().getCanonicalName() + "#" + method.getName(),
-                    "uses configuration parameters: " + ConfigTracker.getAllUsedParams() + " and set parameters: " +
-                    ConfigTracker.getAllSetParams());
+            String className = method.getDeclaringClass().getName();
+            String methodName = method.getName();
+            Log.INFO(TRACKING_LOG_PREFIX, className + "#" + methodName,
+                    "uses configuration parameters: " + ConfigTracker.getAllUsedParams(className, methodName) + " and set parameters: " +
+                    ConfigTracker.getAllSetParams(className, methodName));
             if (saveUsedParamToFile) {
-                ConfigTracker.writeConfigToFile(getTestMethodFullName(method));
+                ConfigTracker.writeConfigToFile(className, methodName, getTestMethodFullName(method));
             }
         }
     }

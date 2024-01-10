@@ -1,7 +1,7 @@
 package edu.illinois.junit5;
 
 import edu.illinois.CTestClass;
-import edu.illinois.CTestJunit5Extension;
+import edu.illinois.CTestJUnit5Extension;
 import edu.illinois.Configuration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * Author: Shuai Wang
  * Date:  11/1/23
  */
-@ExtendWith(CTestJunit5Extension.class)
+@ExtendWith(CTestJUnit5Extension.class)
 @CTestClass
 public class NormalTest {
     @Test

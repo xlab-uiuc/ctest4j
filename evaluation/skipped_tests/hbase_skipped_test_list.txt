@@ -1,0 +1,6 @@
+org.apache.hadoop.hbase.regionserver.TestBulkLoad
+org.apache.hadoop.hbase.regionserver.wal.TestAsyncProtobufLog
+org.apache.hadoop.hbase.regionserver.wal.TestAsyncFSWALDurability
+org.apache.hadoop.hbase.regionserver.TestCompactionAfterBulkLoad
+org.apache.hadoop.hbase.regionserver.TestSyncTimeRangeTracker
+org.apache.hadoop.hbase.util.compaction.TestMajorCompactionTTLRequest

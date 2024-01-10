@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.*;
 import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.AnnotationFormatError;
+import java.lang.reflect.Method;
 import java.util.*;
 
 import static edu.illinois.Names.*;
@@ -14,8 +15,8 @@ import static edu.illinois.Names.*;
  * Author: Shuai Wang
  * Date:  11/1/23
  */
-public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
-        BeforeEachCallback, AfterEachCallback, AfterAllCallback {
+public class CTestJUnit5Extension implements CTestRunner, ExecutionCondition,
+        BeforeAllCallback, BeforeEachCallback, AfterEachCallback, AfterAllCallback {
     /** A list of configuration parameter name that all methods in the test class will use */
     protected Set<String> classLevelParameters;
     protected Map<String, Set<String>> methodLevelParametersFromMappingFile;
@@ -24,6 +25,8 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
     private String className;
     /** The name of the test method */
     private String methodName;
+    /** The set of configuration parameters to be tested for runtime selection purpose. */
+    protected final Set<String> selectionParams = new HashSet<>();
 
     /**
      * Initialize the class-level parameters.
@@ -33,7 +36,7 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
     @Override
     public void beforeAll(ExtensionContext extensionContext) throws Exception {
         initializeRunner(extensionContext);
-        ConfigTracker.startTestClass();
+        //ConfigTracker.startTestClass();
     }
 
     /**
@@ -46,7 +49,7 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
         if (Options.mode == Modes.BASE) {
             return;
         }
-        ConfigTracker.startTestMethod();
+        ConfigTracker.startTestMethod(extensionContext.getRequiredTestClass().getName(), extensionContext.getRequiredTestMethod().getName());
         methodName = extensionContext.getRequiredTestMethod().getName();
     }
 
@@ -60,40 +63,38 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
         if (Options.mode == Modes.BASE) {
             return;
         }
-        ConfigTracker.updateConfigUsage(configUsage, methodName);
-        // Retrieve method-level parameters
-        CTest cTest = extensionContext.getRequiredTestMethod().getAnnotation(CTest.class);
-        if (cTest != null) {
-            try {
-                if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
-                    boolean hasUnusedExpected = isUnUsedParamException(cTest.expected());
-                    boolean meetUnusedException = false;
-                    for (String param : getUnionMethodParameters(methodName, cTest.regex(),
-                            new HashSet<>(Arrays.asList(cTest.value())))) {
-                        if (!ConfigTracker.isParameterUsed(param)) {
-                            if (hasUnusedExpected) {
-                                meetUnusedException = true;
-                                break;
-                            }
-                            throw new UnUsedConfigParamException(param + " was not used during the test.");
+        ConfigTracker.updateConfigUsage(configUsage, className, methodName);
+        if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
+            // Retrieve method-level parameters
+            CTest cTest = extensionContext.getRequiredTestMethod().getAnnotation(CTest.class);
+            if (cTest != null) {
+                boolean hasUnusedExpected = isUnUsedParamException(cTest.expected());
+                boolean meetUnusedException = false;
+                for (String param : getUnionMethodParameters(className, methodName, cTest.regex(),
+                        classLevelParameters, methodLevelParametersFromMappingFile,
+                        new HashSet<>(Arrays.asList(cTest.value())))) {
+                    if (!ConfigTracker.isParameterUsed(className, methodName, param)) {
+                        if (hasUnusedExpected) {
+                            meetUnusedException = true;
+                            break;
                         }
-                    }
-                    if (hasUnusedExpected && !meetUnusedException) {
-                        throw new RuntimeException("The test method " + methodName + " does not meet the expected exception " + cTest.expected());
+                        throw new UnUsedConfigParamException(param + " was not used during the test.");
                     }
                 }
-            } catch (IOException e) {
-                throw new RuntimeException("Unable to parse configuration file from method " + methodName + " Annotation", e);
+                if (hasUnusedExpected && !meetUnusedException) {
+                    throw new RuntimeException("The test method " + methodName + " does not meet the expected exception " + cTest.expected());
+                }
             }
-        }
-        Test test = extensionContext.getRequiredTestMethod().getAnnotation(Test.class);
-        if (test != null) {
-            Log.INFO(TRACKING_LOG_PREFIX, className + "#" + methodName,
-                    "uses configuration parameters: " + ConfigTracker.getAllUsedParams() + " and set parameters: " +
-                            ConfigTracker.getAllSetParams());
-            for (String param : getUnionMethodParameters(methodName, "", new HashSet<>())) {
-                if (!ConfigTracker.isParameterUsed(param)) {
-                    throw new UnUsedConfigParamException(param + " was not used during the test.");
+            Test test = extensionContext.getRequiredTestMethod().getAnnotation(Test.class);
+            if (test != null) {
+                Log.INFO(TRACKING_LOG_PREFIX, className + "#" + methodName,
+                        "uses configuration parameters: " + ConfigTracker.getAllUsedParams(className, methodName) + " and set parameters: " +
+                                ConfigTracker.getAllSetParams(className, methodName));
+                for (String param : getUnionMethodParameters(className, methodName, "",
+                        classLevelParameters, methodLevelParametersFromMappingFile, new HashSet<>())) {
+                    if (!ConfigTracker.isParameterUsed(className, methodName, param)) {
+                        throw new UnUsedConfigParamException(param + " was not used during the test.");
+                    }
                 }
             }
         }
@@ -113,41 +114,69 @@ public class CTestJunit5Extension implements CTestRunner, BeforeAllCallback,
         return classLevelParameters;
     }
 
-    public Set<String> getUnionMethodParameters(String methodName, String methodRegex,
-                                                Set<String> methodLevelParamsFromAnnotation) throws IOException {
-        Set<String> allMethodLevelParameters = new HashSet<>();
-        // Retrieve class-level parameters if present
-        allMethodLevelParameters.addAll(this.classLevelParameters);
-        // Retrieve method-level parameters if present
-        Set<String> methodLevelParameters = this.methodLevelParametersFromMappingFile.get(methodName);
-        if (methodLevelParameters != null) {
-            allMethodLevelParameters.addAll(methodLevelParameters);
-        }
-        allMethodLevelParameters.addAll(methodLevelParamsFromAnnotation);
-
-        // Retrieve regex-level parameters if present
-        if (!methodRegex.isEmpty()) {
-            allMethodLevelParameters.addAll(getParametersFromRegex(methodRegex));
-        }
-        return allMethodLevelParameters;
-    }
-
 
     @Override
     public void initializeRunner(Object context) throws AnnotationFormatError, IOException {
         ExtensionContext extensionContext = (ExtensionContext) context;
         // Retrieve class-level parameters
         className = extensionContext.getRequiredTestClass().getName();
-        // Set the current test class name
-        ConfigTracker.setCurrentTestClassName(className);
         CTestClass cTestClass = extensionContext.getRequiredTestClass().getAnnotation(CTestClass.class);
         if (cTestClass == null) {
-            throw new AnnotationFormatError("CTestClass annotation is not present in class " + className);
+            // this class may extend from another class that has the @CTestClass annotation, check it
+            Class<?> superClass = extensionContext.getRequiredTestClass().getSuperclass();
+            if (superClass != null) {
+                cTestClass = superClass.getAnnotation(CTestClass.class);
+            }
+            if (cTestClass == null) {
+                throw new AnnotationFormatError("CTestClass annotation is not present in class " + className
+                        + " or its super class.");
+            }
         }
 
         // Get classLevel and methodLevel parameters from the mapping file
         Object[] values = initalizeParameterSet(className, cTestClass.configMappingFile(), cTestClass.value(), cTestClass.regex());
         classLevelParameters = (Set<String>) values[0];
         methodLevelParametersFromMappingFile = (Map<String, Set<String>>) values[1];
+        selectionParams.addAll(Utils.getSelectionParameters(
+                System.getProperty(Names.CTEST_SELECTION_PARAMETER_PROPERTY)));
     }
+
+    @Override
+    public ConditionEvaluationResult evaluateExecutionCondition(ExtensionContext extensionContext) {
+        Optional<Method> testMethod = extensionContext.getTestMethod();
+        if (testMethod.isPresent()) {
+            boolean ignoreTest = false;
+            try {
+                ignoreTest = isTestIgnored(extensionContext);
+            } catch (IOException e) {
+                Log.ERROR("Error while checking if test is ignored: " + e);
+            }
+            if (ignoreTest) {
+                return ConditionEvaluationResult.disabled("CTest is disabled for " + testMethod.get().getName());
+            }
+        }
+        return ConditionEvaluationResult.enabled("");
+    }
+
+    private boolean isTestIgnored(ExtensionContext extensionContext) throws IOException {
+        if (selectionParams.isEmpty()) {
+            return false;
+        }
+        methodName = extensionContext.getRequiredTestMethod().getName();
+        Set<String> usedParams = new HashSet<>();
+        CTest cTest = extensionContext.getRequiredTestMethod().getAnnotation(CTest.class);
+        if (cTest != null) {
+            usedParams.addAll(getUnionMethodParameters(className, methodName, cTest.regex(),
+                    classLevelParameters, methodLevelParametersFromMappingFile, new HashSet<>(Arrays.asList(cTest.value()))));
+            return isCurrentTestIgnored(selectionParams, usedParams);
+        }
+        Test test = extensionContext.getRequiredTestMethod().getAnnotation(Test.class);
+        if (test != null) {
+            usedParams.addAll(getUnionMethodParameters(className, methodName, "",
+                    classLevelParameters, methodLevelParametersFromMappingFile, new HashSet<>()));
+            return isCurrentTestIgnored(selectionParams, usedParams);
+        }
+        return false;
+    }
+
 }

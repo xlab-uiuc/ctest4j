@@ -347,7 +347,7 @@ def run_tests_to_track(project:str, output_dir: str, ctest_mapping_dir: str="cte
 
     t1 = time.perf_counter()
     t2 = time.process_time()
-    cmd = ["mvn", "-B", "surefire:test", "-Dmode=default", "-Dctest.mapping.dir=" + ctest_mapping_dir, "-Dctest.config.save=true"]
+    cmd = ["mvn", "-B", "surefire:test", "-Dctest.mode=default", "-Dctest.mapping.dir=" + ctest_mapping_dir, "-Dctest.config.save=true"]
     print_log("run tests: " + " ".join(cmd))
     log_file = LOG_FILES["track"]
     tmp_index = log_file.index(".")
@@ -499,7 +499,7 @@ def run_ctests(project:str, output_dir: str, ctest_mapping_dir: str="ctest/mappi
     t1 = time.perf_counter()
     t2 = time.process_time()
     cmd_1 = ["mvn", "-B", "clean", "test-compile"]
-    cmd_2 = ["mvn", "-B", "surefire:test", "-Dmode=default", "-Dctest.mapping.dir=" + ctest_mapping_dir, "-Dctest.config.save=false"]
+    cmd_2 = ["mvn", "-B", "surefire:test", "-Dctest.mode=default", "-Dctest.mapping.dir=" + ctest_mapping_dir, "-Dctest.config.save=false"]
     print_log("run CTests: " + " ".join(cmd_2))
     log_file = LOG_FILES["ctest"]
     tmp_index = log_file.index(".")

@@ -5,7 +5,7 @@ CTest Runner is a customized JUnit test runner that allows you to write and run 
 
 The runner provides a set of annotations that allow you to specify a ctest and the expected results, which is similar to parameterized tests.
 CTest Runner executes ctest in parallel with the user-defined configuration and verifies the correctness of the given configuration.
-
+CTest Runner also provides ctest selection feature that only runs the ctest that uses the given configuration under test to speed up the test execution.
 
 ## Download CTest Runner
 ### Build from source

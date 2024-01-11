@@ -2,15 +2,15 @@
   "classLevelParams":["beforeClass","before"],
   "methodLevelParams":
   {
-    "testTestAnnotation":["testTestAnnotation"],
-    "testCTestAnnotation":["testCTestAnnotation"],
-    "testTestAnnotationFail": ["testTestAnnotationFail", "never-used"],
-    "testCTestAnnotationFail": ["testCTestAnnotationFail", "never-used"],
-    "testTestClassAnnotationFail": ["testTestClassAnnotationFail"],
-    "testCTestClassAnnotationFail": ["testCTestClassAnnotationFail"],
-    "testTestClassRegexFail": ["testTestClassRegexFail"],
-    "testCTestClassRegexFail": ["testCTestClassRegexFail"],
-    "testCTestMethodAnnotationFail": ["testCTestMethodAnnotationFail"],
-    "testCTestMethodRegexFail": ["testCTestMethodRegexFail"]
+    "edu.illinois.junit4.designB.FromAllTest_testTestAnnotation":["testTestAnnotation"],
+    "edu.illinois.junit4.designB.FromAllTest_testCTestAnnotation":["testCTestAnnotation"],
+    "edu.illinois.junit4.designB.FromAllTest_testTestAnnotationFail": ["testTestAnnotationFail", "never-used"],
+    "edu.illinois.junit4.designB.FromAllTest_testCTestAnnotationFail": ["testCTestAnnotationFail", "never-used"],
+    "edu.illinois.junit4.designB.FromAllTest_testTestClassAnnotationFail": ["testTestClassAnnotationFail"],
+    "edu.illinois.junit4.designB.FromAllTest_testCTestClassAnnotationFail": ["testCTestClassAnnotationFail"],
+    "edu.illinois.junit4.designB.FromAllTest_testTestClassRegexFail": ["testTestClassRegexFail"],
+    "edu.illinois.junit4.designB.FromAllTest_testCTestClassRegexFail": ["testCTestClassRegexFail"],
+    "edu.illinois.junit4.designB.FromAllTest_testCTestMethodAnnotationFail": ["testCTestMethodAnnotationFail"],
+    "edu.illinois.junit4.designB.FromAllTest_testCTestMethodRegexFail": ["testCTestMethodRegexFail"]
   }
 }

@@ -73,7 +73,7 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
             }
         }
         // Get classLevel and methodLevel parameters from the mapping file
-        Object[] values = initalizeParameterSet(testClassName, cTestClass.configMappingFile(), cTestClass.value(), cTestClass.regex());
+        Object[] values = initializeParameterSet(testClassName, cTestClass.configMappingFile(), cTestClass.value(), cTestClass.regex());
         classLevelParameters = (Set<String>) values[0];
         methodLevelParametersFromMappingFile = (Map<String, Set<String>>) values[1];
         selectionParams.addAll(Utils.getSelectionParameters(
@@ -177,7 +177,7 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
-                //ConfigTracker.startTestClass();
+                startTestClass(testClassName);
                 originalStatement.evaluate();
             }
         };
@@ -192,6 +192,7 @@ public class CTestJUnit4Runner2 extends BlockJUnit4ClassRunner implements CTestR
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
+                startTestMethod(method.getDeclaringClass().getName(), method.getName());
                 ConfigTracker.startTestMethod(method.getDeclaringClass().getName(), method.getName());
                 originalStatement.evaluate();
             }

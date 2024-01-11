@@ -120,7 +120,7 @@ public class Utils {
      * @return
      */
     public static String getTestMethodFullName(FrameworkMethod method) {
-        return method.getMethod().getDeclaringClass().getName() + Names.TEST_CLASS_METHOD_SEPERATOR + method.getName();
+        return method.getMethod().getDeclaringClass().getName() + Names.TEST_CLASS_METHOD_SEPARATOR + method.getName();
     }
 
     public static String getTestMethodFullName(String className, String methodName) {
@@ -183,7 +183,7 @@ public class Utils {
         if (retClassName.equals(threadName) || retMethodName.equals(threadName)) {
             throw new IOException("Cannot infer test class and method name from stack trace");
         }
-        return retClassName + Names.TEST_CLASS_METHOD_SEPERATOR + retMethodName;
+        return retClassName + Names.TEST_CLASS_METHOD_SEPARATOR + retMethodName;
     }
 
     /**
@@ -191,7 +191,7 @@ public class Utils {
      */
     public static String[] getTestClassAndMethodName() throws IOException {
         String fullName = inferTestClassAndMethodNameFromStackTrace();
-        String className = fullName.split(Names.TEST_CLASS_METHOD_SEPERATOR)[0];
+        String className = fullName.split(Names.TEST_CLASS_METHOD_SEPARATOR)[0];
         return new String[]{className, fullName};
     }
 
@@ -200,10 +200,10 @@ public class Utils {
      */
     public static String getFullTestName(String className, String methodName) {
         // If this is already a full name with the separator, return it directly
-        if (methodName.contains(Names.TEST_CLASS_METHOD_SEPERATOR)) {
+        if (methodName.contains(Names.TEST_CLASS_METHOD_SEPARATOR)) {
             return methodName;
         }
-        return className + Names.TEST_CLASS_METHOD_SEPERATOR + methodName;
+        return className + Names.TEST_CLASS_METHOD_SEPARATOR + methodName;
     }
 
     /**
@@ -251,5 +251,55 @@ public class Utils {
                     + file.getAbsolutePath());
         }
         return configParameterList;
+    }
+
+    /** ========= Methods for pid and tid that used for identifying test class and method name ========= */
+
+    /**
+     * Get the process id and thread id
+     */
+    public static String getPTid() {
+        long pid = ProcessHandle.current().pid();
+        long tid = Thread.currentThread().getId();
+        return pid + Names.PID_TID_SEPARATOR + tid;
+    }
+
+    /**
+     * Set the current test class name to the PTid property
+     */
+    public static void setCurTestClassNameToPTid(String ptid, String className) {
+        System.setProperty(ptid, className);
+    }
+
+    /**
+     * Set the current test class_method name to the PTid property
+     */
+    public static void setCurTestFullNameToPTid(String ptid, String className, String methodName) {
+        System.setProperty(ptid, className + Names.TEST_CLASS_METHOD_SEPARATOR + methodName);
+    }
+
+    /**
+     * Get the current test class name from the PTid property
+     */
+    public static String getCurTestFullNameFromPTid(String ptid) {
+        String name = System.getProperty(ptid);
+        if (name == null) {
+            throw new RuntimeException("Cannot find the test class name for PTid " + ptid);
+        }
+        return name;
+    }
+
+    /**
+     * Get the current test class name from the PTid property
+     */
+    public static String getCurTestClassNameFromPTid(String ptid) {
+        return getCurTestFullNameFromPTid(ptid).split(Names.TEST_CLASS_METHOD_SEPARATOR)[0];
+    }
+
+    /**
+     * Get the current test method name from the PTid property
+     */
+    public static String getCurTestMethodNameFromPTid(String ptid) {
+        return getCurTestFullNameFromPTid(ptid).split(Names.TEST_CLASS_METHOD_SEPARATOR)[1];
     }
 }

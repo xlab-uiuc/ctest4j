@@ -369,13 +369,5 @@ public class ConfigTracker {
         return true;
     }
 
-    /**
-     * Update the config usage for the current test method
-     */
-    public static void updateConfigUsage(ConfigUsage configUsage, String className, String methodName) {
-        String fullTestName = Utils.getFullTestName(className, methodName);
-        configUsage.addClassLevelParams(getClassUsedParams(className));
-        configUsage.addMethodLevelParams(fullTestName, getMethodUsedParams(fullTestName));
-    }
 }
 

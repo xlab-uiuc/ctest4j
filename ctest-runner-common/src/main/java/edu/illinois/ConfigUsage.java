@@ -60,6 +60,10 @@ public class ConfigUsage {
         }
     }
 
+    public void addEmptyMethod(String methodName) {
+        methodLevelParams.put(methodName, new HashSet<>());
+    }
+
     public static ConfigUsage fromFile(String path) throws IOException {
         Gson gson = new Gson();
         Type configUsageType = new TypeToken<ConfigUsage>(){}.getType();
@@ -101,5 +105,36 @@ public class ConfigUsage {
         }
         configUsageFromFile.update(config);
         ConfigUsage.toJsonFile(configUsageFromFile, path);
+    }
+
+
+    /**
+     * Push the className and methodName to configUsage and wait for final update
+     * The final update method @updateAllConfigUsage()
+     * is called right before write the configUsage to a JSON file
+     */
+    public static void bufferForUpdate(ConfigUsage configUsage, String className, String methodName) {
+        String fullTestName = Utils.getFullTestName(className, methodName);
+        configUsage.addEmptyMethod(fullTestName);
+
+    }
+
+    /**
+     * Update the config usage for all test methods
+     */
+    public static void updateAllConfigUsage(ConfigUsage configUsage) {
+        for (String methodName: configUsage.getMethodLevelParams().keySet()) {
+            String className = methodName.substring(0, methodName.lastIndexOf(Names.TEST_CLASS_METHOD_SEPARATOR));
+            updateConfigUsage(configUsage, className, methodName);
+        }
+    }
+
+    /**
+     * Update the config usage for the given test method
+     */
+    public static void updateConfigUsage(ConfigUsage configUsage, String className, String methodName) {
+        String fullTestName = Utils.getFullTestName(className, methodName);
+        configUsage.addClassLevelParams(ConfigTracker.getClassUsedParams(className));
+        configUsage.addMethodLevelParams(fullTestName, ConfigTracker.getMethodUsedParams(fullTestName));
     }
 }

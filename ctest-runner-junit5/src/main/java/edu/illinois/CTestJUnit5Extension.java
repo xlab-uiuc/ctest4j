@@ -65,7 +65,7 @@ public class CTestJUnit5Extension implements CTestRunner, ExecutionCondition,
         if (Options.mode == Modes.BASE) {
             return;
         }
-        ConfigTracker.updateConfigUsage(configUsage, className, methodName);
+        ConfigUsage.bufferForUpdate(configUsage, className, methodName);
         if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
             // Retrieve method-level parameters
             CTest cTest = extensionContext.getRequiredTestMethod().getAnnotation(CTest.class);

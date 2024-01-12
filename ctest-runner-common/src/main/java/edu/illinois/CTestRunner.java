@@ -217,6 +217,7 @@ public interface CTestRunner {
 
     default void writeConfigUsageToJson(ConfigUsage configUsage, File targetFile) {
         if (saveUsedParamToFile) {
+            ConfigUsage.updateAllConfigUsage(configUsage);
             ConfigUsage.writeToJson(configUsage, targetFile);
         }
     }

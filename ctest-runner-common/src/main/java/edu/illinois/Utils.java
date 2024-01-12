@@ -154,7 +154,7 @@ public class Utils {
             }
         }
         if (retClassName.equals(threadName)) {
-            throw new RuntimeException("Cannot infer test class and method name from stack trace");
+            throw new RuntimeException("[CLASS] Cannot infer test class and method name from stack trace");
         }
         return retClassName;
     }
@@ -172,16 +172,25 @@ public class Utils {
             String className = element.getClassName();
             String methodName = element.getMethodName();
             // This logic is purely based on the JUnit name convention
-            if ((methodName.toLowerCase().startsWith("test") || methodName.toLowerCase().endsWith("test"))
-                    && className.toLowerCase().contains("test")) {
+            if ((methodName.toLowerCase().contains("test") && className.toLowerCase().contains("test"))) {
                 if (!isLibraryClass(className)) {
                     retClassName = className;
-                    retMethodName = methodName;
+                    String[] methodParts = methodName.split("\\$");
+                    if (methodParts.length <= 1) {
+                        retMethodName = methodName;
+                    } else {
+                        for (String part : methodParts) {
+                            if (part.toLowerCase().contains("test")) {
+                                retMethodName = part;
+                                break;
+                            }
+                        }
+                    }
                 }
             }
         }
         if (retClassName.equals(threadName) || retMethodName.equals(threadName)) {
-            throw new IOException("Cannot infer test class and method name from stack trace");
+            throw new IOException("[FULL] Cannot infer test class and method name from stack trace");
         }
         return retClassName + Names.TEST_CLASS_METHOD_SEPARATOR + retMethodName;
     }
@@ -284,7 +293,22 @@ public class Utils {
     public static String getCurTestFullNameFromPTid(String ptid) {
         String name = System.getProperty(ptid);
         if (name == null) {
-            throw new RuntimeException("Cannot find the test class name for PTid " + ptid);
+            try {
+                // If the name is null, try to infer the name from the stack trace
+                name = inferTestClassAndMethodNameFromStackTrace();
+                setCurTestFullNameToPTid(ptid, name.split(Names.TEST_CLASS_METHOD_SEPARATOR)[0],
+                        name.split(Names.TEST_CLASS_METHOD_SEPARATOR)[1]);
+            } catch (Exception e) {
+                try {
+                    name = inferTestClassNameFromStackTrace();
+                    setCurTestClassNameToPTid(ptid, name);
+                } catch (Exception ex) {
+                    // If class name also not found, use the ptid
+                    // All the tracked parameter under ptid will be thrown.
+                    // TODO: maybe find a way to handle this part.
+                    name = ptid;
+                }
+            }
         }
         return name;
     }

@@ -43,7 +43,7 @@ def get_proj_junit_version(proj) -> str:
 
 
 def mvn_clean_and_build_cmd() -> str:
-    return 'mvn -B clean install -DskipTests'
+    return 'mvn -B clean install -DskipTests -Drat.skip -Denforcer.skip -Dcheckstyle.skip -Dmaven.test.skip=true'
 
 
 def vanilla_mvn_cmd() -> str:

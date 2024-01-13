@@ -35,6 +35,7 @@ public class CTestJUnit5Extension implements CTestRunner, ExecutionCondition,
      */
     @Override
     public void beforeAll(ExtensionContext extensionContext) throws Exception {
+        startTestClass(extensionContext.getRequiredTestClass().getName());
         initializeRunner(extensionContext);
         //ConfigTracker.startTestClass();
     }
@@ -49,6 +50,7 @@ public class CTestJUnit5Extension implements CTestRunner, ExecutionCondition,
         if (Options.mode == Modes.BASE) {
             return;
         }
+        startTestMethod(extensionContext.getRequiredTestClass().getName(), extensionContext.getRequiredTestMethod().getName());
         ConfigTracker.startTestMethod(extensionContext.getRequiredTestClass().getName(), extensionContext.getRequiredTestMethod().getName());
         methodName = extensionContext.getRequiredTestMethod().getName();
     }
@@ -63,7 +65,7 @@ public class CTestJUnit5Extension implements CTestRunner, ExecutionCondition,
         if (Options.mode == Modes.BASE) {
             return;
         }
-        ConfigTracker.updateConfigUsage(configUsage, className, methodName);
+        ConfigUsage.bufferForUpdate(configUsage, className, methodName);
         if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
             // Retrieve method-level parameters
             CTest cTest = extensionContext.getRequiredTestMethod().getAnnotation(CTest.class);
@@ -134,7 +136,7 @@ public class CTestJUnit5Extension implements CTestRunner, ExecutionCondition,
         }
 
         // Get classLevel and methodLevel parameters from the mapping file
-        Object[] values = initalizeParameterSet(className, cTestClass.configMappingFile(), cTestClass.value(), cTestClass.regex());
+        Object[] values = initializeParameterSet(className, cTestClass.configMappingFile(), cTestClass.value(), cTestClass.regex());
         classLevelParameters = (Set<String>) values[0];
         methodLevelParametersFromMappingFile = (Map<String, Set<String>>) values[1];
         selectionParams.addAll(Utils.getSelectionParameters(

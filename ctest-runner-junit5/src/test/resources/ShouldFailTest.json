@@ -1,0 +1,10 @@
+{
+  "classLevelParams":[],
+  "methodLevelParams":{
+    "edu.illinois.junit5.ShouldFailTest_testWouldFail":["file-param2", "file-param1"],
+    "edu.illinois.junit5.ShouldFailTest_testFailDueToConfigFile":["method-parameter2","method-parameter1","class-parameter2","class-parameter1", "file-param1"],
+    "edu.illinois.junit5.ShouldFailTest_testShouldFail":["class-parameter1", "class-parameter2"],
+    "edu.illinois.junit5.ShouldFailTest_testFailDueToClassAnnotation":["method-parameter2","method-parameter1","file-param1","class-parameter1", "class-parameter2"],
+    "edu.illinois.junit5.ShouldFailTest_testFailDueToMethodAnnotation":["method-parameter1","file-param1","class-parameter2","class-parameter1"]
+  }
+}

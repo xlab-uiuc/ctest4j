@@ -51,6 +51,18 @@ public class ConfigUsage {
         return methodLevelParams;
     }
 
+    public void update(ConfigUsage newConfigUsage) {
+        // Update the class level parameters with the new one
+        this.classLevelParams = new HashSet<>(newConfigUsage.getClassLevelParams());
+        // Add or Update every method level parameter
+        for (Map.Entry<String, Set<String>> entry : newConfigUsage.getMethodLevelParams().entrySet()) {
+            this.methodLevelParams.put(entry.getKey(), new HashSet<>(entry.getValue()));
+        }
+    }
+
+    public void addEmptyMethod(String methodName) {
+        methodLevelParams.put(methodName, new HashSet<>());
+    }
 
     public static ConfigUsage fromFile(String path) throws IOException {
         Gson gson = new Gson();
@@ -70,9 +82,59 @@ public class ConfigUsage {
     /**
      * Write the ConfigUsage to a JSON file.
      */
-    public static void writeToJson(ConfigUsage config, File path)  {
+    private static void toJsonFile(ConfigUsage config, File path)  {
         Gson gson = new Gson();
         String json = gson.toJson(config);
         Utils.writeStringToFile(path.getAbsolutePath(), json);
+    }
+
+    /**
+     * Update the ConfigUsage to a JSON file.
+     */
+    public static void writeToJson(ConfigUsage config, File path) {
+        // If the file does not exist, directly write config to the path
+        if (!path.exists()) {
+            ConfigUsage.toJsonFile(config, path);
+        }
+        // Otherwise read the file and update the config
+        ConfigUsage configUsageFromFile = null;
+        try {
+            configUsageFromFile = ConfigUsage.fromFile(path.getAbsolutePath());
+        } catch (IOException e) {
+            throw new RuntimeException("Cannot read the config usage file " + path.getAbsolutePath());
+        }
+        configUsageFromFile.update(config);
+        ConfigUsage.toJsonFile(configUsageFromFile, path);
+    }
+
+
+    /**
+     * Push the className and methodName to configUsage and wait for final update
+     * The final update method @updateAllConfigUsage()
+     * is called right before write the configUsage to a JSON file
+     */
+    public static void bufferForUpdate(ConfigUsage configUsage, String className, String methodName) {
+        String fullTestName = Utils.getFullTestName(className, methodName);
+        configUsage.addEmptyMethod(fullTestName);
+
+    }
+
+    /**
+     * Update the config usage for all test methods
+     */
+    public static void updateAllConfigUsage(ConfigUsage configUsage) {
+        for (String methodName: configUsage.getMethodLevelParams().keySet()) {
+            String className = methodName.substring(0, methodName.lastIndexOf(Names.TEST_CLASS_METHOD_SEPARATOR));
+            updateConfigUsage(configUsage, className, methodName);
+        }
+    }
+
+    /**
+     * Update the config usage for the given test method
+     */
+    public static void updateConfigUsage(ConfigUsage configUsage, String className, String methodName) {
+        String fullTestName = Utils.getFullTestName(className, methodName);
+        configUsage.addClassLevelParams(ConfigTracker.getClassUsedParams(className));
+        configUsage.addMethodLevelParams(fullTestName, ConfigTracker.getMethodUsedParams(fullTestName));
     }
 }

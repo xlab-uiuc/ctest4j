@@ -120,7 +120,7 @@ public class Utils {
      * @return
      */
     public static String getTestMethodFullName(FrameworkMethod method) {
-        return method.getMethod().getDeclaringClass().getName() + Names.TEST_CLASS_METHOD_SEPERATOR + method.getName();
+        return method.getMethod().getDeclaringClass().getName() + Names.TEST_CLASS_METHOD_SEPARATOR + method.getName();
     }
 
     public static String getTestMethodFullName(String className, String methodName) {
@@ -154,7 +154,7 @@ public class Utils {
             }
         }
         if (retClassName.equals(threadName)) {
-            throw new RuntimeException("Cannot infer test class and method name from stack trace");
+            throw new RuntimeException("[CLASS] Cannot infer test class and method name from stack trace");
         }
         return retClassName;
     }
@@ -172,18 +172,27 @@ public class Utils {
             String className = element.getClassName();
             String methodName = element.getMethodName();
             // This logic is purely based on the JUnit name convention
-            if ((methodName.toLowerCase().startsWith("test") || methodName.toLowerCase().endsWith("test"))
-                    && className.toLowerCase().contains("test")) {
+            if ((methodName.toLowerCase().contains("test") && className.toLowerCase().contains("test"))) {
                 if (!isLibraryClass(className)) {
                     retClassName = className;
-                    retMethodName = methodName;
+                    String[] methodParts = methodName.split("\\$");
+                    if (methodParts.length <= 1) {
+                        retMethodName = methodName;
+                    } else {
+                        for (String part : methodParts) {
+                            if (part.toLowerCase().contains("test")) {
+                                retMethodName = part;
+                                break;
+                            }
+                        }
+                    }
                 }
             }
         }
         if (retClassName.equals(threadName) || retMethodName.equals(threadName)) {
-            throw new IOException("Cannot infer test class and method name from stack trace");
+            throw new IOException("[FULL] Cannot infer test class and method name from stack trace");
         }
-        return retClassName + Names.TEST_CLASS_METHOD_SEPERATOR + retMethodName;
+        return retClassName + Names.TEST_CLASS_METHOD_SEPARATOR + retMethodName;
     }
 
     /**
@@ -191,7 +200,7 @@ public class Utils {
      */
     public static String[] getTestClassAndMethodName() throws IOException {
         String fullName = inferTestClassAndMethodNameFromStackTrace();
-        String className = fullName.split(Names.TEST_CLASS_METHOD_SEPERATOR)[0];
+        String className = fullName.split(Names.TEST_CLASS_METHOD_SEPARATOR)[0];
         return new String[]{className, fullName};
     }
 
@@ -200,10 +209,10 @@ public class Utils {
      */
     public static String getFullTestName(String className, String methodName) {
         // If this is already a full name with the separator, return it directly
-        if (methodName.contains(Names.TEST_CLASS_METHOD_SEPERATOR)) {
+        if (methodName.contains(Names.TEST_CLASS_METHOD_SEPARATOR)) {
             return methodName;
         }
-        return className + Names.TEST_CLASS_METHOD_SEPERATOR + methodName;
+        return className + Names.TEST_CLASS_METHOD_SEPARATOR + methodName;
     }
 
     /**
@@ -251,5 +260,74 @@ public class Utils {
                     + file.getAbsolutePath());
         }
         return configParameterList;
+    }
+
+    /** ========= Methods for pid and tid that used for identifying test class and method name ========= */
+
+    /**
+     * Get the process id and thread id
+     */
+    public static String getPTid() {
+        long pid = ProcessHandle.current().pid();
+        long tid = Thread.currentThread().getId();
+        return pid + Names.PID_TID_SEPARATOR + tid;
+    }
+
+    public static String getPid() {
+        return String.valueOf(ProcessHandle.current().pid());
+    }
+
+    /**
+     * Set the current test class name to the PTid property
+     */
+    public static void setCurTestClassNameToPTid(String ptid, String className) {
+        System.setProperty(ptid, className);
+    }
+
+    /**
+     * Set the current test class_method name to the PTid property
+     */
+    public static void setCurTestFullNameToPTid(String ptid, String className, String methodName) {
+        System.setProperty(ptid, className + Names.TEST_CLASS_METHOD_SEPARATOR + methodName);
+    }
+
+    /**
+     * Get the current test class name from the PTid property
+     */
+    public static String getCurTestFullNameFromPTid(String ptid) {
+        String name = System.getProperty(ptid);
+        if (name == null) {
+            try {
+                // If the name is null, try to infer the name from the stack trace
+                name = inferTestClassAndMethodNameFromStackTrace();
+                setCurTestFullNameToPTid(ptid, name.split(Names.TEST_CLASS_METHOD_SEPARATOR)[0],
+                        name.split(Names.TEST_CLASS_METHOD_SEPARATOR)[1]);
+            } catch (Exception e) {
+                try {
+                    name = inferTestClassNameFromStackTrace();
+                    setCurTestClassNameToPTid(ptid, name);
+                } catch (Exception ex) {
+                    // If class name also not found, use the ptid
+                    // All the tracked parameter under ptid will be thrown.
+                    // TODO: maybe find a way to handle this part.
+                    name = ptid;
+                }
+            }
+        }
+        return name;
+    }
+
+    /**
+     * Get the current test class name from the PTid property
+     */
+    public static String getCurTestClassNameFromPTid(String ptid) {
+        return getCurTestFullNameFromPTid(ptid).split(Names.TEST_CLASS_METHOD_SEPARATOR)[0];
+    }
+
+    /**
+     * Get the current test method name from the PTid property
+     */
+    public static String getCurTestMethodNameFromPTid(String ptid) {
+        return getCurTestFullNameFromPTid(ptid).split(Names.TEST_CLASS_METHOD_SEPARATOR)[1];
     }
 }

@@ -8,7 +8,7 @@ The runner executes ctests concurrently using configurations set by the user, en
 Additionally, CTest Runner features a ctest selection option, which enables the execution of only those ctests that utilize the specific configuration being tested to speed up the testing process.
 
 ## Download CTest Runner
-### Build from source
+### Build From Source
 ```bash
 $ git clone https://github.com/xlab-uiuc/ctest-runner.git && cd ctest-runner
 $ mvn clean install

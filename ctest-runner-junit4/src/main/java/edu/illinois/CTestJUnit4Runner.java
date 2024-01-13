@@ -157,7 +157,7 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
                     if (shouldThorwException(fromTestThrowable)) {
                         throw fromTestThrowable;
                     }
-                    ConfigTracker.updateConfigUsage(configUsage, method.getDeclaringClass().getName(), method.getName());
+                    ConfigUsage.updateConfigUsage(configUsage, method.getDeclaringClass().getName(), method.getName());
                     if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
                         /*CTest cTest = method.getAnnotation(CTest.class);
                         if (cTest != null) {

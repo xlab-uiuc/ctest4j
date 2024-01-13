@@ -26,9 +26,23 @@ public interface CTestRunner {
     void initializeRunner(Object context) throws AnnotationFormatError, IOException;
 
     /**
+     * This method must be called right before the test class execution.
+     */
+    default void startTestClass(String testClassName) {
+        Utils.setCurTestClassNameToPTid(Utils.getPTid(), testClassName);
+    }
+
+    /**
+     * This method must be called right before each of the test method execution.
+     */
+    default void startTestMethod(String testClassName, String testMethodName) {
+        Utils.setCurTestFullNameToPTid(Utils.getPTid(), testClassName, testMethodName);
+    }
+
+    /**
      * Initialize the class-level and method-level parameters from the mapping file.
      */
-    default Object[] initalizeParameterSet(String testClassName, String mappingFilePath, String[] annotationValue, String annotationRegex) throws IOException {
+    default Object[] initializeParameterSet(String testClassName, String mappingFilePath, String[] annotationValue, String annotationRegex) throws IOException {
         mappingFilePath = resolveMappingFilePath(mappingFilePath, testClassName);
         if (mappingFilePath.isEmpty()) {
             return new Object[]{getValueAndRegexClassParameters(new HashSet<>(Arrays.asList(annotationValue)), annotationRegex), new HashMap<>()};
@@ -203,6 +217,7 @@ public interface CTestRunner {
 
     default void writeConfigUsageToJson(ConfigUsage configUsage, File targetFile) {
         if (saveUsedParamToFile) {
+            ConfigUsage.updateAllConfigUsage(configUsage);
             ConfigUsage.writeToJson(configUsage, targetFile);
         }
     }

@@ -27,8 +27,10 @@ public class Names {
     /** The directory of files that stores the used configuration parameters by each test */
     public static final String CONFIG_MAPPING_DIR = System.getProperty("ctest.mapping.dir", "ctest/mapping");
     public static final String CONFIG_SAVE_DIR = System.getProperty("ctest.config.save.dir", "ctest/saved_mapping");
-    /** The seperator between test class name and test method name */
-    public static final String TEST_CLASS_METHOD_SEPERATOR = "_";
+    /** The separator between test class name and test method name */
+    public static final String TEST_CLASS_METHOD_SEPARATOR = "_";
+    /** The separator between process id and thread id */
+    public static final String PID_TID_SEPARATOR = "@";
     /** The name of maven surefire plugin */
     public static final String SUREFIRE_PLUGIN_KEY = "org.apache.maven.plugins:maven-surefire-plugin";
     /** The method to get the value of the configuration parameter */

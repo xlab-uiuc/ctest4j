@@ -3,9 +3,9 @@
     "parameter1", "parameter2",
     "regex-parameter1", "regex-parameter2"],
   "methodLevelParams":{
-    "testCTestMethodAnnotationFail":["testCTestMethodAnnotationFail","parameter1","parameter2"],
-    "testTestAnnotation":["testTestAnnotation","parameter1","parameter2"],
-    "testTestClassAnnotationFail":["testTestClassAnnotationFail","parameter1"],
-    "testCTestAnnotation":["testCTestAnnotation","parameter1","parameter2"]
+    "edu.illinois.junit4.designB.ExampleCTest_testCTestMethodAnnotationFail":["testCTestMethodAnnotationFail","parameter1","parameter2"],
+    "edu.illinois.junit4.designB.ExampleCTest_testTestAnnotation":["testTestAnnotation","parameter1","parameter2"],
+    "edu.illinois.junit4.designB.ExampleCTest_testTestClassAnnotationFail":["testTestClassAnnotationFail","parameter1"],
+    "edu.illinois.junit4.designB.ExampleCTest_testCTestAnnotation":["testCTestAnnotation","parameter1","parameter2"]
   }
 }

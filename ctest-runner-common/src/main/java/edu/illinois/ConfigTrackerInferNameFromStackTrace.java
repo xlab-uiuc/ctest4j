@@ -8,7 +8,10 @@ import edu.illinois.track.TestTracker;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
 
@@ -18,7 +21,8 @@ import static edu.illinois.Names.*;
  * Author: Shuai Wang
  * Date:  10/13/23
  */
-public class ConfigTracker {
+@Deprecated
+public class ConfigTrackerInferNameFromStackTrace {
 
     /** Whether to inject config parameters from a file */
     private static final boolean injectFromFile;
@@ -95,25 +99,16 @@ public class ConfigTracker {
      * @param param the parameter to mark
      */
     public static void markParamAsUsed(String param) {
-        String ptid = Utils.getPTid();
-        // If the parameter name contains the process id, we skip it.
-        if (param.contains(Utils.getPid())) {
-            return;
-        }
-        //String className = Utils.inferTestClassNameFromStackTrace();
-        String className = Utils.getCurTestClassNameFromPTid(ptid);
+        String className = Utils.inferTestClassNameFromStackTrace();
         if (((TestClassTracker) trackerGet(className, false)).isTrackingClassParam()){
             trackerGet(className, false).addUsedParam(param);
         } else {
-            trackerGet(Utils.getCurTestFullNameFromPTid(ptid), true).addUsedParam(param);
-/*
             try {
                 trackerGet(Utils.getTestClassAndMethodName()[1], true).addUsedParam(param);
             } catch (IOException e) {
                 // If catch IOException, it means that we are still in class-level setup method
                 trackerGet(className, false).addUsedParam(param);
             }
-*/
         }
     }
 
@@ -131,25 +126,16 @@ public class ConfigTracker {
      * @param param the parameter that has been set
      */
     public static void markParamAsSet(String param) {
-        String ptid = Utils.getPTid();
-        // If the parameter name contains the process id, we skip it.
-        if (param.contains(Utils.getPid())) {
-            return;
-        }
-        //String className = Utils.inferTestClassNameFromStackTrace();
-        String className = Utils.getCurTestClassNameFromPTid(ptid);
+        String className = Utils.inferTestClassNameFromStackTrace();
         if (((TestClassTracker) trackerGet(className, false)).isTrackingClassParam()){
             trackerGet(className, false).addSetParam(param);
         } else {
-            trackerGet(Utils.getCurTestFullNameFromPTid(ptid), true).addSetParam(param);
-/*
             try {
                 trackerGet(Utils.getTestClassAndMethodName()[1], true).addSetParam(param);
             } catch (IOException e) {
                 // If catch IOException, it means that we are still in class-level setup method
                 trackerGet(className, false).addSetParam(param);
             }
-*/
         }
     }
 
@@ -314,8 +300,8 @@ public class ConfigTracker {
      */
     public static void writeConfigToFile(String className, String methodName, String fileName) {
         methodName = Utils.getFullTestName(className, methodName);
-        Utils.writeParamSetToJson(ConfigTracker.getAllUsedParams(className, methodName),
-                ConfigTracker.getAllSetParams(className, methodName), new File(CONFIG_SAVE_DIR, fileName + ".json"));
+        Utils.writeParamSetToJson(ConfigTrackerInferNameFromStackTrace.getAllUsedParams(className, methodName),
+                ConfigTrackerInferNameFromStackTrace.getAllSetParams(className, methodName), new File(CONFIG_SAVE_DIR, fileName + ".json"));
     }
 
     // Internal methods
@@ -379,5 +365,13 @@ public class ConfigTracker {
         return true;
     }
 
+    /**
+     * Update the config usage for the current test method
+     */
+    public static void updateConfigUsage(ConfigUsage configUsage, String className, String methodName) {
+        String fullTestName = Utils.getFullTestName(className, methodName);
+        configUsage.addClassLevelParams(getClassUsedParams(className));
+        configUsage.addMethodLevelParams(fullTestName, getMethodUsedParams(fullTestName));
+    }
 }
 

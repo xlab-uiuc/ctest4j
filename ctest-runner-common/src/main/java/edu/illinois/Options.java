@@ -7,7 +7,7 @@ package edu.illinois;
 public class Options {
     public static Boolean instrumentSetter = Boolean.valueOf(System.getProperty("instrumentSetter", "false"));
 
-    public static Modes mode = Modes.valueOf(System.getProperty("mode", "DEFAULT").toUpperCase());
+    public static Modes mode = Modes.valueOf(System.getProperty("ctest.mode", "DEFAULT").toUpperCase());
 
     public static Boolean saveUsedParamToFile = Boolean.valueOf(System.getProperty("ctest.config.save", "false"));
 

@@ -12,7 +12,7 @@ def build_app(app_name):
     branch = values[0]
     modules = values[1]
     module_str = ",".join(modules)
-    mvn_cmd = "mvn -B clean install -o -DskipTests -am -pl {} -Drat.skip -Denforcer.skip -Dcheckstyle.skip -Dmaven.test.skip=true".format(module_str)
+    mvn_cmd = "mvn -B clean install -DskipTests -am -pl {} -Drat.skip -Denforcer.skip -Dcheckstyle.skip -Dmaven.test.skip=true".format(module_str)
     build_cmd = "cd {} && git checkout {} && {}".format(app_dir, branch, mvn_cmd)
     print("CTest-Runner-Building " + app_name + "=======================================")
     print(build_cmd)
@@ -24,7 +24,7 @@ def build_hadoop_for_hbase():
     app_dir = os.path.join(ROOT_DIR, app_name)
     branch = "ctest-eval-hbase"
     module = 'hadoop-common-project/hadoop-common'
-    mvn_cmd = "mvn -B clean install -o -DskipTests -Dmaven.test.skip=true -am -pl {}".format(module)
+    mvn_cmd = "mvn -B clean install -DskipTests -Dmaven.test.skip=true -am -pl {}".format(module)
     build_cmd = "cd {} && git checkout {} && {}".format(app_dir, branch, mvn_cmd)
     print("CTest-Runner-Building HCommon for HBase =======================================")
     print(build_cmd)

@@ -307,6 +307,8 @@ public class Utils {
                     // All the tracked parameter under ptid will be thrown.
                     // TODO: maybe find a way to handle this part.
                     name = ptid;
+		    System.out.println("Cannot infer test class name from stack trace, below is the stack trace dump");
+		    Thread.dumpStack();
                 }
             }
         }

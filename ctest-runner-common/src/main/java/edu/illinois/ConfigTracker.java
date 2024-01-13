@@ -76,8 +76,10 @@ public class ConfigTracker {
      * @return true if the parameter has been used, false otherwise
      */
     public static boolean isParameterUsed(String className, String methodName, String param) {
-        return (trackerGet(className, false)).isParameterUsed(param) ||
+        boolean res = (trackerGet(className, false)).isParameterUsed(param) ||
                 (trackerGet(Utils.getFullTestName(className, methodName), true)).isParameterUsed(param);
+	System.out.println("checking " + param + " in method " + Utils.getFullTestName(className, methodName) + " pid " + Utils.getPTid() + " res " + res + " cur time " + System.currentTimeMillis());
+	return res;
     }
 
     /**
@@ -86,7 +88,7 @@ public class ConfigTracker {
      * @return true if the parameter has been set, false otherwise
      */
     public static boolean isParameterSet(String className, String methodName, String param) {
-        return (trackerGet(className, false)).isParameterSet(param) ||
+        return  (trackerGet(className, false)).isParameterSet(param) ||
                 (trackerGet(Utils.getFullTestName(className, methodName), true)).isParameterSet(param);
     }
 
@@ -99,8 +101,13 @@ public class ConfigTracker {
         String className = Utils.getCurTestClassNameFromPTid(Utils.getPTid());
         if (((TestClassTracker) trackerGet(className, false)).isTrackingClassParam()){
             trackerGet(className, false).addUsedParam(param);
+	    System.out.println(param + " is used in class" + className + " pid " + Utils.getPTid() + " cur time " + System.currentTimeMillis());
         } else {
             trackerGet(Utils.getCurTestFullNameFromPTid(Utils.getPTid()), true).addUsedParam(param);
+	 
+	    System.out.println(param + " is used in method" + Utils.getCurTestFullNameFromPTid(Utils.getPTid()) + " pid " + Utils.getPTid() + " cur time " + System.currentTimeMillis());
+
+
 /*
             try {
                 trackerGet(Utils.getTestClassAndMethodName()[1], true).addUsedParam(param);

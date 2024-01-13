@@ -273,6 +273,10 @@ public class Utils {
         return pid + Names.PID_TID_SEPARATOR + tid;
     }
 
+    public static String getPid() {
+        return String.valueOf(ProcessHandle.current().pid());
+    }
+
     /**
      * Set the current test class name to the PTid property
      */

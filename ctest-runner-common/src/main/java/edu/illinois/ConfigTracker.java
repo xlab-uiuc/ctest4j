@@ -95,12 +95,17 @@ public class ConfigTracker {
      * @param param the parameter to mark
      */
     public static void markParamAsUsed(String param) {
+        String ptid = Utils.getPTid();
+        // If the parameter name contains the process id, we skip it.
+        if (param.contains(Utils.getPid())) {
+            return;
+        }
         //String className = Utils.inferTestClassNameFromStackTrace();
-        String className = Utils.getCurTestClassNameFromPTid(Utils.getPTid());
+        String className = Utils.getCurTestClassNameFromPTid(ptid);
         if (((TestClassTracker) trackerGet(className, false)).isTrackingClassParam()){
             trackerGet(className, false).addUsedParam(param);
         } else {
-            trackerGet(Utils.getCurTestFullNameFromPTid(Utils.getPTid()), true).addUsedParam(param);
+            trackerGet(Utils.getCurTestFullNameFromPTid(ptid), true).addUsedParam(param);
 /*
             try {
                 trackerGet(Utils.getTestClassAndMethodName()[1], true).addUsedParam(param);
@@ -126,12 +131,17 @@ public class ConfigTracker {
      * @param param the parameter that has been set
      */
     public static void markParamAsSet(String param) {
+        String ptid = Utils.getPTid();
+        // If the parameter name contains the process id, we skip it.
+        if (param.contains(Utils.getPid())) {
+            return;
+        }
         //String className = Utils.inferTestClassNameFromStackTrace();
-        String className = Utils.getCurTestClassNameFromPTid(Utils.getPTid());
+        String className = Utils.getCurTestClassNameFromPTid(ptid);
         if (((TestClassTracker) trackerGet(className, false)).isTrackingClassParam()){
             trackerGet(className, false).addSetParam(param);
         } else {
-            trackerGet(Utils.getCurTestFullNameFromPTid(Utils.getPTid()), true).addSetParam(param);
+            trackerGet(Utils.getCurTestFullNameFromPTid(ptid), true).addSetParam(param);
 /*
             try {
                 trackerGet(Utils.getTestClassAndMethodName()[1], true).addSetParam(param);

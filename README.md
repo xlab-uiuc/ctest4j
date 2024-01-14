@@ -15,9 +15,7 @@ $ mvn clean install
 ```
 
 ### Add CTest Runner to Your Project
-Include the following dependency in your `pom.xml`:
-
-For JUnit4:
+Include the following dependency in your project build file:
 #### Maven
 ```xml
 <dependency>

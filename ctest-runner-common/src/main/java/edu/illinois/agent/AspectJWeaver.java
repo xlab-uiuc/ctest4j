@@ -1,5 +1,6 @@
 package edu.illinois.agent;
 
+import java.lang.invoke.MethodHandle;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -100,7 +101,7 @@ public class AspectJWeaver {
         }
     }
 
-    @Pointcut("!within(edu.illinois.agent..*) && execution(public * *(..))")
+    @Pointcut("!within(edu.illinois.agent..*) && (execution(public * *(..)) || execution(public *..new(..)))")
     public void anyPublicMethod() {}
 
     @Before("anyPublicMethod()")
@@ -124,7 +125,7 @@ public class AspectJWeaver {
                 }
             }
             for (WeaverUnit wunit : config_setter_list) {
-                if (wunit.getSignature().equals(methodSignature)) {
+                if (methodSignature.contains(wunit.getSignature())) {
                     Object[] args = joinPoint.getArgs();
                     if (wunit.getCaller() == null) {
                         ConfigTracker.markParamAsSet((String) args[wunit.getPos()]);
@@ -142,13 +143,17 @@ public class AspectJWeaver {
     public void afterAnyPublicMethod(JoinPoint joinPoint) throws Exception {
         if (isPropertySet == true) {
             String methodSignature = joinPoint.getSignature().toString();
+            if (methodSignature.contains("org.apache.hadoop.conf.Configuration()")) {
+                int i = 0;
+            }
             for (WeaverUnit wunit : config_injecter_list) {
-                if (wunit.getSignature().equals(methodSignature)) {
+                if (methodSignature.contains(wunit.getSignature())) {
                     Object[] args = joinPoint.getArgs();
                     if (wunit.getCaller() == null) {
                         throw new Exception("Invalid arguments. caller should not be null");
                     } else {
-                        Method injectMethod = wunit.getSignature().getClass().getMethod(wunit.getCaller());
+                        Class<?> configClass = Class.forName(wunit.getSignature().split("\\(")[0]);
+                        Method injectMethod = configClass.getMethod(wunit.getCaller(),String.class,String.class);
                         ConfigTracker.injectConfig((arg1, arg2) -> {
                             try {
                                 injectMethod.invoke(arg1, arg2);

@@ -14,24 +14,28 @@ $ git clone https://github.com/xlab-uiuc/ctest-runner.git && cd ctest-runner
 $ mvn clean install
 ```
 
-### Maven Central
+### Add CTest Runner to Your Project
 Include the following dependency in your `pom.xml`:
+
 For JUnit4:
+#### Maven
 ```xml
 <dependency>
     <groupId>edu.illinois</groupId>
-    <artifactId>ctest-runner-junit4</artifactId>
+    <artifactId>ctest-runner-junit${junit-version}</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
-For JUnit5:
-```xml
-<dependency>
-    <groupId>edu.illinois</groupId>
-    <artifactId>ctest-runner-junit5</artifactId>
-    <version>1.0-SNAPSHOT</version>
-</dependency>
+#### Gradle
+```groovy
+dependencies {
+    testImplementation 'edu.illinois:ctest-runner-junit${junit-version}:1.0-SNAPSHOT'
+}
 ```
+Current CTest Runner support both JUnit4 and JUnit5.
+Replace `${junit-version}` with the version of JUnit you are using (i.e. 4 or 5).
+
+
 
 ## Quick Start
 Please follow the [Guide to Get Started](example_with_hcommon.md) to run a simple example with CTest Runner.

@@ -95,6 +95,9 @@ public class ConfigTracker {
      * @param param the parameter to mark
      */
     public static void markParamAsUsed(String param) {
+        if (isCTestRunnerProperty(param)) {
+            return;
+        }
         String ptid = Utils.getPTid();
         // If the parameter name contains the process id, we skip it.
         if (param.contains(Utils.getPid())) {
@@ -131,6 +134,9 @@ public class ConfigTracker {
      * @param param the parameter that has been set
      */
     public static void markParamAsSet(String param) {
+        if (isCTestRunnerProperty(param)) {
+            return;
+        }
         String ptid = Utils.getPTid();
         // If the parameter name contains the process id, we skip it.
         if (param.contains(Utils.getPid())) {

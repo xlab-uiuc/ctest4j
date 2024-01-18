@@ -76,16 +76,17 @@ public class CTestListener implements CTestRunner, IClassListener, IInvokedMetho
                 if (hasUnusedExpected && !meetUnusedException) {
                     throw new RuntimeException("The test method " + methodName + " does not meet the expected exception " + cTest.expected());
                 }
-            }
-            Test test = method.getTestMethod().getConstructorOrMethod().getMethod().getAnnotation(Test.class);
-            if (test != null) {
-                Log.INFO(TRACKING_LOG_PREFIX, className + "#" + methodName,
-                        "uses configuration parameters: " + ConfigTracker.getAllUsedParams(className, methodName) + " and set parameters: " +
-                                ConfigTracker.getAllSetParams(className, methodName));
-                for (String param : getUnionMethodParameters(className, methodName, "",
-                        classLevelParameters, methodLevelParametersFromMappingFile, new HashSet<>())) {
-                    if (!ConfigTracker.isParameterUsed(className, methodName, param)) {
-                        throw new UnUsedConfigParamException(param + " was not used during the test.");
+            } else {
+                Test test = method.getTestMethod().getConstructorOrMethod().getMethod().getAnnotation(Test.class);
+                if (test != null) {
+                    Log.INFO(TRACKING_LOG_PREFIX, className + "#" + methodName,
+                            "uses configuration parameters: " + ConfigTracker.getAllUsedParams(className, methodName) + " and set parameters: " +
+                                    ConfigTracker.getAllSetParams(className, methodName));
+                    for (String param : getUnionMethodParameters(className, methodName, "",
+                            classLevelParameters, methodLevelParametersFromMappingFile, new HashSet<>())) {
+                        if (!ConfigTracker.isParameterUsed(className, methodName, param)) {
+                            throw new UnUsedConfigParamException(param + " was not used during the test.");
+                        }
                     }
                 }
             }

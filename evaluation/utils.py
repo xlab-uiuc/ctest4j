@@ -51,8 +51,11 @@ def vanilla_mvn_cmd() -> str:
 
 
 def mapping_collection_mvn_cmd() -> str:
-    return 'mvn -B surefire:test -Dctest.config.save'
+    return 'mvn -B surefire:test -Dctest.config.save' + ctest_exclude_parameters()
 
 
 def ctest_runner_mvn_cmd() -> str:
-    return 'mvn -B surefire:test -Dctest.mapping.dir=ctest/saved_mapping/'
+    return 'mvn -B surefire:test -Dctest.mapping.dir=ctest/saved_mapping/' + ctest_exclude_parameters()
+
+def ctest_exclude_parameters() -> str:
+    return ' -Dctest.config.exclude=\"hbase.hregion.memstore.mslab.chunksize,ipc.client.connect.timeout,ipc\.\d+\..*,.*:\d+.*\"'

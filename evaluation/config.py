@@ -12,9 +12,13 @@ build_modules = {
     'kylin': ['ctest-eval', ['core-common', 'core-cube', 'core-job', 'core-metadata', 'core-metrics', 'core-storage']],
     'flink': ['ctest-eval', ['flink-core']],
     'camel': ['ctest-eval', ['core/camel-base', 'core/camel-core']],
-    'zookeeper': ['ctest-eval', ['zookeeper-server']]
+    'zookeeper': ['ctest-eval', ['zookeeper-server'],
+    'jmeter': ['ctest-eval', [''],
+    'paldb': ['ctest-eval', ['']]
 }
 
+GRADLE_PROJECTS = {'jmeter', 'paldb'}
+                  
 PROJ_VANILLA_BRANCH_DICT = {
     'hbase': 'ctest/2.5.6',
     'hcommon': 'ctest-eval-vanilla',
@@ -27,9 +31,10 @@ PROJ_VANILLA_BRANCH_DICT = {
     'kylin': 'kylin-4.0.4',
     'flink': 'ctest-eval-vanilla',
     'camel': 'camel-3.21.2',
-    'zookeeper': 'ctest-eval-vanilla'
+    'zookeeper': 'ctest-eval-vanilla',
+    'jmeter': 'ctest-eval-vanilla',
+    'paldb': 'ctest-eval-vanilla'
 }
-
 
 PROJ_PATH_DICT = {
     'hbase': 'hbase/hbase-server',
@@ -43,10 +48,11 @@ PROJ_PATH_DICT = {
     'kylin': 'kylin/core-metadata',
     'flink': 'flink/flink-core',
     'camel': 'camel/core/camel-core',
-    'zookeeper': 'zookeeper/zookeeper-server'
+    'zookeeper': 'zookeeper/zookeeper-server',
+    'jmeter': 'jmeter/',
+    'paldb': 'paldb/'
 }
 
-# TODO: The version may need fix
 PROJ_JUNIT_VERSION_DICT = {
     'hbase': 'junit4',
     'hcommon': 'junit4',
@@ -59,7 +65,9 @@ PROJ_JUNIT_VERSION_DICT = {
     'kylin': 'junit4',
     'flink': 'junit4',
     'camel': 'junit5',
-    'zookeeper': 'junit5'
+    'zookeeper': 'junit5',
+    'jmeter': 'junit5',
+    'paldb': 'testng'
 }
 
    

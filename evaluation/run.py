@@ -1,6 +1,6 @@
 import os, time, sys
 from auto_annotate import auto_annotate_script_2
-from utils import LOG, is_proj_supported, get_poject_vanilla_branch, get_proj_ctest_branch, get_proj_path, get_proj_junit_version, get_proj_abs_path, mvn_clean_and_build_cmd, vanilla_mvn_cmd, mapping_collection_mvn_cmd, ctest_runner_mvn_cmd, append_to_file, get_junit_version
+from utils import LOG, is_proj_supported, get_poject_vanilla_branch, get_proj_ctest_branch, get_proj_path, get_proj_junit_version, get_proj_abs_path, mvn_clean_and_build_cmd, vanilla_mvn_cmd, mapping_collection_mvn_cmd, ctest_runner_mvn_cmd, append_to_file, get_junit_version, is_gradle_proj, gradle_clean_and_build_cmd, vanilla_gradle_cmd, mapping_collection_gradle_cmd, ctest_runner_gradle_cmd
 from pathlib import Path
 
 CUR_DIR = Path.cwd()
@@ -26,44 +26,61 @@ def checkout_to_branch(proj_path, branch):
     os.system('cd {} && git checkout -f {}'.format(proj_path, branch))
 
     
-def run_vanilla_test(proj_path, branch):
+def get_build_and_run_cmd(mode, proj):
+    gradle_proj: bool = is_gradle_proj(proj)
+    build_cmd = gradle_clean_and_build_cmd(proj) if gradle_proj else mvn_clean_and_build_cmd()
+    if mode == 'vanilla':
+        run_cmd = vanilla_gradle_cmd(proj) if gradle_proj else vanilla_mvn_cmd()
+    elif mode == 'collection':
+        run_cmd = mapping_collection_gradle_cmd(proj) if gradle_proj else mapping_collection_mvn_cmd()
+    elif mode == 'ctest':
+        run_cmd = ctest_runner_gradle_cmd(proj) if gradle_proj else ctest_runner_mvn_cmd()
+    else:
+        raise Exception('Unknown mode {}'.format(mode))
+    return build_cmd, run_cmd
+
+
+def run_vanilla_test(proj, proj_path, branch):
     os.chdir(proj_path)
     os.system('pwd')
 
     # checkout to the branch
     LOG('[VANILLA-RND] Checkout to branch {}'.format(branch))
     checkout_to_branch(proj_path, branch)
-
+    build_cmd, run_cmd = get_build_and_run_cmd('vanilla', proj)
+    
     # mvn clean and build
     LOG('[VANILLA-RND] mvn clean and build')
-    os.system(mvn_clean_and_build_cmd())
+    os.system(build_cmd)
     # run the test
     LOG('[VANILLA-RND] Run the test')
     start_time = time.time()
-    os.system(vanilla_mvn_cmd())
+    os.system(run_cmd)
     end_time = time.time()
     return end_time - start_time
 
 
-def run_ctest_test(proj_path, branch):
+def run_ctest_test(proj, proj_path, branch):
     os.chdir(proj_path)
     LOG('[CTEST-RND-COLLECTION] mvn clean and build')
-    os.system(mvn_clean_and_build_cmd())
+    collection_build_cmd, collection_run_cmd = get_build_and_run_cmd('collection', proj)
+    os.system(collection_build_cmd)
 
     # run the test
     LOG('[CTEST-RND-COLLECTION] Run the collection phase')
     start_time = time.time()
-    os.system(mapping_collection_mvn_cmd())
+    os.system(collection_run_cmd)
     end_time = time.time()
     collection_time = end_time - start_time
     
     LOG('[CTEST-RND] mvn clean and build')
-    os.system(mvn_clean_and_build_cmd())
+    ctest_build_cmd, ctest_run_cmd = get_build_and_run_cmd('ctest', proj)
+    os.system(ctest_build_cmd)
     
     # run the test with ctest runner
     LOG('[CTEST-RND] Run the test with ctest runner')
     start_time = time.time()
-    os.system(ctest_runner_mvn_cmd())
+    os.system(ctest_run_cmd)
     end_time = time.time()
     ctest_time = end_time - start_time
     return collection_time, ctest_time
@@ -84,14 +101,14 @@ def run(target_proj):
         exit(1)
 
     # run vanilla test
-    vanilla_time = run_vanilla_test(proj_abs_path, proj_vanilla_branch)
+    vanilla_time = run_vanilla_test(target_proj, proj_abs_path, proj_vanilla_branch)
 
     
     # run script to add all annotations
     annotation_time = add_ctest_annotation(target_proj)
 
     # run mapping collection and ctest-runner test
-    collection_time, ctest_time = run_ctest_test(proj_abs_path, proj_ctest_branch)
+    collection_time, ctest_time = run_ctest_test(target_proj, proj_abs_path, proj_ctest_branch)
     os.chdir(CUR_DIR)
     return vanilla_time, annotation_time, collection_time, ctest_time
 

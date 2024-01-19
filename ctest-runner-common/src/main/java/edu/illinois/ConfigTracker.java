@@ -26,6 +26,7 @@ public class ConfigTracker {
     private static final ConcurrentHashMap<String, TestTracker> testTrackerMap = new ConcurrentHashMap<>();
     /** The map from test class name to the configuration file */
     private static final Map<String, File> testClassToConfigFile = new ConcurrentHashMap<>();
+    private static final Set<String> excludedParamPattern = getExcludedParamPattern();
 
     static {
         injectFromFile = constructTestClzToConfigFileMap();
@@ -100,7 +101,7 @@ public class ConfigTracker {
         }
         String ptid = Utils.getPTid();
         // If the parameter name contains the process id, we skip it.
-        if (param.contains(Utils.getPid())) {
+        if (param.contains(Utils.getPid()) || isParameterExcluded(param)) {
             return;
         }
         //String className = Utils.inferTestClassNameFromStackTrace();
@@ -139,7 +140,7 @@ public class ConfigTracker {
         }
         String ptid = Utils.getPTid();
         // If the parameter name contains the process id, we skip it.
-        if (param.contains(Utils.getPid())) {
+        if (param.contains(Utils.getPid()) || isParameterExcluded(param)) {
             return;
         }
         //String className = Utils.inferTestClassNameFromStackTrace();
@@ -385,5 +386,28 @@ public class ConfigTracker {
         return true;
     }
 
+    /**
+     * Get the set of excluded parameters and/or parameter patterns
+     */
+    private static Set<String> getExcludedParamPattern() {
+        String excludedParams = System.getProperty(CONFIG_EXCLUDE_PROPERTY);
+        if (excludedParams == null) {
+            return new HashSet<>();
+        }
+        return new HashSet<>(Arrays.asList(excludedParams.split(CONFIG_EXCLUDE_SEPARATOR)));
+    }
+
+    /**
+     * Check whether a parameter is excluded
+     */
+    private static boolean isParameterExcluded(String param) {
+        for (String pattern : excludedParamPattern) {
+            // check regex match
+            if (param.matches(pattern)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 

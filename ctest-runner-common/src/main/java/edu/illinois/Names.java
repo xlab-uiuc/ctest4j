@@ -34,6 +34,8 @@ public class Names {
     public static final String CTEST_CONFIG_SAVE_DIR_PROPERTY = "ctest.config.save.dir";
     public static final String CONFIG_SAVE_DIR = System.getProperty(CTEST_CONFIG_SAVE_DIR_PROPERTY, "ctest/saved_mapping");
     public static final String CONFIG_SAVE_PROPERTY = "ctest.config.save";
+    public static final String CONFIG_EXCLUDE_PROPERTY = "ctest.config.exclude";
+    public static final String CONFIG_EXCLUDE_SEPARATOR = ",";
     /** The separator between test class name and test method name */
     public static final String TEST_CLASS_METHOD_SEPARATOR = "_";
     /** The separator between process id and thread id */

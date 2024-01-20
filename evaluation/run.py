@@ -49,8 +49,8 @@ def run_vanilla_test(proj, proj_path, branch):
     checkout_to_branch(proj_path, branch)
     build_cmd, run_cmd = get_build_and_run_cmd('vanilla', proj)
     
-    # mvn clean and build
-    LOG('[VANILLA-RND] mvn clean and build')
+    # clean and build
+    LOG('[VANILLA-RND] clean and build')
     os.system(build_cmd)
     # run the test
     LOG('[VANILLA-RND] Run the test')
@@ -62,8 +62,11 @@ def run_vanilla_test(proj, proj_path, branch):
 
 def run_ctest_test(proj, proj_path, branch):
     os.chdir(proj_path)
-    LOG('[CTEST-RND-COLLECTION] mvn clean and build')
+    LOG('[CTEST-RND-COLLECTION] clean and build')
     collection_build_cmd, collection_run_cmd = get_build_and_run_cmd('collection', proj)
+    if proj == 'jmeter':
+        style_cmd = "./gradlew autostyleApply -PchecksumIgnore"
+        os.system(style_cmd)
     os.system(collection_build_cmd)
 
     # run the test
@@ -73,7 +76,7 @@ def run_ctest_test(proj, proj_path, branch):
     end_time = time.time()
     collection_time = end_time - start_time
     
-    LOG('[CTEST-RND] mvn clean and build')
+    LOG('[CTEST-RND] clean and build')
     ctest_build_cmd, ctest_run_cmd = get_build_and_run_cmd('ctest', proj)
     os.system(ctest_build_cmd)
     

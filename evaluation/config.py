@@ -1,4 +1,4 @@
-SUPPORTED_PROJECTS = ['hbase', 'hcommon', 'hdfs', 'yarn', 'mapreduce', 'hive', 'zeppelin', 'alluxio', 'kylin', 'flink', 'camel']
+SUPPORTED_PROJECTS = ['hbase', 'hcommon', 'hdfs', 'yarn', 'mapreduce', 'hive', 'zeppelin', 'alluxio', 'kylin', 'flink', 'camel', 'jmeter', 'paldb']
 
 build_modules = {
     'hbase': ['ctest-eval', ['hbase-common', 'hbase-server']],
@@ -12,8 +12,8 @@ build_modules = {
     'kylin': ['ctest-eval', ['core-common', 'core-cube', 'core-job', 'core-metadata', 'core-metrics', 'core-storage']],
     'flink': ['ctest-eval', ['flink-core']],
     'camel': ['ctest-eval', ['core/camel-base', 'core/camel-core']],
-    'zookeeper': ['ctest-eval', ['zookeeper-server'],
-    'jmeter': ['ctest-eval', [''],
+    'zookeeper': ['ctest-eval', ['zookeeper-server']],
+    'jmeter': ['ctest-eval', ['']],
     'paldb': ['ctest-eval', ['']]
 }
 

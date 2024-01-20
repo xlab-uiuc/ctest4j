@@ -65,7 +65,7 @@ def run_ctest_test(proj, proj_path, branch):
     LOG('[CTEST-RND-COLLECTION] clean and build')
     collection_build_cmd, collection_run_cmd = get_build_and_run_cmd('collection', proj)
     if proj == 'jmeter':
-        style_cmd = "./gradlew autostyleApply -PchecksumIgnore"
+        style_cmd = "gradle autostyleApply -PchecksumIgnore"
         os.system(style_cmd)
     os.system(collection_build_cmd)
 

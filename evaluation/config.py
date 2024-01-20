@@ -49,8 +49,8 @@ PROJ_PATH_DICT = {
     'flink': 'flink/flink-core',
     'camel': 'camel/core/camel-core',
     'zookeeper': 'zookeeper/zookeeper-server',
-    'jmeter': 'jmeter/',
-    'paldb': 'paldb/'
+    'jmeter': 'jmeter/src/core',
+    'paldb': 'paldb/paldb'
 }
 
 PROJ_JUNIT_VERSION_DICT = {

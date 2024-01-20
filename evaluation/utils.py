@@ -68,18 +68,18 @@ def is_gradle_proj(proj: str) -> bool:
 
 
 def gradle_clean_and_build_cmd(proj: str) -> str:
-    return './gradlew clean build -x test -PchecksumIgnore' if proj == 'jmeter' else 'gradle clean build -x test -PchecksumIgnore'
+    return 'gradle clean build -x test -PchecksumIgnore' if proj == 'jmeter' else 'gradle clean build -x test -PchecksumIgnore'
 
 
 def vanilla_gradle_cmd(proj: str) -> str:
-    return './gradlew :src:core:test --no-rebuild -PchecksumIgnore --rerun-tasks' if proj == 'jmeter' else 'gradle test -PchecksumIgnore --no-rebuild --rerun-tasks'
+    return 'gradle :src:core:test --no-rebuild -PchecksumIgnore --rerun-tasks' if proj == 'jmeter' else 'gradle test -PchecksumIgnore --no-rebuild --rerun-tasks'
 
 
 def mapping_collection_gradle_cmd(proj: str) -> str:
-    return './gradlew :src:core:test --no-rebuild -PchecksumIgnore --rerun-tasks -Pctest.config.save=true' if proj == 'jmeter' else 'gradle test -PchecksumIgnore --no-rebuild --rerun-tasks -Pctest.config.save=true'
+    return 'gradle :src:core:test --no-rebuild -PchecksumIgnore --rerun-tasks -Pctest.config.save=true' if proj == 'jmeter' else 'gradle test -PchecksumIgnore --no-rebuild --rerun-tasks -Pctest.config.save=true'
 
 
 def ctest_runner_gradle_cmd(proj: str) -> str:
-    return './gradlew :src:core:test --no-rebuild -PchecksumIgnore --rerun-tasks -Pctest.mapping.dir=ctest/saved_mapping/' if proj == 'jmeter' else 'gradle test -PchecksumIgnore --no-rebuild --rerun-tasks -Pctest.mapping.dir=ctest/saved_mapping/'
+    return 'gradle :src:core:test --no-rebuild -PchecksumIgnore --rerun-tasks -Pctest.mapping.dir=ctest/saved_mapping/' if proj == 'jmeter' else 'gradle test -PchecksumIgnore --no-rebuild --rerun-tasks -Pctest.mapping.dir=ctest/saved_mapping/'
     
 

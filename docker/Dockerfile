@@ -130,6 +130,13 @@ RUN wget https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries
 
 COPY settings.xml /usr/share/maven/conf/settings.xml
 
+# Install Gralde 8.5
+RUN wget https://services.gradle.org/distributions/gradle-8.5-bin.zip &&
+    sudo mkdir /opt/gradle
+    sudo unzip -d /opt/gradle gradle-8.5-bin.zip &&
+    echo "export PATH=\$PATH:/opt/gradle/gradle-8.5/bin" >> ~/.profile &&
+    source ~/.profile &&
+
 # Install pylint and python-dateutil
 RUN pip3 install pylint==2.6.0 python-dateutil==2.8.1
 

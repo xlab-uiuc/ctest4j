@@ -11,5 +11,10 @@ build_modules = {
     'kylin': ['ctest-eval', ['core-common', 'core-cube', 'core-job', 'core-metadata', 'core-metrics', 'core-storage']],
     'flink': ['ctest-eval', ['flink-core']],
     'camel': ['ctest-eval', ['core/camel-base', 'core/camel-core']],
-    'zookeeper': ['ctest-eval', ['zookeeper-server']]
+    'zookeeper': ['ctest-eval', ['zookeeper-server'],
+    'jmeter': ['ctest-eval', ['']],
+    'paldb': ['ctest-eval', ['']]]
 }
+
+def is_gradle_project(proj: str) -> bool:
+    return proj in ['jmeter', 'paldb']

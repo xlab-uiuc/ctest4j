@@ -43,3 +43,4 @@ Read the [Features & Options](Options.md) to learn more about all the features t
 ## Supported Framework:
 - [JUnit4](JUnit4.md): [Write and run ctest with JUnit4](write_and_run_ctest.md)
 - [JUnit5](JUnit5.md) 
+- [TestNG](TestNG.md)

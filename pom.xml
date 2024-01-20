@@ -13,6 +13,7 @@
         <module>ctest-runner-common</module>
         <module>ctest-runner-junit5</module>
         <module>ctest-runner-maven-plugin</module>
+        <module>ctest-runner-testng</module>
     </modules>
     <dependencies>
         <dependency>

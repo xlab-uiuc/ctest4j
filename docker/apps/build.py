@@ -8,7 +8,7 @@ def build_maven_app(app_name):
     if app_name == "hbase":
         return
     app_dir = os.path.join(ROOT_DIR, app_name)
-    values = build_config.build_modules[app_name]
+    values = build_modules[app_name]
     branch = values[0]
     modules = values[1]
     module_str = ",".join(modules)
@@ -21,7 +21,7 @@ def build_maven_app(app_name):
     
 def build_gradle_app(app_name):
     app_dir = os.path.join(ROOT_DIR, app_name)
-    values = build_config.build_modules[app_name]
+    values = build_modules[app_name]
     branch = values[0]
     gradle_cmd = "./gradlew clean build -x test -PchecksumIgnore"
     if app_name == "paldb":
@@ -48,7 +48,7 @@ def build_hbase():
     build_hadoop_for_hbase()
     app_name = "hbase"
     app_dir = os.path.join(ROOT_DIR, app_name)
-    values = build_config.build_modules[app_name]
+    values = build_modules[app_name]
     branch = values[0]
     modules = values[1]
     build_cmd = "cd {} && git checkout {} && cd {} && mvn -B clean install -DskipTests && cd - && cd {} && mvn -B clean install -DskipTests".format(app_dir, branch, modules[0], modules[1])
@@ -58,7 +58,7 @@ def build_hbase():
 
 
 def build():
-    apps = build_config.build_modules.keys()
+    apps = build_modules.keys()
     build_hbase()
     for app in apps:
         if is_gradle_project(app):

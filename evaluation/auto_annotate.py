@@ -267,8 +267,10 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
                     # CHANGE content -> contents[index]
                     if test_module == "junit4":
                         contents[index] = "@RunWith(CTestJUnit4Runner2.class)\n@CTestClass()\n" + content
-                    else:
+                    elif test_module == "junit5":
                         contents[index] = "@ExtendWith(CTestJUnit5Extension.class)\n@CTestClass()\n" + content
+                    elif test_module == "testng":
+                        contents[index] = "@Listeners(CTestListener.class)\n@CTestClass()\n" + content
                     print_log("normal import and @RunWith added for " + f.name)
                 if not import_added:
                     if not abstract_class and test_class:

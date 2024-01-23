@@ -48,6 +48,8 @@ def run_vanilla_test(proj, proj_path, branch):
     LOG('[VANILLA-RND] Checkout to branch {}'.format(branch))
     checkout_to_branch(proj_path, branch)
     build_cmd, run_cmd = get_build_and_run_cmd('vanilla', proj)
+    if proj == 'zookeeper':
+        run_cmd = run_cmd.replace('surefire:test', 'test')
     
     # clean and build
     LOG('[VANILLA-RND] clean and build')
@@ -64,6 +66,8 @@ def run_ctest_test(proj, proj_path, branch):
     os.chdir(proj_path)
     LOG('[CTEST-RND-COLLECTION] clean and build')
     collection_build_cmd, collection_run_cmd = get_build_and_run_cmd('collection', proj)
+    if proj == 'zookeeper':
+        collection_run_cmd = collection_run_cmd.replace('surefire:test', 'test')
     if proj == 'jmeter':
         style_cmd = "gradle autostyleApply -PchecksumIgnore"
         os.system(style_cmd)
@@ -78,6 +82,8 @@ def run_ctest_test(proj, proj_path, branch):
     
     LOG('[CTEST-RND] clean and build')
     ctest_build_cmd, ctest_run_cmd = get_build_and_run_cmd('ctest', proj)
+    if proj == 'zookeeper':
+        ctest_run_cmd = ctest_run_cmd.replace('surefire:test', 'test')
     os.system(ctest_build_cmd)
     
     # run the test with ctest runner

@@ -70,4 +70,5 @@ PROJ_JUNIT_VERSION_DICT = {
     'paldb': 'testng'
 }
 
-   
+EVALUATE_PROJECTS = ['hbase', 'hcommon', 'hdfs', 'yarn', 'mapreduce', 'zeppelin', 'alluxio', 'flink', 'camel', 'zookeeper', 'jmeter', 'paldb']   
+OLD_CTEST_PROJECTS = ['hbase', 'hcommon', 'hdfs', 'yarn', 'mapreduce', 'zeppelin', 'alluxio', 'flink', 'camel', 'zookeeper']

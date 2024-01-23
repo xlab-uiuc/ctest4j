@@ -21,6 +21,8 @@ def run(target_proj: str, proj_path: Path, test_list: list):
     os.chdir(proj_path)
     LOG('[OLD-CTEST-RND] Start running old ctestrunner...')
     start_time = time.time()
+    if target_proj == 'zookeeper':
+        os.system('git checkout vanilla && mvn -B clean install -DskipTests')
     for test in test_list:
         mvn_cmd = f"mvn -B surefire:test -Dtest={test}"
         #print(f'Running command: {mvn_cmd} in {proj_path}')

@@ -8,7 +8,7 @@ qij3,120,
 siruiw4,90,
 sk117,128,
 whhuang4,144,
-xinyihe4,216,,,For example, we were stuck on using openctest's identify_param for a while because we were unaware of the error in the `mvn surefire:test` in [runner.py](https://github.com/Xinyihe123/openctest/blob/main/core/identify_param/runner.py) because "mvn surefire:test" was done in a subprocess and its output were not shown by default.
+xinyihe4,216,,,For example, we were stuck on using openctest's identify_param for a while because we were unaware of the error in the `mvn surefire:test` in [runner.py](https://github.com/Xinyihe123/openctest/blob/main/core/identify_param/runner.py) because `mvn surefire:test` was done in a subprocess and its output were not shown by default.
 yangj4,70,
 ych10,70,
 yenc3,170,,,I think instrumenting GET/SET API is quite time-consuming.

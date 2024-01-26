@@ -1,4 +1,4 @@
-## JUnit4 CTest4j Runner
+## JUnit4 CTest4J Runner
 
 ### Usage
 
@@ -66,7 +66,7 @@ public void testTrack() {
 ```
 
 #### Run An Example
-Example dependency can be found at [pom.xml](pom.xml).
+Example dependency can be found at [pom.xml](../pom.xml).
 Under the root directory of this project, run the following command:
 ```bash
 $ mvn clean install -DskipTests

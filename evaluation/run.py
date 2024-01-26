@@ -116,7 +116,7 @@ def run(target_proj):
     # run script to add all annotations
     annotation_time = add_ctest_annotation(target_proj)
 
-    # run mapping collection and ctest-runner test
+    # run mapping collection and ctest4j test
     collection_time, ctest_time = run_ctest_test(target_proj, proj_abs_path, proj_ctest_branch)
     os.chdir(CUR_DIR)
     return vanilla_time, annotation_time, collection_time, ctest_time

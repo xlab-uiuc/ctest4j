@@ -20,9 +20,9 @@ PROJECTS_POTENTIAL = ["mapreduce-client-core", "alluxio-core-common", "bookkeepe
 
 TEST_MODULES_SUPPORTED = ["junit4", "junit5", "testng"]
 
-JAVA_DEPENDENCY = {"junit4": "    <dependency>\n      <groupId>edu.illinois</groupId>\n      <artifactId>ctest-runner-junit4</artifactId>\n      <version>1.0-SNAPSHOT</version>\n      <scope>compile</scope>\n    </dependency>\n",
-                   "junit5": "    <dependency>\n      <groupId>edu.illinois</groupId>\n      <artifactId>ctest-runner-junit4</artifactId>\n      <version>1.0-SNAPSHOT</version>\n      <scope>compile</scope>\n    </dependency>\n",
-                     "testng": "    <dependency>\n      <groupId>edu.illinois</groupId>\n      <artifactId>ctest-runner-testng</artifactId>\n      <version>1.0-SNAPSHOT</version>\n      <scope>compile</scope>\n    </dependency>\n"
+JAVA_DEPENDENCY = {"junit4": "    <dependency>\n      <groupId>edu.illinois</groupId>\n      <artifactId>ctest4j-junit4</artifactId>\n      <version>1.0-SNAPSHOT</version>\n      <scope>compile</scope>\n    </dependency>\n",
+                   "junit5": "    <dependency>\n      <groupId>edu.illinois</groupId>\n      <artifactId>ctest4j-junit4</artifactId>\n      <version>1.0-SNAPSHOT</version>\n      <scope>compile</scope>\n    </dependency>\n",
+                     "testng": "    <dependency>\n      <groupId>edu.illinois</groupId>\n      <artifactId>ctest4j-testng</artifactId>\n      <version>1.0-SNAPSHOT</version>\n      <scope>compile</scope>\n    </dependency>\n"
                    }
 
 IMPORT_NORMAL = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
@@ -44,7 +44,7 @@ PRINT_LOG = False
 # Utility section
 def print_log(message: str):
     if PRINT_LOG:
-        print("<<<ctest-runner-script>>> " + message)
+        print("<<<ctest4j-script>>> " + message)
 
 def change_working_dir(target_dir: str):
     current = os.getcwd()
@@ -96,7 +96,7 @@ def add_dependency(project: str, test_module: str):
             for index, content in enumerate(contents):
                 if "</dependencies>" in content and "dependencyManagement" not in contents[index + 1]:
                     added = True
-                    if "ctest-runner-junit4" not in contents[index - 4]:
+                    if "ctest4j-junit4" not in contents[index - 4]:
                         contents[index] = JAVA_DEPENDENCY[test_module] + contents[index]
                         break
             if not added:

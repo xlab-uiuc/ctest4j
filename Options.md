@@ -25,4 +25,12 @@
 | ctest.runtime.selection | Whether to select test methods at runtime. If set to true, then the runner will try to read the target parameter from the option "ctest.selection.parameter" and perform selection based on the given paraemter list.                                                                                      | True / False                                                                              |
 | ctest.selection.parameter | A list of configuration parameters separated by comma, or a configuration file path start with @. If value is a configuration file, then each line of the file should be the name of "one" configuration paraemter. Only the test methods that use the specified configuration parameter will be executed. | Configuration parameter name seperated by comma; or a configuration file path start with @ |
 
-
+### AspectJ Options 
+| Arguments      | Description                                                                | Supported Format                                                                                            |
+|----------------|----------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| ctest.getter   | Specifies the method for getting the value of a configuration parameter.   | Signature1#(Optional)Pos1#(Optional)TransferMethod1;Signature2#(Optional)Pos2#(Optional)TransferMethod2;... |
+| ctest.setter   | Specifies the method for setting the value of a configuration parameter.   | Signature1#(Optional)Pos1#(Optional)TransferMethod1;Signature2#(Optional)Pos2#(Optional)TransferMethod2;... |
+| ctest.injecter | Specifies the method for injecting the value of a configuration parameter. | Signature1#(Optional)Pos1#(Optional)TransferMethod1;Signature2#(Optional)Pos2#(Optional)TransferMethod2;... |
+Note:
+- Pos: Index of the input to this method that will be the parameter name or will be used for TransferMethod.
+- TransferMethod: Method name needed to convert the input to the parameter name.

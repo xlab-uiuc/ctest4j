@@ -1,4 +1,4 @@
-# Write and Run Configuration Test with CTest Runner
+# Write and Run Configuration Test with CTest4j
 
 ## Write Configuration Test
 The following example provides a glimpse at the minimum requirements for writing a configuration test in JUnit4 with CTest Runner.
@@ -166,26 +166,4 @@ Please refer to [Options](Options.md) for more details about the arguments.
 One exmaple of using Maven Surefire to run configuration test is:
 ```bash
 $ mvn surefire:test -Dmode=default -Dconfig.inject.dir=src/test/resources/inject_config -Dconfig.used.dir=src/test/resources/used_config -Dsave.used.config=true
-```
-
-## Run Configuration Test with CTest Suite Runner
-CTest Suite Runner is a runner that allows user to run a suite of configuration tests.
-An example of using CTest Suite Runner is:
-```java
-@RunWith(CTestJUnit4Suite.class)
-@Suite.SuiteClasses({
-        TestNormalOne.class,
-        TestNormalTwo.class,
-})
-public class AllTests {
-}
-```
-The test in the suite does not need `@CTest` annotation but can still perform as a configuration test. The runner would automatically inject configuration value to the test and check whether all required configuration parameters are used after the test execution. The runner can take the same arguments as above to control the behavior of the test.
-One specific argument for CTest Suite is `ctest.suite.tracking`. If this argument is set to true, then the runner would use `@Test` annotation to track the configuration usage during the test execution and save to `ctest.mapping.dir`; otherwise all `@Test` would also perform like `@CTest`.
-To run a CTest suite, one can use the following command:
-```bash
-# track configuration usage and save used parmas to ctest.mapping.dir
-$ mvn surefire:test -Dtest=AllTests -Dconfig.used.dir=src/test/resources -Dctest.suite.tracking
-# run every test method as a configuration test
-$ mvn surefire:test -Dtest=AllTests -Dconfig.used.dir=src/test/resources
 ```

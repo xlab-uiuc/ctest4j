@@ -1,4 +1,4 @@
-## JUnit4 Configuration Test Runner
+## JUnit4 CTest4j Runner
 
 ### Usage
 
@@ -8,36 +8,19 @@ For maven project, add the following dependency to your pom.xml:
 <dependencies>
     <dependency>
         <groupId>edu.illinois</groupId>
-        <artifactId>ctest-runner-junit4</artifactId>
+        <artifactId>ctest4j-junit4</artifactId>
         <version>1.0-SNAPSHOT</version>
         <scope>compile</scope>
     </dependency>
 </dependencies>
 ```
 
-#### DO NOT USE IT FOR NOW: (Optional) Automatic Instrumentation Only：
-Specify Runner Agent and Configuration APIs in Maven Surefire plugin:
-```xml
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <argLine>-javaagent:~/.m2/repository/edu/illinois/edu.illinois.CTestRunner/1.0-SNAPSHOT/edu.illinois.CTestRunner-1.0-SNAPSHOT.jar</argLine>
-          <systemPropertyVariables>
-            <configurationClassName>${CONFIGURATION_CLASS}</configurationClassName>
-            <configurationGetterMethod>${GETTER_METHOD_NAME_AND_DESCRIPTOR}</configurationGetterMethod>
-            <configurationSetterMethod>${SETTER_METHOD_NAME_AND_DESCRIPTOR}</configurationSetterMethod>
-          </systemPropertyVariables>
-        </configuration>
-      </plugin>
-```
-
 #### Manual Instrumentation:
 To track configuration parameters, you need to add the following code to your project:
 ```java
-public static <T> void injectConfig(BiConsumer<String, T> configSetterMethod) throws IOException
-public static void markParamAsUsed(String param)
-public static void markParamAsSet(String param)
+public static <T> void injectConfig(BiConsumer<String, T> configSetterMethod) throws IOException;
+public static void markParamAsUsed(String param);
+public static void markParamAsSet(String param);
 ```
 `injectConfig` method need to be added to the end of your Configuration class constructor to inject configuration value 
 with configuration setter method. `markParamAsUsed` method need to be added to the end of your configuration getter method

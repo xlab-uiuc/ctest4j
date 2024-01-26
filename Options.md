@@ -1,4 +1,4 @@
-## CTest Runner Argument Options
+## CTest4j Argument Options
 
 ### General Options
 | Arguments            | Description                                                                            | Supported Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |

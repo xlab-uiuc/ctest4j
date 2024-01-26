@@ -1,6 +1,6 @@
-# Example of Applying CTest Runner to HCommon
+# Example of Applying CTest4j to HCommon
 
-## Build the CTest Runner
+## Build the CTest4j
 
 ```bash
 $ mvn clean install -DskipTests
@@ -20,7 +20,7 @@ Since HCommon uses JUnit4, add the junit4 runner dependency to the `pom.xml` fil
     ...
     <dependency>
         <groupId>edu.illinois</groupId>
-        <artifactId>ctest-runner-junit4</artifactId>
+        <artifactId>ctest4j-junit4</artifactId>
         <version>1.0-SNAPSHOT</version>
         <scope>compile</scope>
     </dependency>
@@ -101,7 +101,7 @@ To track the configuration parameters that are set by the test, add the `ConfigT
   }
 ```
 
-### Add ctest-runner configuration injector to the Configuration constructor
+### Add CTest4j configuration injector to the Configuration constructor
 Add the `ConfigTracker.injectConfig(setterMethod)` to the end of the Configuration constructor.
 The setterMethod takes two arguments, the first argument is the configuration parameter name, the second argument is the configuration parameter value.
 This is used to inject the configuration value with the configuration setter method during the test execution.

@@ -64,19 +64,19 @@ public class AspectJWeaver {
     private static boolean isPropertySet = false;
     private static WeaverUnit[] config_getter_list;
     private static WeaverUnit[] config_setter_list;
-    private static WeaverUnit[] config_injecter_list;
+    private static WeaverUnit[] config_injector_list;
 
     private void setProperty() {
         String config_getter_str = System.getProperty(CTEST_GETTER);
         String config_setter_str = System.getProperty(CTEST_SETTER);
-        String config_injecter_str = System.getProperty(CTEST_INJECTER);
+        String config_injector_str = System.getProperty(CTEST_INJECTOR);
         // Split the strings and initialize the WeaverUnit arrays
         String[] getterStrings = config_getter_str != null ? config_getter_str.split(";") : new String[0];
         String[] setterStrings = config_setter_str != null ? config_setter_str.split(";") : new String[0];
-        String[] injecterStrings = config_injecter_str != null ? config_injecter_str.split(";") : new String[0];
+        String[] injectorStrings = config_injector_str != null ? config_injector_str.split(";") : new String[0];
         config_getter_list = new WeaverUnit[getterStrings.length];
         config_setter_list = new WeaverUnit[setterStrings.length];
-        config_injecter_list = new WeaverUnit[injecterStrings.length];
+        config_injector_list = new WeaverUnit[injectorStrings.length];
         // Convert each string into a WeaverUnit
         for (int i = 0; i < getterStrings.length; i++) {
             try {
@@ -92,9 +92,9 @@ public class AspectJWeaver {
                 throw new RuntimeException(e);
             }
         }
-        for (int i = 0; i < injecterStrings.length; i++) {
+        for (int i = 0; i < injectorStrings.length; i++) {
             try {
-                config_injecter_list[i] = new WeaverUnit(injecterStrings[i].split("#"));
+                config_injector_list[i] = new WeaverUnit(injectorStrings[i].split("#"));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -106,7 +106,7 @@ public class AspectJWeaver {
 
     @Before("anyPublicMethod()")
     public void beforeAnyPublicMethod(JoinPoint joinPoint) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        if (isPropertySet == false && (System.getProperty(CTEST_GETTER) != null) || (System.getProperty(CTEST_SETTER) != null) || (System.getProperty(CTEST_INJECTER) != null)) {
+        if (isPropertySet == false && (System.getProperty(CTEST_GETTER) != null) || (System.getProperty(CTEST_SETTER) != null) || (System.getProperty(CTEST_INJECTOR) != null)) {
             setProperty();
             isPropertySet = true;
         }
@@ -146,7 +146,7 @@ public class AspectJWeaver {
             if (methodSignature.contains("org.apache.hadoop.conf.Configuration()")) {
                 int i = 0;
             }
-            for (WeaverUnit wunit : config_injecter_list) {
+            for (WeaverUnit wunit : config_injector_list) {
                 if (methodSignature.contains(wunit.getSignature())) {
                     Object[] args = joinPoint.getArgs();
                     if (wunit.getCaller() == null) {

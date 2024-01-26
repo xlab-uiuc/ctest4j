@@ -15,7 +15,7 @@ For our purposes, we've selected Load-Time Weaving. This approach allows us to r
 |----------------|-------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
 | ctest.getter   | Specifies the method for getting the value of a configuration parameter.    | Signature1#(Optional)Pos1#(Optional)TransferMethod1;Signature2#(Optional)Pos2#(Optional)TransferMethod2;... |
 | ctest.setter   | Specifies the method for setting the value of a configuration parameter.    | Signature1#(Optional)Pos1#(Optional)TransferMethod1;Signature2#(Optional)Pos2#(Optional)TransferMethod2;... |
-| ctest.injecter | Specifies the method for injecting the value of a configuration parameter. | Signature1#(Optional)Pos1#(Optional)TransferMethod1;Signature2#(Optional)Pos2#(Optional)TransferMethod2;... |
+| ctest.injector | Specifies the method for injecting the value of a configuration parameter. | Signature1#(Optional)Pos1#(Optional)TransferMethod1;Signature2#(Optional)Pos2#(Optional)TransferMethod2;... |
 Note:
 - Pos: Index of the input to this method that will be the parameter name or will be used for TransferMethod.
 - TransferMethod: Method name needed to convert the input to the parameter name.
@@ -73,6 +73,6 @@ Include the AspectJ dependency in the same pom.xml file:
 This addition enables AspectJ's load-time weaving.
 ### Add Instrumentation via CLI
 ```bash
-mvn XXX -Dctest.getter="org.apache.hadoop.conf.Configuration.get(String)" -Dctest.setter="org.apache.hadoop.conf.Configuration.set(String,String)" -Dctest.injecter="org.apache.hadoop.conf.Configuration()#set"
+mvn XXX -Dctest.getter="org.apache.hadoop.conf.Configuration.get(String)" -Dctest.setter="org.apache.hadoop.conf.Configuration.set(String,String)" -Dctest.injector="org.apache.hadoop.conf.Configuration()#set"
 ```
 This command specifies the methods AspectJ will use to get, set, and inject configuration parameters.

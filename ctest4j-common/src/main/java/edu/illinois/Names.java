@@ -47,7 +47,7 @@ public class Names {
     /** The method to set the value of the configuration parameter */
     public static final String CTEST_SETTER = "ctest.setter";
     /** The method to inject the value of the configuration parameter */
-    public static final String CTEST_INJECTER = "ctest.injecter";
+    public static final String CTEST_INJECTOR = "ctest.injector";
     public static final Set<String> CTEST_RUNNER_PROPERTY_LIST = Set.of(
             CTEST_MODE_PROPERTY,
             INJECT_CONFIG_FILE_DIR_PROPERTY,

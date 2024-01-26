@@ -5,15 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.illinois</groupId>
-    <artifactId>ctest-runner</artifactId>
+    <artifactId>ctest4j</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>ctest-runner-junit4</module>
-        <module>ctest-runner-common</module>
-        <module>ctest-runner-junit5</module>
-        <module>ctest-runner-maven-plugin</module>
-        <module>ctest-runner-testng</module>
+        <module>ctest4j-junit4</module>
+        <module>ctest4j-common</module>
+        <module>ctest4j-junit5</module>
+        <module>ctest4j-maven-plugin</module>
+        <module>ctest4j-testng</module>
     </modules>
     <dependencies>
         <dependency>
@@ -46,73 +46,12 @@
             <version>3.5</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.7</version>
+        </dependency>
     </dependencies>
-
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-<!--                <configuration>
-                    <argLine>-javaagent:/Users/allenwang/.m2/repository/edu/illinois/edu.illinois.CTestRunner/1.0-SNAPSHOT/edu.illinois.CTestRunner-1.0-SNAPSHOT.jar</argLine>
-                    <systemPropertyVariables>
-                        <configurationClassName>edu/illinois/Configuration</configurationClassName>
-                        <configurationGetterMethod>get(Ljava/lang/String;)Ljava/lang/String;</configurationGetterMethod>
-                        <configurationSetterMethod>set(Ljava/lang/String;Ljava/lang/String;)V</configurationSetterMethod>
-                    </systemPropertyVariables>
-                </configuration>-->
-            </plugin>
-<!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>edu.illinois.agent.ConfigRunnerAgent</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
--->
-
-<!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.4.1</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <manifestEntries>
-                                        <Premain-Class>edu.illinois.agent.ConfigRunnerAgent</Premain-Class>
-                                    </manifestEntries>
-                                </transformer>
-                            </transformers>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
--->
-
-
-<!--            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.6.0</version>
-            </plugin>-->
-        </plugins>
-    </build>
-
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

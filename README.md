@@ -1,46 +1,43 @@
-# Configuration Test (CTest) Runner
+# CTest4J - Configuration Testing Framework for Java
 
-## What is CTest Runner?
+## What is CTest4J?
 
-CTest Runner is a specialized JUnit test runner designed to simplify the process of writing and executing configuration tests (ctests). 
-It offers a range of annotations for defining a ctest and its expected outcomes, similar to parameterized tests. 
-The runner executes ctests concurrently using configurations set by the user, ensuring the accuracy of these configurations. 
-Additionally, CTest Runner features a ctest selection option, which enables the execution of only those ctests that utilize the specific configuration being tested to speed up the testing process.
+CTest4J is a practical configuration testing framework for Java.
+The goal of CTest4J is to help developers to write, run and maintain configuration tests easily and efficiently.
 
-## Download CTest Runner
+## Download CTest4J
 ### Build From Source
 ```bash
-$ git clone https://github.com/xlab-uiuc/ctest-runner.git && cd ctest-runner
+$ git clone https://github.com/xlab-uiuc/ctest4j.git && cd ctest4j
 $ mvn clean install
 ```
 
-### Add CTest Runner to Your Project
+### Add CTest4J to Your Project
 Include the following dependency in your project build file:
 #### Maven
 ```xml
 <dependency>
     <groupId>edu.illinois</groupId>
-    <artifactId>ctest-runner-junit${junit-version}</artifactId>
+    <artifactId>ctest4j-junit${junit-version}</artifactId> <!-- or ctest4j-testng --> 
     <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
 #### Gradle
 ```groovy
 dependencies {
-    testImplementation 'edu.illinois:ctest-runner-junit${junit-version}:1.0-SNAPSHOT'
+    testImplementation 'edu.illinois:ctest4j-junit${junit-version}:1.0-SNAPSHOT' // or ctest4j-testng
 }
 ```
-Current CTest Runner support both JUnit4 and JUnit5.
-Replace `${junit-version}` with the version of JUnit you are using (i.e. 4 or 5).
-
-
+Current CTest4J support JUnit4 and 5, and TestNG.
 
 ## Quick Start
-Please follow the [Guide to Get Started](example_with_hcommon.md) to run a simple example with CTest Runner.
+Please follow the [Guide to Get Started](Example.md) to run a simple example with CTest4J.
 
-Read the [Features & Options](Options.md) to learn more about all the features that CTest Runner supports.
+Read the [Features & Options](Options.md) to learn more about all the features that CTest4J supports.
+
+Follow the [Guide to Write and Run CTest](write_and_run_ctest.md) to write and run your own configuration tests.
 
 ## Supported Framework:
-- [JUnit4](JUnit4.md): [Write and run ctest with JUnit4](write_and_run_ctest.md)
-- [JUnit5](JUnit5.md) 
-- [TestNG](TestNG.md)
+- JUnit4
+- JUnit5
+- TestNG

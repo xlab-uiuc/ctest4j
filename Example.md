@@ -1,35 +1,38 @@
-# Example of Applying CTest Runner to HCommon
+# Example of Applying CTest4J to Hadoop Common
 
-## Build the CTest Runner
+## Build the CTest4J
 
 ```bash
 $ mvn clean install -DskipTests
 ```
 
-## Clone the HCommon repository
+## Clone the Hadoop repository
 
 ```bash
 $ git clone git@github.com:apache/hadoop.git
 ```
 
-## Add the runner dependency to HCommon
-Since HCommon uses JUnit4, add the junit4 runner dependency to the `pom.xml` file of HCommon module.
+## Add the runner dependency to Hadoop Common
+Add the following CTest4J dependency to the `pom.xml` file of Hadoop Common module.
 
 ```xml
 <dependencies>
     ...
     <dependency>
         <groupId>edu.illinois</groupId>
-        <artifactId>ctest-runner-junit4</artifactId>
+        <artifactId>ctest4j-junit4</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <scope>compile</scope>
     </dependency>
     ...
 </dependencies>
 ```
+For a project that uses JUnit5 or TestNG, add `ctest4j-junit5` or `ctest4j-testng` dependency instead.
 
-## Instrument the Configuration class
+## Instrument the Configuration APIs
+CTest4J provides an automatic instrumentation for configuration APIs to enable configuration testing.
+Follow the [instrumentation guidance](Instrumentation.md) to automatically instrument the configuration APIs.
 
+User can also manually instrument the configuration APIs by adding the following code to the configuration APIs:
 ### Add ctest-runner configuration tracker to the Configuration getter methods
 To track the usage of configuration parameters, add the `ConfigTracker.markParamAsUsed(paramName)` to the getter methods.
 ```java
@@ -101,7 +104,7 @@ To track the configuration parameters that are set by the test, add the `ConfigT
   }
 ```
 
-### Add ctest-runner configuration injector to the Configuration constructor
+### Add CTest4J configuration injector to the Configuration constructor
 Add the `ConfigTracker.injectConfig(setterMethod)` to the end of the Configuration constructor.
 The setterMethod takes two arguments, the first argument is the configuration parameter name, the second argument is the configuration parameter value.
 This is used to inject the configuration value with the configuration setter method during the test execution.
@@ -113,5 +116,5 @@ This is used to inject the configuration value with the configuration setter met
    }
 ```
 
-### Write and Run Configuration Tests
-You can follow the [write_and_run_ctest.md](write_and_run_ctest.md) to write and run configuration tests.
+## Write and Run Configuration Tests
+You can follow the [write_and_run_ctest.md](write_and_run_ctest.md) to write and run configuration tests with CTest4J.

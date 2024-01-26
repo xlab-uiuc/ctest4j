@@ -29,8 +29,8 @@ for proj in ${proj_list[@]};
 do
     print_progress "$proj"
     containerName=ctest-${proj}
-    docker run --name ${containerName} -w "/home/ctestrunner/ctest-runner/evaluation" -d -i -t "shuaiwang516/runner-image:${imageTag}" bash > /dev/null
+    docker run --name ${containerName} -w "/home/ctestrunner/ctest4j/evaluation" -d -i -t "shuaiwang516/runner-image:${imageTag}" bash > /dev/null
     docker exec ${containerName} python3 run.py ${proj} > ${proj}.log 2>&1
-    docker cp ${containerName}:/home/ctestrunner/ctest-runner/evaluation/${proj}-time.tsv ./
+    docker cp ${containerName}:/home/ctestrunner/ctest4j/evaluation/${proj}-time.tsv ./
 done
 	  

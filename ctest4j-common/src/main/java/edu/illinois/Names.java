@@ -42,6 +42,12 @@ public class Names {
     public static final String PID_TID_SEPARATOR = "@";
     /** The name of maven surefire plugin */
     public static final String SUREFIRE_PLUGIN_KEY = "org.apache.maven.plugins:maven-surefire-plugin";
+    /** The method to get the value of the configuration parameter */
+    public static final String CTEST_GETTER = "ctest.getter";
+    /** The method to set the value of the configuration parameter */
+    public static final String CTEST_SETTER = "ctest.setter";
+    /** The method to inject the value of the configuration parameter */
+    public static final String CTEST_INJECTOR = "ctest.injector";
     public static final Set<String> CTEST_RUNNER_PROPERTY_LIST = Set.of(
             CTEST_MODE_PROPERTY,
             INJECT_CONFIG_FILE_DIR_PROPERTY,

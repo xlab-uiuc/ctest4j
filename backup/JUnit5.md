@@ -1,4 +1,4 @@
-## JUnit5 Configuration Test Runner
+## JUnit5 CTest4J Runner
 
 ### Usage
 
@@ -8,7 +8,7 @@ For maven project, add the following dependency to your pom.xml:
 <dependencies>
     <dependency>
         <groupId>edu.illinois</groupId>
-        <artifactId>ctest-runner-junit5</artifactId>
+        <artifactId>ctest4j-junit5</artifactId>
         <version>1.0-SNAPSHOT</version>
         <scope>compile</scope>
     </dependency>
@@ -18,9 +18,9 @@ For maven project, add the following dependency to your pom.xml:
 #### Manual Instrumentation:
 To track configuration parameters, you need to add the following code to your project:
 ```java
-public static <T> void injectConfig(BiConsumer<String, T> configSetterMethod) throws IOException
-public static void markParamAsUsed(String param)
-public static void markParamAsSet(String param)
+public static <T> void injectConfig(BiConsumer<String, T> configSetterMethod) throws IOException;
+public static void markParamAsUsed(String param);
+public static void markParamAsSet(String param);
 ```
 `injectConfig` method need to be added to the end of your Configuration class constructor to inject configuration value
 with configuration setter method. `markParamAsUsed` method need to be added to the end of your configuration getter method

@@ -1,7 +1,7 @@
 {
-  "classLevelParams":["class-parameter1", "class-parameter2"],
-  "methodLevelParams": {
-    "test":["method-parameter1", "method-parameter2"],
-    "testWouldFail":["method-parameter1", "method-parameter2"]
+  "classLevelParams":[],
+  "methodLevelParams":{
+    "edu.illinois.junit5.FromFileTest_test":["method-parameter2","method-parameter1","class-parameter2","class-parameter1"],
+    "edu.illinois.junit5.FromFileTest_testWouldFail":["method-parameter1","class-parameter2","class-parameter1", "method-parameter2"]
   }
 }

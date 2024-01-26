@@ -1,0 +1,346 @@
+[[1;34mINFO[m] Scanning for projects...
+[[1;33mWARNING[m] 
+[[1;33mWARNING[m] Some problems were encountered while building the effective model for org.apache.kylin:kylin-core-common:jar:4.0.4
+[[1;33mWARNING[m] 'dependencyManagement.dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.apache.spark:spark-sql_${scala.binary.version}:jar -> duplicate declaration of version ${spark.version} @ org.apache.kylin:kylin:4.0.4, /home/xinyu/port_ctest_runner/kylin/pom.xml, line 1118, column 19
+[[1;33mWARNING[m] 'dependencyManagement.dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.apache.spark:spark-hive_${scala.binary.version}:jar -> duplicate declaration of version ${spark.version} @ org.apache.kylin:kylin:4.0.4, /home/xinyu/port_ctest_runner/kylin/pom.xml, line 1124, column 19
+[[1;33mWARNING[m] 
+[[1;33mWARNING[m] It is highly recommended to fix these problems because they threaten the stability of your build.
+[[1;33mWARNING[m] 
+[[1;33mWARNING[m] For this reason, future Maven versions might no longer support building such malformed projects.
+[[1;33mWARNING[m] 
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m-----------------< [0;36morg.apache.kylin:kylin-core-common[0;1m >-----------------[m
+[[1;34mINFO[m] [1mBuilding Apache Kylin - Core Common 4.0.4[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+Downloading from conjars: https://conjars.org/repo/net/minidev/json-smart/maven-metadata.xml
+[[1;33mWARNING[m] Could not transfer metadata net.minidev:json-smart/maven-metadata.xml from/to conjars (https://conjars.org/repo/): Transfer failed for https://conjars.org/repo/net/minidev/json-smart/maven-metadata.xml
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:2.21.0:test[m [1m(default-cli)[m @ [36mkylin-core-common[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m]  T E S T S
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m] Running org.apache.kylin.common.metrics.metrics2.[1mHadoopMetrics2ReporterTest[m
+[[1;31mERROR[m] [1;31mTests [0;1mrun: [0;1m8[m, Failures: 0, [1;31mErrors: [0;1;31m8[m, Skipped: 0, Time elapsed: 0.581 s[1;31m <<< FAILURE![m - in org.apache.kylin.common.metrics.metrics2.[1mHadoopMetrics2ReporterTest[m
+[[1;31mERROR[m] cachedMetricsAreClearedAfterCycle(org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest)  Time elapsed: 0.263 s  <<< ERROR!
+org.mockito.exceptions.base.MockitoException: 
+
+Mockito cannot mock this class: class com.codahale.metrics.MetricRegistry.
+
+Mockito can only mock non-private & non-final classes.
+If you're not sure why you're getting this error, please report to the mailing list.
+
+
+Java               : 11
+JVM vendor name    : Ubuntu
+JVM vendor version : 11.0.20.1+1-post-Ubuntu-0ubuntu120.04
+JVM name           : OpenJDK 64-Bit Server VM
+JVM version        : 11.0.20.1+1-post-Ubuntu-0ubuntu120.04
+JVM info           : mixed mode, sharing
+OS name            : Linux
+OS version         : 5.15.0-78-generic
+
+
+Underlying exception : java.lang.UnsupportedOperationException: Cannot define class using reflection
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+Caused by: java.lang.UnsupportedOperationException: Cannot define class using reflection
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+Caused by: java.lang.IllegalArgumentException: Unknown Java version: 11
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+
+[[1;31mERROR[m] testHistogramReporting(org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest)  Time elapsed: 0.052 s  <<< ERROR!
+org.mockito.exceptions.base.MockitoException: 
+
+Mockito cannot mock this class: class com.codahale.metrics.MetricRegistry.
+
+Mockito can only mock non-private & non-final classes.
+If you're not sure why you're getting this error, please report to the mailing list.
+
+
+Java               : 11
+JVM vendor name    : Ubuntu
+JVM vendor version : 11.0.20.1+1-post-Ubuntu-0ubuntu120.04
+JVM name           : OpenJDK 64-Bit Server VM
+JVM version        : 11.0.20.1+1-post-Ubuntu-0ubuntu120.04
+JVM info           : mixed mode, sharing
+OS name            : Linux
+OS version         : 5.15.0-78-generic
+
+
+Underlying exception : java.lang.UnsupportedOperationException: Cannot define class using reflection
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+Caused by: java.lang.UnsupportedOperationException: Cannot define class using reflection
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+Caused by: java.lang.IllegalArgumentException: Unknown Java version: 11
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+
+[[1;31mERROR[m] metrics2CycleIsNonDestructive(org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest)  Time elapsed: 0.053 s  <<< ERROR!
+org.mockito.exceptions.base.MockitoException: 
+
+Mockito cannot mock this class: class com.codahale.metrics.MetricRegistry.
+
+Mockito can only mock non-private & non-final classes.
+If you're not sure why you're getting this error, please report to the mailing list.
+
+
+Java               : 11
+JVM vendor name    : Ubuntu
+JVM vendor version : 11.0.20.1+1-post-Ubuntu-0ubuntu120.04
+JVM name           : OpenJDK 64-Bit Server VM
+JVM version        : 11.0.20.1+1-post-Ubuntu-0ubuntu120.04
+JVM info           : mixed mode, sharing
+OS name            : Linux
+OS version         : 5.15.0-78-generic
+
+
+Underlying exception : java.lang.UnsupportedOperationException: Cannot define class using reflection
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+Caused by: java.lang.UnsupportedOperationException: Cannot define class using reflection
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+Caused by: java.lang.IllegalArgumentException: Unknown Java version: 11
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+
+[[1;31mERROR[m] testCounterReporting(org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest)  Time elapsed: 0.038 s  <<< ERROR!
+org.mockito.exceptions.base.MockitoException: 
+
+Mockito cannot mock this class: class com.codahale.metrics.MetricRegistry.
+
+Mockito can only mock non-private & non-final classes.
+If you're not sure why you're getting this error, please report to the mailing list.
+
+
+Java               : 11
+JVM vendor name    : Ubuntu
+JVM vendor version : 11.0.20.1+1-post-Ubuntu-0ubuntu120.04
+JVM name           : OpenJDK 64-Bit Server VM
+JVM version        : 11.0.20.1+1-post-Ubuntu-0ubuntu120.04
+JVM info           : mixed mode, sharing
+OS name            : Linux
+OS version         : 5.15.0-78-generic
+
+
+Underlying exception : java.lang.UnsupportedOperationException: Cannot define class using reflection
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+Caused by: java.lang.UnsupportedOperationException: Cannot define class using reflection
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+Caused by: java.lang.IllegalArgumentException: Unknown Java version: 11
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+
+[[1;31mERROR[m] testTimerReporting(org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest)  Time elapsed: 0.036 s  <<< ERROR!
+org.mockito.exceptions.base.MockitoException: 
+
+Mockito cannot mock this class: class com.codahale.metrics.MetricRegistry.
+
+Mockito can only mock non-private & non-final classes.
+If you're not sure why you're getting this error, please report to the mailing list.
+
+
+Java               : 11
+JVM vendor name    : Ubuntu
+JVM vendor version : 11.0.20.1+1-post-Ubuntu-0ubuntu120.04
+JVM name           : OpenJDK 64-Bit Server VM
+JVM version        : 11.0.20.1+1-post-Ubuntu-0ubuntu120.04
+JVM info           : mixed mode, sharing
+OS name            : Linux
+OS version         : 5.15.0-78-generic
+
+
+Underlying exception : java.lang.UnsupportedOperationException: Cannot define class using reflection
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+Caused by: java.lang.UnsupportedOperationException: Cannot define class using reflection
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+Caused by: java.lang.IllegalArgumentException: Unknown Java version: 11
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+
+[[1;31mERROR[m] testGaugeReporting(org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest)  Time elapsed: 0.031 s  <<< ERROR!
+org.mockito.exceptions.base.MockitoException: 
+
+Mockito cannot mock this class: class com.codahale.metrics.MetricRegistry.
+
+Mockito can only mock non-private & non-final classes.
+If you're not sure why you're getting this error, please report to the mailing list.
+
+
+Java               : 11
+JVM vendor name    : Ubuntu
+JVM vendor version : 11.0.20.1+1-post-Ubuntu-0ubuntu120.04
+JVM name           : OpenJDK 64-Bit Server VM
+JVM version        : 11.0.20.1+1-post-Ubuntu-0ubuntu120.04
+JVM info           : mixed mode, sharing
+OS name            : Linux
+OS version         : 5.15.0-78-generic
+
+
+Underlying exception : java.lang.UnsupportedOperationException: Cannot define class using reflection
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+Caused by: java.lang.UnsupportedOperationException: Cannot define class using reflection
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+Caused by: java.lang.IllegalArgumentException: Unknown Java version: 11
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+
+[[1;31mERROR[m] testMeterReporting(org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest)  Time elapsed: 0.026 s  <<< ERROR!
+org.mockito.exceptions.base.MockitoException: 
+
+Mockito cannot mock this class: class com.codahale.metrics.MetricRegistry.
+
+Mockito can only mock non-private & non-final classes.
+If you're not sure why you're getting this error, please report to the mailing list.
+
+
+Java               : 11
+JVM vendor name    : Ubuntu
+JVM vendor version : 11.0.20.1+1-post-Ubuntu-0ubuntu120.04
+JVM name           : OpenJDK 64-Bit Server VM
+JVM version        : 11.0.20.1+1-post-Ubuntu-0ubuntu120.04
+JVM info           : mixed mode, sharing
+OS name            : Linux
+OS version         : 5.15.0-78-generic
+
+
+Underlying exception : java.lang.UnsupportedOperationException: Cannot define class using reflection
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+Caused by: java.lang.UnsupportedOperationException: Cannot define class using reflection
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+Caused by: java.lang.IllegalArgumentException: Unknown Java version: 11
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+
+[[1;31mERROR[m] testBuilderDefaults(org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest)  Time elapsed: 0.025 s  <<< ERROR!
+org.mockito.exceptions.base.MockitoException: 
+
+Mockito cannot mock this class: class com.codahale.metrics.MetricRegistry.
+
+Mockito can only mock non-private & non-final classes.
+If you're not sure why you're getting this error, please report to the mailing list.
+
+
+Java               : 11
+JVM vendor name    : Ubuntu
+JVM vendor version : 11.0.20.1+1-post-Ubuntu-0ubuntu120.04
+JVM name           : OpenJDK 64-Bit Server VM
+JVM version        : 11.0.20.1+1-post-Ubuntu-0ubuntu120.04
+JVM info           : mixed mode, sharing
+OS name            : Linux
+OS version         : 5.15.0-78-generic
+
+
+Underlying exception : java.lang.UnsupportedOperationException: Cannot define class using reflection
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+Caused by: java.lang.UnsupportedOperationException: Cannot define class using reflection
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+Caused by: java.lang.IllegalArgumentException: Unknown Java version: 11
+	at org.apache.kylin.common.metrics.metrics2.HadoopMetrics2ReporterTest.setup(HadoopMetrics2ReporterTest.java:68)
+
+[[1;34mINFO[m] Running org.apache.kylin.common.restclient.[1mRestClientTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.256 s - in org.apache.kylin.common.restclient.[1mRestClientTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.[1mStorageURLTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s - in org.apache.kylin.common.[1mStorageURLTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.persistence.[1mResourceToolTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.17 s - in org.apache.kylin.common.persistence.[1mResourceToolTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.persistence.[1mLocalFileResourceStoreTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.09 s - in org.apache.kylin.common.persistence.[1mLocalFileResourceStoreTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.persistence.[1mAutoDeleteDirectoryTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in org.apache.kylin.common.persistence.[1mAutoDeleteDirectoryTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.persistence.[1mHDFSResourceStoreTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.223 s - in org.apache.kylin.common.persistence.[1mHDFSResourceStoreTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.[1mKylinVersionTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in org.apache.kylin.common.[1mKylinVersionTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.zookeeper.[1mKylinServerDiscoveryTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.819 s - in org.apache.kylin.common.zookeeper.[1mKylinServerDiscoveryTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.[1mKylinConfigTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m13[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.511 s - in org.apache.kylin.common.[1mKylinConfigTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.[1mQueryTraceTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.203 s - in org.apache.kylin.common.[1mQueryTraceTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mBasicTest[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m1[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m1[m, Time elapsed: 0 s - in org.apache.kylin.common.util.[1mBasicTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mSortUtilTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s - in org.apache.kylin.common.util.[1mSortUtilTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mRangeTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s - in org.apache.kylin.common.util.[1mRangeTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mJacksonTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.02 s - in org.apache.kylin.common.util.[1mJacksonTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mBitSetsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s - in org.apache.kylin.common.util.[1mBitSetsTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mRandomSamplerTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s - in org.apache.kylin.common.util.[1mRandomSamplerTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mDateFormatTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s - in org.apache.kylin.common.util.[1mDateFormatTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mRandomUtilTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in org.apache.kylin.common.util.[1mRandomUtilTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mSourceConfigurationUtilTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.029 s - in org.apache.kylin.common.util.[1mSourceConfigurationUtilTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mStringSplitterTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in org.apache.kylin.common.util.[1mStringSplitterTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mRingBufferTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in org.apache.kylin.common.util.[1mRingBufferTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mToolUtilTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in org.apache.kylin.common.util.[1mToolUtilTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mMailServiceTest[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m1[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m1[m, Time elapsed: 0 s - in org.apache.kylin.common.util.[1mMailServiceTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mStringUtilTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m17[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s - in org.apache.kylin.common.util.[1mStringUtilTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mPartialSorterTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in org.apache.kylin.common.util.[1mPartialSorterTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mImplementationSwitchTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in org.apache.kylin.common.util.[1mImplementationSwitchTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mRangeUtilTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in org.apache.kylin.common.util.[1mRangeUtilTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mParameterFilterTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s - in org.apache.kylin.common.util.[1mParameterFilterTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mCaseInsensitiveStringCollectionTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s - in org.apache.kylin.common.util.[1mCaseInsensitiveStringCollectionTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mSSHClientTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.067 s - in org.apache.kylin.common.util.[1mSSHClientTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mBytesUtilTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s - in org.apache.kylin.common.util.[1mBytesUtilTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mIdentityUtilTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in org.apache.kylin.common.util.[1mIdentityUtilTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mAutoReadWriteLockTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in org.apache.kylin.common.util.[1mAutoReadWriteLockTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mCacheBuilderTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s - in org.apache.kylin.common.util.[1mCacheBuilderTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mTimeUtilTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 s - in org.apache.kylin.common.util.[1mTimeUtilTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mEncryptUtilTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.077 s - in org.apache.kylin.common.util.[1mEncryptUtilTest[m
+[[1;34mINFO[m] Running org.apache.kylin.common.util.[1mSumHelperTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in org.apache.kylin.common.util.[1mSumHelperTest[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] Results:
+[[1;34mINFO[m] 
+[[1;31mERROR[m] [1;31mErrors: [m
+[[1;31mERROR[m] [1;31m  HadoopMetrics2ReporterTest.setup:68 Mockito 
+Mockito cannot mock this class: c...[m
+[[1;31mERROR[m] [1;31m  HadoopMetrics2ReporterTest.setup:68 Mockito 
+Mockito cannot mock this class: c...[m
+[[1;31mERROR[m] [1;31m  HadoopMetrics2ReporterTest.setup:68 Mockito 
+Mockito cannot mock this class: c...[m
+[[1;31mERROR[m] [1;31m  HadoopMetrics2ReporterTest.setup:68 Mockito 
+Mockito cannot mock this class: c...[m
+[[1;31mERROR[m] [1;31m  HadoopMetrics2ReporterTest.setup:68 Mockito 
+Mockito cannot mock this class: c...[m
+[[1;31mERROR[m] [1;31m  HadoopMetrics2ReporterTest.setup:68 Mockito 
+Mockito cannot mock this class: c...[m
+[[1;31mERROR[m] [1;31m  HadoopMetrics2ReporterTest.setup:68 Mockito 
+Mockito cannot mock this class: c...[m
+[[1;31mERROR[m] [1;31m  HadoopMetrics2ReporterTest.setup:68 Mockito 
+Mockito cannot mock this class: c...[m
+[[1;34mINFO[m] 
+[[1;31mERROR[m] [1;31mTests run: 100, Failures: 0, Errors: 8, Skipped: 2[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;31mBUILD FAILURE[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  02:16 min
+[[1;34mINFO[m] Finished at: 2023-12-26T15:02:42-06:00
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;31mERROR[m] Failed to execute goal [32morg.apache.maven.plugins:maven-surefire-plugin:2.21.0:test[m [1m(default-cli)[m on project [36mkylin-core-common[m: [1;31mThere are test failures.[m
+[[1;31mERROR[m] [1;31m[m
+[[1;31mERROR[m] [1;31mPlease refer to /home/xinyu/port_ctest_runner/kylin/core-common/../target/surefire-reports for the individual test results.[m
+[[1;31mERROR[m] [1;31mPlease refer to dump files (if any exist) [date]-jvmRun[N].dump, [date].dumpstream and [date]-jvmRun[N].dumpstream.[m
+[[1;31mERROR[m] -> [1m[Help 1][m
+[[1;31mERROR[m] 
+[[1;31mERROR[m] To see the full stack trace of the errors, re-run Maven with the [1m-e[m switch.
+[[1;31mERROR[m] Re-run Maven using the [1m-X[m switch to enable full debug logging.
+[[1;31mERROR[m] 
+[[1;31mERROR[m] For more information about the errors and possible solutions, please read the following articles:
+[[1;31mERROR[m] [1m[Help 1][m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

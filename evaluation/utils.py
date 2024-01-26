@@ -5,11 +5,19 @@ def LOG(msg):
     print(f"[CTEST-RUNNER-EVAL] {msg}")
 
 
+def get_junit_version(proj) -> str:
+    return config.PROJ_JUNIT_VERSION_DICT[proj]
+
 def write_to_file(file_path, content):
     with open(file_path, 'w') as f:
         f.write(content)
 
-        
+
+def append_to_file(file_path, content):
+    with open(file_path, 'a') as f:
+        f.write(content)
+
+
 def is_proj_supported(proj) -> bool:
     return proj in config.PROJ_PATH_DICT.keys()
 
@@ -35,7 +43,7 @@ def get_proj_junit_version(proj) -> str:
 
 
 def mvn_clean_and_build_cmd() -> str:
-    return 'mvn -B clean install -DskipTests'
+    return 'mvn -B clean install -DskipTests -Drat.skip -Denforcer.skip -Dcheckstyle.skip -Dmaven.test.skip=true'
 
 
 def vanilla_mvn_cmd() -> str:

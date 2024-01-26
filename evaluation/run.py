@@ -1,6 +1,6 @@
 import os, time, sys
 from auto_annotate import auto_annotate_script_2
-from utils import LOG, is_proj_supported, get_poject_vanilla_branch, get_proj_ctest_branch, get_proj_path, get_proj_junit_version, get_proj_abs_path, mvn_clean_and_build_cmd, vanilla_mvn_cmd, mapping_collection_mvn_cmd, ctest_runner_mvn_cmd, write_to_file
+from utils import LOG, is_proj_supported, get_poject_vanilla_branch, get_proj_ctest_branch, get_proj_path, get_proj_junit_version, get_proj_abs_path, mvn_clean_and_build_cmd, vanilla_mvn_cmd, mapping_collection_mvn_cmd, ctest_runner_mvn_cmd, append_to_file, get_junit_version
 from pathlib import Path
 
 CUR_DIR = Path.cwd()
@@ -11,11 +11,12 @@ def add_ctest_annotation(target_proj):
     proj_abs_path = get_proj_abs_path(target_proj, CUR_DIR)
     proj_ctest_branch = get_proj_ctest_branch(target_proj)
     checkout_to_branch(proj_abs_path, proj_ctest_branch)
+    junit_version = get_junit_version(target_proj)
     
     os.chdir(proj_abs_path)    
     LOG('[ANNOTATION] Add annotation')
     start_time = time.time()
-    auto_annotate_script_2(target_proj, str(proj_abs_path))
+    auto_annotate_script_2(target_proj, str(proj_abs_path), junit_version)
     end_time = time.time()
     return end_time - start_time
 
@@ -84,6 +85,7 @@ def run(target_proj):
 
     # run vanilla test
     vanilla_time = run_vanilla_test(proj_abs_path, proj_vanilla_branch)
+
     
     # run script to add all annotations
     annotation_time = add_ctest_annotation(target_proj)
@@ -100,6 +102,7 @@ if __name__ == '__main__':
         exit(1)
     target_proj = sys.argv[1]
     vanilla_time, annotation_time, collection_time, ctest_time = run(target_proj)
-    write_to_file(f'{target_proj}-time.tsv', 'Vanilla_Test_Time:{}\tAnnotation_Time:{}\tCollection_Time:{}\tCTest_Time:{}'.format(vanilla_time, annotation_time, collection_time, ctest_time))
+    cur_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    append_to_file(f'{target_proj}-time.tsv', 'Start_Date:{}\tVanilla_Test_Time:{}\tAnnotation_Time:{}\tCollection_Time:{}\tCTest_Time:{}'.format(cur_time, vanilla_time, annotation_time, collection_time, ctest_time))
     
 

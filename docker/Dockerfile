@@ -15,7 +15,7 @@ RUN echo APT::Install-Suggests "0"\; >>  /etc/apt/apt.conf.d/10disableextras
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_TERSE true
 # This requires the machine needs to have at least have 7g memory
-ENV _JAVA_OPTIONS="-Xmx7g"
+# ENV _JAVA_OPTIONS="-Xmx7g"
 ######
 # Install common dependencies from packages. Versions here are either
 # sufficient or irrelevant.
@@ -65,6 +65,7 @@ RUN apt-get -q update \
         software-properties-common \
         sudo \
         valgrind \
+        emacs \
         wget \
         zlib1g-dev \
     && apt-get clean \
@@ -199,7 +200,8 @@ RUN pwd && ls -l
 
 # Build projects
 RUN python3 /home/ctestrunner/build.py 1> /home/ctestrunner/build-docker.log 2>build-docker.err
+RUN grep -ir "BUILD FAILURE" /home/ctestrunner/build-docker.log -A10 -B10
 
-RUN cp -r /root/.m2 /home/ctestrunner && chmod -R a+rwX /home/ctestrunner
+#RUN cp -r /root/.m2 /home/ctestrunner && chmod -R a+rwX /home/ctestrunner
 
 CMD [""]

@@ -1,0 +1,428 @@
+[[1;34mINFO[m] Scanning for projects...
+[[1;33mWARNING[m] 
+[[1;33mWARNING[m] Some problems were encountered while building the effective model for org.alluxio:alluxio-core-common:jar:2.9.3
+[[1;33mWARNING[m] 'build.plugins.plugin.version' for pl.project13.maven:git-commit-id-plugin is missing. @ org.alluxio:alluxio-parent:2.9.3, /home/xinyu/port_ctest_runner/alluxio/pom.xml, line 1171, column 15
+[[1;33mWARNING[m] 
+[[1;33mWARNING[m] It is highly recommended to fix these problems because they threaten the stability of your build.
+[[1;33mWARNING[m] 
+[[1;33mWARNING[m] For this reason, future Maven versions might no longer support building such malformed projects.
+[[1;33mWARNING[m] 
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m------------------< [0;36morg.alluxio:alluxio-core-common[0;1m >-------------------[m
+[[1;34mINFO[m] [1mBuilding Alluxio Core - Common Utilities 2.9.3[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-enforcer-plugin:3.0.0-M3:enforce[m [1m(enforce-maven)[m @ [36malluxio-core-common[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-enforcer-plugin:3.0.0-M3:enforce[m [1m(enforce-versions)[m @ [36malluxio-core-common[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-checkstyle-plugin:3.1.2:check[m [1m(checkstyle)[m @ [36malluxio-core-common[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mlicense-maven-plugin:4.0.rc1:check[m [1m(default)[m @ [36malluxio-core-common[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mgit-commit-id-plugin:4.9.10:revision[m [1m(get-the-git-infos)[m @ [36malluxio-core-common[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mbuildnumber-maven-plugin:1.4:create-metadata[m [1m(default)[m @ [36malluxio-core-common[0;1m ---[m
+[[1;34mINFO[m] Executing: /bin/sh -c cd '/home/xinyu/port_ctest_runner/alluxio/core/common' && 'git' 'rev-parse' '--verify' 'HEAD'
+[[1;34mINFO[m] Working directory: /home/xinyu/port_ctest_runner/alluxio/core/common
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mproperties-maven-plugin:1.1.0:read-project-properties[m [1m(default)[m @ [36malluxio-core-common[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mtemplating-maven-plugin:1.0.0:filter-sources[m [1m(filter-src)[m @ [36malluxio-core-common[0;1m ---[m
+[[1;34mINFO[m] Coping files with filtering to temporary directory.
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] Copying 1 resource
+[[1;34mINFO[m] No files needs to be copied to output directory. Up to date: /home/xinyu/port_ctest_runner/alluxio/core/common/target/generated-sources/java-templates
+[[1;34mINFO[m] Source directory: /home/xinyu/port_ctest_runner/alluxio/core/common/target/generated-sources/java-templates added.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.7:resources[m [1m(default-resources)[m @ [36malluxio-core-common[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] skip non existing resourceDirectory /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.8.1:compile[m [1m(default-compile)[m @ [36malluxio-core-common[0;1m ---[m
+[[1;34mINFO[m] Changes detected - recompiling the module!
+[[1;34mINFO[m] Compiling 508 source files to /home/xinyu/port_ctest_runner/alluxio/core/common/target/classes
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/UnsafeAccess.java:[7,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/UnsafeAccess.java:[7,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/UnsafeAccess.java:[7,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/ForkJoinPool.java:[560,32] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/ForkJoinPool.java:[560,32] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/ForkJoinPool.java:[560,32] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/ForkJoinPool.java:[2563,34] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/ForkJoinPool.java:[2563,34] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/ForkJoinPool.java:[2563,34] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/ForkJoinTask.java:[205,32] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/ForkJoinTask.java:[205,32] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/ForkJoinTask.java:[205,32] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/CountedCompleter.java:[388,32] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/CountedCompleter.java:[388,32] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/CountedCompleter.java:[388,32] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/UnsafeAccess.java:[13,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/UnsafeAccess.java:[13,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/UnsafeAccess.java:[13,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/UnsafeAccess.java:[16,21] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/UnsafeAccess.java:[18,17] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/CompletableFuture.java:[213,32] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/CompletableFuture.java:[213,32] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/CompletableFuture.java:[213,32] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/TLRandom.java:[31,32] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/TLRandom.java:[31,32] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;33mWARNING[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/concurrent/jsr/TLRandom.java:[31,32] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[[1;34mINFO[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/network/protocol/databuffer/RefCountedNioByteBuf.java: Some input files use or override a deprecated API.
+[[1;34mINFO[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/network/protocol/databuffer/RefCountedNioByteBuf.java: Recompile with -Xlint:deprecation for details.
+[[1;34mINFO[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/conf/AlluxioConfiguration.java: Some input files use unchecked or unsafe operations.
+[[1;34mINFO[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/main/java/alluxio/conf/AlluxioConfiguration.java: Recompile with -Xlint:unchecked for details.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m>>> [0;32mspotbugs-maven-plugin:4.0.4:check[m [1m(default)[0;1m > [0;1m:spotbugs[m @ [36malluxio-core-common[0;1m >>>[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mspotbugs-maven-plugin:4.0.4:spotbugs[m [1m(spotbugs)[m @ [36malluxio-core-common[0;1m ---[m
+[[1;34mINFO[m] Fork Value is true
+[[1;34mINFO[m] Done SpotBugs Analysis....
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m<<< [0;32mspotbugs-maven-plugin:4.0.4:check[m [1m(default)[0;1m < [0;1m:spotbugs[m @ [36malluxio-core-common[0;1m <<<[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mspotbugs-maven-plugin:4.0.4:check[m [1m(default)[m @ [36malluxio-core-common[0;1m ---[m
+[[1;34mINFO[m] BugInstance size is 0
+[[1;34mINFO[m] Error size is 0
+[[1;34mINFO[m] No errors/warnings found
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.7:testResources[m [1m(default-testResources)[m @ [36malluxio-core-common[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] Copying 1 resource
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.8.1:testCompile[m [1m(default-testCompile)[m @ [36malluxio-core-common[0;1m ---[m
+[[1;34mINFO[m] Changes detected - recompiling the module!
+[[1;34mINFO[m] Compiling 166 source files to /home/xinyu/port_ctest_runner/alluxio/core/common/target/test-classes
+[[1;34mINFO[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/test/java/alluxio/AbstractResourceRule.java: Some input files use or override a deprecated API.
+[[1;34mINFO[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/test/java/alluxio/AbstractResourceRule.java: Recompile with -Xlint:deprecation for details.
+[[1;34mINFO[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/test/java/alluxio/resource/ResourcePoolTest.java: Some input files use unchecked or unsafe operations.
+[[1;34mINFO[m] /home/xinyu/port_ctest_runner/alluxio/core/common/src/test/java/alluxio/resource/ResourcePoolTest.java: Recompile with -Xlint:unchecked for details.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:3.0.0-M5:test[m [1m(default-test)[m @ [36malluxio-core-common[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m]  T E S T S
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m] Running alluxio.[1mAbstractMasterClientTest[m
+[[1;34mINFO[m] Running alluxio.[1mAbstractClientTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.681 s - in alluxio.[1mAbstractClientTest[m
+[[1;34mINFO[m] Running alluxio.[1mAlluxioURITest[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m44[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m3[m, Time elapsed: 0.214 s - in alluxio.[1mAlluxioURITest[m
+[[1;34mINFO[m] Running alluxio.[1mAuthenticatedClientUserResourceTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.267 s - in alluxio.[1mAuthenticatedClientUserResourceTest[m
+[[1;34mINFO[m] Running alluxio.[1mAuthenticatedUserRuleTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.941 s - in alluxio.[1mAbstractMasterClientTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.279 s - in alluxio.[1mAuthenticatedUserRuleTest[m
+[[1;34mINFO[m] Running alluxio.[1mConfigurationRuleTest[m
+[[1;34mINFO[m] Running alluxio.[1mSessionInfoTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.096 s - in alluxio.[1mSessionInfoTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.297 s - in alluxio.[1mConfigurationRuleTest[m
+[[1;34mINFO[m] Running alluxio.[1mSystemErrRuleTest[m
+[[1;34mINFO[m] Running alluxio.[1mSystemOutRuleTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.098 s - in alluxio.[1mSystemErrRuleTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.102 s - in alluxio.[1mSystemOutRuleTest[m
+[[1;34mINFO[m] Running alluxio.[1mTestLoggerRuleTest[m
+[[1;34mINFO[m] Running alluxio.[1mUnderFileSystemFactoryRegistryRuleTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.169 s - in alluxio.[1mTestLoggerRuleTest[m
+[[1;34mINFO[m] Running alluxio.check.[1mUpdateCheckTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.603 s - in alluxio.[1mUnderFileSystemFactoryRegistryRuleTest[m
+[[1;34mINFO[m] Running alluxio.cli.[1mAbstractShellTest[m
+[[1;31mERROR[m] WARNING: An illegal reflective access operation has occurred
+[[1;31mERROR[m] WARNING: Illegal reflective access by org.powermock.reflect.internal.WhiteboxImpl (file:/home/xinyu/.m2/repository/org/powermock/powermock-reflect/2.0.7/powermock-reflect-2.0.7.jar) to method java.lang.Object.clone()
+[[1;31mERROR[m] WARNING: Please consider reporting this to the maintainers of org.powermock.reflect.internal.WhiteboxImpl
+[[1;31mERROR[m] WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+[[1;31mERROR[m] WARNING: All illegal access operations will be denied in a future release
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.724 s - in alluxio.cli.[1mAbstractShellTest[m
+[[1;34mINFO[m] Running alluxio.cli.[1mCommandTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.194 s - in alluxio.cli.[1mCommandTest[m
+[[1;34mINFO[m] Running alluxio.client.file.[1mCacheContextTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m18[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.02 s - in alluxio.check.[1mUpdateCheckTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.109 s - in alluxio.client.file.[1mCacheContextTest[m
+[[1;34mINFO[m] Running alluxio.client.file.[1mURIStatusTest[m
+[[1;34mINFO[m] Running alluxio.client.quota.[1mCacheScopeTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.107 s - in alluxio.client.quota.[1mCacheScopeTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.189 s - in alluxio.client.file.[1mURIStatusTest[m
+[[1;34mINFO[m] Running alluxio.collections.[1mBuiltinBitSetTest[m
+[[1;34mINFO[m] Running alluxio.collections.[1mConcurrentIdentityHashMapTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.094 s - in alluxio.collections.[1mBuiltinBitSetTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.099 s - in alluxio.collections.[1mConcurrentIdentityHashMapTest[m
+[[1;34mINFO[m] Running alluxio.collections.[1mDirectedAcyclicGraphTest[m
+[[1;34mINFO[m] Running alluxio.collections.[1mIndexedSetConcurrencyTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.097 s - in alluxio.collections.[1mDirectedAcyclicGraphTest[m
+[[1;34mINFO[m] Running alluxio.collections.[1mIndexedSetTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m13[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.173 s - in alluxio.collections.[1mIndexedSetTest[m
+[[1;34mINFO[m] Running alluxio.collections.[1mLockPoolTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.537 s - in alluxio.collections.[1mLockPoolTest[m
+[[1;34mINFO[m] Running alluxio.collections.[1mPairTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.178 s - in alluxio.collections.[1mPairTest[m
+[[1;34mINFO[m] Running alluxio.collections.[1mPrefixListTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.215 s - in alluxio.collections.[1mPrefixListTest[m
+[[1;34mINFO[m] Running alluxio.collections.[1mUnmodifiableArrayListTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m11[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.178 s - in alluxio.collections.[1mUnmodifiableArrayListTest[m
+[[1;34mINFO[m] Running alluxio.concurrent.[1mClientRWLockTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.173 s - in alluxio.concurrent.[1mClientRWLockTest[m
+[[1;34mINFO[m] Running alluxio.concurrent.[1mCountingLatchTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.221 s - in alluxio.concurrent.[1mCountingLatchTest[m
+[[1;34mINFO[m] Running alluxio.conf.[1mAlluxioPropertiesTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m12[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.574 s - in alluxio.conf.[1mAlluxioPropertiesTest[m
+[[1;34mINFO[m] Running alluxio.conf.[1mCredentialConfigItemsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.291 s - in alluxio.conf.[1mCredentialConfigItemsTest[m
+[[1;34mINFO[m] Running alluxio.conf.[1mInstancedConfigurationTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m95[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.232 s - in alluxio.conf.[1mInstancedConfigurationTest[m
+[[1;34mINFO[m] Running alluxio.conf.[1mPropertyKeyTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m26[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.371 s - in alluxio.conf.[1mPropertyKeyTest[m
+[[1;34mINFO[m] Running alluxio.conf.[1mSourceTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.262 s - in alluxio.conf.[1mSourceTest[m
+[[1;34mINFO[m] Running alluxio.conf.path.[1mPrefixPathMatcherTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.333 s - in alluxio.conf.path.[1mPrefixPathMatcherTest[m
+[[1;34mINFO[m] Running alluxio.conf.path.[1mTrieNodeTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.234 s - in alluxio.conf.path.[1mTrieNodeTest[m
+[[1;34mINFO[m] Running alluxio.grpc.[1mGrpcChannelPoolTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.123 s - in alluxio.grpc.[1mGrpcChannelPoolTest[m
+[[1;34mINFO[m] Running alluxio.grpc.[1mGrpcUtilsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.103 s - in alluxio.grpc.[1mGrpcUtilsTest[m
+[[1;34mINFO[m] Running alluxio.grpc.[1mReadResponseMarshallerTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.416 s - in alluxio.grpc.[1mReadResponseMarshallerTest[m
+[[1;34mINFO[m] Running alluxio.grpc.[1mWriteRequestMarshallerTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.362 s - in alluxio.grpc.[1mWriteRequestMarshallerTest[m
+[[1;34mINFO[m] Running alluxio.heartbeat.[1mHeartbeatContextTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.183 s - in alluxio.heartbeat.[1mHeartbeatContextTest[m
+[[1;34mINFO[m] Running alluxio.heartbeat.[1mHeartbeatThreadTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.064 s - in alluxio.heartbeat.[1mHeartbeatThreadTest[m
+[[1;34mINFO[m] Running alluxio.heartbeat.[1mSleepingTimerTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.752 s - in alluxio.heartbeat.[1mSleepingTimerTest[m
+[[1;34mINFO[m] Running alluxio.master.[1mMasterInquireClientTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 23.913 s - in alluxio.collections.[1mIndexedSetConcurrencyTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.462 s - in alluxio.master.[1mMasterInquireClientTest[m
+[[1;34mINFO[m] Running alluxio.master.[1mPollingMasterInquireClientTest[m
+[[1;34mINFO[m] Running alluxio.master.[1mPortReservationRuleTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.109 s - in alluxio.master.[1mPortReservationRuleTest[m
+[[1;34mINFO[m] Running alluxio.master.[1mZkMasterInquireClientTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.617 s - in alluxio.master.[1mPollingMasterInquireClientTest[m
+[[1;34mINFO[m] Running alluxio.master.block.[1mBlockIdTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.085 s - in alluxio.master.block.[1mBlockIdTest[m
+[[1;34mINFO[m] Running alluxio.metrics.[1mMetricTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.214 s - in alluxio.metrics.[1mMetricTest[m
+[[1;34mINFO[m] Running alluxio.metrics.[1mMetricsConfigTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.152 s - in alluxio.metrics.[1mMetricsConfigTest[m
+[[1;34mINFO[m] Running alluxio.metrics.[1mMetricsSystemTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.494 s - in alluxio.metrics.[1mMetricsSystemTest[m
+[[1;34mINFO[m] Running alluxio.network.protocol.databuffer.[1mRefCountedNioByteBufTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m375[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.147 s - in alluxio.network.protocol.databuffer.[1mRefCountedNioByteBufTest[m
+[[1;34mINFO[m] Running alluxio.refresh.[1mTimeoutRefreshTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.886 s - in alluxio.refresh.[1mTimeoutRefreshTest[m
+[[1;34mINFO[m] Running alluxio.resource.[1mCloseableIteratorTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.284 s - in alluxio.resource.[1mCloseableIteratorTest[m
+[[1;34mINFO[m] Running alluxio.resource.[1mDynamicResourcePoolTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.366 s - in alluxio.resource.[1mDynamicResourcePoolTest[m
+[[1;34mINFO[m] Running alluxio.resource.[1mLockResourceTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.27 s - in alluxio.resource.[1mLockResourceTest[m
+[[1;34mINFO[m] Running alluxio.resource.[1mResourcePoolTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.285 s - in alluxio.resource.[1mResourcePoolTest[m
+[[1;34mINFO[m] Running alluxio.retry.[1mCountingRetryTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.086 s - in alluxio.retry.[1mCountingRetryTest[m
+[[1;34mINFO[m] Running alluxio.retry.[1mExponentialBackoffRetryTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.087 s - in alluxio.retry.[1mExponentialBackoffRetryTest[m
+[[1;34mINFO[m] Running alluxio.retry.[1mExponentialTimeBoundedRetryTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.161 s - in alluxio.retry.[1mExponentialTimeBoundedRetryTest[m
+[[1;34mINFO[m] Running alluxio.retry.[1mRetryUtilsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.155 s - in alluxio.retry.[1mRetryUtilsTest[m
+[[1;34mINFO[m] Running alluxio.retry.[1mTimeoutRetryTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.235 s - in alluxio.retry.[1mTimeoutRetryTest[m
+[[1;34mINFO[m] Running alluxio.security.[1mUserTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.092 s - in alluxio.security.[1mUserTest[m
+[[1;34mINFO[m] Running alluxio.security.authentication.[1mCustomAuthenticationProviderTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.16 s - in alluxio.security.authentication.[1mCustomAuthenticationProviderTest[m
+[[1;34mINFO[m] Running alluxio.security.authentication.[1mPlainSaslClientCallbackHandlerTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.094 s - in alluxio.security.authentication.[1mPlainSaslClientCallbackHandlerTest[m
+[[1;34mINFO[m] Running alluxio.security.authentication.[1mPlainSaslServerCallbackHandlerTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.276 s - in alluxio.security.authentication.[1mPlainSaslServerCallbackHandlerTest[m
+[[1;34mINFO[m] Running alluxio.security.authentication.[1mPlainSaslServerProviderTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.122 s - in alluxio.security.authentication.[1mPlainSaslServerProviderTest[m
+[[1;34mINFO[m] Running alluxio.security.authentication.[1mPlainSaslServerTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.096 s - in alluxio.security.authentication.[1mPlainSaslServerTest[m
+[[1;34mINFO[m] Running alluxio.security.authentication.[1mSaslHandlersTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.305 s - in alluxio.security.authentication.[1mSaslHandlersTest[m
+[[1;34mINFO[m] Running alluxio.security.authentication.[1mSimpleAuthenticationProviderTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.088 s - in alluxio.security.authentication.[1mSimpleAuthenticationProviderTest[m
+[[1;34mINFO[m] Running alluxio.security.authorization.[1mAccessControlListTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.109 s - in alluxio.security.authorization.[1mAccessControlListTest[m
+[[1;34mINFO[m] Running alluxio.security.authorization.[1mAclActionsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.091 s - in alluxio.security.authorization.[1mAclActionsTest[m
+[[1;34mINFO[m] Running alluxio.security.authorization.[1mAclEntryTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.09 s - in alluxio.security.authorization.[1mAclEntryTest[m
+[[1;34mINFO[m] Running alluxio.security.authorization.[1mModeBitsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.091 s - in alluxio.security.authorization.[1mModeBitsTest[m
+[[1;34mINFO[m] Running alluxio.security.authorization.[1mModeParserTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m11[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.11 s - in alluxio.security.authorization.[1mModeParserTest[m
+[[1;34mINFO[m] Running alluxio.security.authorization.[1mModeTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m14[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.279 s - in alluxio.security.authorization.[1mModeTest[m
+[[1;34mINFO[m] Running alluxio.security.group.[1mGroupMappingServiceTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.307 s - in alluxio.security.group.[1mGroupMappingServiceTest[m
+[[1;34mINFO[m] Running alluxio.security.group.[1mIdentityUserGroupsMappingTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.091 s - in alluxio.security.group.[1mIdentityUserGroupsMappingTest[m
+[[1;34mINFO[m] Running alluxio.security.group.[1mShellBasedUnixGroupsMappingTest[m
+[[1;31mERROR[m] WARNING: An illegal reflective access operation has occurred
+[[1;31mERROR[m] WARNING: Illegal reflective access by org.powermock.reflect.internal.WhiteboxImpl (file:/home/xinyu/.m2/repository/org/powermock/powermock-reflect/2.0.7/powermock-reflect-2.0.7.jar) to method java.lang.Object.clone()
+[[1;31mERROR[m] WARNING: Please consider reporting this to the maintainers of org.powermock.reflect.internal.WhiteboxImpl
+[[1;31mERROR[m] WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+[[1;31mERROR[m] WARNING: All illegal access operations will be denied in a future release
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.302 s - in alluxio.security.group.[1mShellBasedUnixGroupsMappingTest[m
+[[1;34mINFO[m] Running alluxio.security.login.[1mLoginModuleTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.174 s - in alluxio.security.login.[1mLoginModuleTest[m
+[[1;34mINFO[m] Running alluxio.security.user.[1mUserStateTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.285 s - in alluxio.security.user.[1mUserStateTest[m
+[[1;34mINFO[m] Running alluxio.shell.[1mShellCommandTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.181 s - in alluxio.shell.[1mShellCommandTest[m
+[[1;34mINFO[m] Running alluxio.test.util.[1mCommonTestUtilsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 35.983 s - in alluxio.master.[1mZkMasterInquireClientTest[m
+[[1;34mINFO[m] Running alluxio.time.[1mExponentialTimerTest[m
+[[1;31mERROR[m] WARNING: An illegal reflective access operation has occurred
+[[1;31mERROR[m] WARNING: Illegal reflective access by org.powermock.reflect.internal.WhiteboxImpl (file:/home/xinyu/.m2/repository/org/powermock/powermock-reflect/2.0.7/powermock-reflect-2.0.7.jar) to method java.lang.Object.clone()
+[[1;31mERROR[m] WARNING: Please consider reporting this to the maintainers of org.powermock.reflect.internal.WhiteboxImpl
+[[1;31mERROR[m] WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+[[1;31mERROR[m] WARNING: All illegal access operations will be denied in a future release
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.078 s - in alluxio.test.util.[1mCommonTestUtilsTest[m
+[[1;34mINFO[m] Running alluxio.time.[1mManualSleeperTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.095 s - in alluxio.time.[1mManualSleeperTest[m
+[[1;34mINFO[m] Running alluxio.underfs.[1mFingerprintTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.18 s - in alluxio.underfs.[1mFingerprintTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.743 s - in alluxio.time.[1mExponentialTimerTest[m
+[[1;34mINFO[m] Running alluxio.underfs.[1mObjectUnderFileSystemTest[m
+[[1;34mINFO[m] Running alluxio.underfs.[1mUfsDirectoryStatusTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.099 s - in alluxio.underfs.[1mUfsDirectoryStatusTest[m
+[[1;34mINFO[m] Running alluxio.underfs.[1mUfsFileStatusTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.163 s - in alluxio.underfs.[1mUfsFileStatusTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.759 s - in alluxio.underfs.[1mObjectUnderFileSystemTest[m
+[[1;34mINFO[m] Running alluxio.underfs.[1mUnderFileSystemConfigurationTest[m
+[[1;34mINFO[m] Running alluxio.underfs.[1mUnderFileSystemTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.303 s - in alluxio.underfs.[1mUnderFileSystemConfigurationTest[m
+[[1;33mWARNING[m] [1;33mTests [0;1mrun: [0;1m2[m, Failures: 0, Errors: 0, [1;33mSkipped: [0;1;33m1[m, Time elapsed: 0.317 s - in alluxio.underfs.[1mUnderFileSystemTest[m
+[[1;34mINFO[m] Running alluxio.underfs.options.[1mCreateOptionsTest[m
+[[1;34mINFO[m] Running alluxio.underfs.options.[1mDeleteOptionsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.299 s - in alluxio.underfs.options.[1mCreateOptionsTest[m
+[[1;34mINFO[m] Running alluxio.underfs.options.[1mFileLocationOptionsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.121 s - in alluxio.underfs.options.[1mFileLocationOptionsTest[m
+[[1;31mERROR[m] WARNING: An illegal reflective access operation has occurred
+[[1;31mERROR[m] WARNING: Illegal reflective access by org.powermock.reflect.internal.WhiteboxImpl (file:/home/xinyu/.m2/repository/org/powermock/powermock-reflect/2.0.7/powermock-reflect-2.0.7.jar) to method java.lang.Object.clone()
+[[1;31mERROR[m] WARNING: Please consider reporting this to the maintainers of org.powermock.reflect.internal.WhiteboxImpl
+[[1;31mERROR[m] WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+[[1;31mERROR[m] WARNING: All illegal access operations will be denied in a future release
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.806 s - in alluxio.underfs.options.[1mDeleteOptionsTest[m
+[[1;34mINFO[m] Running alluxio.underfs.options.[1mListOptionsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.107 s - in alluxio.underfs.options.[1mListOptionsTest[m
+[[1;34mINFO[m] Running alluxio.underfs.options.[1mMkdirsOptionsTest[m
+[[1;34mINFO[m] Running alluxio.underfs.options.[1mOpenOptionsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.289 s - in alluxio.underfs.options.[1mMkdirsOptionsTest[m
+[[1;34mINFO[m] Running alluxio.uri.[1mAuthorityTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.191 s - in alluxio.uri.[1mAuthorityTest[m
+[[1;31mERROR[m] WARNING: An illegal reflective access operation has occurred
+[[1;31mERROR[m] WARNING: Illegal reflective access by org.powermock.reflect.internal.WhiteboxImpl (file:/home/xinyu/.m2/repository/org/powermock/powermock-reflect/2.0.7/powermock-reflect-2.0.7.jar) to method java.lang.Object.clone()
+[[1;31mERROR[m] WARNING: Please consider reporting this to the maintainers of org.powermock.reflect.internal.WhiteboxImpl
+[[1;31mERROR[m] WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+[[1;31mERROR[m] WARNING: All illegal access operations will be denied in a future release
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.799 s - in alluxio.underfs.options.[1mOpenOptionsTest[m
+[[1;34mINFO[m] Running alluxio.util.[1mBucketCounterTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.087 s - in alluxio.util.[1mBucketCounterTest[m
+[[1;34mINFO[m] Running alluxio.util.[1mCommonUtilsTest[m
+[[1;34mINFO[m] Running alluxio.util.[1mConfigurationUtilsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m11[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.439 s - in alluxio.util.[1mConfigurationUtilsTest[m
+[[1;34mINFO[m] Running alluxio.util.[1mExceptionUtilsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.132 s - in alluxio.util.[1mExceptionUtilsTest[m
+[[1;34mINFO[m] Running alluxio.util.[1mFormatUtilsTest[m
+[[1;31mERROR[m] WARNING: An illegal reflective access operation has occurred
+[[1;31mERROR[m] WARNING: Illegal reflective access by org.powermock.reflect.internal.WhiteboxImpl (file:/home/xinyu/.m2/repository/org/powermock/powermock-reflect/2.0.7/powermock-reflect-2.0.7.jar) to method java.lang.Object.clone()
+[[1;31mERROR[m] WARNING: Please consider reporting this to the maintainers of org.powermock.reflect.internal.WhiteboxImpl
+[[1;31mERROR[m] WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+[[1;31mERROR[m] WARNING: All illegal access operations will be denied in a future release
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.482 s - in alluxio.util.[1mFormatUtilsTest[m
+[[1;34mINFO[m] Running alluxio.util.[1mHFSUtilsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m8[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.096 s - in alluxio.util.[1mHFSUtilsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m28[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.335 s - in alluxio.util.[1mCommonUtilsTest[m
+[[1;34mINFO[m] Running alluxio.util.[1mIdUtilsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.174 s - in alluxio.util.[1mIdUtilsTest[m
+[[1;34mINFO[m] Running alluxio.util.[1mJvmPauseMonitorTest[m
+[[1;34mINFO[m] Running alluxio.util.[1mLogUtilsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.201 s - in alluxio.util.[1mLogUtilsTest[m
+[[1;34mINFO[m] Running alluxio.util.[1mObjectSizeCalculatorTest[m
+[[1;31mERROR[m] WARNING: An illegal reflective access operation has occurred
+[[1;31mERROR[m] WARNING: Illegal reflective access by alluxio.util.ObjectSizeCalculator$ClassSizeInfo (file:/home/xinyu/port_ctest_runner/alluxio/core/common/target/classes/) to field java.util.concurrent.ConcurrentHashMap.table
+[[1;31mERROR[m] WARNING: Please consider reporting this to the maintainers of alluxio.util.ObjectSizeCalculator$ClassSizeInfo
+[[1;31mERROR[m] WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+[[1;31mERROR[m] WARNING: All illegal access operations will be denied in a future release
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m15[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.19 s - in alluxio.util.[1mObjectSizeCalculatorTest[m
+[[1;34mINFO[m] Running alluxio.util.[1mSecurityUtilsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.278 s - in alluxio.util.[1mSecurityUtilsTest[m
+[[1;34mINFO[m] Running alluxio.util.[1mShellUtilsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.197 s - in alluxio.util.[1mShellUtilsTest[m
+[[1;34mINFO[m] Running alluxio.util.[1mUnderFileSystemUtilsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.154 s - in alluxio.util.[1mUnderFileSystemUtilsTest[m
+[[1;34mINFO[m] Running alluxio.util.[1mWaitForOptionsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.106 s - in alluxio.util.[1mWaitForOptionsTest[m
+[[1;34mINFO[m] Running alluxio.util.executor.[1mControllableSchedulerTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m7[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.422 s - in alluxio.util.[1mJvmPauseMonitorTest[m
+[[1;34mINFO[m] Running alluxio.util.executor.[1mUniqueBlockingQueueTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.093 s - in alluxio.util.executor.[1mUniqueBlockingQueueTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.033 s - in alluxio.util.executor.[1mControllableSchedulerTest[m
+[[1;34mINFO[m] Running alluxio.util.io.[1mBufferUtilsTest[m
+[[1;34mINFO[m] Running alluxio.util.io.[1mByteIOUtilsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m4[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.099 s - in alluxio.util.io.[1mByteIOUtilsTest[m
+[[1;34mINFO[m] Running alluxio.util.io.[1mFileUtilsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m15[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.399 s - in alluxio.util.io.[1mFileUtilsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m11[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.09 s - in alluxio.util.io.[1mBufferUtilsTest[m
+[[1;34mINFO[m] Running alluxio.util.io.[1mPathUtilsTest[m
+[[1;34mINFO[m] Running alluxio.util.logging.[1mSamplingLoggerTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m20[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.283 s - in alluxio.util.io.[1mPathUtilsTest[m
+[[1;34mINFO[m] Running alluxio.util.network.[1mGetMasterWorkerAddressTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.573 s - in alluxio.util.logging.[1mSamplingLoggerTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.319 s - in alluxio.util.network.[1mGetMasterWorkerAddressTest[m
+[[1;34mINFO[m] Running alluxio.util.network.[1mNetworkAddressUtilsTest[m
+[[1;34mINFO[m] Running alluxio.util.proto.[1mBlockLocationUtilsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.164 s - in alluxio.util.proto.[1mBlockLocationUtilsTest[m
+[[1;34mINFO[m] Running alluxio.wire.[1mAlluxioMasterInfoTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m17[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.39 s - in alluxio.util.network.[1mNetworkAddressUtilsTest[m
+[[1;34mINFO[m] Running alluxio.wire.[1mAlluxioProxyInfoTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.883 s - in alluxio.wire.[1mAlluxioMasterInfoTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.669 s - in alluxio.wire.[1mAlluxioProxyInfoTest[m
+[[1;34mINFO[m] Running alluxio.wire.[1mBlockInfoTest[m
+[[1;34mINFO[m] Running alluxio.wire.[1mAlluxioWorkerInfoTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.381 s - in alluxio.wire.[1mBlockInfoTest[m
+[[1;34mINFO[m] Running alluxio.wire.[1mBlockLocationTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.727 s - in alluxio.wire.[1mAlluxioWorkerInfoTest[m
+[[1;34mINFO[m] Running alluxio.wire.[1mBlockMasterInfoTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.336 s - in alluxio.wire.[1mBlockLocationTest[m
+[[1;34mINFO[m] Running alluxio.wire.[1mCapacityTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.326 s - in alluxio.wire.[1mBlockMasterInfoTest[m
+[[1;34mINFO[m] Running alluxio.wire.[1mFileBlockInfoTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.375 s - in alluxio.wire.[1mFileBlockInfoTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.718 s - in alluxio.wire.[1mCapacityTest[m
+[[1;34mINFO[m] Running alluxio.wire.[1mFileInfoTest[m
+[[1;34mINFO[m] Running alluxio.wire.[1mInconsistentPropertyTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.195 s - in alluxio.wire.[1mInconsistentPropertyTest[m
+[[1;34mINFO[m] Running alluxio.wire.[1mMasterInfoTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.548 s - in alluxio.wire.[1mFileInfoTest[m
+[[1;34mINFO[m] Running alluxio.wire.[1mMountPointInfoTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.437 s - in alluxio.wire.[1mMasterInfoTest[m
+[[1;34mINFO[m] Running alluxio.wire.[1mTieredIdentityTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.394 s - in alluxio.wire.[1mMountPointInfoTest[m
+[[1;34mINFO[m] Running alluxio.wire.[1mWorkerInfoTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m5[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.475 s - in alluxio.wire.[1mTieredIdentityTest[m
+[[1;34mINFO[m] Running alluxio.wire.[1mWorkerNetAddressTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.443 s - in alluxio.wire.[1mWorkerInfoTest[m
+[[1;34mINFO[m] Running alluxio.worker.block.io.[1mLocalFileBlockReaderTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.356 s - in alluxio.wire.[1mWorkerNetAddressTest[m
+[[1;34mINFO[m] Running alluxio.worker.block.io.[1mLocalFileBlockWriterTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m6[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.333 s - in alluxio.worker.block.io.[1mLocalFileBlockReaderTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m3[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.22 s - in alluxio.worker.block.io.[1mLocalFileBlockWriterTest[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] Results:
+[[1;34mINFO[m] 
+[[1;33mWARNING[m] [1;33mTests run: 1131, Failures: 0, Errors: 0, Skipped: 4[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  01:54 min
+[[1;34mINFO[m] Finished at: 2023-12-26T15:56:28-06:00
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m

@@ -18,21 +18,28 @@ PROJECTS_SUPPORTED = ["hadoop-common", "hadoop-hdfs"]
 PROJECTS_POTENTIAL = ["mapreduce-client-core", "alluxio-core-common", "bookkeeper-common", "camel-core", "druid-processing", "flink-core", "hive-common", "kylin-core-common", "netty-common", "nifi-commons",\
                         "redisson", "rocketmq-common", "spark-core", "zeppelin-interpreter", "zookeeper-server"]
 
-TEST_MODULES_SUPPORTED = ["junit4"]
+TEST_MODULES_SUPPORTED = ["junit4", "junit5"]
 
-JAVA_DEPENDENCY = {"junit4": "    <dependency>\n      <groupId>edu.illinois</groupId>\n      <artifactId>ctest-runner-junit4</artifactId>\n      <version>1.0-SNAPSHOT</version>\n      <scope>compile</scope>\n    </dependency>\n"}
+JAVA_DEPENDENCY = {"junit4": "    <dependency>\n      <groupId>edu.illinois</groupId>\n      <artifactId>ctest-runner-junit4</artifactId>\n      <version>1.0-SNAPSHOT</version>\n      <scope>compile</scope>\n    </dependency>\n",
+                   "junit5": "    <dependency>\n      <groupId>edu.illinois</groupId>\n      <artifactId>ctest-runner-junit4</artifactId>\n      <version>1.0-SNAPSHOT</version>\n      <scope>compile</scope>\n    </dependency>\n"}
 
-IMPORT_NORMAL = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
+IMPORT_NORMAL = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
+                 "junit5": "import org.junit.jupiter.api.extension.ExtendWith;\nimport edu.illinois.CTestJUnit5Extension;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
 
-IMPORT_NORMAL_2 = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner2;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
+IMPORT_NORMAL_2 = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner2;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
+                   "junit5": "import org.junit.jupiter.api.extension.ExtendWith;\nimport edu.illinois.CTestJUnit5Extension;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
 
-IMPORT_ABSTRACT = {"junit4": "import edu.illinois.CTest;\n\n"}
+IMPORT_ABSTRACT = {"junit4": "import edu.illinois.CTest;\n\n",
+                   "junit5": "import edu.illinois.CTest;\n\n"}
 
 LOG_FILES = {"compile": "compile.txt", "track": "track.txt", "ctest": "ctest.txt"}
 
+PRINT_LOG = False
+
 # Utility section
 def print_log(message: str):
-    print("<<<ctest-runner-script>>> " + message)
+    if PRINT_LOG:
+        print("<<<ctest-runner-script>>> " + message)
 
 def change_working_dir(target_dir: str):
     current = os.getcwd()
@@ -206,6 +213,7 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
         package_or_import_seen = False
         for index, content in enumerate(contents):
             # add import
+            """ Option 1
             if not package_or_import_seen and (re.match("package .*", content) is not None or re.match("import (?:(?!static)).*", content) is not None):
                 package_or_import_seen = True
             if package_or_import_seen and not import_added and re.match("import static .*", content) is not None:
@@ -217,7 +225,7 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
                     contents[index] = IMPORT_ABSTRACT[test_module] + content
                     print_log("abstract import added for " + f.name)
                 import_added = True
-            if package_or_import_seen and not import_added and re.match("\/\*\*", content) is not None:
+            if package_or_import_seen and not import_added and (re.match("\/\*\*", content) is not None or re.match("@Category", content) is not None):
                 if not abstract_class and test_class:
                     # CHANGE content -> contents[index]
                     contents[index] = IMPORT_NORMAL_2[test_module] + content
@@ -231,6 +239,31 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
                 if not abstract_class and test_class:
                     # CHANGE content -> contents[index]
                     contents[index] = "@RunWith(CTestJUnit4Runner2.class)\n@CTestClass()\n" + content
+                    print_log("normal import and @RunWith added for " + f.name)
+                if not import_added:
+                    if not abstract_class and test_class:
+                        contents[index] = IMPORT_NORMAL_2[test_module] + contents[index]
+                    if abstract_class and not test_class and not ctest_annotation_seen:
+                        contents[index] = IMPORT_ABSTRACT[test_module] + contents[index]
+                        print_log("abstract import added for " + f.name)
+                    import_added = True
+                break
+            """
+            """ Option 2 """
+            if re.match("import .*;", content) is not None and not import_added:
+                if not abstract_class and test_class:
+                    contents[index] = IMPORT_NORMAL_2[test_module] + content
+                if abstract_class and not test_class and not ctest_annotation_seen:
+                    contents[index] = IMPORT_ABSTRACT[test_module] + content
+                    print_log("abstract import added for " + f.name)
+                import_added = True
+            if re.match(".*class +\w+.*{", content) is not None:
+                if not abstract_class and test_class:
+                    # CHANGE content -> contents[index]
+                    if test_module == "junit4":
+                        contents[index] = "@RunWith(CTestJUnit4Runner2.class)\n@CTestClass()\n" + content
+                    else:
+                        contents[index] = "@ExtendWith(CTestJUnit5Extension.class)\n@CTestClass()\n" + content
                     print_log("normal import and @RunWith added for " + f.name)
                 if not import_added:
                     if not abstract_class and test_class:
@@ -273,7 +306,7 @@ def add_runwith_for_all(target_dir: str):
                         f.seek(0)
                         f.write(contents)
 
-def add_runwith_for_all_2(target_dir: str):
+def add_runwith_for_all_2(target_dir: str, junit_version: str="junit4"):
     modules = []
     if not os.path.isdir(target_dir + "/src/test"): # /src/test/java
         for i in os.listdir(target_dir):
@@ -283,7 +316,7 @@ def add_runwith_for_all_2(target_dir: str):
         if not os.path.isdir(target_dir + "/src/test"):
             raise ValueError("Does not support current project file hierarchy.")
         else:
-            modules.append("src/test")
+            modules.append(target_dir + "/src/test")
     for test_dir in modules:
         print_log("add import information and @RunWith in " + test_dir)
         for dir_path, dir_name, files in os.walk(test_dir):
@@ -291,7 +324,7 @@ def add_runwith_for_all_2(target_dir: str):
             for file_name in files:
                 if ".java" in file_name:
                     with open(dir_path + "/" + file_name, "r+") as f:
-                        contents = add_import_and_runwith_2(f, True)
+                        contents = add_import_and_runwith_2(f, True, junit_version)
                         contents = "".join(contents)
                         f.seek(0)
                         f.write(contents)
@@ -314,7 +347,7 @@ def run_tests_to_track(project:str, output_dir: str, ctest_mapping_dir: str="cte
 
     t1 = time.perf_counter()
     t2 = time.process_time()
-    cmd = ["mvn", "-B", "surefire:test", "-Dmode=default", "-Dctest.mapping.dir=" + ctest_mapping_dir, "-Dctest.config.save=true"]
+    cmd = ["mvn", "-B", "surefire:test", "-Dctest.mode=default", "-Dctest.mapping.dir=" + ctest_mapping_dir, "-Dctest.config.save=true"]
     print_log("run tests: " + " ".join(cmd))
     log_file = LOG_FILES["track"]
     tmp_index = log_file.index(".")
@@ -466,7 +499,7 @@ def run_ctests(project:str, output_dir: str, ctest_mapping_dir: str="ctest/mappi
     t1 = time.perf_counter()
     t2 = time.process_time()
     cmd_1 = ["mvn", "-B", "clean", "test-compile"]
-    cmd_2 = ["mvn", "-B", "surefire:test", "-Dmode=default", "-Dctest.mapping.dir=" + ctest_mapping_dir, "-Dctest.config.save=false"]
+    cmd_2 = ["mvn", "-B", "surefire:test", "-Dctest.mode=default", "-Dctest.mapping.dir=" + ctest_mapping_dir, "-Dctest.config.save=false"]
     print_log("run CTests: " + " ".join(cmd_2))
     log_file = LOG_FILES["ctest"]
     tmp_index = log_file.index(".")
@@ -509,7 +542,7 @@ def auto_annotate_script(project: str, test_module:str, project_dir: str, projec
         run_ctests(project, log_dir, ctest_mapping_dir)
 
         
-def auto_annotate_script_2(project: str, project_dir: str):
+def auto_annotate_script_2(project: str, project_dir: str, junit_version: str):
     print_log("======================================================================")
     print_log("project: " + project)
     log_dir = os.getcwd() + "/log"
@@ -522,7 +555,7 @@ def auto_annotate_script_2(project: str, project_dir: str):
     # add import and runwith to all test classes
     print_log("add import and runwith to all test classes")
     check_or_create_dir(project_dir, True)
-    add_runwith_for_all_2(project_dir)
+    add_runwith_for_all_2(project_dir, junit_version)
 
         
 def test(project: str, test_module: str, project_dir: str, project_test_dir: str, ctest_mapping_dir: str):

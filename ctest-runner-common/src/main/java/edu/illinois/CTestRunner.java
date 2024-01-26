@@ -26,9 +26,23 @@ public interface CTestRunner {
     void initializeRunner(Object context) throws AnnotationFormatError, IOException;
 
     /**
+     * This method must be called right before the test class execution.
+     */
+    default void startTestClass(String testClassName) {
+        Utils.setCurTestClassNameToPTid(Utils.getPTid(), testClassName);
+    }
+
+    /**
+     * This method must be called right before each of the test method execution.
+     */
+    default void startTestMethod(String testClassName, String testMethodName) {
+        Utils.setCurTestFullNameToPTid(Utils.getPTid(), testClassName, testMethodName);
+    }
+
+    /**
      * Initialize the class-level and method-level parameters from the mapping file.
      */
-    default Object[] initalizeParameterSet(String testClassName, String mappingFilePath, String[] annotationValue, String annotationRegex) throws IOException {
+    default Object[] initializeParameterSet(String testClassName, String mappingFilePath, String[] annotationValue, String annotationRegex) throws IOException {
         mappingFilePath = resolveMappingFilePath(mappingFilePath, testClassName);
         if (mappingFilePath.isEmpty()) {
             return new Object[]{getValueAndRegexClassParameters(new HashSet<>(Arrays.asList(annotationValue)), annotationRegex), new HashMap<>()};
@@ -153,24 +167,24 @@ public interface CTestRunner {
      * @return a set of parameters that the test method must use
      * @throws IOException if the parsing fails
      */
-    default Set<String> getUnionMethodParameters(String className, String methodName, String methodLevelConfigMappingFile,
-                                                 String methodLevelRegex, Set<String> methodLevelParameters,
-                                                 Set<String> classLevelParameters) throws IOException {
+
+    default Set<String> getUnionMethodParameters(String testClassName, String methodName, String methodRegex,
+                                                 Set<String> classLevelParameters, Map<String, Set<String>> methodLevelParametersFromMappingFile,
+                                                 Set<String> methodLevelParamsFromAnnotation) {
+        methodName = Utils.getFullTestName(testClassName, methodName);
         Set<String> allMethodLevelParameters = new HashSet<>();
-        // Retrieve method-level parameters if present
-        allMethodLevelParameters.addAll(methodLevelParameters);
         // Retrieve class-level parameters if present
         allMethodLevelParameters.addAll(classLevelParameters);
-
-        // Retrieve file-level parameters if present
-        if (!methodLevelConfigMappingFile.isEmpty()) {
-            allMethodLevelParameters.addAll(getParametersFromMappingFile(methodLevelConfigMappingFile));
-        } else {
-            allMethodLevelParameters.addAll(getRequiredParametersFromDefaultFile(className, methodName));
+        // Retrieve method-level parameters if present
+        Set<String> methodLevelParameters = methodLevelParametersFromMappingFile.get(methodName);
+        if (methodLevelParameters != null) {
+            allMethodLevelParameters.addAll(methodLevelParameters);
         }
+        allMethodLevelParameters.addAll(methodLevelParamsFromAnnotation);
+
         // Retrieve regex-level parameters if present
-        if (!methodLevelRegex.isEmpty()) {
-            allMethodLevelParameters.addAll(getParametersFromRegex(methodLevelRegex));
+        if (!methodRegex.isEmpty()) {
+            allMethodLevelParameters.addAll(getParametersFromRegex(methodRegex));
         }
         return allMethodLevelParameters;
     }
@@ -189,6 +203,7 @@ public interface CTestRunner {
         return params;
     }
 
+/*
     default void checkCTestParameterUsage(Set<String> params) throws UnUsedConfigParamException {
         if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
             for (String param : params) {
@@ -198,9 +213,11 @@ public interface CTestRunner {
             }
         }
     }
+*/
 
     default void writeConfigUsageToJson(ConfigUsage configUsage, File targetFile) {
         if (saveUsedParamToFile) {
+            ConfigUsage.updateAllConfigUsage(configUsage);
             ConfigUsage.writeToJson(configUsage, targetFile);
         }
     }
@@ -217,5 +234,13 @@ public interface CTestRunner {
      */
     default boolean shouldThorwException(Throwable throwable) {
         return throwable != null && !throwable.getMessage().equals("Expected exception: edu.illinois.UnUsedConfigParamException");
+    }
+
+    default boolean isCurrentTestIgnored(Set<String> targetParams, Set<String> usedParams) {
+        if (Names.CTEST_RUNTIME_SELECTION && !targetParams.isEmpty()) {
+            // return true if none of the parameters in targetParams is used
+            return Collections.disjoint(targetParams, usedParams);
+        }
+        return false;
     }
 }

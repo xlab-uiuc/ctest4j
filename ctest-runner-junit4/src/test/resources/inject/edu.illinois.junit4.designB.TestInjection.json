@@ -1,0 +1,6 @@
+{
+  "beforeClass": "beforeClass-fromFile-designB",
+  "before": "before-fromFile-designB",
+  "param1": "param1-fromFile-designB",
+  "param2": "param2-fromFile-designB"
+}

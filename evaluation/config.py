@@ -12,20 +12,22 @@ build_modules = {
     'kylin': ['ctest-eval', ['core-common', 'core-cube', 'core-job', 'core-metadata', 'core-metrics', 'core-storage']],
     'flink': ['ctest-eval', ['flink-core']],
     'camel': ['ctest-eval', ['core/camel-base', 'core/camel-core']],
+    'zookeeper': ['ctest-eval', ['zookeeper-server']]
 }
 
 PROJ_VANILLA_BRANCH_DICT = {
-    'hbase': 'rel/2.5.6',
-    'hcommon': 'rel/release-3.3.6',
-    'hdfs': 'rel/release-3.3.6',
-    'yarn': 'rel/release-3.3.6',
-    'mapreduce': 'rel/release-3.3.6',
+    'hbase': 'ctest/2.5.6',
+    'hcommon': 'ctest-eval-vanilla',
+    'hdfs': 'ctest-eval-vanilla',
+    'yarn': 'ctest-eval-vanilla',
+    'mapreduce': 'ctest-eval-vanilla',
     'hive': 'rel/release-3.1.3',
     'zeppelin': 'v0.10.1',
-    'alluxio': 'v2.9.3',
+    'alluxio': 'ctest-eval-vanilla',
     'kylin': 'kylin-4.0.4',
-    'flink': 'release-1.18.0',
-    'camel': 'camel-3.21.2'
+    'flink': 'ctest-eval-vanilla',
+    'camel': 'camel-3.21.2',
+    'zookeeper': 'ctest-eval-vanilla'
 }
 
 
@@ -41,6 +43,7 @@ PROJ_PATH_DICT = {
     'kylin': 'kylin/core-metadata',
     'flink': 'flink/flink-core',
     'camel': 'camel/core/camel-core',
+    'zookeeper': 'zookeeper/zookeeper-server'
 }
 
 # TODO: The version may need fix
@@ -55,7 +58,8 @@ PROJ_JUNIT_VERSION_DICT = {
     'alluxio': 'junit4',
     'kylin': 'junit4',
     'flink': 'junit4',
-    'camel': 'junit4',
+    'camel': 'junit5',
+    'zookeeper': 'junit5'
 }
 
    

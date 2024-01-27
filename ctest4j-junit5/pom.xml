@@ -6,7 +6,7 @@
     <parent>
         <groupId>edu.illinois</groupId>
         <artifactId>ctest4j</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0</version> <!-- ctest4j version -->
     </parent>
 
     <artifactId>ctest4j-junit5</artifactId>

@@ -2,7 +2,7 @@ package edu.illinois.junit4.designB;
 
 import edu.illinois.CTest;
 import edu.illinois.CTestClass;
-import edu.illinois.CTestJUnit4Runner2;
+import edu.illinois.CTestJUnit4Runner;
 import edu.illinois.Configuration;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
  * Author: Shuai Wang
  * Date:  11/4/23
  */
-@RunWith(CTestJUnit4Runner2.class)
+@RunWith(CTestJUnit4Runner.class)
 @CTestClass
 public class TestInjection {
     Configuration conf = null;

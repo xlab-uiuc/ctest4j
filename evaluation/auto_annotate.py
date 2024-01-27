@@ -29,7 +29,7 @@ IMPORT_NORMAL = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinoi
                  "junit5": "import org.junit.jupiter.api.extension.ExtendWith;\nimport edu.illinois.CTestJUnit5Extension;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
                  "testng": "import org.testng.annotations.Listeners;\nimport edu.illinois.CTestListener;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
 
-IMPORT_NORMAL_2 = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner2;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
+IMPORT_NORMAL_2 = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
                    "junit5": "import org.junit.jupiter.api.extension.ExtendWith;\nimport edu.illinois.CTestJUnit5Extension;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
                    "testng": "import org.testng.annotations.Listeners;\nimport edu.illinois.CTestListener;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
 
@@ -243,7 +243,7 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
             if package_or_import_seen and re.match(".*class +\w+.*{", content) is not None:
                 if not abstract_class and test_class:
                     # CHANGE content -> contents[index]
-                    contents[index] = "@RunWith(CTestJUnit4Runner2.class)\n@CTestClass()\n" + content
+                    contents[index] = "@RunWith(CTestJUnit4Runner.class)\n@CTestClass()\n" + content
                     print_log("normal import and @RunWith added for " + f.name)
                 if not import_added:
                     if not abstract_class and test_class:
@@ -266,7 +266,7 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
                 if not abstract_class and test_class:
                     # CHANGE content -> contents[index]
                     if test_module == "junit4":
-                        contents[index] = "@RunWith(CTestJUnit4Runner2.class)\n@CTestClass()\n" + content
+                        contents[index] = "@RunWith(CTestJUnit4Runner.class)\n@CTestClass()\n" + content
                     elif test_module == "junit5":
                         contents[index] = "@ExtendWith(CTestJUnit5Extension.class)\n@CTestClass()\n" + content
                     elif test_module == "testng":
@@ -492,7 +492,7 @@ def annotate_test_method_2(class_list: List, target_dir: str, ctest_mapping_dir:
                     contents = f.readlines()
                     for index, content in enumerate(contents):
                         # if "import edu.illinois.CTestJUnit4Runner;" in content:
-                        #     contents[index] = contents[index].replace("import edu.illinois.CTestJUnit4Runner", "import edu.illinois.CTestJUnit4Runner2")
+                        #     contents[index] = contents[index].replace("import edu.illinois.CTestJUnit4Runner", "import edu.illinois.CTestJUnit4Runner")
                         if "@CTestClass()" in content:
                             contents[index] = content.replace("@CTestClass()", "@CTestClass(configMappingFile=\"" + ctest_mapping_dir + "/" + class_name + ".json\")")
                             class_list.remove(class_name)

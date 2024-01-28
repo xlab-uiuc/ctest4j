@@ -1,6 +1,5 @@
 package edu.illinois.agent;
 
-import java.lang.invoke.MethodHandle;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -13,7 +12,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import edu.illinois.ConfigTracker;
 import static edu.illinois.Names.*;
 
-//    org.apache.hadoop.conf.Configuration.get(String,String)#2#transfer;
 @Aspect
 public class AspectJWeaver {
     public class WeaverUnit {
@@ -101,11 +99,11 @@ public class AspectJWeaver {
         }
     }
 
-    @Pointcut("!within(edu.illinois.agent..*) && (execution(public * *(..)) || execution(public *..new(..)))")
-    public void anyPublicMethod() {}
+    @Pointcut("!within(edu.illinois..*) && execution(public String *..*(String))")
+    public void anyGetMethod() {}
 
-    @Before("anyPublicMethod()")
-    public void beforeAnyPublicMethod(JoinPoint joinPoint) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    @Before("anyGetMethod()")
+    public void beforeAnyPublicGetMethod(JoinPoint joinPoint) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         if (isPropertySet == false && (System.getProperty(CTEST_GETTER) != null) || (System.getProperty(CTEST_SETTER) != null) || (System.getProperty(CTEST_INJECTOR) != null)) {
             setProperty();
             isPropertySet = true;
@@ -124,6 +122,20 @@ public class AspectJWeaver {
                     }
                 }
             }
+        }
+    }
+
+    @Pointcut("!within(edu.illinois..*) && execution(public void *..*(String, String))")
+    public void anySetMethod() {}
+
+    @Before("anySetMethod()")
+    public void beforeAnyPublicSetMethod(JoinPoint joinPoint) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        if (isPropertySet == false && (System.getProperty(CTEST_GETTER) != null) || (System.getProperty(CTEST_SETTER) != null) || (System.getProperty(CTEST_INJECTOR) != null)) {
+            setProperty();
+            isPropertySet = true;
+        }
+        if (isPropertySet) {
+            String methodSignature = joinPoint.getSignature().toString();
             for (WeaverUnit wunit : config_setter_list) {
                 if (methodSignature.contains(wunit.getSignature())) {
                     Object[] args = joinPoint.getArgs();
@@ -139,26 +151,31 @@ public class AspectJWeaver {
         }
     }
 
-    @After("anyPublicMethod()")
-    public void afterAnyPublicMethod(JoinPoint joinPoint) throws Exception {
-        if (isPropertySet == true) {
+
+    @Pointcut("!within(edu.illinois..*) && initialization(*..new(..))")
+    public void anyInjectMethod() {}
+
+    @After("anyInjectMethod()")
+    public void afterAnyPublicInjectMethod(JoinPoint joinPoint) throws Exception {
+        if (!isPropertySet && ((System.getProperty(CTEST_GETTER) != null) || (System.getProperty(CTEST_SETTER) != null) || (System.getProperty(CTEST_INJECTOR) != null))) {
+            setProperty();
+            isPropertySet = true;
+        }
+        if (isPropertySet) {
             String methodSignature = joinPoint.getSignature().toString();
-            if (methodSignature.contains("org.apache.hadoop.conf.Configuration()")) {
-                int i = 0;
-            }
             for (WeaverUnit wunit : config_injector_list) {
                 if (methodSignature.contains(wunit.getSignature())) {
                     Object[] args = joinPoint.getArgs();
                     if (wunit.getCaller() == null) {
-                        throw new Exception("Invalid arguments. caller should not be null");
+                        throw new Exception("Invalid arguments. Caller should not be null");
                     } else {
                         Class<?> configClass = Class.forName(wunit.getSignature().split("\\(")[0]);
-                        Method injectMethod = configClass.getMethod(wunit.getCaller(),String.class,String.class);
+                        Method injectMethod = configClass.getMethod(wunit.getCaller(), String.class, String.class);
                         ConfigTracker.injectConfig((arg1, arg2) -> {
                             try {
-                                injectMethod.invoke(arg1, arg2);
+                                injectMethod.invoke(joinPoint.getTarget(), arg1.toString(), arg2.toString());
                             } catch (IllegalAccessException | InvocationTargetException e) {
-                                throw new RuntimeException("wrong");
+                                throw new RuntimeException("Injection failed", e);
                             }
                         });
                     }

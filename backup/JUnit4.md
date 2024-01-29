@@ -9,8 +9,7 @@ For maven project, add the following dependency to your pom.xml:
     <dependency>
         <groupId>edu.illinois</groupId>
         <artifactId>ctest4j-junit4</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <scope>compile</scope>
+        <version>${ctest4j-version}</version>
     </dependency>
 </dependencies>
 ```

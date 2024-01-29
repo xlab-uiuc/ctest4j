@@ -21,7 +21,7 @@ Add the following CTest4J dependency to the `pom.xml` file of Hadoop Common modu
     <dependency>
         <groupId>edu.illinois</groupId>
         <artifactId>ctest4j-junit4</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${ctest4j-version}</version>
     </dependency>
     ...
 </dependencies>

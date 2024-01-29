@@ -19,13 +19,13 @@ Include the following dependency in your project build file:
 <dependency>
     <groupId>edu.illinois</groupId>
     <artifactId>ctest4j-junit${junit-version}</artifactId> <!-- or ctest4j-testng --> 
-    <version>1.0-SNAPSHOT</version>
+    <version>${ctest4j-version}</version>
 </dependency>
 ```
 #### Gradle
 ```groovy
 dependencies {
-    testImplementation 'edu.illinois:ctest4j-junit${junit-version}:1.0-SNAPSHOT' // or ctest4j-testng
+    testImplementation 'edu.illinois:ctest4j-junit${junit-version}:${ctest4j-version}' // or ctest4j-testng
 }
 ```
 Current CTest4J support JUnit4 and 5, and TestNG.

@@ -38,7 +38,7 @@ Add the CTest4J dependency to the pom.xml file of the HCommon module:
     <dependency>
         <groupId>edu.illinois</groupId>
         <artifactId>ctest4j-junit4</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${ctest4j-version}</version>
     </dependency>
     ...
 </dependencies>

@@ -1,1 +1,0 @@
-{"required": ["hadoop.ssl.require.client.cert","hadoop.ssl.client.conf","ssl.client.truststore.location"]}

@@ -1,1 +1,0 @@
-{"required": ["dfs.ha.fencing.ssh.connect-timeout","dfs.ha.fencing.ssh.private-key-files"]}

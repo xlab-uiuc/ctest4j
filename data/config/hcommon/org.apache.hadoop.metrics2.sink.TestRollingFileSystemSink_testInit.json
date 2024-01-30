@@ -1,1 +1,0 @@
-{"required": ["hadoop.security.auth_to_local.mechanism","hadoop.kerberos.min.seconds.before.relogin","hadoop.security.authentication","hadoop.kerberos.keytab.login.autorenewal.enabled","hadoop.user.group.metrics.percentiles.intervals","hadoop.security.auth_to_local"]}

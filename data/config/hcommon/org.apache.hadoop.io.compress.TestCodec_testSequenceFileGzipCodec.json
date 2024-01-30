@@ -1,1 +1,0 @@
-{"required": ["fs.defaultFS","zlib.compress.strategy","io.seqfile.compress.blocksize","fs.permissions.umask-mode","file.stream-buffer-size","zlib.compress.level","fs.local.block.size","fs.option.openfile.buffer.size","fs.file.impl.disable.cache","io.file.buffer.size","io.serializations"]}

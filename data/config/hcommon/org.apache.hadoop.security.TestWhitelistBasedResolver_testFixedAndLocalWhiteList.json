@@ -1,1 +1,0 @@
-{"required": ["hadoop.security.sasl.variablewhitelist.enable","hadoop.rpc.protection.non-whitelist","hadoop.rpc.protection","hadoop.security.sasl.fixedwhitelist.file"]}

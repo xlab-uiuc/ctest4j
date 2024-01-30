@@ -1,1 +1,0 @@
-{"required": ["hadoop.security.groups.cache.secs","hadoop.security.groups.negative-cache.secs","hadoop.security.groups.cache.background.reload.threads","hadoop.security.groups.shell.command.timeout","hadoop.security.group.mapping","hadoop.security.groups.cache.background.reload","hadoop.user.group.static.mapping.overrides","hadoop.security.groups.cache.warn.after.ms"]}

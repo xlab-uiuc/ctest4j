@@ -1,1 +1,0 @@
-{"required": ["io.compression.codec.lz4.use.lz4hc","io.compression.codec.lz4.buffersize"]}

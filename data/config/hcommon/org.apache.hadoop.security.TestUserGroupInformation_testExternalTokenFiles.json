@@ -1,1 +1,0 @@
-{"required": ["fs.defaultFS","hadoop.tokens","fs.client.resolve.remote.symlinks","hadoop.service.shutdown.timeout","file.stream-buffer-size","fs.local.block.size","fs.file.impl.disable.cache","io.file.buffer.size","hadoop.token.files","fs.permissions.umask-mode","fs.file.impl","file.bytes-per-checksum","fs.automatic.close"]}

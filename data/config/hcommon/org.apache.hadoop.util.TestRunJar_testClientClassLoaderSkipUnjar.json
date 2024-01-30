@@ -1,1 +1,0 @@
-{"required": ["fs.client.resolve.remote.symlinks","hadoop.service.shutdown.timeout","fs.local.block.size","fs.AbstractFileSystem.file.impl"]}

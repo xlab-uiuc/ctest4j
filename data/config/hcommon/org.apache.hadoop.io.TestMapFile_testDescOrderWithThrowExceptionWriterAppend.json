@@ -1,1 +1,0 @@
-{"required": ["io.map.index.interval","fs.defaultFS","io.seqfile.compress.blocksize","io.seqfile.compression.type","fs.permissions.umask-mode","file.stream-buffer-size","fs.local.block.size","fs.file.impl.disable.cache","io.file.buffer.size","io.serializations"]}

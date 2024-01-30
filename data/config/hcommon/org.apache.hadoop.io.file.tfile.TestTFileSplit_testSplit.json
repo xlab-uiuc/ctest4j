@@ -1,1 +1,0 @@
-{"required": ["fs.defaultFS","tfile.fs.input.buffer.size","fs.permissions.umask-mode","file.stream-buffer-size","fs.local.block.size","tfile.fs.output.buffer.size","fs.file.impl.disable.cache","io.file.buffer.size"]}

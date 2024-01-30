@@ -1,1 +1,0 @@
-{"required": ["fs.defaultFS","io.seqfile.compress.blocksize","file.stream-buffer-size","seq.io.sort.mb","fs.local.block.size","fs.option.openfile.buffer.size","io.sort.mb","fs.file.impl.disable.cache","io.file.buffer.size","io.sort.factor","io.seqfile.local.dir","fs.permissions.umask-mode","io.serializations","seq.io.sort.factor"]}

@@ -1,1 +1,0 @@
-{"required": ["fs.defaultFS","mapreduce.job.credentials.binary","fs.permissions.umask-mode","file.stream-buffer-size","fs.local.block.size","fs.file.impl.disable.cache","io.file.buffer.size"]}

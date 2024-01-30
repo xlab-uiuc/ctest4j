@@ -1,1 +1,0 @@
-{"required": ["fs.defaultFS","fs.client.resolve.remote.symlinks","fs.permissions.umask-mode","fs.local.block.size","fs.file.impl.disable.cache","fs.AbstractFileSystem.file.impl","io.serializations"]}

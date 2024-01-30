@@ -1,1 +1,0 @@
-{"required": ["ha.failover-controller.new-active.rpc-timeout.ms","ha.failover-controller.graceful-fence.rpc-timeout.ms","dummy.fence.key","ha.failover-controller.graceful-fence.connection.retries"]}

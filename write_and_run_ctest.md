@@ -1,7 +1,7 @@
-# Write and Run Configuration Test with CTest4J
+# Write and Run Configuration Test with Ctest4J
 
 ## Write Configuration Test
-The following example provides a glimpse at the minimum requirements for writing a configuration test with CTest4J.
+The following example provides a glimpse at the minimum requirements for writing a configuration test with Ctest4J.
 
 ```java
 import java.util.Map;
@@ -43,7 +43,7 @@ public class ExampleCTest {
 ```
 
 ### Annotations
-CTest4J provides 3 annotations to help developers to write configuration tests, which are listed below.
+Ctest4J provides 3 annotations to help developers to write configuration tests, which are listed below.
 
 | Annotations | Descriptions                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 |-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

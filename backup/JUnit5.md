@@ -1,4 +1,4 @@
-## JUnit5 CTest4J Runner
+## JUnit5 Ctest4J Runner
 
 ### Usage
 

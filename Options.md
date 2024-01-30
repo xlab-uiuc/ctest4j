@@ -1,4 +1,4 @@
-## CTest4J Argument Options
+## Ctest4J Argument Options
 
 ### General Options
 | Arguments            | Description                                                                            | Supported Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |

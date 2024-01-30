@@ -1,6 +1,6 @@
-# Example of Applying CTest4J to Hadoop Common
+# Example of Applying Ctest4J to Hadoop Common
 
-## Build the CTest4J
+## Build the Ctest4J
 
 ```bash
 $ mvn clean install -DskipTests
@@ -13,7 +13,7 @@ $ git clone git@github.com:apache/hadoop.git
 ```
 
 ## Add the runner dependency to Hadoop Common
-Add the following CTest4J dependency to the `pom.xml` file of Hadoop Common module.
+Add the following Ctest4J dependency to the `pom.xml` file of Hadoop Common module.
 
 ```xml
 <dependencies>
@@ -29,7 +29,7 @@ Add the following CTest4J dependency to the `pom.xml` file of Hadoop Common modu
 For a project that uses JUnit5 or TestNG, add `ctest4j-junit5` or `ctest4j-testng` dependency instead.
 
 ## Instrument the Configuration APIs
-CTest4J provides an automatic instrumentation for configuration APIs to enable configuration testing.
+Ctest4J provides an automatic instrumentation for configuration APIs to enable configuration testing.
 Follow the [instrumentation guidance](Instrumentation.md) to automatically instrument the configuration APIs.
 
 User can also manually instrument the configuration APIs by adding the following code to the configuration APIs:
@@ -104,7 +104,7 @@ To track the configuration parameters that are set by the test, add the `ConfigT
   }
 ```
 
-### Add CTest4J configuration injector to the Configuration constructor
+### Add Ctest4J configuration injector to the Configuration constructor
 Add the `ConfigTracker.injectConfig(setterMethod)` to the end of the Configuration constructor.
 The setterMethod takes two arguments, the first argument is the configuration parameter name, the second argument is the configuration parameter value.
 This is used to inject the configuration value with the configuration setter method during the test execution.
@@ -117,4 +117,4 @@ This is used to inject the configuration value with the configuration setter met
 ```
 
 ## Write and Run Configuration Tests
-You can follow the [write_and_run_ctest.md](write_and_run_ctest.md) to write and run configuration tests with CTest4J.
+You can follow the [write_and_run_ctest.md](write_and_run_ctest.md) to write and run configuration tests with Ctest4J.

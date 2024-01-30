@@ -1,18 +1,18 @@
-# CTest4J - Configuration Testing Framework for Java
+# Ctest4J - Configuration Testing Framework for Java
 
-## What is CTest4J?
+## What is Ctest4J?
 
-CTest4J is a practical configuration testing framework for Java.
-The goal of CTest4J is to help developers to write, run and maintain configuration tests easily and efficiently.
+Ctest4J is a practical configuration testing framework for Java.
+The goal of Ctest4J is to help developers to write, run and maintain configuration tests easily and efficiently.
 
-## Download CTest4J
+## Download Ctest4J
 ### Build From Source
 ```bash
 $ git clone https://github.com/xlab-uiuc/ctest4j.git && cd ctest4j
 $ mvn clean install
 ```
 
-### Add CTest4J to Your Project
+### Add Ctest4J to Your Project
 Include the following dependency in your project build file:
 #### Maven
 ```xml
@@ -28,12 +28,12 @@ dependencies {
     testImplementation 'edu.illinois:ctest4j-junit${junit-version}:${ctest4j-version}' // or ctest4j-testng
 }
 ```
-Current CTest4J support JUnit4 and 5, and TestNG.
+Current Ctest4J support JUnit4 and 5, and TestNG.
 
 ## Quick Start
-Please follow the [Guide to Get Started](Example.md) to run a simple example with CTest4J.
+Please follow the [Guide to Get Started](Example.md) to run a simple example with Ctest4J.
 
-Read the [Features & Options](Options.md) to learn more about all the features that CTest4J supports.
+Read the [Features & Options](Options.md) to learn more about all the features that Ctest4J supports.
 
 Follow the [Guide to Write and Run CTest](write_and_run_ctest.md) to write and run your own configuration tests.
 

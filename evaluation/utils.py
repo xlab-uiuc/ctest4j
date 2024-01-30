@@ -2,7 +2,7 @@ import config
 from pathlib import Path
 
 def LOG(msg):
-    print(f"[CTest4J-EVAL] {msg}")
+    print(f"[Ctest4J-EVAL] {msg}")
 
 
 def get_junit_version(proj) -> str:

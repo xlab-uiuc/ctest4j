@@ -1,11 +1,11 @@
 # Automatic Configuration API Instrumentation with AspectJ
 
 ## Introduction
-CTest4J provides automatic instrumentation for configuration APIs to enable configuration testing. 
+Ctest4J provides automatic instrumentation for configuration APIs to enable configuration testing. 
 It utilizes AspectJ Load-Time Weaving to inject instrumentation code into the configuration API methods.
 
 ## Arguments
-To enable automatic instrumentation, specify the following arguments when running the CTest4J:
+To enable automatic instrumentation, specify the following arguments when running the Ctest4J:
 | Arguments      | Purpose                                                                                                     | Supported Format                                                                                            |
 |----------------|-------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
 | ctest.getter   | Specifies the method for getting the value of a configuration parameter.    | Signature1#(Optional)Pos1#(Optional)TransferMethod1;Signature2#(Optional)Pos2#(Optional)TransferMethod2;... |
@@ -18,8 +18,8 @@ Note:
 ## Example of Applying AspectJ to HCommon
 Here we show an example with Hadoop Common to enable configuration testing.
 
-### Build the CTest4J
-First, compile the CTest4J using Maven:
+### Build the Ctest4J
+First, compile the Ctest4J using Maven:
 ```bash
 $ mvn clean install -DskipTests
 ```
@@ -29,8 +29,8 @@ $ git clone git@github.com:apache/hadoop.git
 ```
 
 ### Add dependencies to HCommon
-#### a. CTest4J Dependency
-Add the CTest4J dependency to the pom.xml file of the HCommon module:
+#### a. Ctest4J Dependency
+Add the Ctest4J dependency to the pom.xml file of the HCommon module:
 
 ```xml
 <dependencies>

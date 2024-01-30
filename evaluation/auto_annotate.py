@@ -25,11 +25,11 @@ JAVA_DEPENDENCY = {"junit4": "    <dependency>\n      <groupId>edu.illinois</gro
                      "testng": "    <dependency>\n      <groupId>edu.illinois</groupId>\n      <artifactId>ctest4j-testng</artifactId>\n      <version>1.0-SNAPSHOT</version>\n      <scope>compile</scope>\n    </dependency>\n"
                    }
 
-IMPORT_NORMAL = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
+IMPORT_NORMAL = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnitRunner;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
                  "junit5": "import org.junit.jupiter.api.extension.ExtendWith;\nimport edu.illinois.CTestJUnit5Extension;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
                  "testng": "import org.testng.annotations.Listeners;\nimport edu.illinois.CTestListener;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
 
-IMPORT_NORMAL_2 = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnit4Runner;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
+IMPORT_NORMAL_2 = {"junit4": "import org.junit.runner.RunWith;\nimport edu.illinois.CTestJUnitRunner;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
                    "junit5": "import org.junit.jupiter.api.extension.ExtendWith;\nimport edu.illinois.CTestJUnit5Extension;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n",
                    "testng": "import org.testng.annotations.Listeners;\nimport edu.illinois.CTestListener;\nimport edu.illinois.CTestClass;\nimport edu.illinois.CTest;\n\n"}
 
@@ -491,8 +491,8 @@ def annotate_test_method_2(class_list: List, target_dir: str, ctest_mapping_dir:
                 with open(full_file_name, "r+") as f:
                     contents = f.readlines()
                     for index, content in enumerate(contents):
-                        # if "import edu.illinois.CTestJUnit4Runner;" in content:
-                        #     contents[index] = contents[index].replace("import edu.illinois.CTestJUnit4Runner", "import edu.illinois.CTestJUnit4Runner")
+                        # if "import edu.illinois.CTestJUnitRunner;" in content:
+                        #     contents[index] = contents[index].replace("import edu.illinois.CTestJUnitRunner", "import edu.illinois.CTestJUnitRunner")
                         if "@CTestClass()" in content:
                             contents[index] = content.replace("@CTestClass()", "@CTestClass(configMappingFile=\"" + ctest_mapping_dir + "/" + class_name + ".json\")")
                             class_list.remove(class_name)

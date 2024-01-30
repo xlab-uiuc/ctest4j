@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
  * Author: Shuai Wang
  * Date:  11/29/23
  */
-@RunWith(CTestJUnit4Runner.class)
+@RunWith(CTestJUnitRunner.class)
 @CTestClass(
         value = {"parameter1", "parameter2"},
         regex = "regex-parameter(1|2)",

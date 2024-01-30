@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
  * Author: Shuai Wang
  * Date:  11/10/23
  */
-@RunWith(CTestJUnit4Runner.class)
+@RunWith(CTestJUnitRunner.class)
 @CTestClass(configMappingFile = "src/test/resources/designB/FromAllTest.json",
         value = {"parameter1", "parameter2"}, regex = "regex-parameter(1|2)")
 public class FromAllTest {

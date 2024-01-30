@@ -21,11 +21,11 @@ import java.util.concurrent.TimeUnit;
 import static edu.illinois.Names.CONFIG_SAVE_DIR;
 
 /**
- * Design B: Only CTestClass Annotation and treat all the test methods as @CTest
+ * Ctest4j JUnit4 Runner
  * Author: Shuai Wang
  * Date:  11/10/23
  */
-public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRunner {
+public class CTestJUnitRunner extends BlockJUnit4ClassRunner implements CTestRunner {
     protected Set<String> classLevelParameters;
     protected Map<String, Set<String>> methodLevelParametersFromMappingFile;
     protected final ConfigUsage configUsage = new ConfigUsage();
@@ -33,7 +33,7 @@ public class CTestJUnit4Runner extends BlockJUnit4ClassRunner implements CTestRu
     /** The set of configuration parameters to be tested for runtime selection purpose. */
     protected final Set<String> selectionParams = new HashSet<>();
 
-    public CTestJUnit4Runner(Class<?> klass) throws InitializationError, IOException {
+    public CTestJUnitRunner(Class<?> klass) throws InitializationError, IOException {
         super(klass);
         initializeRunner(klass);
     }

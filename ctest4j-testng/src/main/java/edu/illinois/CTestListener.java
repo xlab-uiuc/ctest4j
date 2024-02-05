@@ -100,7 +100,7 @@ public class CTestListener implements CTestRunner, IClassListener, IInvokedMetho
 
     @Override
     public Set<String> getUnionClassParameters(Set<String> classLevelParameters, String classConfigFile, String classRegex) throws IOException {
-        classLevelParameters.addAll(getClasssParametersFromMappingFile(classConfigFile));
+        classLevelParameters.addAll(getClassParametersFromMappingFile(classConfigFile));
         if (!classRegex.isEmpty()) {
             classLevelParameters.addAll(getParametersFromRegex(classRegex));
         }

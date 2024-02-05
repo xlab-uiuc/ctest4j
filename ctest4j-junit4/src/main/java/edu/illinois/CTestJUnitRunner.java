@@ -214,7 +214,7 @@ public class CTestJUnitRunner extends BlockJUnit4ClassRunner implements CTestRun
                 } catch (Throwable throwable) {
                     fromTestThrowable = throwable;
                 } finally {
-                    if (shouldThorwException(fromTestThrowable)) {
+                    if (shouldThrowException(fromTestThrowable)) {
                         throw fromTestThrowable;
                     }
                     ConfigUsage.bufferForUpdate(configUsage, testClassName, method.getName());
@@ -275,7 +275,7 @@ public class CTestJUnitRunner extends BlockJUnit4ClassRunner implements CTestRun
 
     @Override
     public Set<String> getUnionClassParameters(Set<String> classLevelParameters, String classConfigFile, String classRegex) throws IOException {
-        classLevelParameters.addAll(getClasssParametersFromMappingFile(classConfigFile));
+        classLevelParameters.addAll(getClassParametersFromMappingFile(classConfigFile));
         if (!classRegex.isEmpty()) {
             classLevelParameters.addAll(getParametersFromRegex(classRegex));
         }

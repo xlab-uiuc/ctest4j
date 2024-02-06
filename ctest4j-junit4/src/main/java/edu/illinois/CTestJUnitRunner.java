@@ -243,14 +243,4 @@ public class CTestJUnitRunner extends BlockJUnit4ClassRunner implements CTestRun
             }
         };
     }
-
-    @Override
-    public Set<String> getUnionClassParameters(Set<String> classLevelParameters, String classConfigFile, String classRegex) throws IOException {
-        classLevelParameters.addAll(getClassParametersFromMappingFile(classConfigFile));
-        if (!classRegex.isEmpty()) {
-            classLevelParameters.addAll(getParametersFromRegex(classRegex));
-        }
-        return classLevelParameters;
-    }
-
 }

@@ -66,15 +66,6 @@ public class CTestListener implements CTestRunner, IClassListener, IInvokedMetho
     }
 
     @Override
-    public Set<String> getUnionClassParameters(Set<String> classLevelParameters, String classConfigFile, String classRegex) throws IOException {
-        classLevelParameters.addAll(getClassParametersFromMappingFile(classConfigFile));
-        if (!classRegex.isEmpty()) {
-            classLevelParameters.addAll(getParametersFromRegex(classRegex));
-        }
-        return classLevelParameters;
-    }
-
-    @Override
     public void initializeRunner(Object context) throws AnnotationFormatError, IOException {
         ITestClass testClass = (ITestClass) context;
         className = testClass.getName();

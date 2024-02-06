@@ -175,11 +175,11 @@ public interface CTestRunner {
      * @return a set of parameters that every test method in the class must use
      */
     default Set<String> getUnionClassParameters(Set<String> classLevelParameters, String classConfigFile, String classRegex) throws IOException {
-        Set<String> result = new HashSet<>(getValueAndRegexClassParameters(classLevelParameters, classRegex));
-        if (!classConfigFile.isEmpty()) {
-            result.addAll(getParametersFromMappingFile(classConfigFile));
+        classLevelParameters.addAll(getClassParametersFromMappingFile(classConfigFile));
+        if (!classRegex.isEmpty()) {
+            classLevelParameters.addAll(getParametersFromRegex(classRegex));
         }
-        return result;
+        return classLevelParameters;
     }
 
     /**

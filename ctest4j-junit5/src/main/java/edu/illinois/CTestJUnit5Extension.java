@@ -73,16 +73,6 @@ public class CTestJUnit5Extension implements CTestRunner, ExecutionCondition,
     }
 
     @Override
-    public Set<String> getUnionClassParameters(Set<String> classLevelParameters, String classConfigFile, String classRegex) throws IOException {
-        classLevelParameters.addAll(getClassParametersFromMappingFile(classConfigFile));
-        if (!classRegex.isEmpty()) {
-            classLevelParameters.addAll(getParametersFromRegex(classRegex));
-        }
-        return classLevelParameters;
-    }
-
-
-    @Override
     public void initializeRunner(Object context) throws AnnotationFormatError, IOException {
         ExtensionContext extensionContext = (ExtensionContext) context;
         // Retrieve class-level parameters

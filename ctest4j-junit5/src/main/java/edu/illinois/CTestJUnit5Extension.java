@@ -62,44 +62,10 @@ public class CTestJUnit5Extension implements CTestRunner, ExecutionCondition,
      */
     @Override
     public void afterEach(ExtensionContext extensionContext) throws IOException {
-        if (Options.mode == Modes.BASE) {
-            return;
-        }
-        ConfigUsage.bufferForUpdate(configUsage, className, methodName);
-        if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
-            // Retrieve method-level parameters
-            CTest cTest = extensionContext.getRequiredTestMethod().getAnnotation(CTest.class);
-            if (cTest != null) {
-                boolean hasUnusedExpected = isUnUsedParamException(cTest.expected());
-                boolean meetUnusedException = false;
-                for (String param : getUnionMethodParameters(className, methodName, cTest.regex(),
-                        classLevelParameters, methodLevelParametersFromMappingFile,
-                        new HashSet<>(Arrays.asList(cTest.value())))) {
-                    if (!ConfigTracker.isParameterUsed(className, methodName, param)) {
-                        if (hasUnusedExpected) {
-                            meetUnusedException = true;
-                            break;
-                        }
-                        throw new UnUsedConfigParamException(param + " was not used during the test.");
-                    }
-                }
-                if (hasUnusedExpected && !meetUnusedException) {
-                    throw new RuntimeException("The test method " + methodName + " does not meet the expected exception " + cTest.expected());
-                }
-            }
-            Test test = extensionContext.getRequiredTestMethod().getAnnotation(Test.class);
-            if (test != null) {
-                Log.INFO(TRACKING_LOG_PREFIX, className + "#" + methodName,
-                        "uses configuration parameters: " + ConfigTracker.getAllUsedParams(className, methodName) + " and set parameters: " +
-                                ConfigTracker.getAllSetParams(className, methodName));
-                for (String param : getUnionMethodParameters(className, methodName, "",
-                        classLevelParameters, methodLevelParametersFromMappingFile, new HashSet<>())) {
-                    if (!ConfigTracker.isParameterUsed(className, methodName, param)) {
-                        throw new UnUsedConfigParamException(param + " was not used during the test.");
-                    }
-                }
-            }
-        }
+        endTestMethod(configUsage, className, methodName,
+                extensionContext.getRequiredTestMethod().getAnnotation(CTest.class),
+                extensionContext.getRequiredTestMethod().getAnnotation(Test.class),
+                classLevelParameters, methodLevelParametersFromMappingFile);
     }
 
     @Override

@@ -39,6 +39,46 @@ public interface CTestRunner {
         Utils.setCurTestFullNameToPTid(Utils.getPTid(), testClassName, testMethodName);
     }
 
+    default void endTestMethod(ConfigUsage configUsage, String testClassName, String testMethodName,
+                               CTest cTest, Object testAnnotation,
+                               Set<String> classLevelParameters,
+                               Map<String, Set<String>> methodLevelParametersFromMappingFile) {
+        if (Options.mode == Modes.BASE) {
+            return;
+        }
+        ConfigUsage.bufferForUpdate(configUsage, testClassName, testMethodName);
+        if (cTest != null) {
+            checkConfigurationParameterUsage(testClassName, testMethodName, cTest.regex(), cTest.value(),
+                    cTest.expected(), classLevelParameters, methodLevelParametersFromMappingFile);
+        } else if (testAnnotation != null) {
+            Class<? extends Throwable> annotationExpected = null;
+            if (testAnnotation instanceof org.junit.Test) {
+                annotationExpected = ((org.junit.Test) testAnnotation).expected();
+            }
+            checkConfigurationParameterUsage(testClassName, testMethodName, "", new String[]{},
+                    annotationExpected, classLevelParameters, methodLevelParametersFromMappingFile);
+        }
+    }
+
+    default void checkConfigurationParameterUsage(String testClassName, String methodName,
+                                                  String annotationRegex, String[] annotationValue,
+                                                  Class<? extends Throwable> annotationExpected,
+                                                  Set<String> classLevelParameters,
+                                                  Map<String, Set<String>> methodLevelParametersFromMappingFile) throws UnUsedConfigParamException {
+        if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
+            for (String param : getUnionMethodParameters(testClassName, methodName, annotationRegex,
+                            classLevelParameters, methodLevelParametersFromMappingFile,
+                            new HashSet<>(Arrays.asList(annotationValue)))) {
+                if (!ConfigTracker.isParameterUsed(testClassName, methodName, param)) {
+                    if (isUnUsedParamException(annotationExpected)) {
+                        return;
+                    }
+                    throw new UnUsedConfigParamException(param + " was not used during the test.");
+                }
+            }
+        }
+    }
+
     /**
      * Initialize the class-level and method-level parameters from the mapping file.
      */
@@ -196,6 +236,9 @@ public interface CTestRunner {
      * Check whether the exception is an UnUsedConfigParamException.
      */
     default boolean isUnUsedParamException(Class<? extends Throwable> expected) {
+        if (expected == null) {
+            return false;
+        }
         return expected.isAssignableFrom(UnUsedConfigParamException.class);
     }
 

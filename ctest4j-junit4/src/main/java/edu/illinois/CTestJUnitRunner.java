@@ -217,37 +217,9 @@ public class CTestJUnitRunner extends BlockJUnit4ClassRunner implements CTestRun
                     if (shouldThrowException(fromTestThrowable)) {
                         throw fromTestThrowable;
                     }
-                    ConfigUsage.bufferForUpdate(configUsage, testClassName, method.getName());
-                    if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
-                        CTest cTest = method.getAnnotation(CTest.class);
-                        if (cTest != null) {
-                            for (String param :
-                                    getUnionMethodParameters(testClassName, method.getName(), cTest.regex(),
-                                            classLevelParameters, methodLevelParametersFromMappingFile,
-                                            new HashSet<>(Arrays.asList(cTest.value())))) {
-                                if (!ConfigTracker.isParameterUsed(testClassName, method.getName(), param)) {
-                                    if (isUnUsedParamException(cTest.expected())) {
-                                        return;
-                                    }
-                                    throw new UnUsedConfigParamException(param + " was not used during the test.");
-                                }
-                            }
-                        }
-                        Test testAnnotation = method.getAnnotation(Test.class);
-                        if (testAnnotation != null) {
-                            for (String param :
-                                    getUnionMethodParameters(testClassName, method.getName(), "",
-                                            classLevelParameters, methodLevelParametersFromMappingFile,
-                                            new HashSet<>())) {
-                                if (!ConfigTracker.isParameterUsed(testClassName, method.getName(), param)) {
-                                    if (isUnUsedParamException(testAnnotation.expected())) {
-                                        return;
-                                    }
-                                    throw new UnUsedConfigParamException(param + " was not used during the test.");
-                                }
-                            }
-                        }
-                    }
+                    endTestMethod(configUsage, testClassName, method.getName(),
+                            method.getAnnotation(CTest.class), method.getAnnotation(Test.class),
+                            classLevelParameters, methodLevelParametersFromMappingFile);
                 }
             }
         };

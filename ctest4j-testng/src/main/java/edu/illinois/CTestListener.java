@@ -46,7 +46,6 @@ public class CTestListener implements CTestRunner, IClassListener, IInvokedMetho
             return;
         }
         startTestMethod(method.getTestMethod().getTestClass().getName(), method.getTestMethod().getMethodName());
-        ConfigTracker.startTestMethod(method.getTestMethod().getTestClass().getName(), method.getTestMethod().getMethodName());
         methodName = method.getTestMethod().getMethodName();
     }
 

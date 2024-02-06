@@ -193,7 +193,6 @@ public class CTestJUnitRunner extends BlockJUnit4ClassRunner implements CTestRun
             @Override
             public void evaluate() throws Throwable {
                 startTestMethod(method.getDeclaringClass().getName(), method.getName());
-                ConfigTracker.startTestMethod(method.getDeclaringClass().getName(), method.getName());
                 originalStatement.evaluate();
             }
         };

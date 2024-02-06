@@ -51,7 +51,6 @@ public class CTestJUnit5Extension implements CTestRunner, ExecutionCondition,
             return;
         }
         startTestMethod(extensionContext.getRequiredTestClass().getName(), extensionContext.getRequiredTestMethod().getName());
-        ConfigTracker.startTestMethod(extensionContext.getRequiredTestClass().getName(), extensionContext.getRequiredTestMethod().getName());
         methodName = extensionContext.getRequiredTestMethod().getName();
     }
 

@@ -37,6 +37,7 @@ public interface CTestRunner {
      */
     default void startTestMethod(String testClassName, String testMethodName) {
         Utils.setCurTestFullNameToPTid(Utils.getPTid(), testClassName, testMethodName);
+        ConfigTracker.startTestMethod(testClassName, testMethodName);
     }
 
     default void endTestMethod(ConfigUsage configUsage, String testClassName, String testMethodName,

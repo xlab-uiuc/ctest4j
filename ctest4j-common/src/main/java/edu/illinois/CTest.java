@@ -1,6 +1,5 @@
 package edu.illinois;
 
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -8,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * Author: Shuai Wang
- * Date:  1/18/24
+ * Date:  2/5/24
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
@@ -19,6 +18,7 @@ public @interface CTest {
     String configMappingFile() default "";
     String regex() default "";
 
+    /** =============================== Copied From @Test annotation =================================== */
     static class None extends Throwable {
         private static final long serialVersionUID = 1L;
 
@@ -27,4 +27,6 @@ public @interface CTest {
     }
 
     Class<? extends Throwable> expected() default None.class;
+
+    long timeout() default 0L;
 }

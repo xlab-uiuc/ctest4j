@@ -171,7 +171,7 @@ def add_import_and_runwith(f=None, test_class: bool=True, test_module: str="juni
             if package_or_import_seen and re.match(".*class +\w+.*{", content) is not None:
                 if not abstract_class and test_class:
                     # CHANGE content -> contents[index]
-                    contents[index] = "@RunWith(CTestJUnit4Runner.class)\n" + content
+                    contents[index] = "@RunWith(CTestJUnitRunner.class)\n" + content
                     print_log("normal import and @RunWith added for " + f.name)
                 if not import_added:
                     if not abstract_class and test_class:
@@ -243,7 +243,7 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
             if package_or_import_seen and re.match(".*class +\w+.*{", content) is not None:
                 if not abstract_class and test_class:
                     # CHANGE content -> contents[index]
-                    contents[index] = "@RunWith(CTestJUnit4Runner.class)\n@CTestClass()\n" + content
+                    contents[index] = "@RunWith(CTestJUnitRunner.class)\n@CTestClass()\n" + content
                     print_log("normal import and @RunWith added for " + f.name)
                 if not import_added:
                     if not abstract_class and test_class:
@@ -266,7 +266,7 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
                 if not abstract_class and test_class:
                     # CHANGE content -> contents[index]
                     if test_module == "junit4":
-                        contents[index] = "@RunWith(CTestJUnit4Runner.class)\n@CTestClass()\n" + content
+                        contents[index] = "@RunWith(CTestJUnitRunner.class)\n@CTestClass()\n" + content
                     elif test_module == "junit5":
                         contents[index] = "@ExtendWith(CTestJUnit5Extension.class)\n@CTestClass()\n" + content
                     elif test_module == "testng":

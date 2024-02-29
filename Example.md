@@ -136,6 +136,6 @@ After adding the Ctest4J dependency and instrumenting the configuration APIs, bu
 $ mvn clean install -DskipTests
 ```
 
-## Write and Run Configuration Tests
+## Run an Example Ctest in Hadoop Common
 Now your Hadoop Common module is ready for configuration testing.\
-You can follow the [write_and_run_ctest.md](write_and_run_ctest.md) to write and run configuration tests with Ctest4J.
+You can follow the [document here](run_hcommon_example_ctest.md) to run a simple Ctest example in Hadoop Common with Ctest4J.

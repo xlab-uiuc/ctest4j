@@ -31,7 +31,7 @@ dependencies {
 Current Ctest4J support JUnit4 and 5, and TestNG.
 
 ## Quick Start
-Please follow the [Guide to Get Started](Example.md) to run a simple example with Ctest4J.
+Please follow the [Guide to Support Ctest4J](Example.md) and [Guide to Run Ctest with Ctest4J](run_hcommon_example_ctest.md) to run a simple Ctest example in Hadoop Common with Ctest4J.
 
 Read the [Features & Options](Options.md) to learn more about all the features that Ctest4J supports.
 

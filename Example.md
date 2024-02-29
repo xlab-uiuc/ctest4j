@@ -4,7 +4,7 @@
 
 ```bash
 $ git clone git@github.com:xlab-uiuc/ctest4j.git
-$ cd ctest4j && mvn clean install -DskipTests
+$ cd ctest4j && mvn clean install -DskipTests && cd ..
 ```
 
 ## Clone the Hadoop repository
@@ -43,6 +43,10 @@ Follow the [instrumentation guidance](Instrumentation.md) to automatically instr
 User can manually instrument the configuration APIs by adding the following code to the configuration APIs:
 ### Add ctest-runner configuration tracker to the Configuration getter methods
 The Configuration class of `Hadoop Common` is located at `hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/conf/Configuration.java`.\
+Make sure you are under `hadoop/hadoop-common-project/hadoop-common` directory, and open the `Configuration.java` file.
+```bash
+$ emacs $(find . -name "Configuration.java")  # or replace emacs with your favorite editor
+```
 To track the usage of configuration parameters, add the `ConfigTracker.markParamAsUsed(paramName)` to the getter methods of the Configuration class.
 ```java
    public String get(String name, String defaultValue) {
@@ -125,5 +129,12 @@ This is used to inject the configuration value with the configuration setter met
    }
 ```
 
+### Build the Hadoop Common module
+After adding the Ctest4J dependency and instrumenting the configuration APIs, build the Hadoop Common module.
+```bash
+$ mvn clean install -DskipTests
+```
+
 ## Write and Run Configuration Tests
+Now your Hadoop Common module is ready for configuration testing.\
 You can follow the [write_and_run_ctest.md](write_and_run_ctest.md) to write and run configuration tests with Ctest4J.

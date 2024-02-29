@@ -11,6 +11,7 @@ $ cd ctest4j && mvn clean install -DskipTests && cd ..
 
 ```bash
 $ git clone git@github.com:apache/hadoop.git
+$ git checkout rel/release-3.3.6 && git checkout -b ctest4j-example
 ```
 
 ## Add the runner dependency to Hadoop Common

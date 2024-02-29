@@ -56,8 +56,12 @@ Running a configuration test is the same as running a normal test.
 For example with Maven Surefire, you can run a configuration test with the following command:
 ```bash
 $ mvn surefire:test -Dtest=ExampleCTest
-``` 
-The runner can take a few arguments to control the behavior of the test, which are listed below.
+```
 
-### Arguments
-Please refer to [Options](Options.md) for more details about the arguments.
+The example command for running the above Ctest is:
+```bash
+$ mvn surefire:test -Dtest=ExampleCTest -Dconfig.inject.cli="server.ip.address=127.0.0.1,server.port=8080,server.max.connections=50"
+```
+This command will inject the configuration under test through the Ctest4j `config.inject.cli` argument.
+
+Ctest4j can also take other arguments to control the behavior of the test, please refer to [Options](Options.md) for more details.

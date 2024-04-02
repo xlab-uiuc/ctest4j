@@ -14,6 +14,7 @@
         <module>ctest4j-junit5</module>
         <module>ctest4j-maven-plugin</module>
         <module>ctest4j-testng</module>
+        <module>ctest4j-logging</module>
     </modules>
     <dependencies>
         <dependency>

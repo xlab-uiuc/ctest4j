@@ -37,6 +37,47 @@ public interface CTestRunner {
      */
     default void startTestMethod(String testClassName, String testMethodName) {
         Utils.setCurTestFullNameToPTid(Utils.getPTid(), testClassName, testMethodName);
+        ConfigTracker.startTestMethod(testClassName, testMethodName);
+    }
+
+    default void endTestMethod(ConfigUsage configUsage, String testClassName, String testMethodName,
+                               CTest cTest, Object testAnnotation,
+                               Set<String> classLevelParameters,
+                               Map<String, Set<String>> methodLevelParametersFromMappingFile) {
+        if (Options.mode == Modes.BASE) {
+            return;
+        }
+        ConfigUsage.bufferForUpdate(configUsage, testClassName, testMethodName);
+        if (cTest != null) {
+            checkConfigurationParameterUsage(testClassName, testMethodName, cTest.regex(), cTest.value(),
+                    cTest.expected(), classLevelParameters, methodLevelParametersFromMappingFile);
+        } else if (testAnnotation != null) {
+            Class<? extends Throwable> annotationExpected = null;
+            if (testAnnotation instanceof org.junit.Test) {
+                annotationExpected = ((org.junit.Test) testAnnotation).expected();
+            }
+            checkConfigurationParameterUsage(testClassName, testMethodName, "", new String[]{},
+                    annotationExpected, classLevelParameters, methodLevelParametersFromMappingFile);
+        }
+    }
+
+    default void checkConfigurationParameterUsage(String testClassName, String methodName,
+                                                  String annotationRegex, String[] annotationValue,
+                                                  Class<? extends Throwable> annotationExpected,
+                                                  Set<String> classLevelParameters,
+                                                  Map<String, Set<String>> methodLevelParametersFromMappingFile) throws UnUsedConfigParamException {
+        if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
+            for (String param : getUnionMethodParameters(testClassName, methodName, annotationRegex,
+                            classLevelParameters, methodLevelParametersFromMappingFile,
+                            new HashSet<>(Arrays.asList(annotationValue)))) {
+                if (!ConfigTracker.isParameterUsed(testClassName, methodName, param)) {
+                    if (isUnUsedParamException(annotationExpected)) {
+                        return;
+                    }
+                    throw new UnUsedConfigParamException(param + " was not used during the test.");
+                }
+            }
+        }
     }
 
     /**
@@ -60,7 +101,8 @@ public interface CTestRunner {
     }
 
     /**
-     * Resolve the mapping file path. If the mapping file path is empty, try the default mapping file path.
+     * Resolve the mapping file path.
+     * If the mapping file path is empty, try the default mapping file path under the @CONFIG_MAPPING_DIR.
      */
     private String resolveMappingFilePath(String mappingFile, String testClassName) {
         if (mappingFile.isEmpty()) {
@@ -82,10 +124,7 @@ public interface CTestRunner {
     }
 
     /**
-     * Get the parameters from a configuration file.
-     * @param file the path of the configuration file
-     * @return the set of parameters that must be used
-     * @throws IOException if the parsing fails
+     * Get the configuration parameter name set from a configuration file.
      */
     default Set<String> getParametersFromMappingFile(String file) throws IOException {
         ConfigurationParser parser = getParser(Utils.getFileType(file));
@@ -95,28 +134,19 @@ public interface CTestRunner {
     /**
      * Get the class-level parameters from a configuration mapping file.
      */
-    default Set<String> getClasssParametersFromMappingFile(String configMappingFile) throws IOException {
+    default Set<String> getClassParametersFromMappingFile(String configMappingFile) throws IOException {
         ConfigurationParser parser = getParser(Utils.getFileType(configMappingFile));
         return parser.getClassLevelRequiredConfigParam(configMappingFile);
-    }
-
-    default Map<String, Set<String>> getAllMethodLevelParametersFromMappingFile(String configMappingFile) throws IOException {
-        ConfigurationParser parser = getParser(Utils.getFileType(configMappingFile));
-        return parser.getMethodLevelRequiredConfigParam(configMappingFile);
     }
 
     /**
      * Get the method-level parameters from a configuration mapping file.
      */
-    default Set<String> getMethodParametersFromMappingFile(String configMappingFile, String methodName) throws IOException {
+    default Map<String, Set<String>> getAllMethodLevelParametersFromMappingFile(String configMappingFile) throws IOException {
         ConfigurationParser parser = getParser(Utils.getFileType(configMappingFile));
-        Map<String, Set<String>> methodLevelRequiredConfigParam = parser.getMethodLevelRequiredConfigParam(configMappingFile);
-        if (methodLevelRequiredConfigParam.containsKey(methodName)) {
-            return methodLevelRequiredConfigParam.get(methodName);
-        } else {
-            return new HashSet<>();
-        }
+        return parser.getMethodLevelRequiredConfigParam(configMappingFile);
     }
+
 
     /**
      * Get the parser for a configuration file based on its file type.
@@ -140,18 +170,20 @@ public interface CTestRunner {
     }
 
     /**
+     * Ctest configuration parameter usage checking:
      * Get all the parameters for a test class that every test method in the class must use.
      * @return a set of parameters that every test method in the class must use
      */
     default Set<String> getUnionClassParameters(Set<String> classLevelParameters, String classConfigFile, String classRegex) throws IOException {
-        Set<String> result = new HashSet<>(getValueAndRegexClassParameters(classLevelParameters, classRegex));
-        if (!classConfigFile.isEmpty()) {
-            result.addAll(getParametersFromMappingFile(classConfigFile));
+        classLevelParameters.addAll(getClassParametersFromMappingFile(classConfigFile));
+        if (!classRegex.isEmpty()) {
+            classLevelParameters.addAll(getParametersFromRegex(classRegex));
         }
-        return result;
+        return classLevelParameters;
     }
 
     /**
+     * Ctest configuration parameter usage checking:
      * Get the parameters from the regex and the parameters from the class-level annotation.
      */
     default Set<String> getValueAndRegexClassParameters(Set<String> classLevelParameters, String classRegex) throws IOException {
@@ -163,11 +195,11 @@ public interface CTestRunner {
     }
 
     /**
+     * Ctest configuration parameter usage checking:
      * Get all the parameters for a test method.
      * @return a set of parameters that the test method must use
      * @throws IOException if the parsing fails
      */
-
     default Set<String> getUnionMethodParameters(String testClassName, String methodName, String methodRegex,
                                                  Set<String> classLevelParameters, Map<String, Set<String>> methodLevelParametersFromMappingFile,
                                                  Set<String> methodLevelParamsFromAnnotation) {
@@ -190,31 +222,9 @@ public interface CTestRunner {
     }
 
     /**
-     * Search whether there is a default place that specify the file
-     * @return the set of parameters that must be used
-     * @throws IOException if the parsing fails
+     * Ctest configuration mapping file creation:
+     * Write the used parameters to a JSON file.
      */
-    default Set<String> getRequiredParametersFromDefaultFile(String className, String methodName) throws IOException {
-        Set<String> params = new HashSet<>();
-        File defaultFile = new File(CONFIG_MAPPING_DIR, Utils.getTestMethodFullName(className, methodName) + ".json");
-        if (defaultFile.exists()) {
-            params.addAll(getParametersFromMappingFile(defaultFile.getAbsolutePath()));
-        }
-        return params;
-    }
-
-/*
-    default void checkCTestParameterUsage(Set<String> params) throws UnUsedConfigParamException {
-        if (Options.mode == Modes.CHECKING || Options.mode == Modes.DEFAULT) {
-            for (String param : params) {
-                if (!ConfigTracker.isParameterUsed(param)) {
-                    throw new UnUsedConfigParamException(param + " was not used during the test.");
-                }
-            }
-        }
-    }
-*/
-
     default void writeConfigUsageToJson(ConfigUsage configUsage, File targetFile) {
         if (saveUsedParamToFile) {
             ConfigUsage.updateAllConfigUsage(configUsage);
@@ -223,19 +233,28 @@ public interface CTestRunner {
     }
 
     /**
+     * Ctest configuration parameter usage checking:
      * Check whether the exception is an UnUsedConfigParamException.
      */
     default boolean isUnUsedParamException(Class<? extends Throwable> expected) {
+        if (expected == null) {
+            return false;
+        }
         return expected.isAssignableFrom(UnUsedConfigParamException.class);
     }
 
     /**
+     * Ctest configuration parameter usage checking:
      * Swallow the exception thrown from test method if the exception is an Assertion Error that expects UnUsedConfigParamException.
      */
-    default boolean shouldThorwException(Throwable throwable) {
+    default boolean shouldThrowException(Throwable throwable) {
         return throwable != null && !throwable.getMessage().equals("Expected exception: edu.illinois.UnUsedConfigParamException");
     }
 
+    /**
+     * Ctest selection:
+     * Check whether the current test is ignored.
+     */
     default boolean isCurrentTestIgnored(Set<String> targetParams, Set<String> usedParams) {
         if (Names.CTEST_RUNTIME_SELECTION && !targetParams.isEmpty()) {
             // return true if none of the parameters in targetParams is used

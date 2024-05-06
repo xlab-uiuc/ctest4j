@@ -33,13 +33,7 @@ Read the [Features & Options](Options.md) to learn more about all the features t
 Follow the [Guide to Write and Run CTest](write_and_run_ctest.md) to write and run your own configuration tests.
 
 ## Demo Video
-<details>
-  <summary>Click to view the demo video</summary>
-  <video width="640" height="480" controls>
-    <source src="ctest4j-demo.mov" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</details>
+[Click to view the demo video](https://github.com/xlab-uiuc/ctest4j/blob/main/demo-video.md)
 
 
 ## Supported Framework:

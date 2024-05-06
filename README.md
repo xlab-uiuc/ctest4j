@@ -3,7 +3,7 @@
 ## What is Ctest4J?
 
 Ctest4J is a practical configuration testing framework for Java.
-The goal of Ctest4J is to help developers to write, run and maintain configuration tests easily and efficiently.
+The goal of Ctest4J is to help developers write, run and maintain configuration tests easily and efficiently.
 
 ## Download Ctest4J
 ### Build From Source
@@ -23,12 +23,7 @@ Include the following dependency in your project build file:
 </dependency>
 ```
 #### Gradle
-```groovy
-dependencies {
-    testImplementation 'edu.illinois:ctest4j-junit${junit-version}:${ctest4j-version}' // or ctest4j-testng
-}
-```
-Current Ctest4J support JUnit4 and 5, and TestNG.
+Current Ctest4J supports JUnit4 and 5, and TestNG.
 
 ## Quick Start
 Please follow the [Guide to Support Ctest4J](Example.md) and [Guide to Run Ctest with Ctest4J](run_hcommon_example_ctest.md) to run a simple Ctest example in Hadoop Common with Ctest4J.
@@ -36,6 +31,16 @@ Please follow the [Guide to Support Ctest4J](Example.md) and [Guide to Run Ctest
 Read the [Features & Options](Options.md) to learn more about all the features that Ctest4J supports.
 
 Follow the [Guide to Write and Run CTest](write_and_run_ctest.md) to write and run your own configuration tests.
+
+## Demo Video
+<details>
+  <summary>Click to view the demo video</summary>
+  <video width="640" height="480" controls>
+    <source src="ctest4j-demo.mov" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</details>
+
 
 ## Supported Framework:
 - JUnit4

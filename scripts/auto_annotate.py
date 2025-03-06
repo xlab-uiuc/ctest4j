@@ -515,21 +515,21 @@ def auto_annotate_script_2(project: str, test_module: str, project_dir: str, pro
         check_or_create_dir(log_dir)
         check_or_create_dir(project_dir, True)
         change_working_dir(project_dir)
-        #add_dependency(project, test_module)
+        add_dependency(project, test_module)
         # add import and runwith to all test classes
         check_or_create_dir(project_test_dir, True)
         add_runwith_for_all_2(project_test_dir)
         # run all tests to track parameter usage, save those in "ctest/mapping"
-        #check_or_create_dir(ctest_mapping_dir)
-        #run_tests_to_track(project, log_dir, ctest_mapping_dir)
+        check_or_create_dir(ctest_mapping_dir)
+        run_tests_to_track(project, log_dir, ctest_mapping_dir)
         # read used config dir and analyze json file in "ctest/mapping"
-        #class_list = get_class_list(ctest_mapping_dir)
+        class_list = get_class_list(ctest_mapping_dir)
         # add corresponding @CTest annotation for child class and super class
-        #remaining = annotate_test_method_2(class_list, project_test_dir, ctest_mapping_dir)
-        #print_log("remaining:")
-        #for i in remaining:
-        #    print(i)
-        #run_ctests(project, log_dir, ctest_mapping_dir)
+        remaining = annotate_test_method_2(class_list, project_test_dir, ctest_mapping_dir)
+        print_log("remaining:")
+        for i in remaining:
+            print(i)
+        run_ctests(project, log_dir, ctest_mapping_dir)
 
 def test(project: str, test_module: str, project_dir: str, project_test_dir: str, ctest_mapping_dir: str):
     log_dir = os.getcwd() + "/log"

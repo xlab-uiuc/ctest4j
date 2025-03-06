@@ -16,7 +16,7 @@ from typing import List, Dict
 # If you want to test more projects, add their names in the PROJECTS_POTENTIAL field and run the script with corresponding arguments.
 PROJECTS_SUPPORTED = ["hadoop-common", "hadoop-hdfs"]
 PROJECTS_POTENTIAL = ["mapreduce-client-core", "alluxio-core-common", "bookkeeper-common", "camel-core", "druid-processing", "flink-core", "hive-common", "kylin-core-common", "netty-common", "nifi-commons",\
-                        "redisson", "rocketmq-common", "spark-core", "zeppelin-interpreter", "zookeeper-server"]
+                        "redisson", "rocketmq-common", "spark-core", "zeppelin-interpreter", "zookeeper-server", "hbase-server"]
 
 TEST_MODULES_SUPPORTED = ["junit4"]
 
@@ -217,7 +217,7 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
                     contents[index] = IMPORT_ABSTRACT[test_module] + content
                     print_log("abstract import added for " + f.name)
                 import_added = True
-            if package_or_import_seen and not import_added and re.match("\/\*\*", content) is not None:
+            if package_or_import_seen and not import_added and (re.match("\s*\/\*\*", content) is not None or re.match("\s*@\w+.*", content) is not None):
                 if not abstract_class and test_class:
                     # CHANGE content -> contents[index]
                     contents[index] = IMPORT_NORMAL_2[test_module] + content
@@ -227,7 +227,7 @@ def add_import_and_runwith_2(f=None, test_class: bool=True, test_module: str="ju
                     print_log("abstract import added for " + f.name)
                 import_added = True
             # add @RunWith and import (rare case)
-            if package_or_import_seen and re.match(".*class +\w+.*{", content) is not None:
+            if package_or_import_seen and (re.match(".*class +\w+.*{", content) is not None or re.match(".*class +\w+.*\|.*{", (content+contents[index+1]).replace("\n", "|")) is not None):
                 if not abstract_class and test_class:
                     # CHANGE content -> contents[index]
                     contents[index] = "@RunWith(CTestJUnit4Runner2.class)\n@CTestClass()\n" + content

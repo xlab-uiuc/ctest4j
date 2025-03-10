@@ -16,7 +16,7 @@ from typing import List, Dict
 # If you want to test more projects, add their names in the PROJECTS_POTENTIAL field and run the script with corresponding arguments.
 PROJECTS_SUPPORTED = ["hadoop-common", "hadoop-hdfs"]
 PROJECTS_POTENTIAL = ["mapreduce-client-core", "alluxio-core-common", "bookkeeper-common", "camel-core", "druid-processing", "flink-core", "hive-common", "kylin-core-common", "netty-common", "nifi-commons",\
-                        "redisson", "rocketmq-common", "spark-core", "zeppelin-interpreter", "zookeeper-server", "hbase-server"]
+                        "redisson", "rocketmq-common", "spark-core", "zeppelin-interpreter", "zookeeper-server", "hbase-server", "yarn-common"]
 
 TEST_MODULES_SUPPORTED = ["junit4"]
 
